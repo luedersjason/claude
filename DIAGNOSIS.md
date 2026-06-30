@@ -43,6 +43,11 @@ unchanged**, verified by diff:
    CA bundle) and points `REQUESTS_CA_BUNDLE` / `CURL_CA_BUNDLE` / `SSL_CERT_FILE` at the
    proxy bundle when present. It is a safe no-op outside the proxied environment (vars are
    only set when the bundle file exists; uses `setdefault`, so a real env override wins).
+   It **also makes `curl_cffi` un-importable** (`sys.modules['curl_cffi'] = None`) so
+   yfinance falls back to plain `requests` *regardless of the installed yfinance version* —
+   necessary because the routine environment does not pin yfinance and some versions ignore
+   `YF_DISABLE_CURL_CFFI`. This is the exact manual fix the run journal recorded as working
+   (2026-06-26 / 06-29).
 
 2. **Hardened `_download()`** — retries 3× with 1s/2s backoff (absorbs transient SSL and
    429), and **raises `DataError` instead of ever returning an empty frame**. Previously a
@@ -58,3 +63,15 @@ unchanged**, verified by diff:
   surprise upgrade can't reintroduce the curl_cffi backend.
 - Confirm the Discord webhook host is `discord.com` (not `discordapp.com`, which the
   environment allowlist blocks).
+
+## Update — journal reviewed through 2026-06-30 13:14 UTC
+The failure was **still recurring** after the initial diagnosis: fresh `DATA_ERROR`s at
+2026-06-29 16:07, 2026-06-30 03:04, and 2026-06-30 03:09 UTC. Each cold run hand-applied a
+*different* ad-hoc workaround (uninstall curl_cffi; downgrade yfinance 1.5.1→0.2.54;
+PYTHONSTARTUP CA-bundle patch), and the **yfinance version thrashes run-to-run**
+(1.4.1 → 0.2.50 → 1.5.1 → 0.2.54). That confirmed the root cause and motivated the
+curl_cffi-block hardening above so the engine self-heals on any version without manual
+intervention. One residual, intermittent failure mode remains that the engine cannot fully
+fix on its own: Yahoo occasionally redirects to `guce.yahoo.com` (consent gateway), which
+the proxy blocks (403) — pinning yfinance to a requests-based 0.2.x in the environment
+setup script is the best mitigation.

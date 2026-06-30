@@ -28,6 +28,15 @@ def _bootstrap_tls() -> None:
             os.environ.setdefault('CURL_CA_BUNDLE', _cand)
             os.environ.setdefault('SSL_CERT_FILE', _cand)
             break
+    # Version-proofing: the routine env does not pin yfinance, and some
+    # versions ignore YF_DISABLE_CURL_CFFI. Make curl_cffi un-importable so
+    # yfinance's `try: import curl_cffi` falls back to plain `requests` (which
+    # honors the proxy CA bundle) regardless of the installed yfinance version.
+    # This is the manual fix the run journal recorded as working (2026-06-26/29).
+    # Runs before `import yfinance` (curl_cffi not loaded yet); setting it to
+    # None makes `import curl_cffi` raise ImportError -> requests fallback.
+    if 'curl_cffi' not in sys.modules:
+        sys.modules['curl_cffi'] = None
 _bootstrap_tls()
 
 try:
