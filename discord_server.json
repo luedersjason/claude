@@ -1,153 +1,154 @@
 {
-  "_comment": "Insurgency Protocol: The Fifth Column. Edit freely -- setup_discord.py is idempotent, so you can add entries and re-run it without duplicating anything. Nothing is ever deleted.",
+  "_comment": "Insurgency Protocol: The Fifth Column. Structure and copy from the original setup pack. Edit and re-run -- setup_discord.py never duplicates or deletes.",
+  "guild_id": "1534369454807318599",
+  "system_channel": "general",
+  "community": { "rules_channel": "rules", "updates_channel": "announcements" },
 
   "roles": [
     {
       "name": "Command",
-      "color": "#8B0000",
+      "color": "#C9A86A",
       "hoist": true,
       "mentionable": true,
-      "permissions": ["ADMINISTRATOR"]
-    },
-    {
-      "name": "Handler",
-      "color": "#C8102E",
-      "hoist": true,
-      "mentionable": true,
+      "_note": "Deliberately not ADMINISTRATOR -- see DISCORD_SETUP.md. Owner keeps full power regardless.",
       "permissions": [
-        "VIEW_CHANNEL", "SEND_MESSAGES", "SEND_MESSAGES_IN_THREADS",
-        "CREATE_PUBLIC_THREADS", "MANAGE_MESSAGES", "MANAGE_THREADS",
-        "EMBED_LINKS", "ATTACH_FILES", "READ_MESSAGE_HISTORY",
-        "ADD_REACTIONS", "MENTION_EVERYONE", "MUTE_MEMBERS", "MOVE_MEMBERS",
-        "KICK_MEMBERS", "CONNECT", "SPEAK", "CREATE_INSTANT_INVITE"
+        "VIEW_CHANNEL", "MANAGE_GUILD", "MANAGE_ROLES", "MANAGE_CHANNELS",
+        "MANAGE_WEBHOOKS", "MANAGE_MESSAGES", "MANAGE_THREADS", "MANAGE_NICKNAMES",
+        "MANAGE_EVENTS", "KICK_MEMBERS", "BAN_MEMBERS", "MODERATE_MEMBERS",
+        "VIEW_AUDIT_LOG", "MENTION_EVERYONE", "SEND_MESSAGES", "SEND_MESSAGES_IN_THREADS",
+        "CREATE_PUBLIC_THREADS", "EMBED_LINKS", "ATTACH_FILES", "READ_MESSAGE_HISTORY",
+        "ADD_REACTIONS", "CONNECT", "SPEAK", "MUTE_MEMBERS", "DEAFEN_MEMBERS",
+        "MOVE_MEMBERS", "CREATE_INSTANT_INVITE", "CHANGE_NICKNAME", "STREAM"
       ]
     },
     {
-      "name": "Operative",
-      "color": "#4A5D23",
+      "name": "GM",
+      "color": "#C9A86A",
       "hoist": true,
       "mentionable": true,
       "permissions": [
         "VIEW_CHANNEL", "SEND_MESSAGES", "SEND_MESSAGES_IN_THREADS",
-        "CREATE_PUBLIC_THREADS", "EMBED_LINKS", "ATTACH_FILES",
-        "READ_MESSAGE_HISTORY", "ADD_REACTIONS", "USE_EXTERNAL_EMOJIS",
+        "CREATE_PUBLIC_THREADS", "MANAGE_MESSAGES", "MANAGE_THREADS", "MANAGE_EVENTS",
+        "MODERATE_MEMBERS", "MUTE_MEMBERS", "MOVE_MEMBERS", "DEAFEN_MEMBERS",
+        "MENTION_EVERYONE", "EMBED_LINKS", "ATTACH_FILES", "READ_MESSAGE_HISTORY",
+        "ADD_REACTIONS", "CONNECT", "SPEAK", "STREAM", "CREATE_INSTANT_INVITE",
+        "CHANGE_NICKNAME"
+      ]
+    },
+    {
+      "name": "Doctrine Certified",
+      "color": "#3A7EBF",
+      "hoist": true,
+      "mentionable": true,
+      "permissions": [
+        "VIEW_CHANNEL", "SEND_MESSAGES", "SEND_MESSAGES_IN_THREADS",
+        "CREATE_PUBLIC_THREADS", "READ_MESSAGE_HISTORY", "ADD_REACTIONS",
+        "ATTACH_FILES", "EMBED_LINKS", "USE_EXTERNAL_EMOJIS", "CHANGE_NICKNAME",
         "CONNECT", "SPEAK", "STREAM", "CREATE_INSTANT_INVITE"
       ]
     },
     {
-      "name": "Recruit",
-      "color": "#6E7B8B",
-      "hoist": true,
-      "mentionable": false,
+      "name": "US Forces",
+      "color": "#3A7EBF",
+      "hoist": false,
+      "mentionable": true,
       "permissions": [
-        "VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY",
-        "ADD_REACTIONS", "CONNECT", "SPEAK"
+        "VIEW_CHANNEL", "SEND_MESSAGES", "SEND_MESSAGES_IN_THREADS",
+        "READ_MESSAGE_HISTORY", "ADD_REACTIONS", "ATTACH_FILES", "EMBED_LINKS",
+        "USE_EXTERNAL_EMOJIS", "CHANGE_NICKNAME", "CONNECT", "SPEAK", "STREAM",
+        "CREATE_INSTANT_INVITE"
       ]
     },
     {
-      "name": "Fifth Column Bot",
-      "color": "#2F4F4F",
+      "name": "Soviet Forces",
+      "color": "#D0402E",
+      "hoist": false,
+      "mentionable": true,
+      "permissions": [
+        "VIEW_CHANNEL", "SEND_MESSAGES", "SEND_MESSAGES_IN_THREADS",
+        "READ_MESSAGE_HISTORY", "ADD_REACTIONS", "ATTACH_FILES", "EMBED_LINKS",
+        "USE_EXTERNAL_EMOJIS", "CHANGE_NICKNAME", "CONNECT", "SPEAK", "STREAM",
+        "CREATE_INSTANT_INVITE"
+      ]
+    },
+    {
+      "name": "Operative",
+      "color": "#95A5A6",
       "hoist": false,
       "mentionable": false,
       "permissions": [
-        "VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS", "ATTACH_FILES",
-        "READ_MESSAGE_HISTORY", "MANAGE_WEBHOOKS", "USE_APPLICATION_COMMANDS"
+        "VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY", "ADD_REACTIONS",
+        "ATTACH_FILES", "EMBED_LINKS", "USE_EXTERNAL_EMOJIS", "CHANGE_NICKNAME",
+        "CONNECT", "SPEAK", "STREAM"
       ]
     }
   ],
 
   "categories": [
     {
-      "name": "BRIEFING",
+      "name": "📋 COMMAND POST",
       "channels": [
         {
           "name": "welcome",
-          "topic": "Start here. Read the protocol, claim a role, report for assignment.",
-          "slowmode": 30
+          "readonly": true,
+          "topic": "Start here.",
+          "post": "**Welcome to INSURGENCY PROTOCOL: THE FIFTH COLUMN** ⚔\n\nTwo ways to play. One server.\n\n**☠ THE INSURGENCY** — Persistent, chaotic, always on. US holds the FOB with top-tier gear. Soviets spawn hidden among civilians — unarmed means invisible, armed means fair game. Dynamic missions run 24/7 for both factions: HVT captures, cache sabotage, convoy demolition. Complete one, another spawns.\n\n**🎖 THE OPERATIONS** — Scheduled, structured, GM-run milsim. Bespoke coordinated ops with briefings, modern gear, and a live Game Master adapting the battlefield in real time. Earn rank through ops — rank unlocks gear access.\n\n**Get started:**\n→ Read the rules\n→ Grab a faction role (ask Command for now)\n→ Squad up in #lfg-squad-up\n→ Playtest feedback goes in #suggestions — early players shape this project\n\nServer name in Reforger browser: **Insurgency Protocol**\nInvite your friends: https://discord.gg/Qr4JZJmaVq"
         },
         {
-          "name": "rules-of-engagement",
-          "topic": "Conduct expected of every operative. Violations answer to Command."
+          "name": "rules",
+          "readonly": true,
+          "topic": "Rules of engagement. Violations answer to Command.",
+          "post": "**1. No cheating, exploiting, or ghosting.** Instant ban. Includes stream-sniping and cross-team intel leaking.\n**2. Respect the undercover system.** In-game deception is the point. Out-of-game harassment is not.\n**3. No toxicity.** Banter yes, abuse no. Racism/bigotry = instant ban.\n**4. Ops have standards.** Sign up = show up. Follow the GM and chain of command during scheduled operations.\n**5. Report, don't retaliate.** Issues go to #reports or DM Command.\n**6. Discord ToS applies.** You must be 13+."
         },
         {
           "name": "announcements",
-          "topic": "Official transmissions from Command. Low traffic, high signal.",
+          "readonly": true,
+          "topic": "Official transmissions from Command.",
           "slowmode": 60
         },
         {
-          "name": "roster",
-          "topic": "Active operatives, callsigns, and current assignments."
+          "name": "op-schedule",
+          "readonly": true,
+          "topic": "Upcoming operations and start times."
         }
       ]
     },
     {
-      "name": "OPERATIONS",
+      "name": "⚔ THE INSURGENCY",
       "channels": [
-        {
-          "name": "mission-briefs",
-          "topic": "Upcoming operations: objectives, loadouts, timing."
-        },
-        {
-          "name": "ops-planning",
-          "topic": "Working channel for planning active operations."
-        },
-        {
-          "name": "after-action",
-          "topic": "AARs. What worked, what broke, what changes next time."
-        },
-        {
-          "name": "bot-feed",
-          "topic": "Automated posts. Webhook target -- humans need not post here.",
-          "webhook": "Fifth Column Feed"
-        }
+        { "name": "general", "topic": "Open channel." },
+        { "name": "lfg-squad-up", "topic": "Looking for group. Squad up here." },
+        { "name": "intel-and-tactics", "topic": "Doctrine, loadouts, map knowledge." },
+        { "name": "clips-and-highlights", "topic": "Clips, screenshots, recovered footage." },
+        { "name": "suggestions", "topic": "Playtest feedback. Early players shape this project." }
       ]
     },
     {
-      "name": "COMMS",
+      "name": "🎖 THE OPERATIONS",
       "channels": [
-        {
-          "name": "general",
-          "topic": "Open channel. Anything goes within the rules of engagement."
-        },
-        {
-          "name": "off-topic",
-          "topic": "Everything unrelated to the Protocol."
-        },
-        {
-          "name": "media",
-          "topic": "Screenshots, clips, and recovered footage."
-        },
-        {
-          "name": "recruiting",
-          "topic": "Invite links, outreach, and prospect discussion."
-        }
+        { "name": "op-signups", "topic": "Sign up = show up." },
+        { "name": "op-briefings", "readonly": true, "topic": "Briefings posted by the GM." },
+        { "name": "op-debriefs", "topic": "AARs. What worked, what broke." }
       ]
     },
     {
-      "name": "COMMAND NET",
-      "private_to": ["Command", "Handler"],
+      "name": "🔒 STAFF",
+      "private_to": ["Command", "GM"],
       "channels": [
-        {
-          "name": "command",
-          "topic": "Command and Handler coordination. Not visible to the rank and file."
-        },
-        {
-          "name": "handler-notes",
-          "topic": "Running notes on operatives, plot threads, and pending reveals."
-        },
-        {
-          "name": "moderation-log",
-          "topic": "Record of moderation actions and their justification."
-        }
+        { "name": "admin-chat", "topic": "Command and GM coordination." },
+        { "name": "reports", "topic": "Member reports. Report, don't retaliate." },
+        { "name": "mod-log", "topic": "Record of moderation actions." }
       ]
     },
     {
-      "name": "VOICE",
+      "name": "🔊 VOICE",
       "channels": [
-        { "name": "Operations Room", "type": "voice" },
-        { "name": "Squad One", "type": "voice" },
-        { "name": "Squad Two", "type": "voice" },
-        { "name": "Dead Drop (AFK)", "type": "voice" }
+        { "name": "Lobby", "type": "voice" },
+        { "name": "us-forces", "type": "voice" },
+        { "name": "russian-forces", "type": "voice" },
+        { "name": "underground-radio", "type": "voice" },
+        { "name": "Gaming", "type": "voice" },
+        { "name": "Ops Net", "type": "voice" }
       ]
     }
   ]
