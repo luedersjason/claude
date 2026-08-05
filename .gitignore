@@ -1,2 +1,9 @@
 __pycache__/
 *.pyc
+
+# Secrets: bot tokens and webhook URLs must never be committed.
+.env
+*.token
+token.txt
+webhooks.json
+*.webhooks.json

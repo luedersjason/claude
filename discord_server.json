@@ -1,0 +1,154 @@
+{
+  "_comment": "Insurgency Protocol: The Fifth Column. Edit freely -- setup_discord.py is idempotent, so you can add entries and re-run it without duplicating anything. Nothing is ever deleted.",
+
+  "roles": [
+    {
+      "name": "Command",
+      "color": "#8B0000",
+      "hoist": true,
+      "mentionable": true,
+      "permissions": ["ADMINISTRATOR"]
+    },
+    {
+      "name": "Handler",
+      "color": "#C8102E",
+      "hoist": true,
+      "mentionable": true,
+      "permissions": [
+        "VIEW_CHANNEL", "SEND_MESSAGES", "SEND_MESSAGES_IN_THREADS",
+        "CREATE_PUBLIC_THREADS", "MANAGE_MESSAGES", "MANAGE_THREADS",
+        "EMBED_LINKS", "ATTACH_FILES", "READ_MESSAGE_HISTORY",
+        "ADD_REACTIONS", "MENTION_EVERYONE", "MUTE_MEMBERS", "MOVE_MEMBERS",
+        "KICK_MEMBERS", "CONNECT", "SPEAK", "CREATE_INSTANT_INVITE"
+      ]
+    },
+    {
+      "name": "Operative",
+      "color": "#4A5D23",
+      "hoist": true,
+      "mentionable": true,
+      "permissions": [
+        "VIEW_CHANNEL", "SEND_MESSAGES", "SEND_MESSAGES_IN_THREADS",
+        "CREATE_PUBLIC_THREADS", "EMBED_LINKS", "ATTACH_FILES",
+        "READ_MESSAGE_HISTORY", "ADD_REACTIONS", "USE_EXTERNAL_EMOJIS",
+        "CONNECT", "SPEAK", "STREAM", "CREATE_INSTANT_INVITE"
+      ]
+    },
+    {
+      "name": "Recruit",
+      "color": "#6E7B8B",
+      "hoist": true,
+      "mentionable": false,
+      "permissions": [
+        "VIEW_CHANNEL", "SEND_MESSAGES", "READ_MESSAGE_HISTORY",
+        "ADD_REACTIONS", "CONNECT", "SPEAK"
+      ]
+    },
+    {
+      "name": "Fifth Column Bot",
+      "color": "#2F4F4F",
+      "hoist": false,
+      "mentionable": false,
+      "permissions": [
+        "VIEW_CHANNEL", "SEND_MESSAGES", "EMBED_LINKS", "ATTACH_FILES",
+        "READ_MESSAGE_HISTORY", "MANAGE_WEBHOOKS", "USE_APPLICATION_COMMANDS"
+      ]
+    }
+  ],
+
+  "categories": [
+    {
+      "name": "BRIEFING",
+      "channels": [
+        {
+          "name": "welcome",
+          "topic": "Start here. Read the protocol, claim a role, report for assignment.",
+          "slowmode": 30
+        },
+        {
+          "name": "rules-of-engagement",
+          "topic": "Conduct expected of every operative. Violations answer to Command."
+        },
+        {
+          "name": "announcements",
+          "topic": "Official transmissions from Command. Low traffic, high signal.",
+          "slowmode": 60
+        },
+        {
+          "name": "roster",
+          "topic": "Active operatives, callsigns, and current assignments."
+        }
+      ]
+    },
+    {
+      "name": "OPERATIONS",
+      "channels": [
+        {
+          "name": "mission-briefs",
+          "topic": "Upcoming operations: objectives, loadouts, timing."
+        },
+        {
+          "name": "ops-planning",
+          "topic": "Working channel for planning active operations."
+        },
+        {
+          "name": "after-action",
+          "topic": "AARs. What worked, what broke, what changes next time."
+        },
+        {
+          "name": "bot-feed",
+          "topic": "Automated posts. Webhook target -- humans need not post here.",
+          "webhook": "Fifth Column Feed"
+        }
+      ]
+    },
+    {
+      "name": "COMMS",
+      "channels": [
+        {
+          "name": "general",
+          "topic": "Open channel. Anything goes within the rules of engagement."
+        },
+        {
+          "name": "off-topic",
+          "topic": "Everything unrelated to the Protocol."
+        },
+        {
+          "name": "media",
+          "topic": "Screenshots, clips, and recovered footage."
+        },
+        {
+          "name": "recruiting",
+          "topic": "Invite links, outreach, and prospect discussion."
+        }
+      ]
+    },
+    {
+      "name": "COMMAND NET",
+      "private_to": ["Command", "Handler"],
+      "channels": [
+        {
+          "name": "command",
+          "topic": "Command and Handler coordination. Not visible to the rank and file."
+        },
+        {
+          "name": "handler-notes",
+          "topic": "Running notes on operatives, plot threads, and pending reveals."
+        },
+        {
+          "name": "moderation-log",
+          "topic": "Record of moderation actions and their justification."
+        }
+      ]
+    },
+    {
+      "name": "VOICE",
+      "channels": [
+        { "name": "Operations Room", "type": "voice" },
+        { "name": "Squad One", "type": "voice" },
+        { "name": "Squad Two", "type": "voice" },
+        { "name": "Dead Drop (AFK)", "type": "voice" }
+      ]
+    }
+  ]
+}
