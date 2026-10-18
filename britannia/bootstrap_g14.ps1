@@ -1,5 +1,5 @@
 # Britannia bootstrap for the G14. Paste into PowerShell.
-$ErrorActionPreference = 'Stop'
+$ErrorActionPreference = 'Continue'
 $dev  = 'C:\dev'
 $repo = Join-Path $dev 'britannia'
 
