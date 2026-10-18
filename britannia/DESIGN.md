@@ -7,6 +7,15 @@ Status: pre-production. Decisions locked 2026-10-18.
 
 **Automation is the game.** Not a twitch/reflex game. The appeal is building macros that partially play the character: complex, reliable, unattended. Combat is auto-swing; skill training, gathering and crafting are designed to be scripted. The macro system is a first-class game system, not an add-on.
 
+**The player engineers the automation; the game never automates for them.** No built-in auto-train, auto-farm or offline progression. The game supplies primitives and the player builds:
+- Text scripting language (EasyUO-class power): variables, loops, conditionals, functions, waits.
+- Rich sensors: own stats/skills/mana/HP, journal/system messages, nearby objects and mobiles, container contents, target cursor state, timers.
+- All player actions callable from scripts (move, use skill, cast, target, equip, drag/drop, speak).
+- Action recorder that emits editable script as a starting point.
+- Debugger: step, breakpoints, live variable view, per-macro log.
+- Macros run only while the game is running (AFK at the PC, like UO).
+- UOAssist-parity tools (counters, skill panel, gear sets, loot rules) are player-configured tools, scriptable, never automatic by default.
+
 ## Locked decisions
 
 | # | Topic | Decision | Notes |
