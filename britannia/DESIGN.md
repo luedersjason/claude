@@ -34,8 +34,9 @@ Status: pre-production. Decisions locked 2026-10-18.
 - [ ] Source T2A-era skill list, caps, gain and atrophy rules (primary sources).
 - [ ] Decide world scale (meters per tile).
 - [ ] Confirm latest Godot stable; pin version.
+- [ ] Macro add-on Jason used in UO: features to be incorporated (name/screenshot pending).
 - [ ] Systems backlog to rank: magic/reagents, crafting/gathering, vendors/bank, monsters/spawns/loot, death/ghost, housing, mounts.
 
 ## Milestone 1 (vertical slice)
 
-Britain + surrounding countryside + one dungeon; ~5 use-based skills; UO-style combat; one vendor; save/load.
+Britain + surrounding countryside + one dungeon; 7 use-based skills (hally mage: Magery, Evaluating Intelligence, Meditation, Resisting Spells, Wrestling, Swordsmanship, Tactics; 700 total cap pending T2A verification); UO-style combat; one vendor; save/load.
