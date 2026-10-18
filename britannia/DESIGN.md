@@ -3,6 +3,10 @@
 First-person, single-player-first re-creation of Ultima Online (T2A era).
 Status: pre-production. Decisions locked 2026-10-18.
 
+## Core pillar
+
+**Automation is the game.** Not a twitch/reflex game. The appeal is building macros that partially play the character: complex, reliable, unattended. Combat is auto-swing; skill training, gathering and crafting are designed to be scripted. The macro system is a first-class game system, not an add-on.
+
 ## Locked decisions
 
 | # | Topic | Decision | Notes |
