@@ -14,6 +14,12 @@ Status: pre-production. Decisions locked 2026-10-18.
 | 5 | Art | Low-poly placeholder, swappable | Logic references asset IDs only; one manifest maps IDs to art. Lock world scale (meters per UO tile) and character rig early. |
 | 6 | Combat | UO-style: target + auto-swing on timer, skill-based hit rolls | |
 
+## Machines
+
+- **Build:** cloud sessions + G14 (inside ecosystem boundary). UO client installed on the G14 for map extraction.
+- **Play:** Alienware Aurora ACT1250 (RTX 5070 12 GB, Core Ultra 7 265KF, 32 GB, Win 11 Home). Outside the boundary: it only downloads and runs finished builds. No Claude access to it.
+- **Delivery:** Windows exports published to GitHub Releases (or Drive); Jason downloads on the Alienware.
+
 ## Architecture rules
 
 - **Simulation** (world, skills, combat, NPCs, persistence) has no rendering/input dependencies.
@@ -24,7 +30,7 @@ Status: pre-production. Decisions locked 2026-10-18.
 
 ## Open items
 
-- [ ] Jason: create Endless Journey account, install Classic Client on G14, copy `map*`, `statics*`, `tiledata*` (exact list TBD) to `G:\My Drive\uo-data\`.
+- [ ] Jason: create Endless Journey account, install Classic Client on the G14 (not the Alienware), copy `map*`, `statics*`, `tiledata*` (exact list TBD) to `G:\My Drive\uo-data\`.
 - [ ] Source T2A-era skill list, caps, gain and atrophy rules (primary sources).
 - [ ] Decide world scale (meters per tile).
 - [ ] Confirm latest Godot stable; pin version.
