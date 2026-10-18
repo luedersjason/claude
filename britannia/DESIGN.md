@@ -15,6 +15,10 @@ Status: pre-production. Decisions locked 2026-10-18.
 - Debugger: step, breakpoints, live variable view, per-macro log.
 - Macros run only while the game is running (AFK at the PC, like UO).
 - UOAssist-parity tools (counters, skill panel, gear sets, loot rules) are player-configured tools, scriptable, never automatic by default.
+- **Nothing ships pre-built.** No default macros, no templates. Every automation (e.g. auto-heal) is built by the player.
+- **The script builder is part of the game:** opened in-game, edits and debugs against the live world. No external tool.
+- **Combat boundary (T2A-faithful):** auto-defend when attacked is a game rule (T2A: "you will automatically defend if you are attacked", must be in War Mode to attack — https://www.mocagh.org/origin/uosecondage-refcard.pdf). Scripts can do anything the player can EXCEPT initiate combat: `attack` and War Mode toggle are human-input only. Scripts may support a fight in progress (heal, cure, re-arm, buff, open corpse for loot rules). Result: no autonomous hunting.
+- Open: AFK melee training past NPC-trainable level — leave manual (apparent T2A behavior, unverified) or add a training target.
 
 ## Locked decisions
 
