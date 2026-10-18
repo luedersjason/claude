@@ -1,0 +1,35 @@
+# Britannia (working title) — Design Decisions
+
+First-person, single-player-first re-creation of Ultima Online (T2A era).
+Status: pre-production. Decisions locked 2026-10-18.
+
+## Locked decisions
+
+| # | Topic | Decision | Notes |
+|---|-------|----------|-------|
+| 1 | Players | Solo first, online later | Built as local authoritative server + client from day one so multiplayer is an add-on, not a rewrite. |
+| 2 | Map source | Import from official UO client data, convert once to our own format | Client: free "Endless Journey" account, https://uo.com/endless-journey/ . Private use only; EA terms on data use unverified. |
+| 3 | Era | The Second Age (T2A): Britannia + Lost Lands, single world, no Trammel/Felucca | Modern client map likely has post-2000 changes — diff against T2A-era maps before locking. Skill/stat caps and gain rules to be sourced from 1998–2000 publish notes, not assumed. |
+| 4 | Engine | Godot 4.x | 4.4.1 verified running headless in the cloud dev container 2026-10-18. Confirm latest stable before pinning. |
+| 5 | Art | Low-poly placeholder, swappable | Logic references asset IDs only; one manifest maps IDs to art. Lock world scale (meters per UO tile) and character rig early. |
+| 6 | Combat | UO-style: target + auto-swing on timer, skill-based hit rolls | |
+
+## Architecture rules
+
+- **Simulation** (world, skills, combat, NPCs, persistence) has no rendering/input dependencies.
+- **Client** sends intents (`move`, `attack target`, `use skill`) and renders state; never mutates state.
+- Simulation decides all outcomes (gains, damage, loot).
+- Persistence: SQLite-compatible schema.
+- Art via asset-ID manifest; terrain data separate from terrain renderer.
+
+## Open items
+
+- [ ] Jason: create Endless Journey account, install Classic Client on G14, copy `map*`, `statics*`, `tiledata*` (exact list TBD) to `G:\My Drive\uo-data\`.
+- [ ] Source T2A-era skill list, caps, gain and atrophy rules (primary sources).
+- [ ] Decide world scale (meters per tile).
+- [ ] Confirm latest Godot stable; pin version.
+- [ ] Systems backlog to rank: magic/reagents, crafting/gathering, vendors/bank, monsters/spawns/loot, death/ghost, housing, mounts.
+
+## Milestone 1 (vertical slice)
+
+Britain + surrounding countryside + one dungeon; ~5 use-based skills; UO-style combat; one vendor; save/load.
