@@ -1001,5 +1001,261 @@
     }
    ]
   }
+ ],
+ "path": [
+  [
+   "Plans approved (Village + KWU)",
+   "done",
+   "11/4"
+  ],
+  [
+   "Fix project manual",
+   "now",
+   "List sent to Pinnacle 11/4"
+  ],
+  [
+   "Bid to Village-prequalified contractors",
+   "next",
+   ""
+  ],
+  [
+   "Sign contract; Village approves it",
+   "",
+   ""
+  ],
+  [
+   "Village sets security (120%)",
+   "",
+   ""
+  ],
+  [
+   "Closing: security, DA, SWMA signed",
+   "",
+   ""
+  ],
+  [
+   "Record documents; get permits",
+   "",
+   ""
+  ],
+  [
+   "Build; Village accepts by 11/15/27",
+   "",
+   ""
+  ]
+ ],
+ "donext": [
+  [
+   "Review the A/B/C list below with Claude, one item at a time",
+   "Jason"
+  ],
+  [
+   "Ask Kurt/Peggy: prequalified contractor list (Ch. 405) and whether the expired wetland permits block the watermain permits",
+   "Jason"
+  ],
+  [
+   "Send DNR submittal, CAD file to Village, CM estimate",
+   "Pinnacle"
+  ]
+ ],
+ "waiting": [
+  [
+   "Pinnacle",
+   "Answers to the 8 manual items",
+   "sent 11/4"
+  ],
+  [
+   "Lisa Kleinke",
+   "Zilber standard owner-direct contract",
+   "asked 11/4"
+  ],
+  [
+   "WDNR",
+   "Water main extension approval",
+   "Pinnacle submitting"
+  ]
+ ],
+ "review": [
+  {
+   "g": "A. Work that isn't utility work",
+   "items": [
+    [
+     "A1",
+     "All permits on the contractor",
+     "Terms s.7; C-1 note 11",
+     "Move DNR, WPDES NOI, erosion control and WisDOT to Pinnacle/owner. Contractor keeps the Village ROW permit and Diggers Hotline."
+    ],
+    [
+     "A2",
+     "SWPPP inspections, reports, rain log, Notice of Termination",
+     "C-6 s.5.0",
+     "Pinnacle or a third party inspects and reports; contractor only maintains the erosion controls."
+    ],
+    [
+     "A3",
+     "As-built / record drawings",
+     "C-1 submittals",
+     "Already in Pinnacle's CM scope (condition 6d). Contractor gives field redlines and ties only, so we don't pay twice."
+    ],
+    [
+     "A4",
+     "Extra soils investigation at contractor's cost",
+     "C-1 notes 2-3",
+     "Hand out the geotech report; delete the extra-investigation line."
+    ],
+    [
+     "A5",
+     "Contractor solely responsible for quantities",
+     "C-1 note 5",
+     "Delete: the bid form is unit price, so pay measured quantities."
+    ],
+    [
+     "A6",
+     "Contractor finds all existing utilities; survey not warranted",
+     "C-2 to C-4; Terms s.21",
+     "Add a potholing line item at known crossings."
+    ],
+    [
+     "A7",
+     "Traffic control / WisDOT at STH 31 & 108th",
+     "not on bid form",
+     "Pinnacle confirms if any work touches STH 31 ROW; add a line or state none."
+    ],
+    [
+     "A8",
+     "Coordinating water shutdowns with area businesses",
+     "C-1 note 16",
+     "Village DPW and Pinnacle send notices; contractor schedules."
+    ],
+    [
+     "A9",
+     "Site sequencing plan 5 business days before start",
+     "C-6",
+     "Keep. Simple ask."
+    ],
+    [
+     "A10",
+     "Spills reported to the 'general contractor'",
+     "C-6 s.6",
+     "Fix wording: there is no GC."
+    ],
+    [
+     "A11",
+     "Survey monuments",
+     "DA s.7.2",
+     "Pinnacle survey, not the contractor."
+    ]
+   ]
+  },
+  {
+   "g": "B. Terms that make bidders add money",
+   "items": [
+    [
+     "B1",
+     "Consequential damages + $500/day LDs + one-way attorney fees",
+     "Terms s.5",
+     "Your/attorney call; compare to Lisa's standard."
+    ],
+    [
+     "B2",
+     "Terminate if owner 'not satisfied'; no pay until work finished",
+     "Terms s.19",
+     "Your/attorney call."
+    ],
+    [
+     "B3",
+     "Payment every 60 days",
+     "Terms s.10(a)",
+     "Monthly is typical; your call."
+    ],
+    [
+     "B4",
+     "$5M umbrella insurance",
+     "Terms s.9",
+     "Village only requires being named; confirm the $5M is our standard."
+    ],
+    [
+     "B5",
+     "Contractor indemnifies Pinnacle too, no WC limit",
+     "C-1 note 15; Terms s.8",
+     "Your/attorney call."
+    ],
+    [
+     "B6",
+     "All subsurface risk, no differing-site-conditions clause",
+     "Terms s.21",
+     "Your/attorney call."
+    ],
+    [
+     "B7",
+     "312 LF directional drill is usually subbed; subletting needs consent",
+     "Terms s.12",
+     "Pre-approve a drilling sub in the bid form."
+    ]
+   ]
+  },
+  {
+   "g": "C. Missing steps",
+   "items": [
+    [
+     "C1",
+     "Only Village-prequalified contractors (Ch. 405)",
+     "C-1 Village note 3",
+     "Get the Village list before inviting bidders."
+    ],
+    [
+     "C2",
+     "Expired DNR/ACOE wetland permits may block ANY permit",
+     "Approval letter p.2",
+     "Ask Kurt/Peggy if this applies to the watermain."
+    ],
+    [
+     "C3",
+     "Floodplain (713.3) and wetland easement near the drill",
+     "C-4",
+     "Pinnacle confirms no bore pit or spoil in wetland/floodplain."
+    ],
+    [
+     "C4",
+     "Permits wait on closing and recording (SWMA, DA memo, CSM)",
+     "Conditions 2, 9",
+     "Plan the sequence: bid, contract, security, closing, record, permits."
+    ],
+    [
+     "C5",
+     "Building likely needs this main earlier than 11/15/27 (unconfirmed)",
+     "DA s.6.1 vs Phase A 1/1/28",
+     "Confirm fire-protection water timing with Pinnacle / fire dept."
+    ],
+    [
+     "C6",
+     "Copies of every agency permit to the Village",
+     "DA s.7.3",
+     "Track in permits step."
+    ],
+    [
+     "C7",
+     "CAD file for Village GIS",
+     "Kurt 11/4",
+     "Pinnacle to send and confirm."
+    ],
+    [
+     "C8",
+     "DA Exhibit D is the 8/11 plan set; DA party and contract owner are different LLCs",
+     "DA exhibits",
+     "Ask Peggy to update Exhibit D and confirm the entity."
+    ]
+   ]
+  }
+ ],
+ "sent_to_pinnacle": [
+  "Completion date still 7/31/2026",
+  "Bid form: item 17 twice, no 18",
+  "Scope missing from bid form",
+  "Permits clause too broad",
+  "No bid instructions",
+  "CM estimate (condition 6d)",
+  "CSM spelled 'Lakeveiw'",
+  "Cleanup: names, 60-day pay, s.24 wording"
  ]
 }
