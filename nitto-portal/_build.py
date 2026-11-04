@@ -2,8 +2,8 @@ import json, html, datetime
 S = json.load(open('_data.json'))
 E = html.escape
 OUT = 'watermain.html'
-VERSION = 'v4'
-UPDATED = '2026-11-04 4:15 PM'
+VERSION = 'v5'
+UPDATED = '2026-11-04 4:40 PM'
 
 DOCS = [
  ('Village DA conditional approval letter', 'Rob Hanson, 8/25/26. Conditions 1-12.', 'NW-Village-DA-Approval-Letter-8.25.26.pdf'),

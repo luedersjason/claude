@@ -1108,26 +1108,27 @@
     },
     {
      "k": "A2",
-     "t": "SWPPP inspections, reports and Notice of Termination",
+     "t": "SWPPP inspections: Pinnacle prices it once, everyone carries the same number",
      "where": [
       [
        "Plans 11/3/26",
        "Sheet C-6, SWPPP s.5.0 Inspection; General Information"
       ]
      ],
-     "who": "Pinnacle (plan sheet)",
+     "who": "Pinnacle (proposal + plan sheet C-6); Owner (bid form)",
      "cur": [
       "\"INSPECTIONS SHALL BE UNDERTAKEN BY QUALIFIED PERSONNEL PROVIDED BY THE CONTRACTOR ... A STORMWATER POLLUTION PREVENTION PLAN INSPECTION REPORT SHALL BE COMPLETED AND ADDED TO THE SWPPP. RAINFALL SHALL BE RECORDED ON THE SWPPP RAINFALL LOG.\"",
       "\"KEEPING PLANS CURRENT: THE CONTRACTOR SHALL AMEND THE PLAN WHENEVER THERE IS A CHANGE ...\"",
       "\"CONTRACTOR SHALL SUBMIT A COMPLETED NOTICE OF TERMINATION TO OWNER FOR EXECUTION PRIOR TO THEIR FINAL PAY APPLICATION REQUEST.\""
      ],
      "new": [
-      "\"INSPECTIONS SHALL BE UNDERTAKEN BY QUALIFIED PERSONNEL PROVIDED BY THE OWNER'S ENGINEER ... THE ENGINEER SHALL COMPLETE THE INSPECTION REPORT AND RAINFALL LOG.\" Contractor keeps: \"CONTRACTOR SHALL IMMEDIATELY ARRANGE FOR REPAIR OR REPLACEMENT OF ANY DAMAGED OR DEFICIENT CONTROL MEASURES.\"",
-      "\"THE ENGINEER SHALL AMEND THE PLAN ...\"",
-      "\"THE ENGINEER SHALL PREPARE THE NOTICE OF TERMINATION FOR OWNER EXECUTION.\""
+      "Pinnacle gives a fixed-fee proposal for SWPPP inspections (every 7 days and within 24 hours of a 1/2\" rain), inspection reports, rainfall log, SWPPP amendments, and the Notice of Termination.",
+      "Recommended: Zilber contracts Pinnacle directly (add it to Pinnacle's CM estimate under condition 6d). Bid form note: \"SWPPP INSPECTION AND REPORTING BY OWNER'S ENGINEER UNDER SEPARATE CONTRACT. CONTRACTOR SHALL MAINTAIN AND REPAIR ALL EROSION CONTROL MEASURES WITHIN 24 HOURS OF NOTICE.\"",
+      "Alternative: carry it in the bid as a fixed allowance line, e.g. \"SWPPP inspections by Pinnacle Engineering per proposal dated __/__/__: $______ (all bidders carry this amount)\". Contractor pays Pinnacle.",
+      "Sheet C-6 s.5.0: \"INSPECTIONS SHALL BE UNDERTAKEN BY QUALIFIED PERSONNEL PROVIDED BY THE OWNER'S ENGINEER.\" Amend-the-plan and Notice of Termination move to the Engineer."
      ],
-     "why": "Weekly and rain-event reports by a certified inspector are paperwork a pipe crew doesn't have staff for. Add to Pinnacle's CM scope (condition 6d) or hire a third party.",
-     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD; Pinnacle adds the cost to its CM estimate",
+     "why": "Pinnacle gets the work and every bidder carries the same SWPPP cost. Contracting Pinnacle directly avoids a contractor markup on it and keeps the inspector working for you, not the contractor. Either way the Village counts it: condition 7 sizes the security on public improvements plus inspections and construction services.",
+     "deliver": "Claude drafts the request to Andy for the SWPPP proposal, the bid form note, and the C-6 markup",
      "dec": "open",
      "note": ""
     },
