@@ -1,0 +1,19 @@
+# One Worker per project site. Copy this folder, change name / SITE_TITLE / database, deploy.
+name = "nitto-watermain"
+main = "src/worker.js"
+compatibility_date = "2026-10-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = true
+
+[vars]
+SITE_TITLE = "Nitto Public Watermain"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "nitto-watermain"
+database_id = "REPLACE_AFTER_wrangler_d1_create"
+# Secret (set on the G14, never in chat or git): ANTHROPIC_API_KEY
