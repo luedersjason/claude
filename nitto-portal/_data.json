@@ -1050,7 +1050,7 @@
    "Jason"
   ],
   [
-   "Ask Kurt/Peggy: prequalified contractor list (Ch. 405) and whether the expired wetland permits block the watermain permits",
+   "Ask Kurt for the Village prequalified contractor list (Ch. 405)",
    "Jason"
   ],
   [
@@ -1505,8 +1505,8 @@
      ],
      "why": "Could stop the job after the contract is signed.",
      "deliver": "No document change; action item",
-     "dec": "open",
-     "note": ""
+     "dec": "reject",
+     "note": "Resolved 11/4: Jason confirms new DNR/ACOE wetland permits are in hand."
     },
     {
      "k": "C3",
@@ -1526,8 +1526,8 @@
      ],
      "why": "Avoids a surprise permit.",
      "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
-     "dec": "open",
-     "note": ""
+     "dec": "reject",
+     "note": "Rejected by Jason 11/4: new wetland permits in hand; staying out of the wetland is the contractor's responsibility."
     },
     {
      "k": "C4",
