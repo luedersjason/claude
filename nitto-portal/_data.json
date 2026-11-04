@@ -1049,6 +1049,10 @@
   [
    "Send DNR submittal, CAD file to Village, CM estimate",
    "Pinnacle"
+  ],
+  [
+   "Later (not bidding): confirm when the building needs fire-protection water; send permit copies to the Village (DA s.7.3)",
+   "Jason / Pinnacle"
   ]
  ],
  "waiting": [
@@ -1539,48 +1543,6 @@
       "Plan the order: bid, contract, Village approval, 120% breakdown, closing, recording, permits, precon."
      ],
      "why": "Contract start date must allow for it.",
-     "deliver": "No document change; action item",
-     "dec": "open",
-     "note": ""
-    },
-    {
-     "k": "C5",
-     "t": "Building may need this main sooner (unconfirmed)",
-     "where": [
-      [
-       "DA",
-       "s.6.1 (11/15/27) vs Phase A completion 1/1/28"
-      ]
-     ],
-     "who": "Pinnacle / fire dept",
-     "cur": [
-      "Not addressed."
-     ],
-     "new": [
-      "Confirm when the building needs fire-protection water; set the contract completion date from that."
-     ],
-     "why": "The real deadline may be much earlier than 11/15/27.",
-     "deliver": "No document change; action item",
-     "dec": "open",
-     "note": ""
-    },
-    {
-     "k": "C6",
-     "t": "Permit copies to the Village",
-     "where": [
-      [
-       "DA",
-       "s.7.3"
-      ]
-     ],
-     "who": "Pinnacle",
-     "cur": [
-      "\"... shall provide and submit to the Village valid copies of any and all governmental agency permits ...\""
-     ],
-     "new": [
-      "Track with the permits step."
-     ],
-     "why": "DA requirement.",
      "deliver": "No document change; action item",
      "dec": "open",
      "note": ""
