@@ -1134,42 +1134,24 @@
     },
     {
      "k": "A5",
-     "t": "Pricing: make it lump sum; unit prices only for changes",
+     "t": "Pricing: state lump sum on the proposal form",
      "where": [
       [
        "Project manual 11/3/26",
-       "Agreement Art. II, PDF p.2"
-      ],
-      [
-       "Project manual 11/3/26",
-       "Standard Terms s.10(a), PDF p.7"
-      ],
-      [
-       "Project manual 11/3/26",
-       "Proposal form, PDF p.12"
-      ],
-      [
-       "Plans 11/3/26",
-       "Sheet C-1, General Note 5 (no change)"
+       "Proposal form, PDF p.12 (header)"
       ]
      ],
-     "who": "Owner / attorney (project manual); Pinnacle (proposal form)",
+     "who": "Pinnacle (proposal form)",
      "cur": [
-      "Art. II: \"...the lump sum amount set below for each type or class of work or the amount of the general proposal. ($ ). (See proposal form for Schedule of Prices, if any)\"",
-      "s.10(a): \"Such Payment shall equal the value of the Work done by Contractor according to the Owner's estimate at applicable unit prices or percentage of total completion, whichever is applicable...\"",
-      "Proposal form: columns for Engineer's Estimate quantity, Contractor quantity, unit price and total, with no statement of whether it is lump sum or unit price.",
-      "C-1 Note 5: \"THE CONTRACTOR IS SOLELY RESPONSIBLE FOR THE COMPUTATION OF QUANTITIES ... AND IN NO SUCH INSTANCE RELY ON THE ENGINEER'S ESTIMATE.\""
+      "Proposal form has engineer's quantities, contractor quantities and unit prices, but never says whether the bid is lump sum or unit price. Art. II says \"lump sum ... or the amount of the general proposal\"; s.10(a) pays \"at applicable unit prices or percentage of total completion\"."
      ],
      "new": [
-      "Art. II: \"Owner shall pay Contractor the lump sum Contract Sum of $________ stated on the Contractor's Proposal, subject to additions and deductions under s.23 and s.24.\"",
-      "s.10(a): \"...the value of the Work in place, based on the Proposal line items as the schedule of values and their percentage of completion, less retainage...\"",
-      "Proposal form header: \"LUMP SUM BID. Engineer's quantities are for reference only; Bidder shall verify quantities, and the Contractor Quantity column governs the Bidder's total. Unit prices will be used only to adjust the Contract Sum for Owner-directed changes.\"",
-      "C-1 Note 5: no change. It already puts quantities on the contractor, which matches a lump sum."
+      "Add one header line to the proposal form: \"LUMP SUM BID. UNIT PRICES ARE USED ONLY TO PRICE OWNER-DIRECTED CHANGES.\" No change to Art. II, s.10(a) or Sheet C-1 Note 5."
      ],
-     "why": "Today the documents disagree: Note 5 reads lump sum, Art. II says \"lump sum ... or the general proposal\", and s.10(a) pays \"at unit prices or percentage of completion\". A lump sum gives one fixed contract number for the Village's 120% security and puts the quantity risk on the contractor. On roughly 1,100 LF of pipe with a set profile, the padding for that risk should be small.",
-     "deliver": "Claude drafts the revised Art. II, s.10(a) and proposal form header (redline) for Pinnacle to drop in",
+     "why": "Closes the gap that would let a contractor bill quantity overruns at unit prices, and gives the Village one fixed contract number for the 120% security.",
+     "deliver": "Claude gives Pinnacle the one-line header text",
      "dec": "accept",
-     "note": "Accepted by Jason 11/4: lump sum, unit prices for changes only."
+     "note": "Accepted by Jason 11/4: one header line only."
     },
     {
      "k": "A6",
