@@ -1525,27 +1525,6 @@
      "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
      "dec": "reject",
      "note": "Rejected by Jason 11/4: new wetland permits in hand; staying out of the wetland is the contractor's responsibility."
-    },
-    {
-     "k": "C4",
-     "t": "Permits wait on closing and recording",
-     "where": [
-      [
-       "Approval letter",
-       "Conditions 2, 8, 9"
-      ]
-     ],
-     "who": "Jason",
-     "cur": [
-      "SWMA executed and recorded before any permits; DA memo, tax agreements, CSM and SWMA recorded before watermain permits."
-     ],
-     "new": [
-      "Plan the order: bid, contract, Village approval, 120% breakdown, closing, recording, permits, precon."
-     ],
-     "why": "Contract start date must allow for it.",
-     "deliver": "No document change; action item",
-     "dec": "open",
-     "note": ""
     }
    ]
   }
