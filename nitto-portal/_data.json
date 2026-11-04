@@ -1605,27 +1605,6 @@
      "deliver": "No document change; action item",
      "dec": "open",
      "note": ""
-    },
-    {
-     "k": "C8",
-     "t": "DA Exhibit D: swap in the 11/3 bid set",
-     "where": [
-      [
-       "DA (draft)",
-       "Exhibit D, Public Watermain Infrastructure Plans"
-      ]
-     ],
-     "who": "Peggy / Village",
-     "cur": [
-      "Exhibit D in the 8/25 packet is the 8/11/26 plan set."
-     ],
-     "new": [
-      "Replace with the 11/3/26 bid set (rev. 4) that Kurt approved 11/4 before the DA is signed."
-     ],
-     "why": "The DA's watermain obligation and the construction contract should point to the same plans.",
-     "deliver": "No document change by Claude; ask Peggy",
-     "dec": "open",
-     "note": ""
     }
    ]
   }
