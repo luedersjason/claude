@@ -1584,27 +1584,6 @@
      "deliver": "No document change; action item",
      "dec": "open",
      "note": ""
-    },
-    {
-     "k": "C7",
-     "t": "CAD file for Village GIS",
-     "where": [
-      [
-       "Kurt email",
-       "11/4"
-      ]
-     ],
-     "who": "Pinnacle",
-     "cur": [
-      "Requested by Kurt 11/4."
-     ],
-     "new": [
-      "Pinnacle sends it and confirms."
-     ],
-     "why": "Open request.",
-     "deliver": "No document change; action item",
-     "dec": "open",
-     "note": ""
     }
    ]
   }
