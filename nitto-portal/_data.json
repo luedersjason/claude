@@ -1079,172 +1079,585 @@
   {
    "g": "A. Work that isn't utility work",
    "items": [
-    [
-     "A1",
-     "All permits on the contractor",
-     "Terms s.7; C-1 note 11",
-     "Move DNR, WPDES NOI, erosion control and WisDOT to Pinnacle/owner. Contractor keeps the Village ROW permit and Diggers Hotline."
-    ],
-    [
-     "A2",
-     "SWPPP inspections, reports, rain log, Notice of Termination",
-     "C-6 s.5.0",
-     "Pinnacle or a third party inspects and reports; contractor only maintains the erosion controls."
-    ],
-    [
-     "A3",
-     "As-built / record drawings",
-     "C-1 submittals",
-     "Already in Pinnacle's CM scope (condition 6d). Contractor gives field redlines and ties only, so we don't pay twice."
-    ],
-    [
-     "A4",
-     "Extra soils investigation at contractor's cost",
-     "C-1 notes 2-3",
-     "Hand out the geotech report; delete the extra-investigation line."
-    ],
-    [
-     "A5",
-     "Contractor solely responsible for quantities",
-     "C-1 note 5",
-     "Delete: the bid form is unit price, so pay measured quantities."
-    ],
-    [
-     "A6",
-     "Contractor finds all existing utilities; survey not warranted",
-     "C-2 to C-4; Terms s.21",
-     "Add a potholing line item at known crossings."
-    ],
-    [
-     "A7",
-     "Traffic control / WisDOT at STH 31 & 108th",
-     "not on bid form",
-     "Pinnacle confirms if any work touches STH 31 ROW; add a line or state none."
-    ],
-    [
-     "A8",
-     "Coordinating water shutdowns with area businesses",
-     "C-1 note 16",
-     "Village DPW and Pinnacle send notices; contractor schedules."
-    ],
-    [
-     "A9",
-     "Site sequencing plan 5 business days before start",
-     "C-6",
-     "Keep. Simple ask."
-    ],
-    [
-     "A10",
-     "Spills reported to the 'general contractor'",
-     "C-6 s.6",
-     "Fix wording: there is no GC."
-    ],
-    [
-     "A11",
-     "Survey monuments",
-     "DA s.7.2",
-     "Pinnacle survey, not the contractor."
-    ]
+    {
+     "k": "A1",
+     "t": "Permits: move agency permits off the contractor",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Standard Terms s.7, PDF p.6"
+      ],
+      [
+       "Plans 11/3/26",
+       "Sheet C-1, General Note 11 (and Note 9)"
+      ]
+     ],
+     "who": "Owner / attorney (project manual); Pinnacle (plan sheet)",
+     "cur": [
+      "s.7: \"Contractor shall obtain and pay for all permits, approvals, clearances and licenses required to perform the Work.\"",
+      "C-1 Note 11: \"THE CONTRACTOR SHALL, AT ITS OWN EXPENSE, OBTAIN ALL NECESSARY PERMITS AND LICENSES TO COMPLETE THE PROJECT. OBTAINING PERMITS, OR DELAYS, IS NOT CAUSE FOR DELAY OF THE CONTRACT OR SCHEDULE.\""
+     ],
+     "new": [
+      "s.7: \"Contractor shall obtain and pay for the Village of Pleasant Prairie right-of-way / excavation permit(s), any permits required by Contractor's means and methods, and all Diggers Hotline notifications. Owner, through its Engineer, will obtain the WDNR water main extension approval, WPDES construction site stormwater coverage (NOI), the Village erosion control permit, and the WisDOT permit if one is required. Contractor shall comply with the conditions of all permits.\"",
+      "C-1 Note 11: same split, in the sheet's wording. Note 9: change \"ALL APPLICABLE PERMITS HAVE BEEN OBTAINED\" to \"ALL CONTRACTOR PERMITS HAVE BEEN OBTAINED\"."
+     ],
+     "why": "A utility contractor prices unknown agency approvals and schedule risk he can't control. Pinnacle is already filing the DNR extension.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in; Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A2",
+     "t": "SWPPP inspections, reports and Notice of Termination",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-6, SWPPP s.5.0 Inspection; General Information"
+      ]
+     ],
+     "who": "Pinnacle (plan sheet)",
+     "cur": [
+      "\"INSPECTIONS SHALL BE UNDERTAKEN BY QUALIFIED PERSONNEL PROVIDED BY THE CONTRACTOR ... A STORMWATER POLLUTION PREVENTION PLAN INSPECTION REPORT SHALL BE COMPLETED AND ADDED TO THE SWPPP. RAINFALL SHALL BE RECORDED ON THE SWPPP RAINFALL LOG.\"",
+      "\"KEEPING PLANS CURRENT: THE CONTRACTOR SHALL AMEND THE PLAN WHENEVER THERE IS A CHANGE ...\"",
+      "\"CONTRACTOR SHALL SUBMIT A COMPLETED NOTICE OF TERMINATION TO OWNER FOR EXECUTION PRIOR TO THEIR FINAL PAY APPLICATION REQUEST.\""
+     ],
+     "new": [
+      "\"INSPECTIONS SHALL BE UNDERTAKEN BY QUALIFIED PERSONNEL PROVIDED BY THE OWNER'S ENGINEER ... THE ENGINEER SHALL COMPLETE THE INSPECTION REPORT AND RAINFALL LOG.\" Contractor keeps: \"CONTRACTOR SHALL IMMEDIATELY ARRANGE FOR REPAIR OR REPLACEMENT OF ANY DAMAGED OR DEFICIENT CONTROL MEASURES.\"",
+      "\"THE ENGINEER SHALL AMEND THE PLAN ...\"",
+      "\"THE ENGINEER SHALL PREPARE THE NOTICE OF TERMINATION FOR OWNER EXECUTION.\""
+     ],
+     "why": "Weekly and rain-event reports by a certified inspector are paperwork a pipe crew doesn't have staff for. Add to Pinnacle's CM scope (condition 6d) or hire a third party.",
+     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD; Pinnacle adds the cost to its CM estimate",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A3",
+     "t": "Record drawings: contractor gives redlines, Pinnacle draws",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-1, Required Submittals for Records, item 3"
+      ]
+     ],
+     "who": "Pinnacle (plan sheet)",
+     "cur": [
+      "\"3. UNDERGROUND UTILITY LOCATION RECORD DRAWINGS\""
+     ],
+     "new": [
+      "\"3. FIELD RECORD MARKUPS (REDLINES) OF INSTALLED WATER MAIN, VALVES, HYDRANTS AND FITTINGS WITH TIES TO SURFACE FEATURES. RECORD DRAWINGS WILL BE PREPARED BY THE ENGINEER.\""
+     ],
+     "why": "Approval letter condition 6d already puts as-builts and record drawings in Pinnacle's CM estimate. As written we'd pay for them twice.",
+     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A4",
+     "t": "Geotech: hand it out, drop the 'more borings at your cost' line",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-1, General Note 2"
+      ]
+     ],
+     "who": "Pinnacle (plan sheet)",
+     "cur": [
+      "\"THE CONTRACTOR IS RESPONSIBLE FOR PERFORMING ANY ADDITIONAL SOILS INVESTIGATIONS THEY FEEL IS NECESSARY ... AT NO ADDITIONAL COST TO THE OWNER.\""
+     ],
+     "new": [
+      "Delete that sentence. Include the geotechnical report in the bid package (Pinnacle to confirm which report covers the watermain route)."
+     ],
+     "why": "Bidders price their own borings or a soils contingency. Giving them the report is cheaper.",
+     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A5",
+     "t": "Quantities: pay measured units",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-1, General Note 5"
+      ],
+      [
+       "Project manual 11/3/26",
+       "Proposal form, PDF p.12"
+      ]
+     ],
+     "who": "Pinnacle (plan sheet)",
+     "cur": [
+      "\"THE CONTRACTOR IS SOLELY RESPONSIBLE FOR THE COMPUTATION OF QUANTITIES ... THE CONTRACTOR'S BID SHALL BE BASED ON ITS OWN COMPUTATIONS AND IN NO SUCH INSTANCE RELY ON THE ENGINEER'S ESTIMATE.\""
+     ],
+     "new": [
+      "\"QUANTITIES ON THE PROPOSAL FORM ARE THE ENGINEER'S ESTIMATE FOR BID COMPARISON. UNIT PRICE ITEMS WILL BE PAID ON MEASURED QUANTITIES INSTALLED AND ACCEPTED; LUMP SUM ITEMS AS BID.\""
+     ],
+     "why": "The proposal form is a unit-price schedule with the engineer's quantities. The note contradicts it and invites padding.",
+     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A6",
+     "t": "Existing utilities: add a potholing line item",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Proposal form, PDF p.12 (new item)"
+      ],
+      [
+       "Project manual 11/3/26",
+       "Standard Terms s.21, PDF p.9"
+      ]
+     ],
+     "who": "Pinnacle (plan sheet); Owner / attorney (project manual)",
+     "cur": [
+      "s.21: \"No representations are made by the Owner ... as to the existence or nature of visible or invisible surface or subsurface difficulties ... whether shown on the plans or not ...\"",
+      "Proposal form: no potholing item."
+     ],
+     "new": [
+      "Add: \"Potholing / exploratory excavation at existing utility crossings, EA, qty by Engineer.\" (Pinnacle sets the count from sheets C-3 and C-4.)"
+     ],
+     "why": "Gives the contractor a paid way to find crossings instead of carrying a contingency.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A7",
+     "t": "STH 31: traffic control and WisDOT",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Proposal form, PDF p.12"
+      ]
+     ],
+     "who": "Pinnacle (plan sheet)",
+     "cur": [
+      "No traffic control item. Sheet C-1 lists WisDOT contacts."
+     ],
+     "new": [
+      "Pinnacle confirms whether any work is in the STH 31 right-of-way. If yes, add \"Traffic control, LS\" and Engineer obtains the WisDOT permit (see A1). If no, add a note: \"NO WORK IN STH 31 RIGHT-OF-WAY.\""
+     ],
+     "why": "KWU's letter says the main is in easement outside the right-of-way; the plans should say so plainly.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A8",
+     "t": "Water shutdowns: who notifies businesses",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-1, General Note 16"
+      ]
+     ],
+     "who": "Pinnacle (plan sheet)",
+     "cur": [
+      "\"ANY WATER SHUTDOWNS NEEDED DURING CONSTRUCTION WILL NEED TO BE PERFORMED BY THE VILLAGE OF PLEASANT PRAIRIE DEPARTMENT OF PUBLIC WORKS AND COORDINATED WITH AREA BUSINESSES.\""
+     ],
+     "new": [
+      "\"... PERFORMED BY THE VILLAGE DPW. CONTRACTOR SHALL REQUEST SHUTDOWNS FROM THE VILLAGE [__] BUSINESS DAYS IN ADVANCE. THE ENGINEER WILL COORDINATE NOTICE TO AFFECTED BUSINESSES.\" (Pinnacle fills in the Village's lead time.)"
+     ],
+     "why": "Notice to neighboring businesses is coordination, not pipe work.",
+     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A9",
+     "t": "Site sequencing plan 5 business days before start",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-6"
+      ]
+     ],
+     "who": "-",
+     "cur": [
+      "\"THE CONTRACTOR SHALL SUBMIT A DETAILED SITE SEQUENCING PLAN TO OWNER FOR APPROVAL AT LEAST 5 BUSINESS DAYS PRIOR TO COMMENCEMENT ...\""
+     ],
+     "new": [
+      "No change suggested."
+     ],
+     "why": "Reasonable ask for any contractor.",
+     "deliver": "None",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A10",
+     "t": "Spill reporting names a general contractor",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-6, SWPPP s.6"
+      ]
+     ],
+     "who": "Pinnacle (plan sheet)",
+     "cur": [
+      "\"... SPILLS OF TOXIC OR HAZARDOUS MATERIALS SHALL BE REPORTED TO THE OWNER AND GENERAL CONTRACTOR.\""
+     ],
+     "new": [
+      "\"... SHALL BE REPORTED TO THE OWNER AND THE ENGINEER.\""
+     ],
+     "why": "There is no GC on this contract.",
+     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "A11",
+     "t": "Survey monuments go to Pinnacle",
+     "where": [
+      [
+       "DA (draft)",
+       "s.7.2 Survey Monuments"
+      ]
+     ],
+     "who": "Pinnacle (CM scope)",
+     "cur": [
+      "\"The Developer, at the Developer's cost, shall place and install on the Property all survey monuments required ...\""
+     ],
+     "new": [
+      "Include in Pinnacle's CM estimate (condition 6d). Not in the contractor's scope."
+     ],
+     "why": "Surveyor's work.",
+     "deliver": "No document change; action item",
+     "dec": "open",
+     "note": ""
+    }
    ]
   },
   {
    "g": "B. Terms that make bidders add money",
    "items": [
-    [
-     "B1",
-     "Consequential damages + $500/day LDs + one-way attorney fees",
-     "Terms s.5",
-     "Your/attorney call; compare to Lisa's standard."
-    ],
-    [
-     "B2",
-     "Terminate if owner 'not satisfied'; no pay until work finished",
-     "Terms s.19",
-     "Your/attorney call."
-    ],
-    [
-     "B3",
-     "Payment every 60 days",
-     "Terms s.10(a)",
-     "Monthly is typical; your call."
-    ],
-    [
-     "B4",
-     "$5M umbrella insurance",
-     "Terms s.9",
-     "Village only requires being named; confirm the $5M is our standard."
-    ],
-    [
-     "B5",
-     "Contractor indemnifies Pinnacle too, no WC limit",
-     "C-1 note 15; Terms s.8",
-     "Your/attorney call."
-    ],
-    [
-     "B6",
-     "All subsurface risk, no differing-site-conditions clause",
-     "Terms s.21",
-     "Your/attorney call."
-    ],
-    [
-     "B7",
-     "312 LF directional drill is usually subbed; subletting needs consent",
-     "Terms s.12",
-     "Pre-approve a drilling sub in the bid form."
-    ]
+    {
+     "k": "B1",
+     "t": "Late-finish exposure: consequential damages + LDs + fees",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Standard Terms s.5 and s.5a, PDF p.5"
+      ]
+     ],
+     "who": "Owner / attorney (project manual)",
+     "cur": [
+      "\"Contractor shall be responsible to Owner for any and all direct or indirect damages (including, but not limited to, consequential damages) incurred as the result of Contractor's failure to complete the Work within the Contract Time. All costs, including attorney's fees, incurred by Owner in enforcing the Agreement ... shall be borne solely by Contractor.\""
+     ],
+     "new": [
+      "Delete both sentences. Keep s.5a liquidated damages ($500/day) as the sole remedy for delay. Art. IV already gives the prevailing party its fees."
+     ],
+     "why": "Uncapped consequential damages on a pipe job gets priced or gets no bid. LDs already protect the schedule.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "B2",
+     "t": "Termination: add notice and cure",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Standard Terms s.19, PDF p.8"
+      ]
+     ],
+     "who": "Owner / attorney (project manual)",
+     "cur": [
+      "\"The Owner may, upon written notice, terminate the Agreement, with or without cause, if the Owner determines (in its sole discretion) that the Contractor has not performed ... the Contractor shall not be entitled to receive further payment until the Work is finished.\""
+     ],
+     "new": [
+      "For cause: written notice and 7 days to cure, then Owner may terminate and complete at Contractor's cost. For convenience: Owner pays for work performed and demobilization."
+     ],
+     "why": "\"Sole discretion, no pay until finished\" reads as risk of not getting paid.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "B3",
+     "t": "Pay monthly, not every 60 days",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Standard Terms s.10(a), PDF p.7"
+      ]
+     ],
+     "who": "Owner / attorney (project manual)",
+     "cur": [
+      "\"Partial payments ... will be made by the Owner every sixty (60) days ...\""
+     ],
+     "new": [
+      "\"... will be made by the Owner monthly ...\" (matches s.10(b), which already bases pay apps on month-end work)."
+     ],
+     "why": "Carrying 60 days of cost gets priced in.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "B4",
+     "t": "$5M umbrella insurance",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Standard Terms s.9, PDF p.6"
+      ]
+     ],
+     "who": "Owner / attorney (project manual)",
+     "cur": [
+      "\"(iv) Umbrella/excess liability: (a) Each Occurrence in the amount of Five Million Dollars ($5,000,000); and (b) Aggregate ... Five Million Dollars ($5,000,000).\""
+     ],
+     "new": [
+      "Match Zilber's standard for site/utility work (from Lisa's sample). Keep the Village as additional insured, which is what condition 6c requires."
+     ],
+     "why": "Small utility contractors may not carry $5M. Pick the number from our standard, not Pinnacle's form.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "B5",
+     "t": "Indemnity: limit to contractor's fault",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Standard Terms s.8, PDF p.6"
+      ],
+      [
+       "Plans 11/3/26",
+       "Sheet C-1, General Note 15"
+      ]
+     ],
+     "who": "Owner / attorney (project manual); Pinnacle (plan sheet)",
+     "cur": [
+      "C-1 Note 15: \"THE CONTRACTOR SHALL INDEMNIFY THE OWNER, ENGINEER, AND THEIR AGENTS FROM ALL LIABILITY INVOLVED WITH THE CONSTRUCTION, INSTALLATION, AND TESTING OF THE WORK ON THIS PROJECT.\""
+     ],
+     "new": [
+      "Note 15: \"... TO THE EXTENT CAUSED BY THE NEGLIGENT ACTS OR OMISSIONS OF THE CONTRACTOR, ITS SUBCONTRACTORS, OR ANYONE FOR WHOM IT IS RESPONSIBLE.\" Align s.8 to Zilber's standard."
+     ],
+     "why": "\"All liability\" reads as covering the engineer's own design errors.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in; Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "B6",
+     "t": "Add a differing site conditions clause",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Standard Terms s.21, PDF p.9"
+      ]
+     ],
+     "who": "Owner / attorney (project manual)",
+     "cur": [
+      "\"... the Bid Price for the work covered by this Agreement must cover satisfactory completion thereof on this condition.\""
+     ],
+     "new": [
+      "Add: \"If Contractor encounters subsurface conditions materially different from those shown in the Contract Documents or the geotechnical report, Contractor shall stop affected work and notify Owner in writing; the Contract Sum and Time will be equitably adjusted.\""
+     ],
+     "why": "Without it, every bidder carries a subsurface contingency.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "B7",
+     "t": "Directional drilling sub named in the bid",
+     "where": [
+      [
+       "Project manual 11/3/26",
+       "Proposal form PDF p.12; Standard Terms s.12, PDF p.7"
+      ]
+     ],
+     "who": "Owner / attorney (project manual)",
+     "cur": [
+      "s.12: \"Contractor shall not sublet the Work, either in whole or in part, without prior, express and written consent of Owner.\""
+     ],
+     "new": [
+      "Proposal form: add \"Directional drilling subcontractor: ________\". s.12: \"Subcontractors named in the Contractor's Proposal are deemed approved.\""
+     ],
+     "why": "312 LF of 16\" drill is specialty work most utility contractors sub out.",
+     "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
+     "dec": "open",
+     "note": ""
+    }
    ]
   },
   {
-   "g": "C. Missing steps",
+   "g": "C. Missing steps (actions, not edits)",
    "items": [
-    [
-     "C1",
-     "Only Village-prequalified contractors (Ch. 405)",
-     "C-1 Village note 3",
-     "Get the Village list before inviting bidders."
-    ],
-    [
-     "C2",
-     "Expired DNR/ACOE wetland permits may block ANY permit",
-     "Approval letter p.2",
-     "Ask Kurt/Peggy if this applies to the watermain."
-    ],
-    [
-     "C3",
-     "Floodplain (713.3) and wetland easement near the drill",
-     "C-4",
-     "Pinnacle confirms no bore pit or spoil in wetland/floodplain."
-    ],
-    [
-     "C4",
-     "Permits wait on closing and recording (SWMA, DA memo, CSM)",
-     "Conditions 2, 9",
-     "Plan the sequence: bid, contract, security, closing, record, permits."
-    ],
-    [
-     "C5",
-     "Building likely needs this main earlier than 11/15/27 (unconfirmed)",
-     "DA s.6.1 vs Phase A 1/1/28",
-     "Confirm fire-protection water timing with Pinnacle / fire dept."
-    ],
-    [
-     "C6",
-     "Copies of every agency permit to the Village",
-     "DA s.7.3",
-     "Track in permits step."
-    ],
-    [
-     "C7",
-     "CAD file for Village GIS",
-     "Kurt 11/4",
-     "Pinnacle to send and confirm."
-    ],
-    [
-     "C8",
-     "DA Exhibit D is the 8/11 plan set; DA party and contract owner are different LLCs",
-     "DA exhibits",
-     "Ask Peggy to update Exhibit D and confirm the entity."
-    ]
+    {
+     "k": "C1",
+     "t": "Village-prequalified contractors only",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-1, Village Note 3"
+      ]
+     ],
+     "who": "Jason / Village",
+     "cur": [
+      "\"ALL WORK WITHIN VILLAGE RIGHTS-OF-WAY, PUBLIC EASEMENTS, OR ON VILLAGE FACILITIES SHALL BE COMPLETED ... BY PREQUALIFIED CONTRACTORS ...\""
+     ],
+     "new": [
+      "Get the Village's prequalified list from Kurt and invite only from it."
+     ],
+     "why": "A non-prequalified low bidder can't do the work.",
+     "deliver": "No document change; action item",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "C2",
+     "t": "Expired wetland permits may block all permits",
+     "where": [
+      [
+       "Approval letter",
+       "p.2"
+      ]
+     ],
+     "who": "Jason / Village",
+     "cur": [
+      "\"Valid wetland fill permits/approvals are required to be submitted from the WI DNR and ACOE prior to issuance of any permits.\" DNR permit expired 9/26/25; ACOE 12/3/25."
+     ],
+     "new": [
+      "Ask Kurt/Peggy whether this applies to the watermain permits."
+     ],
+     "why": "Could stop the job after the contract is signed.",
+     "deliver": "No document change; action item",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "C3",
+     "t": "Floodplain and wetland near the drill",
+     "where": [
+      [
+       "Plans 11/3/26",
+       "Sheet C-4"
+      ]
+     ],
+     "who": "Pinnacle",
+     "cur": [
+      "Sheet shows FLOODPLAIN POST-PROJECT EL. 713.3 and the wetland preservation easement next to the 312 LF drill."
+     ],
+     "new": [
+      "Pinnacle confirms bore pits, spoil and staging are outside the wetland and floodplain, and shows it on the plan."
+     ],
+     "why": "Avoids a surprise permit.",
+     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "C4",
+     "t": "Permits wait on closing and recording",
+     "where": [
+      [
+       "Approval letter",
+       "Conditions 2, 8, 9"
+      ]
+     ],
+     "who": "Jason",
+     "cur": [
+      "SWMA executed and recorded before any permits; DA memo, tax agreements, CSM and SWMA recorded before watermain permits."
+     ],
+     "new": [
+      "Plan the order: bid, contract, Village approval, 120% breakdown, closing, recording, permits, precon."
+     ],
+     "why": "Contract start date must allow for it.",
+     "deliver": "No document change; action item",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "C5",
+     "t": "Building may need this main sooner (unconfirmed)",
+     "where": [
+      [
+       "DA",
+       "s.6.1 (11/15/27) vs Phase A completion 1/1/28"
+      ]
+     ],
+     "who": "Pinnacle / fire dept",
+     "cur": [
+      "Not addressed."
+     ],
+     "new": [
+      "Confirm when the building needs fire-protection water; set the contract completion date from that."
+     ],
+     "why": "The real deadline may be much earlier than 11/15/27.",
+     "deliver": "No document change; action item",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "C6",
+     "t": "Permit copies to the Village",
+     "where": [
+      [
+       "DA",
+       "s.7.3"
+      ]
+     ],
+     "who": "Pinnacle",
+     "cur": [
+      "\"... shall provide and submit to the Village valid copies of any and all governmental agency permits ...\""
+     ],
+     "new": [
+      "Track with the permits step."
+     ],
+     "why": "DA requirement.",
+     "deliver": "No document change; action item",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "C7",
+     "t": "CAD file for Village GIS",
+     "where": [
+      [
+       "Kurt email",
+       "11/4"
+      ]
+     ],
+     "who": "Pinnacle",
+     "cur": [
+      "Requested by Kurt 11/4."
+     ],
+     "new": [
+      "Pinnacle sends it and confirms."
+     ],
+     "why": "Open request.",
+     "deliver": "No document change; action item",
+     "dec": "open",
+     "note": ""
+    },
+    {
+     "k": "C8",
+     "t": "DA Exhibit D and the two LLCs",
+     "where": [
+      [
+       "DA",
+       "Exhibit D; parties"
+      ]
+     ],
+     "who": "Jason / Village",
+     "cur": [
+      "Exhibit D is the 8/11 plan set. DA party: TI Investors of Pleasant Prairie Holding Company LLC. Contract owner: TI Investors of Lakeview Nitto Parcel LLC."
+     ],
+     "new": [
+      "Ask Peggy to swap in the 11/3 bid set and confirm which entity goes on the contract."
+     ],
+     "why": "Contract and DA should match.",
+     "deliver": "No document change; action item",
+     "dec": "open",
+     "note": ""
+    }
    ]
   }
  ],
