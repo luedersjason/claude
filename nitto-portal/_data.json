@@ -79,6 +79,34 @@
      "n": "Letter from Rob Hanson dated 8/25."
     },
     {
+     "t": "WDNR wetland individual permit IP-SE-2026-30-01917",
+     "o": "WDNR",
+     "s": "done",
+     "d": "10/15",
+     "n": "Issued by Sonya Ponzi; plans dated 4/27/2020. Permit says complete by 10/15/2026 (same day as issued) and its permit page is headed 02789; ask Sonya to correct. Covers building-site wetland impacts, not the watermain."
+    },
+    {
+     "t": "WDNR pond individual permit IP-SE-2026-30-02789",
+     "o": "WDNR",
+     "s": "done",
+     "d": "10/15",
+     "n": "Pond within 500 ft of unnamed stream. Same 10/15/2026 completion date and swapped number issue."
+    },
+    {
+     "t": "WDNR Section 401 water quality certification",
+     "o": "WDNR",
+     "s": "done",
+     "d": "10/16",
+     "n": "For Corps permit MVP-2017-01912-LRK."
+    },
+    {
+     "t": "Army Corps Section 404 permit MVP-2017-01912-LRK",
+     "o": "USACE",
+     "s": "open",
+     "d": "",
+     "n": "Provisional letter 6/3 (Lorin Kinney): permit issues only after the 401 certification. 401 issued 10/16; final 404 permit not yet seen."
+    },
+    {
      "t": "Plans and WDNR submittal info sent to KWU",
      "o": "Village",
      "s": "done",
@@ -748,6 +776,21 @@
    "d": "2026-11-04",
    "t": "Jason sends Andy and Justin the project manual items before bidding (completion date, bid form, scope, permits, bid instructions, CM estimate, CSM spelling, cleanup). Asks Lisa Kleinke for Zilber's standard owner-direct plan and spec contract to compare.",
    "src": "Jason"
+  },
+  {
+   "d": "2026-06-03",
+   "t": "Army Corps (Lorin Kinney) sends provisional notification for MVP-2017-01912-LRK: review complete, 404 permit waits on the DNR 401 certification.",
+   "src": "USACE"
+  },
+  {
+   "d": "2026-10-15",
+   "t": "WDNR (Sonya Ponzi) issues the wetland individual permit (01917) and pond individual permit (02789), approving the 4/27/2020 plans.",
+   "src": "Sonya Ponzi"
+  },
+  {
+   "d": "2026-10-16",
+   "t": "WDNR issues the Section 401 water quality certification for the Corps permit.",
+   "src": "Sonya Ponzi"
   }
  ],
  "docs": [
@@ -989,6 +1032,39 @@
       [
        "Email",
        "cczarnecki@kenosha.org"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "org": "Permitting agencies",
+   "p": [
+    {
+     "n": "Sonya Ponzi",
+     "r": "WDNR, wetland and pond permits",
+     "l": [
+      [
+       "Phone",
+       "608-598-0346"
+      ],
+      [
+       "Email",
+       "sonya.ponzi@wisconsin.gov"
+      ]
+     ]
+    },
+    {
+     "n": "Lorin Kinney",
+     "r": "US Army Corps of Engineers, St. Paul District (MVP-2017-01912-LRK)",
+     "l": [
+      [
+       "Phone",
+       "651-383-5914"
+      ],
+      [
+       "Email",
+       "Lorin.R.Kinney@usace.army.mil"
       ]
      ]
     }

@@ -14,6 +14,9 @@ DOCS = [
  ('Village Engineer comments', 'Marked plans, 8/11/26.', 'NW-Village-Engineer-Comments-8.11.26.pdf'),
  ('CSM dedication language (draft)', '"Lakeveiw" typo.', 'NW-CSM-Dedication-Covenant-Language-DRAFT.pdf'),
  ('Stormwater Maintenance Agreement (draft)', 'Exhibit B still needed.', 'NW-Stormwater-Maintenance-Agreement-DRAFT.pdf'),
+ ('WDNR wetland individual permit (01917)', 'Sonya Ponzi, 10/15/26. Completion date and number need correcting.', 'NW-WDNR-Wetland-IP-01917-10.15.26.pdf'),
+ ('WDNR pond individual permit (02789)', 'Sonya Ponzi, 10/15/26.', 'NW-WDNR-Pond-IP-02789-10.15.26.pdf'),
+ ('WDNR 401 water quality certification', '10/16/26, for Corps MVP-2017-01912-LRK.', 'NW-WDNR-WQC-01917-10.16.26.pdf'),
 ]
 TAG = {'done':('g','Done'),'active':('b','In progress'),'open':('n','Open'),'attn':('r','Needs action'),'hold':('a','On hold'),'na':('n','N/A')}
 
