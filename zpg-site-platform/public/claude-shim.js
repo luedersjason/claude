@@ -8,13 +8,16 @@
     const list = docs.map((d) => ({ id: d.id, data: () => d.data, exists: true }));
     return { docs: list, size: list.length, empty: !list.length, forEach: (fn) => list.forEach(fn) };
   }
+  // Listeners per collection name, so a write on this page refreshes them at once instead of at the next poll.
+  const subs = {};
+  const kick = (name) => (subs[name] || new Set()).forEach((fn) => fn());
   function collection(name) {
     const base = "/c/" + encodeURIComponent(name);
     const docRef = (id) => ({
       id,
-      set: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); },
-      update: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); },
-      delete: async () => { const r = await api(base + "/" + encodeURIComponent(id), { method: "DELETE" }); if (!r.ok) await fail(r); },
+      set: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); },
+      update: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); },
+      delete: async () => { const r = await api(base + "/" + encodeURIComponent(id), { method: "DELETE" }); if (!r.ok) await fail(r); kick(name); },
       get: async () => { const s = await getAll(); const d = s.docs.find((x) => x.id === id); return d || { id, exists: false, data: () => undefined }; },
     });
     let etag = null, last = null;
@@ -29,15 +32,20 @@
       add: async (data) => { const id = "d" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); await docRef(id).set(data); return docRef(id); },
       get: () => getAll(true),
       onSnapshot(next, error) {
-        let stopped = false, prev = null;
+        let stopped = false, prev = null, timer = null, busy = false, again = false;
         const tick = async () => {
           if (stopped) return;
+          if (busy) { again = true; return; }
+          busy = true; clearTimeout(timer);
           try { const s = await getAll(); if (s !== prev) { prev = s; next(s); } }
           catch (e) { if (error) error(e); }
-          if (!stopped) setTimeout(tick, document.hidden ? 15000 : 4000);
+          busy = false;
+          if (again) { again = false; return tick(); }
+          if (!stopped) timer = setTimeout(tick, document.hidden ? 15000 : 4000);
         };
+        (subs[name] = subs[name] || new Set()).add(tick);
         tick();
-        return () => { stopped = true; };
+        return () => { stopped = true; clearTimeout(timer); subs[name].delete(tick); };
       },
     };
   }

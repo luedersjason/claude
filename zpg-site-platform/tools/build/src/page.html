@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nitto Public Watermain</title>
+<meta name="description" content="ZPG project site for the Nitto public watermain at Zilber Industrial 3, LakeView Corporate Park, Pleasant Prairie.">
+<link rel="icon" href="img/zpg-logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+%%CSS%%
+</style>
+</head>
+<body>
+<div class="ribbon"><div class="wrap">
+  <img class="logo" src="img/zpg-logo.png" alt="Zilber Property Group">
+  <div class="ptitle">Nitto Public Watermain <span>Zilber Industrial 3 · LakeView Corporate Park</span></div>
+  <nav class="tabs" aria-label="Project sections">
+    <button class="tab" data-tab="home" type="button">Home</button>
+    <button class="tab" data-tab="review" type="button">Review</button>
+    <button class="tab" data-tab="tracker" type="button">Tracker</button>
+    <button class="tab" data-tab="documents" type="button">Documents</button>
+    <button class="tab" data-tab="schedule" type="button">Schedule</button>
+    <button class="tab" data-tab="team" type="button">Team</button>
+  </nav>
+</div></div>
+
+<div class="shell">
+<aside class="lbar">
+  <div class="box">
+    <label class="eyebrow" for="q">Search this project</label>
+    <input id="q" class="search" type="search" placeholder="Issues, review items, people…" autocomplete="off">
+    <div id="qres" class="qres"></div>
+  </div>
+  <button class="btn go newiss" type="button" id="newIss">+ New issue</button>
+  <div class="box">
+    <div class="eyebrow">Issue tracker · <span class="grpsw"><button type="button" data-g="owner" aria-pressed="false">By owner</button><button type="button" data-g="area" aria-pressed="true">By discipline</button></span></div>
+    <div id="disc" class="disc"><p class="note">Loading…</p></div>
+  </div>
+</aside>
+<main id="main">
+
+<div class="panel" data-panel="home">
+<section class="cover" style="background-image:linear-gradient(90deg,rgba(14,28,42,.94) 0%,rgba(14,28,42,.82) 48%,rgba(14,28,42,.35) 100%),url('img/docs/cover-plan.jpg')">
+  <div class="cover-in">
+    <span class="cover-eye">LakeView Corporate Park · Zilber Industrial 3 · Pleasant Prairie, WI</span>
+    <div class="cover-big"><b>1,100 ft</b><span>public 16″ water main<br>west side of Green Bay Road (STH 31)</span></div>
+    <p>Goal: get a winning contractor under contract, send it to Kurt, and post the financial security the DA requires. The water main must be installed and accepted by Nov 15, 2027.</p>
+    <div class="status"><span class="chip now"><span class="dot"></span>Step %%STEPN%% of %%PATHN%%: fix the project manual</span><span class="chip">Plans approved 11/4</span><span class="chip">Accept by 11/15/27</span></div>
+    <button type="button" class="cover-btn" data-sheets="PL-1,PL-2,PL-3,PL-4,PL-5,PL-6,PL-7,PL-8">Open the bid set plans ⤢</button>
+  </div>
+</section>
+<section aria-label="Where we are">
+  <header><span class="eyebrow">Where we are · %%PATHN%% steps to an accepted water main</span><h2>Path to acceptance</h2></header>
+  <ol class="prail">%%RAIL%%</ol>
+</section>
+<section class="two" aria-label="Do next and waiting on">
+  <div class="box"><span class="eyebrow">Do next</span>%%DONEXT%%<button type="button" class="btn" data-tabgo="review" style="justify-self:start;margin-top:4px">Open the review list →</button></div>
+  <div class="box"><span class="eyebrow">Waiting on</span>%%WAITING%%<div class="act"><span class="eyebrow">Sent to Pinnacle 11/4</span><div class="sent">%%SENT%%</div></div></div>
+</section>
+<section class="box" aria-label="About this work"><span class="eyebrow">The work</span><p class="about">%%SUMMARY%%</p></section>
+<div class="prof" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image viewer"><div class="prof-card lb"><button class="btn prof-x" type="button" id="lbX">Close</button><img id="lbImg" alt="" style="width:100%;height:auto"><p class="note" id="lbCap"></p></div></div>
+</div>
+
+<div class="panel" data-panel="review" hidden>
+<section id="review">
+  <header><span class="eyebrow">For the review with Pinnacle · decisions save for the whole team</span><h2>Review list: who should do what</h2>
+  <p class="lede">Each item shows where the text is, the current wording, the proposed wording, and what Claude will produce once you accept it. Every button press saves right away; click it again to set the item back to open.</p></header>
+  <div class="rtools"><span id="rcount"></span><span class="row"><button class="btn" type="button" id="rOpen">Expand all</button><button class="btn" type="button" id="rClose">Collapse all</button></span></div>
+  <div id="rList"><p class="note">Loading…</p></div>
+  <p class="note" id="rMsg"></p>
+</section>
+</div>
+
+<div class="panel" data-panel="tracker" hidden>
+<section id="tracker">
+  <header><span class="eyebrow">Shared with everyone who can open this page</span><h2>Issue tracker</h2>
+  <p class="lede">Steps from the watermain plan, grouped by workstream. Click a status to move it along. Changes save for the whole team.</p></header>
+  <div class="tk-bar" id="tkBar">
+    <div class="tk-counts" id="tkCounts"></div><span id="tkSweep" class="note"></span>
+    <div class="grpsw" id="tkGrpSw" style="margin:0 0 8px"><button type="button" data-tg="area" aria-pressed="true">By discipline</button><button type="button" data-tg="owner" aria-pressed="false">By owner</button><button type="button" data-tg="none" aria-pressed="false">Flat list</button></div>
+    <div class="row">
+      <label class="note" for="tkOwner">Owner</label>
+      <select id="tkOwner" class="btn"><option value="">Everyone</option></select>
+      <label class="note" for="tkShow">Show</label>
+      <select id="tkShow" class="btn"><option value="active">Not done</option><option value="all">All</option><option value="Done">Done</option></select>
+    </div>
+  </div>
+  <div id="tkOnly" class="tk-only" hidden></div>
+  <div id="tkDetail" class="tk-detail" hidden></div>
+  <div class="files-scroll" id="tkWrap"><table class="tk">
+    <thead><tr><th>#</th><th>Item</th><th>Owner</th><th>Status</th><th>Now / next step</th></tr></thead>
+    <tbody id="tkBody"><tr><td colspan="5" class="note">Loading tracker…</td></tr></tbody>
+  </table></div>
+  <p class="note" id="tkMsg"></p>
+</section>
+</div>
+
+<div class="panel" data-panel="documents" hidden>
+<section id="files">
+  <header><span class="eyebrow">Latest versions only</span><h2>Documents by group</h2></header>
+  <div class="dcards" id="dcards"></div>
+</section>
+<div class="prof" id="dcModal" hidden role="dialog" aria-modal="true" aria-labelledby="dcH"><div class="prof-card dcm"><button class="btn prof-x" type="button" id="dcX">Close</button><h2 id="dcH"></h2><p class="note" id="dcSub"></p><div id="dcList" class="dcg"></div></div></div>
+<section id="doclog">
+  <header><span class="eyebrow">What changed</span><h2>Document log</h2></header>
+  <div class="files-scroll"><table><thead><tr><th>Date</th><th>Document</th><th>Change</th><th>From</th></tr></thead><tbody id="doclogbody"><tr><td colspan="4" class="note">Loading…</td></tr></tbody></table></div>
+</section>
+</div>
+
+<div class="panel" data-panel="schedule" hidden>
+<section id="schedule">
+  <header class="g-hdr"><div><span class="eyebrow">From the approval letter, DA draft and agency permits · confirmed dates only</span><h2 id="gTitle">Master schedule</h2>
+  <p class="lede" id="gLede"></p></div></header>
+  <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
+  <div class="g-legend"><span><i class="ms done" style="position:static;display:inline-block;width:10px;height:10px;transform:rotate(45deg);margin-right:8px;border:0"></i>Done</span><span><i style="position:static;display:inline-block;width:10px;height:10px;transform:rotate(45deg);margin-right:8px;border:0;background:var(--accent)"></i>Key date</span><span><i style="position:static;display:inline-block;width:0;height:12px;border:0;border-left:2px dashed var(--accent);margin-right:8px"></i>Today</span></div>
+</section>
+<section id="village">
+  <header><span class="eyebrow">From the DA approval letter and DA draft</span><h2>Approval path, from plan approval to acceptance</h2>
+  <p class="lede">The Village sizes the financial security at 120% of the public improvements, inspections and construction-related services, from the signed contract and Pinnacle's construction management estimate (DA Article VI, Ordinance s.395-17; conditions 6 and 7). The DA, Memorandum of DA and Stormwater Maintenance Agreement are signed at closing and recorded before any permits for the watermain (conditions 8 and 9). The Village schedules the preconstruction meeting once all documents and permits are in (condition 11). Dates for bidding, contract, closing and construction are not set yet.</p></header>
+  <div class="village">%%STEPS%%</div>
+</section>
+</div>
+
+<div class="panel" data-panel="team" hidden>
+<section id="team">
+    <div class="dir-top">
+      <span></span>
+      <div class="row"><button class="btn go" type="button" id="vcAll">Download everyone's vCard (.vcf)</button></div>
+    </div>
+    <header><span class="eyebrow">Nitto Public Watermain · LakeView Corporate Park</span><h2>Project directory</h2>
+    <p class="lede">Grouped by role, developer first. Click a card for the person's profile. Use the contact-card button to add someone to Outlook.</p></header>
+    <div id="dirList"></div>
+    <p class="note">Names, roles, phones and emails come from the project correspondence. Titles are shown only where the correspondence states them. Missing details are marked "to confirm."</p>
+  </section>
+</div>
+</main>
+<aside class="rbar">
+  <div class="box vbox"><div class="eyebrow">Needs your check</div><button type="button" class="btn vbtn" id="vBtn">Validation requests <b id="vCount">0</b></button><p class="note" id="vNote">Nothing waiting.</p></div>
+<div class="prof" id="vModal" hidden role="dialog" aria-modal="true" aria-labelledby="vH"><div class="prof-card vmc" style="max-width:1280px;width:96vw"><button class="btn prof-x" type="button" id="vX">Close</button><h2 id="vH" style="margin-bottom:12px">Validation requests</h2><div id="vList"></div></div></div>
+<div class="prof" id="vRef" hidden role="dialog" aria-modal="true" aria-labelledby="vRefT"><div class="prof-card" style="max-width:720px"><button class="btn prof-x" type="button" id="vRefX">Close</button><h2 id="vRefT" style="margin-bottom:10px"></h2><div id="vRefB" style="white-space:pre-wrap;font-size:14px;line-height:1.5"></div></div></div>
+  <div class="box"><div class="eyebrow">Project feed</div><form id="feedForm" class="feed-form"><input id="feedText" maxlength="90" placeholder="Add a project update, e.g. Bids received" autocomplete="off"><button class="btn" type="submit">Add</button></form><ul id="feed" class="feed"><li class="note">Loading…</li></ul></div>
+</aside>
+</div>
+
+<footer><div class="wrap">
+  <span>Built from the Nitto watermain portal, the Village approval letter and DA draft, and the 11/3 bid set. Open the Documents tab for the source PDFs.</span>
+  <span>Owner: Jason Lueders, ZPG</span>
+</div></footer>
+<div class="toast" id="toast" role="status"></div>
+
+<div class="prof" id="issModal" hidden role="dialog" aria-modal="true" aria-labelledby="issH">
+  <div class="prof-card" style="max-width:520px">
+    <button class="btn prof-x" type="button" id="issX">Close</button>
+    <h2 id="issH" style="margin-bottom:12px">New issue</h2>
+    <div id="tkAdd">
+    <form id="tkForm" class="tk-form">
+      <label>Item<input id="tkTitle" required></label>
+      <label>Owner<input id="tkWho" placeholder="e.g. Pinnacle"></label>
+      <label>Area<select id="tkArea"><option>Plans &amp; approvals</option><option>Bid &amp; contract</option><option>Financial security &amp; closing</option><option>Construction &amp; acceptance</option></select></label>
+      <label>Next step<input id="tkNext"></label>
+      <button class="btn go" type="submit">Add item</button>
+    </form>
+    </div>
+  </div>
+</div>
+<div class="dv" id="dv" hidden role="dialog" aria-label="Drawing viewer">
+  <div class="dv-top">
+    <div class="dv-sheets" id="dvSheets"></div>
+    <div class="dv-tools" id="dvTools">
+      <button type="button" data-tool="pan" title="Pan: drag. Right-drag pans with any tool">Pan</button>
+      <button type="button" data-tool="pen">Pen</button>
+      <button type="button" data-tool="hl">Highlight</button>
+      <button type="button" data-tool="line">Line</button>
+      <button type="button" data-tool="arrow">Arrow</button>
+      <button type="button" data-tool="rect">Box</button>
+      <button type="button" data-tool="ell">Oval</button>
+      <button type="button" data-tool="text" title="Click the drawing, then type">Text</button>
+      <button type="button" data-tool="erase">Erase</button>
+      <span class="dv-sw" id="dvColors"><button type="button" data-c="#E11D2E" style="background:#E11D2E" aria-label="Red"></button><button type="button" data-c="#1D4ED8" style="background:#1D4ED8" aria-label="Blue"></button><button type="button" data-c="#00A94F" style="background:#00A94F" aria-label="Green"></button><button type="button" data-c="#F59E0B" style="background:#F59E0B" aria-label="Orange"></button><button type="button" data-c="#111111" style="background:#111111" aria-label="Black"></button></span>
+      <select id="dvSize" aria-label="Line size"><option value="0">Thin</option><option value="1" selected>Medium</option><option value="2">Thick</option></select>
+      <select id="dvTextSize" aria-label="Note text size" title="Note text size"><option value="0.5">Text S (50%)</option><option value="1" selected>Text M</option><option value="2">Text L (200%)</option></select>
+      <button type="button" id="dvUndo">Undo</button>
+      <button type="button" id="dvRotL" title="Rotate sheet left">⟲ Left</button>
+      <button type="button" id="dvRotR" title="Rotate sheet right">Right ⟳</button>
+      <button type="button" id="dvFit">Fit</button>
+    </div>
+    <div class="row"><a class="btn" id="dvOrig" href="#" target="_blank" rel="noopener" hidden>Original PDF ↗</a><button type="button" class="btn go" id="dvPdf">Download PDF</button><button type="button" class="btn" id="dvClose">Close ✕</button></div>
+  </div>
+  <div class="dv-main">
+    <div class="dv-stage" id="dvStage">
+      <div class="dv-world" id="dvWorld"><img id="dvImg" alt="" draggable="false"><svg id="dvSvg" viewBox="0 0 2016 1344" xmlns="http://www.w3.org/2000/svg"></svg></div>
+      <textarea id="dvText" class="dv-text" hidden rows="1" placeholder="Type a note. Enter places it, Shift+Enter adds a line"></textarea>
+      <div class="dv-hint">Drag a markup to move it · double-click to edit · Shift-drag draws over one · Wheel zooms · right-drag pans · ⟲ ⟳ rotate the sheet · pick a tool and draw</div>
+    </div>
+    <aside class="dv-side">
+      <div class="eyebrow">Markup layers</div>
+      <ul id="dvLayers" class="dv-layers"></ul>
+      <div class="dv-save"><input id="dvName" placeholder="Name this markup session" maxlength="60"><button type="button" class="btn go" id="dvSave">Save as layer</button></div>
+      <p class="note" id="dvMsg">Saved layers are shared with everyone who can open this page. Download PDF puts the checked layers over the drawing.</p>
+    </aside>
+  </div>
+</div>
+<div class="prof" id="prof" hidden role="dialog" aria-modal="true" aria-labelledby="profName">
+  <div class="prof-card">
+    <button class="btn prof-x" type="button" id="profX">Close</button>
+    <div class="prof-grid">
+      <div class="prof-left"><div class="avatar xl" id="profPic"></div><div id="profQR" class="qr"></div><span class="note">Scan to add to your phone</span></div>
+      <div class="prof-right">
+        <span class="eyebrow" id="profGroup"></span>
+        <h2 id="profName"></h2>
+        <div class="prof-title" id="profTitle"></div>
+        <dl class="prof-dl" id="profDl"></dl>
+        <p id="profBio"></p>
+        <div class="row" id="profBtns"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="claude-shim.js"></script>
+<script>
+%%JS%%
+</script>
+</body>
+</html>
