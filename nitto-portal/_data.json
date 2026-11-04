@@ -1,7 +1,7 @@
 {
  "updated": "2026-11-04 14:50 CT",
  "updatedBy": "Claude, from the 8/25 DA approval packet, the 11/3 project manual and plans, and email threads through 11/4 12:13 CT",
- "summary": "Public 16\" PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16\" main at 108th Street. Owner: TI Investors of Lakeview Nitto Parcel LLC. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.",
+ "summary": "Public 16\" PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16\" main at 108th Street. Parcel owner (CSM, contract): TI Investors of Lakeview Nitto Parcel LLC. DA party: TI Investors of Pleasant Prairie Holding Company LLC, covering the Nitto parcel and two other properties. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.",
  "chain": [
   [
    "Plans approved (Village + KWU)",
@@ -589,7 +589,7 @@
    ]
   },
   {
-   "g": "Owner to the Village: TI Investors of Lakeview Nitto Parcel LLC (DA and approval letter)",
+   "g": "Developer to the Village: TI Investors of Pleasant Prairie Holding Company LLC (DA party; Nitto parcel is Phase A of three)",
    "k": "plan",
    "rows": [
     [
@@ -1620,7 +1620,7 @@
       "Exhibit D is the 8/11 plan set; the bid set is 11/3."
      ],
      "new": [
-      "Ask Peggy to swap in the 11/3 bid set. Owner entity on the contract, CSM and DA work: TI Investors of Lakeview Nitto Parcel LLC (per CSM 9/22/26)."
+      "Ask Peggy to swap in the 11/3 bid set. Entities: DA and financial security by TI Investors of Pleasant Prairie Holding Company LLC; CSM, SWMA and the watermain contract by TI Investors of Lakeview Nitto Parcel LLC (parcel owner per CSM 9/22/26)."
      ],
      "why": "Contract and DA should cite the same plans.",
      "deliver": "No document change; action item",
