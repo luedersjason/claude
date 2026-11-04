@@ -1150,8 +1150,8 @@
      ],
      "why": "Approval letter condition 6d already puts as-builts and record drawings in Pinnacle's CM estimate. As written we'd pay for them twice.",
      "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
-     "dec": "open",
-     "note": ""
+     "dec": "reject",
+     "note": "Rejected by Jason 11/4: contractor keeps the record drawings as written."
     },
     {
      "k": "A4",
