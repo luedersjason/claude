@@ -1264,27 +1264,6 @@
      "note": ""
     },
     {
-     "k": "A9",
-     "t": "Site sequencing plan 5 business days before start",
-     "where": [
-      [
-       "Plans 11/3/26",
-       "Sheet C-6"
-      ]
-     ],
-     "who": "-",
-     "cur": [
-      "\"THE CONTRACTOR SHALL SUBMIT A DETAILED SITE SEQUENCING PLAN TO OWNER FOR APPROVAL AT LEAST 5 BUSINESS DAYS PRIOR TO COMMENCEMENT ...\""
-     ],
-     "new": [
-      "No change suggested."
-     ],
-     "why": "Reasonable ask for any contractor.",
-     "deliver": "None",
-     "dec": "open",
-     "note": ""
-    },
-    {
      "k": "A10",
      "t": "Spill reporting names a general contractor",
      "where": [
