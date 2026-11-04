@@ -1,7 +1,7 @@
 import json, html, datetime
 S = json.load(open('_data.json'))
 E = html.escape
-OUT = 'index.html'
+OUT = 'watermain.html'
 VERSION = 'v1'
 
 DOCS = [
