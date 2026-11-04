@@ -1218,8 +1218,8 @@
      ],
      "why": "Gives the contractor a paid way to find crossings instead of carrying a contingency.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
-     "dec": "open",
-     "note": ""
+     "dec": "discuss",
+     "note": "seems we are just opening up risk that is inevitable?"
     },
     {
      "k": "A7",
@@ -1239,8 +1239,8 @@
      ],
      "why": "KWU's letter says the main is in easement outside the right-of-way; the plans should say so plainly.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
-     "dec": "open",
-     "note": ""
+     "dec": "discuss",
+     "note": "not needed as no working in the road?"
     },
     {
      "k": "A8",
@@ -1260,8 +1260,8 @@
      ],
      "why": "Notice to neighboring businesses is coordination, not pipe work.",
      "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
-     "dec": "open",
-     "note": ""
+     "dec": "discuss",
+     "note": "not needed as this is end of the line?"
     },
     {
      "k": "A9",
@@ -1281,7 +1281,7 @@
      ],
      "why": "There is no GC on this contract.",
      "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
-     "dec": "open",
+     "dec": "accept",
      "note": ""
     },
     {
@@ -1302,7 +1302,7 @@
      ],
      "why": "Surveyor's work.",
      "deliver": "No document change; action item",
-     "dec": "open",
+     "dec": "accept",
      "note": ""
     }
    ]
@@ -1328,8 +1328,8 @@
      ],
      "why": "Uncapped consequential damages on a pipe job gets priced or gets no bid. LDs already protect the schedule.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
-     "dec": "open",
-     "note": ""
+     "dec": "discuss",
+     "note": "leave if normal, im ok with simple ld's"
     },
     {
      "k": "B2",
@@ -1349,7 +1349,7 @@
      ],
      "why": "\"Sole discretion, no pay until finished\" reads as risk of not getting paid.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
-     "dec": "open",
+     "dec": "reject",
      "note": ""
     },
     {
@@ -1370,7 +1370,7 @@
      ],
      "why": "Carrying 60 days of cost gets priced in.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
-     "dec": "open",
+     "dec": "accept",
      "note": ""
     },
     {
@@ -1391,8 +1391,8 @@
      ],
      "why": "Small utility contractors may not carry $5M. Pick the number from our standard, not Pinnacle's form.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
-     "dec": "open",
-     "note": ""
+     "dec": "discuss",
+     "note": "need to see ins from lisa then match that"
     },
     {
      "k": "B5",
@@ -1416,7 +1416,7 @@
      ],
      "why": "\"All liability\" reads as covering the engineer's own design errors.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in; Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
-     "dec": "open",
+     "dec": "discuss",
      "note": ""
     },
     {
@@ -1437,7 +1437,7 @@
      ],
      "why": "Without it, every bidder carries a subsurface contingency.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
-     "dec": "open",
+     "dec": "reject",
      "note": ""
     },
     {
@@ -1458,7 +1458,7 @@
      ],
      "why": "312 LF of 16\" drill is specialty work most utility contractors sub out.",
      "deliver": "Claude drafts the revised manual text (redline) for Pinnacle to drop in",
-     "dec": "open",
+     "dec": "reject",
      "note": ""
     }
    ]
@@ -1484,8 +1484,8 @@
      ],
      "why": "A non-prequalified low bidder can't do the work.",
      "deliver": "No document change; action item",
-     "dec": "open",
-     "note": ""
+     "dec": "discuss",
+     "note": "does such a list exist?"
     },
     {
      "k": "C2",
@@ -1506,7 +1506,7 @@
      "why": "Could stop the job after the contract is signed.",
      "deliver": "No document change; action item",
      "dec": "reject",
-     "note": "Resolved 11/4: Jason confirms new DNR/ACOE wetland permits are in hand."
+     "note": "this is done already"
     },
     {
      "k": "C3",
