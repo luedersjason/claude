@@ -1,7 +1,7 @@
 {
  "updated": "2026-11-04 14:50 CT",
  "updatedBy": "Claude, from the 8/25 DA approval packet, the 11/3 project manual and plans, and email threads through 11/4 12:13 CT",
- "summary": "Public 16\" PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16\" main at 108th Street. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.",
+ "summary": "Public 16\" PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16\" main at 108th Street. Owner: TI Investors of Lakeview Nitto Parcel LLC. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.",
  "chain": [
   [
    "Plans approved (Village + KWU)",
@@ -414,13 +414,6 @@
   },
   {
    "sev": "low",
-   "t": "Two different Zilber entities",
-   "b": "The DA party is TI Investors of Pleasant Prairie Holding Company LLC; the contract owner is TI Investors of Lakeview Nitto Parcel LLC (titled owner). Confirm with the Village that the titled entity is what they want on the contract.",
-   "o": "Jason Lueders",
-   "s": "open"
-  },
-  {
-   "sev": "low",
    "t": "Manual cleanup",
    "b": "Proposal form names \"Pinnacle Enginering, Attn: Anthony Zanon\" while the cover lists Andy Shoaf. Pay apps every 60 days (s.10a) but based on month-end work (s.10b). s.24 \"proper action by its governing body\" is municipal wording that doesn't fit an LLC owner.",
    "o": "Pinnacle",
@@ -596,7 +589,7 @@
    ]
   },
   {
-   "g": "Developer to the Village (DA and approval letter)",
+   "g": "Owner to the Village: TI Investors of Lakeview Nitto Parcel LLC (DA and approval letter)",
    "k": "plan",
    "rows": [
     [
@@ -1615,7 +1608,7 @@
     },
     {
      "k": "C8",
-     "t": "DA Exhibit D and the two LLCs",
+     "t": "DA Exhibit D is the 8/11 plan set",
      "where": [
       [
        "DA",
@@ -1624,12 +1617,12 @@
      ],
      "who": "Jason / Village",
      "cur": [
-      "Exhibit D is the 8/11 plan set. DA party: TI Investors of Pleasant Prairie Holding Company LLC. Contract owner: TI Investors of Lakeview Nitto Parcel LLC."
+      "Exhibit D is the 8/11 plan set; the bid set is 11/3."
      ],
      "new": [
-      "Ask Peggy to swap in the 11/3 bid set and confirm which entity goes on the contract."
+      "Ask Peggy to swap in the 11/3 bid set. Owner entity on the contract, CSM and DA work: TI Investors of Lakeview Nitto Parcel LLC (per CSM 9/22/26)."
      ],
-     "why": "Contract and DA should match.",
+     "why": "Contract and DA should cite the same plans.",
      "deliver": "No document change; action item",
      "dec": "open",
      "note": ""
