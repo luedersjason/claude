@@ -1133,48 +1133,6 @@
      "note": ""
     },
     {
-     "k": "A3",
-     "t": "Record drawings: contractor gives redlines, Pinnacle draws",
-     "where": [
-      [
-       "Plans 11/3/26",
-       "Sheet C-1, Required Submittals for Records, item 3"
-      ]
-     ],
-     "who": "Pinnacle (plan sheet)",
-     "cur": [
-      "\"3. UNDERGROUND UTILITY LOCATION RECORD DRAWINGS\""
-     ],
-     "new": [
-      "\"3. FIELD RECORD MARKUPS (REDLINES) OF INSTALLED WATER MAIN, VALVES, HYDRANTS AND FITTINGS WITH TIES TO SURFACE FEATURES. RECORD DRAWINGS WILL BE PREPARED BY THE ENGINEER.\""
-     ],
-     "why": "Approval letter condition 6d already puts as-builts and record drawings in Pinnacle's CM estimate. As written we'd pay for them twice.",
-     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
-     "dec": "reject",
-     "note": "Rejected by Jason 11/4: contractor keeps the record drawings as written."
-    },
-    {
-     "k": "A4",
-     "t": "Geotech: hand it out, drop the 'more borings at your cost' line",
-     "where": [
-      [
-       "Plans 11/3/26",
-       "Sheet C-1, General Note 2"
-      ]
-     ],
-     "who": "Pinnacle (plan sheet)",
-     "cur": [
-      "\"THE CONTRACTOR IS RESPONSIBLE FOR PERFORMING ANY ADDITIONAL SOILS INVESTIGATIONS THEY FEEL IS NECESSARY ... AT NO ADDITIONAL COST TO THE OWNER.\""
-     ],
-     "new": [
-      "Delete that sentence. Include the geotechnical report in the bid package (Pinnacle to confirm which report covers the watermain route)."
-     ],
-     "why": "Bidders price their own borings or a soils contingency. Giving them the report is cheaper.",
-     "deliver": "Claude marks up the sheet (clouded PDF) for Pinnacle to revise in CAD",
-     "dec": "open",
-     "note": ""
-    },
-    {
      "k": "A5",
      "t": "Quantities: pay measured units",
      "where": [
