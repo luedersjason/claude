@@ -2,7 +2,7 @@ import json, html, datetime
 S = json.load(open('_data.json'))
 E = html.escape
 OUT = 'watermain.html'
-VERSION = 'v1'
+VERSION = 'v2'
 
 DOCS = [
  ('Village DA conditional approval letter', 'Rob Hanson, 8/25/26. Conditions 1-12.', 'NW-Village-DA-Approval-Letter-8.25.26.pdf'),
@@ -197,7 +197,7 @@ page = f'''<!DOCTYPE html>
     <div class="crumb">Zilber Industrial 3 at LakeView Corporate Park &middot; 108th St &amp; STH 31, Pleasant Prairie WI &middot; TPN 92-4-122-272-0502</div>
     <h1>Nitto Public Watermain <span class="pill">BIDDING NEXT</span></h1>
     <p>{E(S["summary"])}</p>
-    <div class="meta"><span>Updated <b>2026-11-04</b></span><span>Owner: <b>TI Investors of Lakeview Nitto Parcel LLC</b></span><span>Engineer: <b>Pinnacle (Andy Shoaf)</b></span><span>Village: <b>Kurt Davidsen / Peggy Herrick</b></span></div>
+    <div class="meta"><span>Updated <b>2026-11-04 2:50 PM</b></span><span>Owner: <b>TI Investors of Lakeview Nitto Parcel LLC</b></span><span>Engineer: <b>Pinnacle (Andy Shoaf)</b></span><span>Village: <b>Kurt Davidsen / Peggy Herrick</b></span></div>
   </div>
 </header>
 <main class="wrap">

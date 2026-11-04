@@ -1,150 +1,1005 @@
-{"updated":"2026-11-04 13:30 CT","updatedBy":"Claude, from the 8/25 DA approval packet, the 11/3 project manual and plans, and email threads through 11/4 12:13 CT",
-"summary":"Public 16\" PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16\" main at 108th Street. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.",
-"chain":[["Plans approved (Village + KWU)","done"],["Fix project manual","next"],["Bid","open"],["Draft contract + COI to Village","open"],["Pinnacle CM estimate","open"],["Village itemized breakdown (120%)","open"],["Closing: security delivered, DA signed","open"],["DNR + permits, precon","open"],["Build, inspect, accept by 11/15/27","open"]],
-"milestones":[{"d":"2027-11-15","t":"Watermain accepted","n":"DA s.6.1 and approval letter condition 4: installed, inspected and accepted by the Village by Nov 15, 2027. The Village may consider more time for reasons beyond the Developer's control."},{"d":"2028-01-01","t":"Phase A substantial completion","n":"Approval letter p.1: Phase A building must reach substantial completion by Jan 1, 2028 to avoid payment penalties."}],
-"ws":[
-{"id":"plan","name":"Plans & approvals","spec":"Village engineering review, Kenosha Water Utility system review, WDNR water main extension approval.","docs":["letter","engc","kwu","plans"],
- "steps":[
-  {"t":"Village Engineer review comments","o":"Village","s":"done","d":"08/11","n":"Attached to the approval letter (condition 3)."},
-  {"t":"Village Board conditional approval of DA, CSM and public improvement plans","o":"Village","s":"done","d":"08/24","n":"Letter from Rob Hanson dated 8/25."},
-  {"t":"Plans and WDNR submittal info sent to KWU","o":"Village","s":"done","d":"10/27","n":"Kurt Davidsen to Curt Czarnecki under para. 29 of the 1997 Cooperative Agreement; system-level review (south of the Wholesale/Retail Dividing Line)."},
-  {"t":"Second Village review comments","o":"Village","s":"done","d":"10/27","n":"Kurt: once changes are made you can move forward with bidding; developer and attorney should review the project manual/contract."},
-  {"t":"Revised plans and project manual resubmitted","o":"Pinnacle","s":"done","d":"11/03","n":"Plan revision 4: BID SET / VOPP RESUBMITTAL 11/03/26."},
-  {"t":"Village approval of plans","o":"Village","s":"done","d":"11/04","n":"Kurt: \"It all looks good to me\" and \"the Village of Pleasant Prairie approves of the proposed water main extension.\""},
-  {"t":"KWU approval","o":"KWU","s":"done","d":"11/04","n":"Ian Bagley letter: plans compatible with KWU systems and approved."},
-  {"t":"CAD file of proposed main to Village (GIS)","o":"Pinnacle","s":"open","d":"","n":"Requested by Kurt 11/4."},
-  {"t":"WDNR water main extension submittal","o":"Pinnacle","s":"active","d":"11/04","n":"Andy: will submit plans and extension permit to DNR."},
-  {"t":"WDNR approval","o":"WDNR","s":"open","d":"","n":"Required before installation (condition 6b)."},
-  {"t":"WisDOT permit for work in STH 31 right-of-way","o":"Contractor","s":"open","d":"","n":"Condition 10b, \"if applicable\". Main is in easement outside the right-of-way per KWU letter; confirm whether any work touches the ROW."}]},
-{"id":"bid","name":"Bid & contract","spec":"Pinnacle project manual (General Contract, Standard Terms, Proposal Form) plus the 11/3 plans. The signed contract is what the Village uses to size the security.","docs":["manual","plans","letter"],
- "steps":[
-  {"t":"Fix project manual gaps before bidding","o":"Pinnacle / Zilber","s":"attn","d":"","n":"Stale 7/31/2026 completion date, bid form numbering, scope not on bid form, permit split, missing bid instructions. See Issues."},
-  {"t":"Attorney review of project manual","o":"Zilber","s":"open","d":"","n":"Recommended by Kurt 10/27; Adam Artz asked Zilber to check against standard contract language (11/3)."},
-  {"t":"Issue for bid","o":"Pinnacle","s":"open","d":"","n":"Jason 11/2: bidding is on the critical path to the financial security."},
-  {"t":"Bids received and leveled","o":"Pinnacle / Zilber","s":"open","d":"","n":""},
-  {"t":"Contractor selected","o":"Zilber","s":"open","d":"","n":""},
-  {"t":"Draft contract, bid documents and COI to Village","o":"Zilber","s":"open","d":"","n":"Condition 6c: Village checks items are itemized for financial security; contract in the titled owner's name; Village listed as insured on the COI."},
-  {"t":"Pinnacle cost estimate for construction management","o":"Pinnacle","s":"open","d":"","n":"Condition 6d: field staking, as-builts, record drawings."},
-  {"t":"Village approval of contracts","o":"Village","s":"open","d":"","n":"Then signed contracts and COIs go to the Village."}]},
-{"id":"sec","name":"Financial security & closing","spec":"DA Article VI under Village Ordinance s.395-17. Village computes 120% of public improvements, inspections and construction-related services.","docs":["art6","exd","letter","csm"],
- "steps":[
-  {"t":"Village prepares itemized cost breakdown (DA Exhibit D1)","o":"Village","s":"open","d":"","n":"Condition 7: after Village approves the contracts and Pinnacle CM estimate. D1 is blank in the packet."},
-  {"t":"Security instrument prepared","o":"Zilber","s":"open","d":"","n":"Copy becomes DA Exhibit D2 (blank in the packet)."},
-  {"t":"DA Exhibit D updated to the 11/3 bid set","o":"Village","s":"open","d":"","n":"The packet's Exhibit D is the 8/11 plan set."},
-  {"t":"Revised CSM submitted for staff review","o":"Pinnacle","s":"open","d":"","n":"Condition 1, with the dedication and covenant language added."},
-  {"t":"Stormwater Maintenance Agreement finalized (Exhibit B)","o":"Pinnacle / Zilber","s":"open","d":"","n":"Condition 2: executed and recorded before any permits."},
-  {"t":"Taxes and special assessments paid","o":"Zilber","s":"open","d":"","n":"Condition 5. Village Finance said none outstanding as of the letter."},
-  {"t":"Closing: DA (with Tax Agreements C1-C3), Memorandum of DA, SWMA executed; security and cash payments delivered","o":"Zilber / Village","s":"open","d":"","n":"Condition 8 and DA s.6.1."},
-  {"t":"Recording: Memorandum of DA, Tax Agreements, CSM, SWMA","o":"Zilber","s":"open","d":"","n":"Condition 9: recorded copies to the Village within 72 hours; required before any permits for the watermain."}]},
-{"id":"con","name":"Construction & acceptance","spec":"Preconstruction meeting, Village permits, installation, inspection and acceptance by Nov 15, 2027.","docs":["letter","manual"],
- "steps":[
-  {"t":"Preconstruction agenda, site logistics plan, construction schedule","o":"Pinnacle","s":"open","d":"","n":"Condition 10a, after KWU and DNR approvals."},
-  {"t":"Erosion control permit application incl. WDNR NOI","o":"Pinnacle / Contractor","s":"open","d":"","n":"Condition 10c."},
-  {"t":"Village right-of-way permit","o":"Contractor","s":"open","d":"","n":"Condition 10d. Apply on the Village permit portal."},
-  {"t":"Preconstruction meeting","o":"Village","s":"open","d":"","n":"Condition 11: Village schedules once all documents and permits are in."},
-  {"t":"Permit fees paid, permits issued","o":"Contractor","s":"open","d":"","n":"Condition 12: construction may then begin."},
-  {"t":"Watermain installed","o":"Contractor","s":"open","d":"","n":"16\" C900: 37 LF granular, 739 LF spoil backfill, 312 LF directional drill; 3 butterfly valves; 1 hydrant."},
-  {"t":"Testing, inspection, conditional acceptance by Village","o":"Village","s":"open","d":"","n":"Deadline Nov 15, 2027. Starts the contractor's 2-year warranty (Terms s.17)."},
-  {"t":"Security reductions / release","o":"Zilber","s":"open","d":"","n":"DA s.6.3: request reductions under s.395-17."}]}],
-"flags":[
- {"sev":"high","t":"Contract completion date is in the past","b":"Standard Terms s.5 sets substantial completion at July 31, 2026, and liquidated damages ($500/day, s.5a) key off it. Set a date that leaves time for Village inspection and acceptance before Nov 15, 2027.","o":"Pinnacle","s":"open"},
- {"sev":"high","t":"Scope on the plans but not on the bid form","b":"Plans call for tracer wire with access boxes behind hydrants, insulation where directed, street sweeping and wetland protection. The form also has no line for pressure testing, disinfection or traffic control at STH 31 / 108th. Either add lines or state they are incidental to items 1-19, so the Village's 120% is computed from complete prices. Not checked against Village standard specs.","o":"Pinnacle","s":"open"},
- {"sev":"high","t":"No bid instructions in the manual","b":"No bid due date, delivery, bid validity period, or list of what comes with the bid. Ask bidders for a sample COI naming the Village, a schedule and a subcontractor list: these are what the Village reviews under condition 6c.","o":"Pinnacle","s":"open"},
- {"sev":"med","t":"Bid form numbering","b":"Item 17 appears twice and 18 is missing, but the subtotal reads items 1-19. The Village itemizes the security from this form.","o":"Pinnacle","s":"open"},
- {"sev":"med","t":"Permits clause puts every permit on the contractor","b":"Terms s.7 says the contractor obtains all permits. Pinnacle is filing the WDNR extension, and the WPDES NOI is the owner's. Name the contractor's permits: Village ROW, erosion control (letter 10c/d) and WisDOT if applicable.","o":"Pinnacle","s":"open"},
- {"sev":"med","t":"DA Exhibit D is the 8/11 plan set","b":"The contract cites the Nov 3, 2026 plans. Ask Peggy to swap the bid set into Exhibit D when the DA is finalized.","o":"Jason Lueders","s":"open"},
- {"sev":"med","t":"Pinnacle CM estimate not seen","b":"Not in any email so far. Condition 6d requires it before the Village can compute the security. It is separate from the construction contract.","o":"Andy Shoaf","s":"open"},
- {"sev":"low","t":"Owner entity spelling on the CSM","b":"The contract correctly says TI Investors of Lakeview Nitto Parcel LLC. The CSM dedication draft says \"Lakeveiw\". Condition 6c requires the contract name to match title.","o":"Pinnacle","s":"open"},
- {"sev":"low","t":"Two different Zilber entities","b":"The DA party is TI Investors of Pleasant Prairie Holding Company LLC; the contract owner is TI Investors of Lakeview Nitto Parcel LLC (titled owner). Confirm with the Village that the titled entity is what they want on the contract.","o":"Jason Lueders","s":"open"},
- {"sev":"low","t":"Manual cleanup","b":"Proposal form names \"Pinnacle Enginering, Attn: Anthony Zanon\" while the cover lists Andy Shoaf. Pay apps every 60 days (s.10a) but based on month-end work (s.10b). s.24 \"proper action by its governing body\" is municipal wording that doesn't fit an LLC owner.","o":"Pinnacle","s":"open"}],
-"obl":[
- {"g":"Contractor (project manual)","k":"bid","rows":[
-  ["Perform all work per plans, Village Standard Specifications and the Proposal; furnish all labor, materials, equipment, utility and transport services","Agreement Art. I, III; Terms s.4",""],
-  ["Order of precedence: Standard Terms, then Village Standard Specs, then 11/3 plans, then the Agreement, then the Proposal","Art. III",""],
-  ["Substantially complete by July 31, 2026; final completion within 30 days after","Terms s.5","Date is in the past"],
-  ["Liquidated damages $500/day past substantial completion and again past final completion","Terms s.5a",""],
-  ["Liable for direct and consequential damages for late completion, and Owner's enforcement costs","Terms s.5",""],
-  ["Obtain and pay for all permits, approvals and licenses","Terms s.7","Conflicts with Pinnacle's DNR filing"],
-  ["Indemnify and defend Owner, its agents, contractors and employees","Terms s.8",""],
-  ["Insurance: WC statutory; CGL $1M occ / $1M agg / $1M products-completed ops, per project, primary and non-contributory; auto $1M CSL; umbrella $5M / $5M","Terms s.9",""],
-  ["Name Owner and Village of Pleasant Prairie as additional insured on WC, CGL and auto; 30-day cancellation notice; waiver of subrogation; subs carry the same","Terms s.9","Meets condition 6c"],
-  ["Pay apps with sworn statement and full lien waivers from contractor and all subs and suppliers","Terms s.10(c)",""],
-  ["No deviation from plans without Owner's written consent; no extra payment without advance written approval","Terms s.11, s.24(e)",""],
-  ["No subletting without Owner's written consent; subs bound by the Agreement and Village ordinance ch. 150","Terms s.12",""],
-  ["Restake at contractor's cost (Owner pays initial survey and layout)","Terms s.13",""],
-  ["Protect the work and adjacent public and private property; repair any damage at own cost","Terms s.14, s.22",""],
-  ["Cooperate with Owner's other contractors; Owner not liable for their delays","Terms s.15",""],
-  ["Sole responsibility for safety and OSHA compliance","Terms s.16",""],
-  ["2-year warranty from Village conditional acceptance; work lien free","Terms s.17",""],
-  ["Daily and completion clean-up, or Owner cleans and back-charges","Terms s.18",""],
-  ["3 working days' written notice to police, fire, EMS, school buses, street and utility authorities before starting","Terms s.21",""],
-  ["Bears all subsurface and ground-condition risk; bid must cover it","Terms s.21",""],
-  ["Price includes all taxes","Art. II",""],
-  ["No assignment without Owner's consent","Terms s.20",""]]},
- {"g":"Owner: TI Investors of Lakeview Nitto Parcel LLC (project manual)","k":"sec","rows":[
-  ["Pay the contract sum: progress payments every 60 days on proper pay apps, less up to 5% retainage if required, released at final completion","Art. II; Terms s.10(a)","60-day vs month-end mismatch"],
-  ["Pay initial surveying and layout","Terms s.13","Covered by Pinnacle CM estimate (condition 6d)"],
-  ["May take over the work on 48 hours' notice at contractor's cost","Terms s.6",""],
-  ["May terminate on written notice if dissatisfied; contractor paid only after the work is finished","Terms s.19",""],
-  ["Changes priced by unit price, supplemental schedule, lump sum, or cost plus 15%","Terms s.23, s.24",""],
-  ["May withhold for unpaid claims, defective work or unpaid subs, and pay them directly","Terms s.25",""],
-  ["Disputes: negotiate, then circuit court in the project county; prevailing party recovers fees","Art. IV",""],
-  ["May assign the Agreement to a subsidiary or related entity","Terms s.20",""],
-  ["Signatory: Jason Lueders, Director of Construction","Signature page",""]]},
- {"g":"Developer to the Village (DA and approval letter)","k":"plan","rows":[
-  ["Deliver financial security to the Village Treasurer under Ord. s.395-17 as a condition of DA approval","DA s.6.1",""],
-  ["Complete the public watermain by Nov 15, 2027 (installed, inspected and accepted)","DA s.6.1; Cond. 4",""],
-  ["Village may draw on the security if the Developer fails; draw based on Village's reasonable cost-to-complete estimate","DA s.6.1",""],
-  ["May request reductions in the remaining security","DA s.6.3",""],
-  ["Wis. Stat. 236.13(2)(am) controls over s.395-17 if they conflict","DA s.6.4","Statute text not verified"],
-  ["Submit draft contracts, bid docs and COIs itemized for financial security; contracts in the titled owner's name; Village listed as insured","Cond. 6c",""],
-  ["Submit Pinnacle CM cost estimate (staking, as-builts, record drawings)","Cond. 6d",""],
-  ["Security = 120% of public improvements, inspections and construction-related services, plus cash payments; final security at closing","Cond. 7",""],
-  ["Obtain KWU and WDNR approvals before installation","Cond. 6a-b","KWU done 11/4"],
-  ["Revised CSM; executed and recorded Stormwater Maintenance Agreement before any permits","Cond. 1, 2",""],
-  ["Record Memorandum of DA, Tax Agreements, CSM and SWMA; copies to Village within 72 hours","Cond. 9",""],
-  ["Precon agenda, logistics plan, schedule; WisDOT permit if applicable; erosion control permit with WDNR NOI; Village ROW permit","Cond. 10",""],
-  ["Pay Village planning, engineering, legal and inspection invoices through the project","DA s.7.6",""],
-  ["Work in a good and workmanlike manner per the plans and Village requirements, at Developer's cost","DA s.7.1",""]]}],
-"plan":[
- {"t":"Fix manual, bid","a":"2026-11-05","b":"2026-12-04","n":"Assumed; no dates set"},
- {"t":"Contract + Village review","a":"2026-12-05","b":"2027-01-15","n":"Assumed"},
- {"t":"Closing / security","a":"2027-01-16","b":"2027-02-28","n":"Assumed"},
- {"t":"Permits, precon","a":"2027-03-01","b":"2027-04-15","n":"Assumed"},
- {"t":"Construction","a":"2027-04-16","b":"2027-10-15","n":"Assumed"},
- {"t":"Acceptance deadline","a":"2027-11-15","b":"2027-11-15","n":"DA s.6.1"}],
-"events":[
- {"d":"2026-08-11","t":"Village Engineer comments on the public improvement plans.","src":"Approval letter, condition 3"},
- {"d":"2026-08-17","t":"Plan Commission conditionally approves Phase A Site and Operational Plans (152,334 sf speculative industrial building).","src":"Approval letter p.1"},
- {"d":"2026-08-24","t":"Village Board conditionally approves the Development Agreement and the CSM with public improvement plans for the STH 31 water extension.","src":"Approval letter p.1"},
- {"d":"2026-08-25","t":"Rob Hanson sends the conditional approval letter with conditions 1-12.","src":"DA approval letter"},
- {"d":"2026-10-27","t":"Kurt Davidsen sends plans and WDNR submittal info to KWU for system-level review. Sends Pinnacle review comments; bidding can proceed once fixed; recommends attorney review of the manual.","src":"Kurt, Andy"},
- {"d":"2026-11-02","t":"Jason presses Pinnacle: bidding is on the critical path to the financial security mechanism.","src":"Jason"},
- {"d":"2026-11-03","t":"Pinnacle resubmits revised plans (rev. 4, bid set) and project manual to Kurt and Peggy, and sends them to Jason for contract review.","src":"Andy"},
- {"d":"2026-11-04","t":"Kurt: plans look good, wants CAD for GIS. KWU (Ian Bagley) approves. Kurt approves the extension and asks Pinnacle to submit to WDNR. Andy confirms the DNR submittal.","src":"Kurt, KWU, Andy"}],
-"docs":[
- {"id":"letter","t":"DA conditional approval letter","g":"village","d":"08/25/26","p":5,"pdf":"letter","n":"Rob Hanson to Jason. Conditions 1-12 for the CSM, SWMA, DA, financial security, closing, recording and precon. Download includes the full 80-page packet (CSM language, SWMA, plans, DA, exhibits)."},
- {"id":"art6","t":"DA Article VI: Financial Security","g":"village","d":"08/2026 draft","p":1,"pdf":"letter","n":"Cash deposit under s.395-17; completion by 11/15/2027; draws; reductions; 236.13(2)(am) controls."},
- {"id":"exd","t":"DA Exhibits D, D1, D2","g":"village","d":"08/2026 draft","p":3,"pdf":"letter","n":"D = watermain plans (8/11 set). D1 itemized cost breakdown and D2 security instrument are blank."},
- {"id":"csm","t":"CSM dedication and covenant language","g":"village","d":"08/13/26 draft","p":2,"pdf":"letter","n":"Owner spelled \"Lakeveiw\" on line 1."},
- {"id":"engc","t":"Village Engineer comments (marked plans)","g":"village","d":"08/11/26","p":4,"pdf":"letter","n":"Attached to the approval letter."},
- {"id":"kwu","t":"KWU approval letter","g":"approvals","d":"11/04/26","p":1,"pdf":"kwu","n":"Ian Bagley to Kurt Davidsen: plans compatible with KWU systems and approved."},
- {"id":"manual","t":"Project manual (contract + proposal form)","g":"bid","d":"11/03/26","p":12,"pdf":"manual","n":"General Contract, Standard Contract Terms and Conditions, Proposal Form (19 items, unpriced)."},
- {"id":"plans","t":"Public watermain plans, bid set","g":"bid","d":"11/03/26","p":8,"pdf":"plans","n":"Pinnacle 644.00, rev. 4 BID SET/VOPP RESUBMITTAL."}],
-"contacts":[
- {"org":"Zilber Property Group","p":[
-  {"n":"Jason Lueders","r":"Director of Construction; contract signatory","l":[["Phone","630-344-3718"],["Email","jason.lueders@zilber.com"]]},
-  {"n":"Chad Navis","r":"Zilber, cc on the bid thread","l":[["Email","chad.navis@zilber.com"]]}]},
- {"org":"Pinnacle Engineering Group (engineer)","p":[
-  {"n":"Andy Shoaf, PE","r":"Associate Project Manager; plans, manual, DNR submittal","l":[["Office","262-754-8888"],["Email","Andrew.Shoaf@pinnacle-engr.com"]]},
-  {"n":"Justin Johnson","r":"Pinnacle","l":[["Email","jjohnson@pinnacle-engr.com"]]},
-  {"n":"Adam Artz","r":"Pinnacle","l":[["Email","Adam.Artz@pinnacle-engr.com"]]},
-  {"n":"Anthony Zanon","r":"Named on the proposal form","l":[]}]},
- {"org":"Village of Pleasant Prairie","p":[
-  {"n":"Kurt Davidsen, PE","r":"Village Engineer","l":[["Phone","262-925-6728"],["Email","kdavidsen@pleasantprairiewi.gov"]]},
-  {"n":"Peggy Herrick","r":"Assistant Community Development Director; letter contact","l":[["Phone","262-925-6716"],["Email","pherrick@pleasantprairiewi.gov"]]},
-  {"n":"Rob Hanson","r":"Community Development Director; signed the approval letter","l":[["Office","262-925-6717"]]},
-  {"n":"Sarah Tomczyk","r":"Assistant Village Engineer","l":[["Email","stomczyk@pleasantprairiewi.gov"]]}]},
- {"org":"Kenosha Water Utility","p":[
-  {"n":"Ian Bagley, PE","r":"Director of Engineering; signed the approval","l":[["Phone","262-653-4349"],["Email","ibagley@kenosha.org"]]},
-  {"n":"Curt Czarnecki, PE","r":"General Manager","l":[["Phone","262-653-4306"],["Email","cczarnecki@kenosha.org"]]}]}]}
+{
+ "updated": "2026-11-04 14:50 CT",
+ "updatedBy": "Claude, from the 8/25 DA approval packet, the 11/3 project manual and plans, and email threads through 11/4 12:13 CT",
+ "summary": "Public 16\" PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16\" main at 108th Street. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.",
+ "chain": [
+  [
+   "Plans approved (Village + KWU)",
+   "done"
+  ],
+  [
+   "Fix project manual (sent to Pinnacle 11/4)",
+   "next"
+  ],
+  [
+   "Bid",
+   "open"
+  ],
+  [
+   "Draft contract + COI to Village",
+   "open"
+  ],
+  [
+   "Pinnacle CM estimate",
+   "open"
+  ],
+  [
+   "Village itemized breakdown (120%)",
+   "open"
+  ],
+  [
+   "Closing: security delivered, DA signed",
+   "open"
+  ],
+  [
+   "DNR + permits, precon",
+   "open"
+  ],
+  [
+   "Build, inspect, accept by 11/15/27",
+   "open"
+  ]
+ ],
+ "milestones": [
+  {
+   "d": "2027-11-15",
+   "t": "Watermain accepted",
+   "n": "DA s.6.1 and approval letter condition 4: installed, inspected and accepted by the Village by Nov 15, 2027. The Village may consider more time for reasons beyond the Developer's control."
+  },
+  {
+   "d": "2028-01-01",
+   "t": "Phase A substantial completion",
+   "n": "Approval letter p.1: Phase A building must reach substantial completion by Jan 1, 2028 to avoid payment penalties."
+  }
+ ],
+ "ws": [
+  {
+   "id": "plan",
+   "name": "Plans & approvals",
+   "spec": "Village engineering review, Kenosha Water Utility system review, WDNR water main extension approval.",
+   "docs": [
+    "letter",
+    "engc",
+    "kwu",
+    "plans"
+   ],
+   "steps": [
+    {
+     "t": "Village Engineer review comments",
+     "o": "Village",
+     "s": "done",
+     "d": "08/11",
+     "n": "Attached to the approval letter (condition 3)."
+    },
+    {
+     "t": "Village Board conditional approval of DA, CSM and public improvement plans",
+     "o": "Village",
+     "s": "done",
+     "d": "08/24",
+     "n": "Letter from Rob Hanson dated 8/25."
+    },
+    {
+     "t": "Plans and WDNR submittal info sent to KWU",
+     "o": "Village",
+     "s": "done",
+     "d": "10/27",
+     "n": "Kurt Davidsen to Curt Czarnecki under para. 29 of the 1997 Cooperative Agreement; system-level review (south of the Wholesale/Retail Dividing Line)."
+    },
+    {
+     "t": "Second Village review comments",
+     "o": "Village",
+     "s": "done",
+     "d": "10/27",
+     "n": "Kurt: once changes are made you can move forward with bidding; developer and attorney should review the project manual/contract."
+    },
+    {
+     "t": "Revised plans and project manual resubmitted",
+     "o": "Pinnacle",
+     "s": "done",
+     "d": "11/03",
+     "n": "Plan revision 4: BID SET / VOPP RESUBMITTAL 11/03/26."
+    },
+    {
+     "t": "Village approval of plans",
+     "o": "Village",
+     "s": "done",
+     "d": "11/04",
+     "n": "Kurt: \"It all looks good to me\" and \"the Village of Pleasant Prairie approves of the proposed water main extension.\""
+    },
+    {
+     "t": "KWU approval",
+     "o": "KWU",
+     "s": "done",
+     "d": "11/04",
+     "n": "Ian Bagley letter: plans compatible with KWU systems and approved."
+    },
+    {
+     "t": "CAD file of proposed main to Village (GIS)",
+     "o": "Pinnacle",
+     "s": "open",
+     "d": "",
+     "n": "Requested by Kurt 11/4."
+    },
+    {
+     "t": "WDNR water main extension submittal",
+     "o": "Pinnacle",
+     "s": "active",
+     "d": "11/04",
+     "n": "Andy: will submit plans and extension permit to DNR."
+    },
+    {
+     "t": "WDNR approval",
+     "o": "WDNR",
+     "s": "open",
+     "d": "",
+     "n": "Required before installation (condition 6b)."
+    },
+    {
+     "t": "WisDOT permit for work in STH 31 right-of-way",
+     "o": "Contractor",
+     "s": "open",
+     "d": "",
+     "n": "Condition 10b, \"if applicable\". Main is in easement outside the right-of-way per KWU letter; confirm whether any work touches the ROW."
+    }
+   ]
+  },
+  {
+   "id": "bid",
+   "name": "Bid & contract",
+   "spec": "Pinnacle project manual (General Contract, Standard Terms, Proposal Form) plus the 11/3 plans. The signed contract is what the Village uses to size the security.",
+   "docs": [
+    "manual",
+    "plans",
+    "letter"
+   ],
+   "steps": [
+    {
+     "t": "Fix project manual gaps before bidding",
+     "o": "Pinnacle / Zilber",
+     "s": "active",
+     "d": "11/04",
+     "n": "Jason sent Andy and Justin the 8-item list with the 11/3 manual (11/4 2:43 PM). Awaiting Pinnacle response."
+    },
+    {
+     "t": "Attorney review of project manual",
+     "o": "Zilber",
+     "s": "open",
+     "d": "",
+     "n": "Recommended by Kurt 10/27; Adam Artz asked Zilber to check against standard contract language (11/3)."
+    },
+    {
+     "t": "Compare against Zilber standard owner-direct contract",
+     "o": "Zilber",
+     "s": "active",
+     "d": "11/04",
+     "n": "Jason asked Lisa Kleinke for a sample plan and spec, owner-direct (no GC) contract, insurance exhibit and lien waiver forms (11/4 2:46 PM). Then check for conflicts with the Village requirements before bidding."
+    },
+    {
+     "t": "Issue for bid",
+     "o": "Pinnacle",
+     "s": "open",
+     "d": "",
+     "n": "Jason 11/2: bidding is on the critical path to the financial security."
+    },
+    {
+     "t": "Bids received and leveled",
+     "o": "Pinnacle / Zilber",
+     "s": "open",
+     "d": "",
+     "n": ""
+    },
+    {
+     "t": "Contractor selected",
+     "o": "Zilber",
+     "s": "open",
+     "d": "",
+     "n": ""
+    },
+    {
+     "t": "Draft contract, bid documents and COI to Village",
+     "o": "Zilber",
+     "s": "open",
+     "d": "",
+     "n": "Condition 6c: Village checks items are itemized for financial security; contract in the titled owner's name; Village listed as insured on the COI."
+    },
+    {
+     "t": "Pinnacle cost estimate for construction management",
+     "o": "Pinnacle",
+     "s": "active",
+     "d": "11/04",
+     "n": "Condition 6d: field staking, as-builts, record drawings. Requested from Andy 11/4."
+    },
+    {
+     "t": "Village approval of contracts",
+     "o": "Village",
+     "s": "open",
+     "d": "",
+     "n": "Then signed contracts and COIs go to the Village."
+    }
+   ]
+  },
+  {
+   "id": "sec",
+   "name": "Financial security & closing",
+   "spec": "DA Article VI under Village Ordinance s.395-17. Village computes 120% of public improvements, inspections and construction-related services.",
+   "docs": [
+    "art6",
+    "exd",
+    "letter",
+    "csm"
+   ],
+   "steps": [
+    {
+     "t": "Village prepares itemized cost breakdown (DA Exhibit D1)",
+     "o": "Village",
+     "s": "open",
+     "d": "",
+     "n": "Condition 7: after Village approves the contracts and Pinnacle CM estimate. D1 is blank in the packet."
+    },
+    {
+     "t": "Security instrument prepared",
+     "o": "Zilber",
+     "s": "open",
+     "d": "",
+     "n": "Copy becomes DA Exhibit D2 (blank in the packet)."
+    },
+    {
+     "t": "DA Exhibit D updated to the 11/3 bid set",
+     "o": "Village",
+     "s": "open",
+     "d": "",
+     "n": "The packet's Exhibit D is the 8/11 plan set."
+    },
+    {
+     "t": "Revised CSM submitted for staff review",
+     "o": "Pinnacle",
+     "s": "open",
+     "d": "",
+     "n": "Condition 1, with the dedication and covenant language added."
+    },
+    {
+     "t": "Stormwater Maintenance Agreement finalized (Exhibit B)",
+     "o": "Pinnacle / Zilber",
+     "s": "open",
+     "d": "",
+     "n": "Condition 2: executed and recorded before any permits."
+    },
+    {
+     "t": "Taxes and special assessments paid",
+     "o": "Zilber",
+     "s": "open",
+     "d": "",
+     "n": "Condition 5. Village Finance said none outstanding as of the letter."
+    },
+    {
+     "t": "Closing: DA (with Tax Agreements C1-C3), Memorandum of DA, SWMA executed; security and cash payments delivered",
+     "o": "Zilber / Village",
+     "s": "open",
+     "d": "",
+     "n": "Condition 8 and DA s.6.1."
+    },
+    {
+     "t": "Recording: Memorandum of DA, Tax Agreements, CSM, SWMA",
+     "o": "Zilber",
+     "s": "open",
+     "d": "",
+     "n": "Condition 9: recorded copies to the Village within 72 hours; required before any permits for the watermain."
+    }
+   ]
+  },
+  {
+   "id": "con",
+   "name": "Construction & acceptance",
+   "spec": "Preconstruction meeting, Village permits, installation, inspection and acceptance by Nov 15, 2027.",
+   "docs": [
+    "letter",
+    "manual"
+   ],
+   "steps": [
+    {
+     "t": "Preconstruction agenda, site logistics plan, construction schedule",
+     "o": "Pinnacle",
+     "s": "open",
+     "d": "",
+     "n": "Condition 10a, after KWU and DNR approvals."
+    },
+    {
+     "t": "Erosion control permit application incl. WDNR NOI",
+     "o": "Pinnacle / Contractor",
+     "s": "open",
+     "d": "",
+     "n": "Condition 10c."
+    },
+    {
+     "t": "Village right-of-way permit",
+     "o": "Contractor",
+     "s": "open",
+     "d": "",
+     "n": "Condition 10d. Apply on the Village permit portal."
+    },
+    {
+     "t": "Preconstruction meeting",
+     "o": "Village",
+     "s": "open",
+     "d": "",
+     "n": "Condition 11: Village schedules once all documents and permits are in."
+    },
+    {
+     "t": "Permit fees paid, permits issued",
+     "o": "Contractor",
+     "s": "open",
+     "d": "",
+     "n": "Condition 12: construction may then begin."
+    },
+    {
+     "t": "Watermain installed",
+     "o": "Contractor",
+     "s": "open",
+     "d": "",
+     "n": "16\" C900: 37 LF granular, 739 LF spoil backfill, 312 LF directional drill; 3 butterfly valves; 1 hydrant."
+    },
+    {
+     "t": "Testing, inspection, conditional acceptance by Village",
+     "o": "Village",
+     "s": "open",
+     "d": "",
+     "n": "Deadline Nov 15, 2027. Starts the contractor's 2-year warranty (Terms s.17)."
+    },
+    {
+     "t": "Security reductions / release",
+     "o": "Zilber",
+     "s": "open",
+     "d": "",
+     "n": "DA s.6.3: request reductions under s.395-17."
+    }
+   ]
+  }
+ ],
+ "flags": [
+  {
+   "sev": "high",
+   "t": "Contract completion date is in the past",
+   "b": "Standard Terms s.5 sets substantial completion at July 31, 2026, and liquidated damages ($500/day, s.5a) key off it. Set a date that leaves time for Village inspection and acceptance before Nov 15, 2027.",
+   "o": "Pinnacle",
+   "s": "open"
+  },
+  {
+   "sev": "high",
+   "t": "Scope on the plans but not on the bid form",
+   "b": "Plans call for tracer wire with access boxes behind hydrants, insulation where directed, street sweeping and wetland protection. The form also has no line for pressure testing, disinfection or traffic control at STH 31 / 108th. Either add lines or state they are incidental to items 1-19, so the Village's 120% is computed from complete prices. Not checked against Village standard specs.",
+   "o": "Pinnacle",
+   "s": "open"
+  },
+  {
+   "sev": "high",
+   "t": "No bid instructions in the manual",
+   "b": "No bid due date, delivery, bid validity period, or list of what comes with the bid. Ask bidders for a sample COI naming the Village, a schedule and a subcontractor list: these are what the Village reviews under condition 6c.",
+   "o": "Pinnacle",
+   "s": "open"
+  },
+  {
+   "sev": "med",
+   "t": "Bid form numbering",
+   "b": "Item 17 appears twice and 18 is missing, but the subtotal reads items 1-19. The Village itemizes the security from this form.",
+   "o": "Pinnacle",
+   "s": "open"
+  },
+  {
+   "sev": "med",
+   "t": "Permits clause puts every permit on the contractor",
+   "b": "Terms s.7 says the contractor obtains all permits. Pinnacle is filing the WDNR extension, and the WPDES NOI is the owner's. Name the contractor's permits: Village ROW, erosion control (letter 10c/d) and WisDOT if applicable.",
+   "o": "Pinnacle",
+   "s": "open"
+  },
+  {
+   "sev": "med",
+   "t": "DA Exhibit D is the 8/11 plan set",
+   "b": "The contract cites the Nov 3, 2026 plans. Ask Peggy to swap the bid set into Exhibit D when the DA is finalized.",
+   "o": "Jason Lueders",
+   "s": "open"
+  },
+  {
+   "sev": "med",
+   "t": "Pinnacle CM estimate not seen",
+   "b": "Requested from Andy 11/4. Condition 6d requires it before the Village can compute the security. It is separate from the construction contract.",
+   "o": "Andy Shoaf",
+   "s": "open"
+  },
+  {
+   "sev": "low",
+   "t": "Owner entity spelling on the CSM",
+   "b": "The contract correctly says TI Investors of Lakeview Nitto Parcel LLC. The CSM dedication draft says \"Lakeveiw\". Condition 6c requires the contract name to match title.",
+   "o": "Pinnacle",
+   "s": "open"
+  },
+  {
+   "sev": "low",
+   "t": "Two different Zilber entities",
+   "b": "The DA party is TI Investors of Pleasant Prairie Holding Company LLC; the contract owner is TI Investors of Lakeview Nitto Parcel LLC (titled owner). Confirm with the Village that the titled entity is what they want on the contract.",
+   "o": "Jason Lueders",
+   "s": "open"
+  },
+  {
+   "sev": "low",
+   "t": "Manual cleanup",
+   "b": "Proposal form names \"Pinnacle Enginering, Attn: Anthony Zanon\" while the cover lists Andy Shoaf. Pay apps every 60 days (s.10a) but based on month-end work (s.10b). s.24 \"proper action by its governing body\" is municipal wording that doesn't fit an LLC owner.",
+   "o": "Pinnacle",
+   "s": "open"
+  }
+ ],
+ "obl": [
+  {
+   "g": "Contractor (project manual)",
+   "k": "bid",
+   "rows": [
+    [
+     "Perform all work per plans, Village Standard Specifications and the Proposal; furnish all labor, materials, equipment, utility and transport services",
+     "Agreement Art. I, III; Terms s.4",
+     ""
+    ],
+    [
+     "Order of precedence: Standard Terms, then Village Standard Specs, then 11/3 plans, then the Agreement, then the Proposal",
+     "Art. III",
+     ""
+    ],
+    [
+     "Substantially complete by July 31, 2026; final completion within 30 days after",
+     "Terms s.5",
+     "Date is in the past"
+    ],
+    [
+     "Liquidated damages $500/day past substantial completion and again past final completion",
+     "Terms s.5a",
+     ""
+    ],
+    [
+     "Liable for direct and consequential damages for late completion, and Owner's enforcement costs",
+     "Terms s.5",
+     ""
+    ],
+    [
+     "Obtain and pay for all permits, approvals and licenses",
+     "Terms s.7",
+     "Conflicts with Pinnacle's DNR filing"
+    ],
+    [
+     "Indemnify and defend Owner, its agents, contractors and employees",
+     "Terms s.8",
+     ""
+    ],
+    [
+     "Insurance: WC statutory; CGL $1M occ / $1M agg / $1M products-completed ops, per project, primary and non-contributory; auto $1M CSL; umbrella $5M / $5M",
+     "Terms s.9",
+     ""
+    ],
+    [
+     "Name Owner and Village of Pleasant Prairie as additional insured on WC, CGL and auto; 30-day cancellation notice; waiver of subrogation; subs carry the same",
+     "Terms s.9",
+     "Meets condition 6c"
+    ],
+    [
+     "Pay apps with sworn statement and full lien waivers from contractor and all subs and suppliers",
+     "Terms s.10(c)",
+     ""
+    ],
+    [
+     "No deviation from plans without Owner's written consent; no extra payment without advance written approval",
+     "Terms s.11, s.24(e)",
+     ""
+    ],
+    [
+     "No subletting without Owner's written consent; subs bound by the Agreement and Village ordinance ch. 150",
+     "Terms s.12",
+     ""
+    ],
+    [
+     "Restake at contractor's cost (Owner pays initial survey and layout)",
+     "Terms s.13",
+     ""
+    ],
+    [
+     "Protect the work and adjacent public and private property; repair any damage at own cost",
+     "Terms s.14, s.22",
+     ""
+    ],
+    [
+     "Cooperate with Owner's other contractors; Owner not liable for their delays",
+     "Terms s.15",
+     ""
+    ],
+    [
+     "Sole responsibility for safety and OSHA compliance",
+     "Terms s.16",
+     ""
+    ],
+    [
+     "2-year warranty from Village conditional acceptance; work lien free",
+     "Terms s.17",
+     ""
+    ],
+    [
+     "Daily and completion clean-up, or Owner cleans and back-charges",
+     "Terms s.18",
+     ""
+    ],
+    [
+     "3 working days' written notice to police, fire, EMS, school buses, street and utility authorities before starting",
+     "Terms s.21",
+     ""
+    ],
+    [
+     "Bears all subsurface and ground-condition risk; bid must cover it",
+     "Terms s.21",
+     ""
+    ],
+    [
+     "Price includes all taxes",
+     "Art. II",
+     ""
+    ],
+    [
+     "No assignment without Owner's consent",
+     "Terms s.20",
+     ""
+    ]
+   ]
+  },
+  {
+   "g": "Owner: TI Investors of Lakeview Nitto Parcel LLC (project manual)",
+   "k": "sec",
+   "rows": [
+    [
+     "Pay the contract sum: progress payments every 60 days on proper pay apps, less up to 5% retainage if required, released at final completion",
+     "Art. II; Terms s.10(a)",
+     "60-day vs month-end mismatch"
+    ],
+    [
+     "Pay initial surveying and layout",
+     "Terms s.13",
+     "Covered by Pinnacle CM estimate (condition 6d)"
+    ],
+    [
+     "May take over the work on 48 hours' notice at contractor's cost",
+     "Terms s.6",
+     ""
+    ],
+    [
+     "May terminate on written notice if dissatisfied; contractor paid only after the work is finished",
+     "Terms s.19",
+     ""
+    ],
+    [
+     "Changes priced by unit price, supplemental schedule, lump sum, or cost plus 15%",
+     "Terms s.23, s.24",
+     ""
+    ],
+    [
+     "May withhold for unpaid claims, defective work or unpaid subs, and pay them directly",
+     "Terms s.25",
+     ""
+    ],
+    [
+     "Disputes: negotiate, then circuit court in the project county; prevailing party recovers fees",
+     "Art. IV",
+     ""
+    ],
+    [
+     "May assign the Agreement to a subsidiary or related entity",
+     "Terms s.20",
+     ""
+    ],
+    [
+     "Signatory: Jason Lueders, Director of Construction",
+     "Signature page",
+     ""
+    ]
+   ]
+  },
+  {
+   "g": "Developer to the Village (DA and approval letter)",
+   "k": "plan",
+   "rows": [
+    [
+     "Deliver financial security to the Village Treasurer under Ord. s.395-17 as a condition of DA approval",
+     "DA s.6.1",
+     ""
+    ],
+    [
+     "Complete the public watermain by Nov 15, 2027 (installed, inspected and accepted)",
+     "DA s.6.1; Cond. 4",
+     ""
+    ],
+    [
+     "Village may draw on the security if the Developer fails; draw based on Village's reasonable cost-to-complete estimate",
+     "DA s.6.1",
+     ""
+    ],
+    [
+     "May request reductions in the remaining security",
+     "DA s.6.3",
+     ""
+    ],
+    [
+     "Wis. Stat. 236.13(2)(am) controls over s.395-17 if they conflict",
+     "DA s.6.4",
+     "Statute text not verified"
+    ],
+    [
+     "Submit draft contracts, bid docs and COIs itemized for financial security; contracts in the titled owner's name; Village listed as insured",
+     "Cond. 6c",
+     ""
+    ],
+    [
+     "Submit Pinnacle CM cost estimate (staking, as-builts, record drawings)",
+     "Cond. 6d",
+     ""
+    ],
+    [
+     "Security = 120% of public improvements, inspections and construction-related services, plus cash payments; final security at closing",
+     "Cond. 7",
+     ""
+    ],
+    [
+     "Obtain KWU and WDNR approvals before installation",
+     "Cond. 6a-b",
+     "KWU done 11/4"
+    ],
+    [
+     "Revised CSM; executed and recorded Stormwater Maintenance Agreement before any permits",
+     "Cond. 1, 2",
+     ""
+    ],
+    [
+     "Record Memorandum of DA, Tax Agreements, CSM and SWMA; copies to Village within 72 hours",
+     "Cond. 9",
+     ""
+    ],
+    [
+     "Precon agenda, logistics plan, schedule; WisDOT permit if applicable; erosion control permit with WDNR NOI; Village ROW permit",
+     "Cond. 10",
+     ""
+    ],
+    [
+     "Pay Village planning, engineering, legal and inspection invoices through the project",
+     "DA s.7.6",
+     ""
+    ],
+    [
+     "Work in a good and workmanlike manner per the plans and Village requirements, at Developer's cost",
+     "DA s.7.1",
+     ""
+    ]
+   ]
+  }
+ ],
+ "plan": [
+  {
+   "t": "Fix manual, bid",
+   "a": "2026-11-05",
+   "b": "2026-12-04",
+   "n": "Assumed; no dates set"
+  },
+  {
+   "t": "Contract + Village review",
+   "a": "2026-12-05",
+   "b": "2027-01-15",
+   "n": "Assumed"
+  },
+  {
+   "t": "Closing / security",
+   "a": "2027-01-16",
+   "b": "2027-02-28",
+   "n": "Assumed"
+  },
+  {
+   "t": "Permits, precon",
+   "a": "2027-03-01",
+   "b": "2027-04-15",
+   "n": "Assumed"
+  },
+  {
+   "t": "Construction",
+   "a": "2027-04-16",
+   "b": "2027-10-15",
+   "n": "Assumed"
+  },
+  {
+   "t": "Acceptance deadline",
+   "a": "2027-11-15",
+   "b": "2027-11-15",
+   "n": "DA s.6.1"
+  }
+ ],
+ "events": [
+  {
+   "d": "2026-08-11",
+   "t": "Village Engineer comments on the public improvement plans.",
+   "src": "Approval letter, condition 3"
+  },
+  {
+   "d": "2026-08-17",
+   "t": "Plan Commission conditionally approves Phase A Site and Operational Plans (152,334 sf speculative industrial building).",
+   "src": "Approval letter p.1"
+  },
+  {
+   "d": "2026-08-24",
+   "t": "Village Board conditionally approves the Development Agreement and the CSM with public improvement plans for the STH 31 water extension.",
+   "src": "Approval letter p.1"
+  },
+  {
+   "d": "2026-08-25",
+   "t": "Rob Hanson sends the conditional approval letter with conditions 1-12.",
+   "src": "DA approval letter"
+  },
+  {
+   "d": "2026-10-27",
+   "t": "Kurt Davidsen sends plans and WDNR submittal info to KWU for system-level review. Sends Pinnacle review comments; bidding can proceed once fixed; recommends attorney review of the manual.",
+   "src": "Kurt, Andy"
+  },
+  {
+   "d": "2026-11-02",
+   "t": "Jason presses Pinnacle: bidding is on the critical path to the financial security mechanism.",
+   "src": "Jason"
+  },
+  {
+   "d": "2026-11-03",
+   "t": "Pinnacle resubmits revised plans (rev. 4, bid set) and project manual to Kurt and Peggy, and sends them to Jason for contract review.",
+   "src": "Andy"
+  },
+  {
+   "d": "2026-11-04",
+   "t": "Kurt: plans look good, wants CAD for GIS. KWU (Ian Bagley) approves. Kurt approves the extension and asks Pinnacle to submit to WDNR. Andy confirms the DNR submittal.",
+   "src": "Kurt, KWU, Andy"
+  },
+  {
+   "d": "2026-11-04",
+   "t": "Jason sends Andy and Justin the project manual items before bidding (completion date, bid form, scope, permits, bid instructions, CM estimate, CSM spelling, cleanup). Asks Lisa Kleinke for Zilber's standard owner-direct plan and spec contract to compare.",
+   "src": "Jason"
+  }
+ ],
+ "docs": [
+  {
+   "id": "letter",
+   "t": "DA conditional approval letter",
+   "g": "village",
+   "d": "08/25/26",
+   "p": 5,
+   "pdf": "letter",
+   "n": "Rob Hanson to Jason. Conditions 1-12 for the CSM, SWMA, DA, financial security, closing, recording and precon. Download includes the full 80-page packet (CSM language, SWMA, plans, DA, exhibits)."
+  },
+  {
+   "id": "art6",
+   "t": "DA Article VI: Financial Security",
+   "g": "village",
+   "d": "08/2026 draft",
+   "p": 1,
+   "pdf": "letter",
+   "n": "Cash deposit under s.395-17; completion by 11/15/2027; draws; reductions; 236.13(2)(am) controls."
+  },
+  {
+   "id": "exd",
+   "t": "DA Exhibits D, D1, D2",
+   "g": "village",
+   "d": "08/2026 draft",
+   "p": 3,
+   "pdf": "letter",
+   "n": "D = watermain plans (8/11 set). D1 itemized cost breakdown and D2 security instrument are blank."
+  },
+  {
+   "id": "csm",
+   "t": "CSM dedication and covenant language",
+   "g": "village",
+   "d": "08/13/26 draft",
+   "p": 2,
+   "pdf": "letter",
+   "n": "Owner spelled \"Lakeveiw\" on line 1."
+  },
+  {
+   "id": "engc",
+   "t": "Village Engineer comments (marked plans)",
+   "g": "village",
+   "d": "08/11/26",
+   "p": 4,
+   "pdf": "letter",
+   "n": "Attached to the approval letter."
+  },
+  {
+   "id": "kwu",
+   "t": "KWU approval letter",
+   "g": "approvals",
+   "d": "11/04/26",
+   "p": 1,
+   "pdf": "kwu",
+   "n": "Ian Bagley to Kurt Davidsen: plans compatible with KWU systems and approved."
+  },
+  {
+   "id": "manual",
+   "t": "Project manual (contract + proposal form)",
+   "g": "bid",
+   "d": "11/03/26",
+   "p": 12,
+   "pdf": "manual",
+   "n": "General Contract, Standard Contract Terms and Conditions, Proposal Form (19 items, unpriced)."
+  },
+  {
+   "id": "plans",
+   "t": "Public watermain plans, bid set",
+   "g": "bid",
+   "d": "11/03/26",
+   "p": 8,
+   "pdf": "plans",
+   "n": "Pinnacle 644.00, rev. 4 BID SET/VOPP RESUBMITTAL."
+  }
+ ],
+ "contacts": [
+  {
+   "org": "Zilber Property Group",
+   "p": [
+    {
+     "n": "Jason Lueders",
+     "r": "Director of Construction; contract signatory",
+     "l": [
+      [
+       "Phone",
+       "630-344-3718"
+      ],
+      [
+       "Email",
+       "jason.lueders@zilber.com"
+      ]
+     ]
+    },
+    {
+     "n": "Lisa Kleinke",
+     "r": "Zilber; standard contract forms",
+     "l": [
+      [
+       "Email",
+       "lisa.kleinke@zilber.com"
+      ]
+     ]
+    },
+    {
+     "n": "Chad Navis",
+     "r": "Zilber, cc on the bid thread",
+     "l": [
+      [
+       "Email",
+       "chad.navis@zilber.com"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "org": "Pinnacle Engineering Group (engineer)",
+   "p": [
+    {
+     "n": "Andy Shoaf, PE",
+     "r": "Associate Project Manager; plans, manual, DNR submittal",
+     "l": [
+      [
+       "Office",
+       "262-754-8888"
+      ],
+      [
+       "Email",
+       "Andrew.Shoaf@pinnacle-engr.com"
+      ]
+     ]
+    },
+    {
+     "n": "Justin Johnson",
+     "r": "Pinnacle",
+     "l": [
+      [
+       "Email",
+       "jjohnson@pinnacle-engr.com"
+      ]
+     ]
+    },
+    {
+     "n": "Adam Artz",
+     "r": "Pinnacle",
+     "l": [
+      [
+       "Email",
+       "Adam.Artz@pinnacle-engr.com"
+      ]
+     ]
+    },
+    {
+     "n": "Anthony Zanon",
+     "r": "Named on the proposal form",
+     "l": []
+    }
+   ]
+  },
+  {
+   "org": "Village of Pleasant Prairie",
+   "p": [
+    {
+     "n": "Kurt Davidsen, PE",
+     "r": "Village Engineer",
+     "l": [
+      [
+       "Phone",
+       "262-925-6728"
+      ],
+      [
+       "Email",
+       "kdavidsen@pleasantprairiewi.gov"
+      ]
+     ]
+    },
+    {
+     "n": "Peggy Herrick",
+     "r": "Assistant Community Development Director; letter contact",
+     "l": [
+      [
+       "Phone",
+       "262-925-6716"
+      ],
+      [
+       "Email",
+       "pherrick@pleasantprairiewi.gov"
+      ]
+     ]
+    },
+    {
+     "n": "Rob Hanson",
+     "r": "Community Development Director; signed the approval letter",
+     "l": [
+      [
+       "Office",
+       "262-925-6717"
+      ]
+     ]
+    },
+    {
+     "n": "Sarah Tomczyk",
+     "r": "Assistant Village Engineer",
+     "l": [
+      [
+       "Email",
+       "stomczyk@pleasantprairiewi.gov"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "org": "Kenosha Water Utility",
+   "p": [
+    {
+     "n": "Ian Bagley, PE",
+     "r": "Director of Engineering; signed the approval",
+     "l": [
+      [
+       "Phone",
+       "262-653-4349"
+      ],
+      [
+       "Email",
+       "ibagley@kenosha.org"
+      ]
+     ]
+    },
+    {
+     "n": "Curt Czarnecki, PE",
+     "r": "General Manager",
+     "l": [
+      [
+       "Phone",
+       "262-653-4306"
+      ],
+      [
+       "Email",
+       "cczarnecki@kenosha.org"
+      ]
+     ]
+    }
+   ]
+  }
+ ]
+}
