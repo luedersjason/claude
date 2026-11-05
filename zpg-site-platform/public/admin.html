@@ -22,7 +22,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} td,th{text-align:left;
 <p class="note">One private link for the whole team (Pinnacle, the Village). Anyone who opens it can see the site and save review decisions as "Project team". Making a new one turns the old one off.</p>
 <p><button type="button" id="team">Create shared team link</button></p></div>
 <div class="card"><h2>Invite someone</h2>
-<p class="note">A personal link works once, on one device, and expires after 7 days. If it is forwarded, the second person gets "already used". Each person can stay signed in on two devices. Use "New link" to reissue.</p>
+<p class="note">A personal link works once, on one device. It does not expire. If it is forwarded, the second person gets "already used". Each person can stay signed in on two devices. Use "New link" to reissue.</p>
 <form id="f">
 <select id="pick" class="full"><option value="">Pick someone from the project team…</option></select>
 <input id="name" list="teamList" placeholder="Or type a full name" required><datalist id="teamList"></datalist>
@@ -47,7 +47,7 @@ async function load(){me=(await (await fetch('/api/me')).json().catch(()=>({})))
 async function invite(p){const r=await fetch('/api/admin/people',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(p)});const j=await r.json();
  if(!r.ok){alert(j.error||'Could not create the link');return;}$('link').textContent=j.link;$('out').hidden=false;
  const first=(p.name||'').split(' ')[0]||'there';
- const body=`Hi ${first},\n\nHere is your link to the Nitto Watermain project site:\n${j.link}\n\nClick it, then "Open the project site". It works once, on one device, and expires in 7 days, so please do not forward it. After that, https://nitto-watermain.pages.dev/ opens for you directly.\n\nJason`;
+ const body=`Hi ${first},\n\nHere is your link to the Nitto Watermain project site:\n${j.link}\n\nClick it, then "Open the project site". It works once, on one device, so please do not forward it. After that, https://nitto-watermain.pages.dev/ opens for you directly.\n\nJason`;
  const m=$('mail');m.hidden=!p.email;if(p.email){m.href='mailto:'+encodeURIComponent(p.email)+'?subject='+encodeURIComponent('Nitto Watermain project site access')+'&body='+encodeURIComponent(body);m.textContent='Email it to '+p.email;}
  load();}
 $('f').onsubmit=e=>{e.preventDefault();const name=$('name').value.trim();invite({id:name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),name,company:$('company').value.trim(),email:$('email').value.trim(),role:$('role').value});};

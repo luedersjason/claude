@@ -137,9 +137,9 @@ async function join(req, env, url) {
   const t = url.searchParams.get("t");
   if (!t) return new Response("Missing invite token.", { status: 400 });
   const person = await env.DB.prepare("SELECT id, created_at FROM people WHERE invite_hash = ?").bind(await sha256(t)).first();
-  const gone = "This invite link was already used, has expired, or is not valid. Ask Jason for a new one.";
-  // Personal links work once and expire after 7 days. Only the shared team link can be used again.
-  if (!person || (person.id !== "team" && Date.now() - person.created_at > 7 * 864e5)) return new Response(gone, { status: 403 });
+  const gone = "This invite link was already used or is not valid. Ask Jason for a new one.";
+  // Personal links work once (no expiry). Only the shared team link can be used again.
+  if (!person) return new Response(gone, { status: 403 });
   // GET only shows a button: mail scanners and link previews fetch links with GET and must not use the link up.
   if (req.method !== "POST") return new Response(`<!doctype html><meta charset=utf-8><meta name=robots content="noindex"><title>${env.SITE_TITLE || "Nitto Watermain"}</title><body style="font:16px system-ui;padding:40px;max-width:520px"><h1 style="font-size:20px">${env.SITE_TITLE || "Nitto Watermain"}</h1><p>This is your personal link. It works once, on one device, so do not forward it.</p><form method=post><button style="font:600 16px system-ui;padding:10px 18px;border:0;border-radius:6px;background:#00A94F;color:#fff;cursor:pointer">Open the project site</button></form>`, { headers: { "content-type": "text/html; charset=utf-8" } });
   if (person.id !== "team") await env.DB.prepare("UPDATE people SET invite_hash = NULL WHERE id = ?").bind(person.id).run();
