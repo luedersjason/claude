@@ -1,6 +1,6 @@
 {
-"v": 2,
-"note": "Playbook alignment: disciplines by who does the work; site & ops items moved to validation requests.",
+"v": 3,
+"note": "Playbook alignment: disciplines by who does the work; site & ops items moved to validation requests. v3: five validation requests from the Nitto email index (10/27 and earlier).",
 "delete": {
 "issues": [
 "N-41",
@@ -652,6 +652,186 @@
 }
 ],
 "itemUpdates": []
+}
+},
+"v-n-rev": {
+"state": "pending",
+"doc": "Justin Johnson email, 10/23/26: revised DNR permits",
+"at": 1793912400000,
+"detail": "On 10/23 Justin Johnson sent you and Peggy Herrick revised wetland and pond permits from Sonya Ponzi (WDNR). The originals showed 10/15/26 for both the permit date and the expiration. The revised ones show an expiration of 10/15/29. The copies on this site are the 10/15 originals. The email does not say whether the permit number in the wetland permit page header (02789 instead of 01917) was also fixed. The revised PDFs are not on the site yet.",
+"evidence": "Justin Johnson email, 10/23/26: revised DNR permits",
+"refs": [
+{
+"label": "Justin to Jason 10/23",
+"kind": "text",
+"title": "Revised permits",
+"body": "\"Revised permits from Sonya, with the expiration date corrected to the standard 3-year window.\""
+},
+{
+"label": "Justin to Peggy 10/23",
+"kind": "text",
+"title": "Expiration",
+"body": "\"The DNR originally had the permit date and the permit expiration date both listed as 10/15/26. These now have the expiration date corrected ... (10/15/29).\""
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Note the corrected 10/15/29 expiration on N-03 and N-04. The two revised PDFs replace the 10/15 copies on the Documents tab once I have them (requested from the G14).",
+"items": [],
+"itemUpdates": [
+{
+"ref": "N-03",
+"next": "11/5: WDNR sent a revised wetland permit 10/23 with expiration 10/15/29; Justin sent it to Peggy 10/23. Swapped permit number not confirmed. Revised PDF to replace the Documents copy."
+},
+{
+"ref": "N-04",
+"next": "11/5: WDNR sent a revised pond permit 10/23 with expiration 10/15/29; Justin sent it to Peggy 10/23. Revised PDF to replace the Documents copy."
+}
+]
+}
+},
+"v-n-fire": {
+"state": "pending",
+"doc": "Andy Shoaf email 10/20/26 and Fire Flow Test thread 10/1 to 10/7",
+"at": 1793912400000,
+"detail": "The fire flow test the WDNR water main form needs was run on 10/7 at 9:00 (Matt Berth, with Pleasant Prairie Water); results went to Andy Shoaf the same day on a 3-page Flow Test Form. On 10/20 Andy sent Peggy Herrick and Kurt Davidsen the permits plus the fire flow calculations and WDNR Forms 3300-260 and 3300-066 (9 pages). The Form 3300-066 on this site is a 4-page copy with the fire flow section blank, so it is not the one that was submitted. Per Justin on 9/25 the order is Village, then KWU, then WDNR. KWU approved on 11/4, so filing with WDNR is next.",
+"evidence": "Andy Shoaf email 10/20/26 and Fire Flow Test thread 10/1 to 10/7",
+"refs": [
+{
+"label": "Andy to Peggy and Kurt 10/20",
+"kind": "text",
+"title": "Attachments",
+"body": "Approved wetland and pond permits, WDNR Form 3300-066 (9 pages), Form 3300-260; \"the fire flow calculations and WDNR Watermain Extension Permits as Engineering have requested.\""
+},
+{
+"label": "Matt Berth 10/5 and 10/7",
+"kind": "text",
+"title": "Flow test",
+"body": "Test scheduled with Pleasant Prairie Water for 9:00 on 10/7; results sent 10/7 on the Flow Test Form for Green Bay Ave."
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Update N-13 to say what has been sent and what is next. The 9-page Form 3300-066 and the flow test form replace the 4-page copy on the Documents tab once I have them.",
+"items": [],
+"itemUpdates": [
+{
+"ref": "N-13",
+"now": "Pinnacle sent the Village and Kurt Forms 3300-260 and 3300-066 with fire flow results on 10/20; KWU approved 11/4; Pinnacle files with WDNR next. No WDNR approval on file.",
+"ball": "Andy Shoaf (Pinnacle)",
+"confirmed": "11/5",
+"source": "Andy Shoaf email 10/20/26; Justin Johnson email 9/25/26"
+}
+]
+}
+},
+"v-n-access": {
+"state": "pending",
+"doc": "Justin Johnson email 9/25/26 and proposal form line 6",
+"at": 1793912400000,
+"detail": "A Village comment asked how the contractor reaches the south side of the wetland. On 9/25 Justin wrote that Pinnacle would propose a temporary access from STH 31 for the water main work, and might cross the wetland instead. The proposal form in the 11/3 project manual has a lump sum line 6, \"Temporary Access (Installation, Maintenance, and Restoration)\", so bidders will price it. I could not find a temporary access location on the 11/3 bid set sheets. If the access is on STH 31, the WisDOT right-of-way question on N-15 may no longer be \"n/a\".",
+"evidence": "Justin Johnson email 9/25/26 and proposal form line 6",
+"refs": [
+{
+"label": "Justin to Jason 9/25",
+"kind": "text",
+"title": "Temporary access",
+"body": "\"We are going to propose a temp access from STH 31 for the watermain construction. It is possible we may be able to cross the wetland ...\""
+},
+{
+"label": "Proposal form, line 6",
+"kind": "text",
+"title": "Bid item",
+"body": "\"6  Temporary Access (Installation, Maintenance, and Restoration)  1  LS\""
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Add one item for Pinnacle to show the temporary access on the bid set (or say the main crosses the wetland), and tie N-15 to it. Nothing changes on bid timing unless you decide it does.",
+"items": [
+{
+"title": "Show the temporary construction access location, or confirm it is not needed, before bidding",
+"owner": "Andy Shoaf (Pinnacle)",
+"area": "Design",
+"blockedBy": []
+}
+],
+"itemUpdates": [
+{
+"ref": "N-15",
+"now": "Condition 5d applies only if work touches the STH 31 right-of-way. Pinnacle proposed a temporary access from STH 31 (9/25); location not on the 11/3 bid set, so WisDOT need is unknown."
+}
+]
+}
+},
+"v-n-6mo": {
+"state": "pending",
+"doc": "Justin Johnson email 9/25/26 and your 9/21 list",
+"at": 1793912400000,
+"detail": "Condition 2 of the site & operational plan letter says the approval is valid for 6 months. On 9/25 Justin suggested talking to the Village about it, since counting from the August approval you would need the building permit in February. Your 9/21 list says \"obtain permit by 2/17/26\", which reads as a typo for 2/17/27. The emails do not show that anyone raised it with the Village. The building permit cannot issue before the DA closing and recordings.",
+"evidence": "Justin Johnson email 9/25/26 and your 9/21 list",
+"refs": [
+{
+"label": "Justin 9/25",
+"kind": "text",
+"title": "Six months",
+"body": "\"If that is based on the August approval date, that would have you needing to pull your building permit in February to avoid the approval expiring.\""
+},
+{
+"label": "Your list 9/21",
+"kind": "text",
+"title": "Date",
+"body": "\"Current Approval Letter is valid for 6 months (obtain permit by 2/17/26)\""
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Add one item for you to ask the Village whether the 6-month period can be extended or restarted if the DA closing runs late. This is a question for the Village, not a decision to make now.",
+"items": [
+{
+"title": "Ask the Village whether the 6-month site & operational plan approval can be extended if the DA closing runs late",
+"owner": "Jason Lueders (ZPG)",
+"area": "ZPG",
+"blockedBy": []
+}
+],
+"itemUpdates": []
+}
+},
+"v-n-eopc": {
+"state": "pending",
+"doc": "Todd Battle email 9/15/26: Pinnacle cost opinions 10/17/25",
+"at": 1793912400000,
+"detail": "Todd Battle forwarded two Pinnacle opinions of probable cost from 10/17/25. They put the water main extension at 1,200 LF and $216,000 base for this parcel (before engineering, administration and 15% contingency). They are conceptual; the 11/3 bid set is 1,088 LF plus 10 LF of stubs. Todd says no stand-alone water main estimate was made and he would check with Adam Artz. The Village still itemizes the 120% security from the signed contract, so this is a benchmark for leveling bids, not the security amount.",
+"evidence": "Todd Battle email 9/15/26: Pinnacle cost opinions 10/17/25",
+"refs": [
+{
+"label": "Todd 9/15",
+"kind": "text",
+"title": "Water main",
+"body": "\"We estimated the water main extension (1,200 LF) @ base cost of $216K (+ Eng/Admin fees ... + contingency).\""
+},
+{
+"label": "Pinnacle EOPC 10/17/25",
+"kind": "text",
+"title": "Parcel 9 CSM #2273",
+"body": "Water Main Extension (1,200LF) $216,000; subtotal without contingency $1,362,809 for the parcel."
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Record the $216,000 conceptual figure on N-20 as the benchmark when bids are leveled, and note on N-23 that Todd asked Adam Artz about a stand-alone estimate.",
+"items": [],
+"itemUpdates": [
+{
+"ref": "N-20",
+"next": "11/5: Benchmark for leveling: Pinnacle opinion of cost 10/17/25, water main 1,200 LF, $216,000 base before engineering and 15% contingency (conceptual). Bid set is 1,088 LF plus 10 LF stubs."
+},
+{
+"ref": "N-23",
+"next": "11/5: Todd Battle asked Adam Artz (9/15) whether a stand-alone water main estimate exists; answer not on file."
+}
+]
 }
 }
 },
