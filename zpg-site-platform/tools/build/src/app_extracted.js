@@ -779,7 +779,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 
 (function validations(){
   const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const $=id=>document.getElementById(id);let db=null,list=[],cur=0;
+  const $=id=>document.getElementById(id);let db=null,list=[],cur=0,vPend=false;document.addEventListener('focusout',e=>{if(vPend&&e.target.matches&&e.target.matches('#vList [data-f=c]')){vPend=false;setTimeout(paint,0);}});
   const today=()=>new Date().toLocaleDateString('en-US',{month:'numeric',day:'numeric'});
   const cut=(t,n)=>{t=String(t||'');return t.length>n?t.slice(0,n-1)+'…':t;};
   const MAIL='<svg viewBox="0 0 24 24" width="38" height="38" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>';
@@ -805,7 +805,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     if(r.kind==='item'){const is=(window.jqIssues||[]).find(x=>x.ref===v.ref);if(!is)return;title=is.ref+' '+is.title;body='Owner: '+(is.owner||'Unassigned')+'\nArea: '+(is.area||'')+'\nStatus: '+is.status+((is.blockedBy||[]).length?'\nWaits on: '+is.blockedBy.join(', '):'')+'\n\n'+(is.next||'No note yet.');}
     $('vRefT').textContent=title;$('vRefB').textContent=body;$('vModal').hidden=true;$('vRef').hidden=false;
     $('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};}
-  function paint(){const n=list.length;$('vCount').textContent=n;$('vBtn').closest('.vbox').classList.toggle('has',n>0);$('vNote').textContent=n?(n+' item'+(n===1?'':'s')+' to confirm from new documents.'):'Nothing waiting.';
+  function paint(){const n=list.length;$('vCount').textContent=n;$('vBtn').closest('.vbox').classList.toggle('has',n>0);$('vNote').textContent=n?(n+' item'+(n===1?'':'s')+' to confirm from new documents.'):'Nothing waiting.';{const fi=document.activeElement;if(fi&&fi.matches&&fi.matches('#vList [data-f=c]')){vPend=true;return;}}  // never redraw under the cursor; catch up when the box loses focus
     if(cur>=n)cur=Math.max(0,n-1);
     const old=document.querySelector('#vList .vq [data-f=c]'),oid=old&&old.closest('.vq').dataset.id,oval=old?old.value:'',hadFocus=!!old&&document.activeElement===old,ss=old?old.selectionStart:0,se=old?old.selectionEnd:0;
     if(!n){$('vList').innerHTML='<p class="note">Nothing waiting.</p>';return;}

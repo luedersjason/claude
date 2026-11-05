@@ -7,6 +7,8 @@ PUB = '/home/user/claude/zpg-site-platform/public/'
 E = html.escape
 DATA = json.load(open('/home/user/claude/nitto-portal/_data.json'))
 PROJ = json.load(open(SP + 'project.json'))
+import subprocess
+BUILD = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True, cwd=PUB).stdout.strip() + ' ' + __import__('datetime').date.today().isoformat()
 # Playbook 6.4: discipline buckets by who does the work. Approvals = only what an agency itself decides.
 DISCS = PROJ['disciplines']
 AREAS = [k for k, n in DISCS]
@@ -149,7 +151,7 @@ AREAOPTS = ''.join(f'<option value="{E(k)}">{E(n)}</option>' for k, n in DISCS)
 page = open(SP + 'page.html').read()
 for k, v in {'%%CSS%%': css, '%%JS%%': js,
              '%%SUMMARY%%': E(DATA['summary']), '%%STEPS%%': steps_html,
-             '%%RAIL4%%': rail4(PROJ['rail']), '%%WRAIL4%%': rail4(PROJ['wrail']), '%%AREAOPTS%%': AREAOPTS}.items():
+             '%%BUILD%%': BUILD, '%%RAIL4%%': rail4(PROJ['rail']), '%%WRAIL4%%': rail4(PROJ['wrail']), '%%AREAOPTS%%': AREAOPTS}.items():
     assert k in page, k
     page = page.replace(k, v)
 open(PUB + 'index.html', 'w').write(page)
