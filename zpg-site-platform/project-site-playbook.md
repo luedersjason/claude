@@ -37,6 +37,8 @@ This file is the single source of truth. If anything else (a skill, a handoff no
 7. One step and one question at a time, short answers, no walls of text.
 8. When something goes wrong, fix the process and record it here, not just the instance.
 9. Every change to the Jaquet site is written into this playbook in the same session (section 14).
+10. The desktop chat reads `repoqueue` and `asks` at the start of every session and does what is waiting.
+11. Keep dollar values out of tracker notes; they stay in the cost control log and the emails, because the owner may see the site.
 
 ---
 
@@ -57,6 +59,7 @@ A published Claude Artifact (one HTML page plus supporting files) shared with a 
 
 ### 1.3 Right bar
 - **Needs your check:** a button "Validation requests" with an amber count badge (grey when zero) and a one-line note; opens the request popup (section 8).
+- **Change something on the tracker:** a box below Needs your check. Jason types a change request and presses Send. The page asks Claude (`sample` capability) to read it against the tracker and creates a check request (`kind:"check"`, with `askId`) under Needs your check. Jason approves with Apply changes and the comment then shows Done. The box lists the last 5 comments with a status: Waiting, Claude is reading it, Ready under Needs your check, Done. The first use asks the viewer's permission for the sample call.
 - **Forum:** free-text posts (`posts`), author names from profiles, newest first, 20 shown.
 - **Project feed:** short dated event lines (`feed`), newest first, 30 shown; a one-line add box; the site also adds lines automatically (item done, layer saved).
 
@@ -108,7 +111,6 @@ When one of these changes, update every place in the same session and say so in 
 - **Publish:** edit the HTML, extract the inline script and run `node --check`, publish with the same file path (same URL). New supporting files go in `files` with `root` set to the outputs folder. Replacing files you have not read needs `overwrite_unread`; removing needs `{"path": null}`.
 - **If a newer live version exists** (someone else published or the page saved itself), read it, diff against the local file, merge your edits onto the live version, then publish.
 - Say plainly "syntax-checked only" unless it was tested in a browser.
-- **Cloudflare hosting (public-work sites, e.g. L152):** the same page runs on Cloudflare Pages with D1 instead of the artifact runtime. `claude-shim.js` provides `window.claude.use()` (db, user, downloads, sample); invite links replace claude.ai sharing; the site is private and not indexed (noindex headers, robots.txt). Pushing the branch deploys. Data changes Claude cannot make through a signed-in session go in `public/migrate.json` (versioned `delete`, `put`, `insert`, `merge`), applied once to the live database on the next request; it touches only the docs it names. Never reseed a live database.
 - **Known gap:** team directory, schedule rows, document cards, facts and titles are still hard-coded in the Jaquet page. Moving them into a per-project config is the next step toward a shared template (see section 12).
 
 ## 3. Visual standard (cohesive appearance)
@@ -178,6 +180,8 @@ When one of these changes, update every place in the same session and say so in 
 - **validations:** state (pending / resolved), kind ("check" for tracker corrections), ref, doc, detail, evidence, refs[] (`{label, kind:'text', title, body}` or `{label, kind:'sheet', ids:[...]}`), proposal {invalid, summary, items[], itemUpdates[]}, nextTitle, nextOwner, nextArea, answer (done / adv / apply), comment, lastComment, rev, applied, nextDone. `itemUpdates` may carry next, now, status, ball, title, owner, due, blockedBy; only fields present are written.
 - **sweeps:** date, at, checked, changed, statusChanges[], requests[], missing[], stale[], sources. The tracker shows "Last full check".
 - **meetings:** title, date, dateLabel, sortAt, kind, summary, attendees, note, exec, progress[], progressLabel, objectives[], objectivesLabel, disciplines[{n, items}], assignments[{who, items}], transcript.
+- **asks:** text, at, by, state (new / working / proposed / done), reply. `validations` may carry `askId` linking a check request to the comment that created it.
+- **repoqueue:** state (new / done / info), at, from, target, job, result. The web chat cannot reach OneDrive, so it leaves repo jobs here; the desktop chat reads the queue at the start of every session, does each `new` job, and sets it `done` with a short result.
 - **feed:** text, at, by. **doclog:** date, doc, change, from, at. **docfiles:** name, file, ver, order. **posts:** text, at, by. **markups:** sheet, name, by, at, marks (JSON string). People are stored as user ids; names come from profiles.
 
 ## 6. Tracker rules
@@ -254,6 +258,17 @@ Collect: project name and address, ZPG lead, team directory (name, company, role
 - **J-31 (11/4, critical):** the tracker said "waiting on approval" while Jaquet had questioned the crane spacing and Jason had answered. The facts were in the transcript and the reply, and even in the note, but the status, title and first line were never recomputed. Causes: the sweep asked only "is it Done?", no proof a sweep ran, document-first reading, append-only notes, threads read as complete. Fixes: rules 8 and 12, section 7, the Now/Ball/Pending model, the sweep agent. The first independent sweep changed 10 of 22 statuses.
 - **From Procore:** ball in court on every open item; overdue reminders go to the ball holder. **From Microsoft Planner's agent:** status reports drafted from plan data (status, progress, risks, next steps); our weekly sweep plays this role. **From Asana:** a person sets the status, the AI drafts and flags risks. **Where we go further:** our sources are emails, transcripts and drawings, so thread checks and missing links matter more than in a closed tool.
 
+## 13a. Where each Claude can work
+
+| | Web chat (claude.ai, in the project) | Desktop chat (Cowork on Jason's PC) |
+|---|---|---|
+| Site and database | read, edit, publish | read, edit, publish |
+| OneDrive / AI Repo / shared folder | no access (no connector found) | yes, through the synced folder |
+| Skills | cannot edit | can edit when Jason asks |
+| Chat history | stored with the account | stored on that PC only; export or "wrap up" to keep it |
+
+The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint connector is enabled for the account, the web chat can do them itself. Chats on two PCs do not sync; the site, its database and the AI Repo are the shared memory. Do not publish the site from two chats at once: read the live version and merge first.
+
 ## 14. Maintenance
 
 - **This playbook follows the Jaquet site.** Every adjustment or upgrade to the Jaquet site (look, layout, a tab, a field, a button, a rule) is written into the matching section here in the same session, before the work is reported as done. A change is not finished until the playbook describes it well enough for another AI to rebuild it.
@@ -274,17 +289,14 @@ Collect: project name and address, ZPG lead, team directory (name, company, role
 - **Holds (11/3-11/4):** no variance or redesign work, and no Village or fire-chief ask, until Jaquet says whether the 10/28 plans work (J-31). Then ask once.
 - **Gate chain:** footprint approval, then Jeremy issues the locked AutoCAD footprint (civil starts) and steel spacing (structural starts).
 
-## Appendix C: Nitto Watermain and L152
+## Appendix C: Nitto Watermain and L152 (Cloudflare sites)
 
-- **Two separate sites.** https://nitto-watermain.pages.dev/ is the Nitto Watermain project site only (public water main: review list, tracker, documents, schedule, team). The L152 building site is a separate site, built with `tools/build/build.py l152` into `l152/` and not deployed yet. Never put building items on the watermain site.
-
-### L152 (parked)
-
-- **Project:** 152,334 SF speculative industrial building, SW corner of STH 31 and 108th Street, LakeView Corporate Park, Pleasant Prairie (tax parcel 92-4-122-272-0502). Owner entity TI Investors of Lakeview Nitto Parcel LLC; DA party TI Investors of Pleasant Prairie Holding Company LLC. Pinnacle is civil engineer. Site: https://nitto-watermain.pages.dev/ (repo luedersjason/claude, folder zpg-site-platform).
-- **Disciplines:** Design (Drawings and Design, Pinnacle), Approvals (only what the Village, WDNR, Army Corps or KWU decides), General Contractor (bidding, cost, construction), ZPG (what ZPG itself must do). Item refs N-nn.
-- **Project addition:** a "Nitto Watermain" tab after Photos holds the public water main's status rail and the bid package review list (decisions in `reviews`, item text in `reviewItems`). Kept at Jason's request; it is the only tab beyond the standard set.
-- **Gates:** the DA executed, water main security posted, and CSM and SWMA recorded before any permits (S&O condition 1); building permit issued within 6 months of the 8/17/26 site & ops approval (2/17/27 by count); water main accepted by 11/15/27; Phase A substantial completion 1/1/28.
-- **Not yet set up:** shared-folder link, Copilot placeholder icon, 3D model, week-by-week, meeting cadence.
+- **Two sites, one deployment.** https://nitto-watermain.pages.dev/ is the Nitto Watermain site (public 16-inch water main only). https://nitto-watermain.pages.dev/l152/ is the L152 building project site (152,334 SF, Zilber Industrial 3). Each ribbon links to the other. Never put building items on the watermain site; move them to L152.
+- **Hosting.** Cloudflare Pages + D1 instead of a Claude Artifact (repo luedersjason/claude, folder zpg-site-platform; push deploys). `claude-shim.js` provides `window.claude.use()` (db, user, downloads); the L152 page's data lives in `l152_*` collections. Data changes outside a signed-in session go through `public/migrate.json` (once-only steps) or Claude's token-protected bot API (`/api/bot/<collection>`, hash only in code).
+- **No `sample`.** No Anthropic API key on the site (Jason's call). Validation comments and the tracker change box (`asks`) are picked up by Claude on its checks (about every 1 to 10 minutes while the session runs) and turned into revised or new check requests that Jason approves.
+- **Access.** Private and not indexed. Jason is the only admin; the Admin pill in the ribbon is shown only to him. Admin page: team pick-list, single-use personal links (no expiry; a forwarded link fails), Email it (.eml for Outlook), Access dropdown, status per person, Remove. Viewers can read and post in the Forum only.
+- **Disciplines:** Design, Approvals (only what an agency decides), General Contractor, ZPG. Refs N-nn. The watermain site keeps a Review tab for the bid package review list (Jason's request).
+- **Job queue.** `repoqueue` jobs are done by the G14 Claude session, which reads the queue at session start.
 
 ## Appendix B: Independent sweep agent brief (copy, fill the brackets)
 
@@ -301,8 +313,8 @@ Collect: project name and address, ZPG lead, team directory (name, company, role
 ---
 
 ### Changelog
-- 2026-11-05: Watermain site restored to watermain-only content (Jason: the watermain site is not the building site). Building items moved to the parked L152 build; migration step 6 removes them from the watermain database.
-- 2026-11-05: L152 site aligned to this playbook: reference shell (Home cover, drawings strip, Now/Next/Gate/Target rail, Meetings, Photos, Forum, approval path on Schedule); disciplines by who does the work; new site & ops items raised as validation requests instead of written straight to the tracker; title and owner format as a check request; sweep record saved. Cloudflare hosting and `migrate.json` added to section 2; Appendix C for L152.
+- 2026-11-05: Appendix C added for the Nitto Watermain and L152 Cloudflare sites (hosting, no sample, access and invites, two sites, job queue).
+- 2026-11-05: Right bar: tracker comment box (`asks`) that turns a typed change into a check request automatically. Added `repoqueue` (web chat to desktop chat job queue), section 13a (where each Claude can work), and rules 10 and 11 on the start page. J-20 closed as merged into J-19; J-47 removed. 11/3 internal recap posted to `meetings` (format: Executive Summary, Progress, Objectives, Details by Discipline written as what was discussed, Assignments by person once each, with decisions kept out of the details). MPC HVAC and plumbing cost items (11/4) and HVAC equipment list (11/5) traced into J-08, J-11, J-13, J-17, J-32.
 - 2026-11-04: Added section 1 site anatomy (shell, left and right bars, Home cover, drawings strip, 3D model, status rail, Schedule Gantt rules and data format, approval path, week-by-week, Team directory with vCards, Teams chat, QR and photos, Meetings, Photos) and the consistency map. Maintenance rule: the playbook is updated with every Jaquet site change. ifc2mesh.py added to the handoff folder.
 - 2026-11-04: Restructured into a handoff and collaboration standard: section 0 (start here), visual standard with tokens and components (3), writing and data formats (4), separate sections for validation requests (8), documents (9), meetings (10), new projects (12); sweep-agent brief as Appendix B; Jaquet facts consolidated in Appendix A. Old validation-UI history removed from the rules (kept below).
 - 2026-11-04: Critical fix after J-31: item-first sweep with a saved record, thread check and missing links, independent sweep agent, answer from the record, recaps are drafts until reviewed. Data model: Pending (automatic from predecessors), now, ball, confirmed, source, due, sweeps; overdue and not-confirmed flags; check requests (Skip / Apply changes). Lessons from Procore, Microsoft Planner and Asana.
