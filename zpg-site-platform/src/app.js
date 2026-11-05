@@ -141,7 +141,7 @@ async function join(req, env, url) {
   // Personal links work once and expire after 7 days. Only the shared team link can be used again.
   if (!person || (person.id !== "team" && Date.now() - person.created_at > 7 * 864e5)) return new Response(gone, { status: 403 });
   // GET only shows a button: mail scanners and link previews fetch links with GET and must not use the link up.
-  if (req.method !== "POST") return new Response(`<!doctype html><meta charset=utf-8><meta name=robots content="noindex"><title>${env.SITE_TITLE || "L152 · Zilber Industrial 3"}</title><body style="font:16px system-ui;padding:40px;max-width:520px"><h1 style="font-size:20px">${env.SITE_TITLE || "L152 · Zilber Industrial 3"}</h1><p>This is your personal link. It works once, on one device, so do not forward it.</p><form method=post><button style="font:600 16px system-ui;padding:10px 18px;border:0;border-radius:6px;background:#00A94F;color:#fff;cursor:pointer">Open the project site</button></form>`, { headers: { "content-type": "text/html; charset=utf-8" } });
+  if (req.method !== "POST") return new Response(`<!doctype html><meta charset=utf-8><meta name=robots content="noindex"><title>${env.SITE_TITLE || "Nitto Watermain"}</title><body style="font:16px system-ui;padding:40px;max-width:520px"><h1 style="font-size:20px">${env.SITE_TITLE || "Nitto Watermain"}</h1><p>This is your personal link. It works once, on one device, so do not forward it.</p><form method=post><button style="font:600 16px system-ui;padding:10px 18px;border:0;border-radius:6px;background:#00A94F;color:#fff;cursor:pointer">Open the project site</button></form>`, { headers: { "content-type": "text/html; charset=utf-8" } });
   if (person.id !== "team") await env.DB.prepare("UPDATE people SET invite_hash = NULL WHERE id = ?").bind(person.id).run();
   return startSession(env, person.id);
 }
@@ -248,7 +248,7 @@ async function route(req, env) {
       return json({ error: "not_found" }, 404);
     }
     if (!person) {
-      return new Response(`<!doctype html><meta charset=utf-8><title>${env.SITE_TITLE || "L152 · Zilber Industrial 3"}</title><body style="font:16px system-ui;padding:40px;max-width:560px"><h1 style="font-size:20px">${env.SITE_TITLE || "L152 · Zilber Industrial 3"}</h1><p>This project site is private. Open it from your personal invite link, or ask Jason Lueders (Zilber Property Group) for one.</p>`,
+      return new Response(`<!doctype html><meta charset=utf-8><title>${env.SITE_TITLE || "Nitto Watermain"}</title><body style="font:16px system-ui;padding:40px;max-width:560px"><h1 style="font-size:20px">${env.SITE_TITLE || "Nitto Watermain"}</h1><p>This project site is private. Open it from your personal invite link, or ask Jason Lueders (Zilber Property Group) for one.</p>`,
         { status: 401, headers: { "content-type": "text/html; charset=utf-8" } });
     }
     return env.ASSETS.fetch(req);

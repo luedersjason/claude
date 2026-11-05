@@ -1,0 +1,72 @@
+{
+ "disciplines": [
+  [
+   "Design",
+   "Drawings and Design"
+  ],
+  [
+   "Approvals",
+   "Village, WDNR, Corps & KWU"
+  ],
+  [
+   "General Contractor",
+   "General Contractor"
+  ],
+  [
+   "ZPG",
+   "Developer (ZPG)"
+  ]
+ ],
+ "rail": [
+  [
+   "now",
+   "Now",
+   "Bid the Nitto Watermain",
+   "Project manual items with Pinnacle, sent 11/4"
+  ],
+  [
+   "",
+   "Next \u00b7 date not set",
+   "Close and record",
+   "DA executed, security posted, CSM and SWMA recorded; required before any permits"
+  ],
+  [
+   "",
+   "Gate \u00b7 by 2/17/27",
+   "Building permit issued",
+   "The site & ops approval lapses 6 months after 8/17/26"
+  ],
+  [
+   "key",
+   "Target \u00b7 1/1/28",
+   "Phase A substantial completion",
+   "DA approval letter, p.1"
+  ]
+ ],
+ "wrail": [
+  [
+   "now",
+   "Now",
+   "Fix the project manual",
+   "8 items sent to Pinnacle 11/4"
+  ],
+  [
+   "",
+   "Next \u00b7 date not set",
+   "Bid",
+   "Village-prequalified contractors"
+  ],
+  [
+   "",
+   "Gate \u00b7 date not set",
+   "Contract approved, security posted",
+   "120% of the work (DA conditions 6 to 8)"
+  ],
+  [
+   "key",
+   "Target \u00b7 11/15/27",
+   "Accepted by the Village",
+   "DA s.6.1"
+  ]
+ ]
+}

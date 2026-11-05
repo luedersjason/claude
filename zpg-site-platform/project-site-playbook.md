@@ -274,7 +274,11 @@ Collect: project name and address, ZPG lead, team directory (name, company, role
 - **Holds (11/3-11/4):** no variance or redesign work, and no Village or fire-chief ask, until Jaquet says whether the 10/28 plans work (J-31). Then ask once.
 - **Gate chain:** footprint approval, then Jeremy issues the locked AutoCAD footprint (civil starts) and steel spacing (structural starts).
 
-## Appendix C: L152 (Zilber Industrial 3, Nitto parcel)
+## Appendix C: Nitto Watermain and L152
+
+- **Two separate sites.** https://nitto-watermain.pages.dev/ is the Nitto Watermain project site only (public water main: review list, tracker, documents, schedule, team). The L152 building site is a separate site, built with `tools/build/build.py l152` into `l152/` and not deployed yet. Never put building items on the watermain site.
+
+### L152 (parked)
 
 - **Project:** 152,334 SF speculative industrial building, SW corner of STH 31 and 108th Street, LakeView Corporate Park, Pleasant Prairie (tax parcel 92-4-122-272-0502). Owner entity TI Investors of Lakeview Nitto Parcel LLC; DA party TI Investors of Pleasant Prairie Holding Company LLC. Pinnacle is civil engineer. Site: https://nitto-watermain.pages.dev/ (repo luedersjason/claude, folder zpg-site-platform).
 - **Disciplines:** Design (Drawings and Design, Pinnacle), Approvals (only what the Village, WDNR, Army Corps or KWU decides), General Contractor (bidding, cost, construction), ZPG (what ZPG itself must do). Item refs N-nn.
@@ -297,6 +301,7 @@ Collect: project name and address, ZPG lead, team directory (name, company, role
 ---
 
 ### Changelog
+- 2026-11-05: Watermain site restored to watermain-only content (Jason: the watermain site is not the building site). Building items moved to the parked L152 build; migration step 6 removes them from the watermain database.
 - 2026-11-05: L152 site aligned to this playbook: reference shell (Home cover, drawings strip, Now/Next/Gate/Target rail, Meetings, Photos, Forum, approval path on Schedule); disciplines by who does the work; new site & ops items raised as validation requests instead of written straight to the tracker; title and owner format as a check request; sweep record saved. Cloudflare hosting and `migrate.json` added to section 2; Appendix C for L152.
 - 2026-11-04: Added section 1 site anatomy (shell, left and right bars, Home cover, drawings strip, 3D model, status rail, Schedule Gantt rules and data format, approval path, week-by-week, Team directory with vCards, Teams chat, QR and photos, Meetings, Photos) and the consistency map. Maintenance rule: the playbook is updated with every Jaquet site change. ifc2mesh.py added to the handoff folder.
 - 2026-11-04: Restructured into a handoff and collaboration standard: section 0 (start here), visual standard with tokens and components (3), writing and data formats (4), separate sections for validation requests (8), documents (9), meetings (10), new projects (12); sweep-agent brief as Appendix B; Jaquet facts consolidated in Appendix A. Old validation-UI history removed from the rules (kept below).

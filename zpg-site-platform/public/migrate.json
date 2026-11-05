@@ -428,231 +428,6 @@
 }
 ]
 }
-},
-"v-n-so5": {
-"state": "pending",
-"doc": "Site & operational plan approval letter, 8/25/26",
-"at": 1793908800000,
-"detail": "The Plan Commission approved the site and operational plans on 8/17/26. Condition 5 lists what must be submitted before the Village schedules the preconstruction meeting. The tracker already covers the recorded CSM and SWMA (N-32), the wetland permits (N-03 to N-06), WisDOT (N-15), erosion control with the NOI (N-34) and the right-of-way permit (N-35). Four are not in the tracker: the revised site & ops PDF (condition 3), LakeView Owners Association approval (5a), the Floodplain Development Permit application (5f) and the commercial driveway permit application (5h). I do not know whether any of these is already done.",
-"evidence": "Site & operational plan approval letter, 8/25/26",
-"refs": [
-{
-"label": "Site & ops letter p.2",
-"kind": "sheet",
-"ids": [
-"SO-2"
-]
-},
-{
-"label": "Site & ops letter p.3",
-"kind": "sheet",
-"ids": [
-"SO-3"
-]
-}
-],
-"proposal": {
-"invalid": false,
-"summary": "Add four items for the condition 3 and 5 submittals not yet tracked. The preconstruction meeting (N-36) should then wait on them too.",
-"items": [
-{
-"title": "Send the Village the revised site & operational plan PDF for final staff review",
-"owner": "Andy Shoaf (Pinnacle)",
-"area": "Design",
-"blockedBy": []
-},
-{
-"title": "Get written approval from the LakeView Owners Association",
-"owner": "Jason Lueders (ZPG)",
-"area": "ZPG",
-"blockedBy": []
-},
-{
-"title": "Apply for the Village Floodplain Development Permit",
-"owner": "Andy Shoaf (Pinnacle)",
-"area": "Design",
-"blockedBy": []
-},
-{
-"title": "Apply for the Village commercial driveway permit for the two 108th Street driveways",
-"owner": "Andy Shoaf (Pinnacle)",
-"area": "Design",
-"blockedBy": []
-}
-],
-"itemUpdates": []
-}
-},
-"v-n-bp": {
-"state": "pending",
-"doc": "Site & operational plan approval letter, 8/25/26",
-"at": 1793908800000,
-"detail": "Condition 2: the approval is valid for 6 months, and the commercial building permit must be submitted and issued before it expires, which by count is 2/17/27. Condition 5i and 5j list the building permit and the mechanical, electrical and HVAC permit applications; condition 12 requires impact fees when the building permit is issued; condition 11 has the Village approve contractor parking and trailer locations with the erosion control permit. The WDNR coverage letter (2/25/26) also requires the certificate of permit coverage to be posted on site.",
-"evidence": "Site & operational plan approval letter, 8/25/26",
-"refs": [
-{
-"label": "Site & ops letter p.2",
-"kind": "sheet",
-"ids": [
-"SO-2"
-]
-},
-{
-"label": "Site & ops letter p.3-4",
-"kind": "sheet",
-"ids": [
-"SO-3",
-"SO-4"
-]
-},
-{
-"label": "WDNR coverage letter",
-"kind": "sheet",
-"ids": [
-"NOI-1",
-"NOI-3"
-]
-}
-],
-"proposal": {
-"invalid": false,
-"summary": "Add the building permit with its 2/17/27 deadline and the related permit steps. The building permit waits on the preconstruction meeting (N-36), because no permits issue before the DA closing and recording.",
-"items": [
-{
-"title": "Get the commercial building permit issued before the site & ops approval lapses (2/17/27)",
-"owner": "Jason Lueders (ZPG)",
-"area": "ZPG",
-"blockedBy": [
-"N-36"
-]
-},
-{
-"title": "Apply for the mechanical, electrical and HVAC permits",
-"owner": "Contractor (to be selected)",
-"area": "General Contractor",
-"blockedBy": [
-"N-36"
-]
-},
-{
-"title": "Get Village approval of contractor parking and trailer locations",
-"owner": "Contractor (to be selected)",
-"area": "General Contractor",
-"blockedBy": [
-"N-34"
-]
-},
-{
-"title": "Post the WDNR certificate of permit coverage on site",
-"owner": "Contractor (to be selected)",
-"area": "General Contractor",
-"blockedBy": []
-}
-],
-"itemUpdates": []
-}
-},
-"v-n-flood": {
-"state": "pending",
-"doc": "Site & operational plan approval letter, 8/25/26",
-"at": 1793908800000,
-"detail": "The site has a floodplain boundary adjustment (Resolution 20-08): fill about 256 CY and create about 1,347 CY. FEMA issued CLOMR 20-05-3166R on 12/22/2020. After the work, the as-built drawing with calculations goes to the Village, then FEMA issues a Letter of Map Revision. Condition 13b makes the LOMR and a CAD and PDF of the amended floodplain a requirement for the certificate of occupancy.",
-"evidence": "Site & operational plan approval letter, 8/25/26",
-"refs": [
-{
-"label": "Site & ops letter p.2",
-"kind": "sheet",
-"ids": [
-"SO-2"
-]
-},
-{
-"label": "Site & ops letter p.4",
-"kind": "sheet",
-"ids": [
-"SO-4"
-]
-}
-],
-"proposal": {
-"invalid": false,
-"summary": "Add one item for the floodplain as-built and LOMR, after the floodplain permit.",
-"items": [
-{
-"title": "Get the FEMA Letter of Map Revision from the floodplain as-built, with CAD and PDF to the Village",
-"owner": "Andy Shoaf (Pinnacle)",
-"area": "Design",
-"blockedBy": []
-}
-],
-"itemUpdates": []
-}
-},
-"v-n-co": {
-"state": "pending",
-"doc": "Site & operational plan approval letter, 8/25/26",
-"at": 1793908800000,
-"detail": "Condition 13 lists what the Village needs before the certificate of occupancy: exterior and site work inspected (13a), the LOMR (13b, separate request), landscaping installed with the installer verification letter or a 110% landscaping guarantee in cold weather (13c), man-door numbering (13d), a stamped as-built survey (13e) and as-built record drawings of private sewer, water, storm and irrigation for GIS (13f). A monument sign is required before a tenant occupies.",
-"evidence": "Site & operational plan approval letter, 8/25/26",
-"refs": [
-{
-"label": "Site & ops letter p.4",
-"kind": "sheet",
-"ids": [
-"SO-4"
-]
-},
-{
-"label": "Site & ops letter p.5",
-"kind": "sheet",
-"ids": [
-"SO-5"
-]
-}
-],
-"proposal": {
-"invalid": false,
-"summary": "Add the certificate of occupancy items. They are far off; they can also wait until the building contract is let.",
-"items": [
-{
-"title": "Complete the exterior building and site work and pass Village inspection",
-"owner": "Contractor (to be selected)",
-"area": "General Contractor",
-"blockedBy": []
-},
-{
-"title": "Install the landscaping and send the installer verification letter",
-"owner": "Contractor (to be selected)",
-"area": "General Contractor",
-"blockedBy": []
-},
-{
-"title": "Number the man doors clockwise from the front door",
-"owner": "Contractor (to be selected)",
-"area": "General Contractor",
-"blockedBy": []
-},
-{
-"title": "Send the Village a stamped as-built survey",
-"owner": "Surveyor (to confirm)",
-"area": "Design",
-"blockedBy": []
-},
-{
-"title": "Send the Village as-built record drawings of private sewer, water, storm and irrigation",
-"owner": "Andy Shoaf (Pinnacle)",
-"area": "Design",
-"blockedBy": []
-},
-{
-"title": "Install a monument sign before a tenant occupies",
-"owner": "Jason Lueders (ZPG)",
-"area": "ZPG",
-"blockedBy": []
-}
-],
-"itemUpdates": []
-}
 }
 },
 "sweeps": {
@@ -663,11 +438,7 @@
 "changed": 7,
 "statusChanges": [],
 "requests": [
-"v-n-fmt",
-"v-n-so5",
-"v-n-bp",
-"v-n-flood",
-"v-n-co"
+"v-n-fmt"
 ],
 "sources": [
 "Site & operational plan approval letter 8/25/26",
@@ -686,27 +457,6 @@
 }
 },
 "doclog": {
-"d12": {
-"date": "8/25/26",
-"doc": "Site & operational plan approval letter",
-"change": "Plan Commission approval 8/17/26 with 21 conditions; building permit within 6 months; condition 5 preconstruction submittals. Added to Building & site.",
-"from": "Rob Hanson, Village",
-"at": 1787652000000
-},
-"d13": {
-"date": "2/25/26",
-"doc": "WDNR construction stormwater permit coverage, FIN 103538",
-"change": "Coverage under WI-S067831-06 from 2/25/26 for up to 3 years; weekly inspections; certificate posted on site. Added to Approvals & permits.",
-"from": "Peter Wood, WDNR",
-"at": 1772042400000
-},
-"d14": {
-"date": "3/18/26",
-"doc": "Site lighting layout and photometrics",
-"change": "Sheet dated 3/18/26, file named 10/2/26; site average 0.54 fc. Added to Building & site.",
-"from": "Lighting designer (initials AD; firm not named)",
-"at": 1773835200000
-},
 "d15": {
 "date": "undated",
 "doc": "WDNR Forms 3300-260 and 3300-066 (water main submittal)",
@@ -716,13 +466,8 @@
 }
 },
 "feed": {
-"e20261105-1": {
-"text": "Village site & operational plan approval letter (8/25/26) logged: building permit due within 6 months of 8/17/26.",
-"at": 1793908800000,
-"by": ""
-},
 "e20261105-2": {
-"text": "WDNR stormwater permit coverage (FIN 103538, from 2/25/26) and the water main submittal forms logged.",
+"text": "WDNR water main submittal forms (3300-260, 3300-066) logged.",
 "at": 1793908800001,
 "by": ""
 }
@@ -842,40 +587,6 @@
 "now": "Condition 5d applies only if work touches the STH 31 right-of-way. Pinnacle proposed a temporary access from STH 31 (9/25); location not on the 11/3 bid set, so WisDOT need is unknown."
 }
 ]
-}
-},
-"v-n-6mo": {
-"state": "pending",
-"doc": "Justin Johnson email 9/25/26 and your 9/21 list",
-"at": 1793912400000,
-"detail": "Condition 2 of the site & operational plan letter says the approval is valid for 6 months. On 9/25 Justin suggested talking to the Village about it, since counting from the August approval you would need the building permit in February. Your 9/21 list says \"obtain permit by 2/17/26\", which reads as a typo for 2/17/27. The emails do not show that anyone raised it with the Village. The building permit cannot issue before the DA closing and recordings.",
-"evidence": "Justin Johnson email 9/25/26 and your 9/21 list",
-"refs": [
-{
-"label": "Justin 9/25",
-"kind": "text",
-"title": "Six months",
-"body": "\"If that is based on the August approval date, that would have you needing to pull your building permit in February to avoid the approval expiring.\""
-},
-{
-"label": "Your list 9/21",
-"kind": "text",
-"title": "Date",
-"body": "\"Current Approval Letter is valid for 6 months (obtain permit by 2/17/26)\""
-}
-],
-"proposal": {
-"invalid": false,
-"summary": "Add one item for you to ask the Village whether the 6-month period can be extended or restarted if the DA closing runs late. This is a question for the Village, not a decision to make now.",
-"items": [
-{
-"title": "Ask the Village whether the 6-month site & operational plan approval can be extended if the DA closing runs late",
-"owner": "Jason Lueders (ZPG)",
-"area": "ZPG",
-"blockedBy": []
-}
-],
-"itemUpdates": []
 }
 },
 "v-n-eopc": {
@@ -1004,7 +715,41 @@
 }
 }
 }
+},
+{
+"v": 6,
+"delete": {
+"validations": [
+"v-n-so5",
+"v-n-bp",
+"v-n-flood",
+"v-n-co",
+"v-n-6mo"
+],
+"doclog": [
+"d12",
+"d13",
+"d14"
+],
+"feed": [
+"e20261105-1"
+]
+},
+"merge": {
+"feed": {
+"e20261105-2": {
+"text": "WDNR water main submittal forms (3300-260, 3300-066) logged."
+}
+},
+"sweeps": {
+"s20261105": {
+"requests": [
+"v-n-fmt"
+]
+}
+}
+}
 }
 ],
-"note": "Steps run once each, in order, when the live database is below that version. Step 3 only inserts."
+"note": "Watermain site. Steps run once each, in order. Step 6 removes the building (site & operational plan) items that belong to the L152 site."
 }

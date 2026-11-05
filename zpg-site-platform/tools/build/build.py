@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """Build public/index.html for the L152 project site (Zilber Industrial 3) from the Jaquet reference + Nitto data."""
-import json, html, re
+import json, html, re, sys
+SITE = (sys.argv[1] if len(sys.argv) > 1 else 'watermain')  # watermain = deployed site; l152 = parked building site
+assert SITE in ('watermain', 'l152')
 import os
 SP = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src') + '/'
 PUB = '/home/user/claude/zpg-site-platform/public/'
 E = html.escape
 DATA = json.load(open('/home/user/claude/nitto-portal/_data.json'))
-PROJ = json.load(open(SP + 'project.json'))
+PROJ = json.load(open(SP + 'project.l152.json'))
 import subprocess
 BUILD = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True, cwd=PUB).stdout.strip() + ' ' + __import__('datetime').date.today().isoformat()
 # Playbook 6.4: discipline buckets by who does the work. Approvals = only what an agency itself decides.
@@ -31,6 +33,64 @@ def R(s, a, b, n=1):
     c = s.count(a)
     assert c == n, (c, a[:120])
     return s.replace(a, b)
+
+# ---------- Watermain site: same playbook layout, watermain-only content ----------
+def _one(s, a, b):
+    assert s.count(a) == 1, (s.count(a), a[:90]); return s.replace(a, b)
+def wm_top(s):
+    a = s.index('const MASTER=['); b = s.index('const VIEWS=')
+    s = s[:a] + """const MASTER=[
+ {n:'Approvals',lab:1},
+ {n:'Village Board approves the DA, CSM and public improvement plans',s:'2026-08-24',m:1},
+ {n:'Village conditional approval letter (conditions 1-12)',s:'2026-08-25',m:1},
+ {n:'WDNR wetland and pond individual permits',s:'2026-10-15',m:1},
+ {n:'WDNR Section 401 water quality certification',s:'2026-10-16',m:1},
+ {n:'Village + KWU approve the watermain plans',s:'2026-11-04',m:1},
+ {n:'Deadlines',lab:1},
+ {n:'Watermain installed, inspected and accepted by the Village (DA s.6.1)',s:'2027-11-15',m:1,k:1},
+];
+""" + s[b:]
+    s = re.sub(r"master:\{t:MASTER,s:'[0-9-]+',e:'[0-9-]+',title:'Master schedule',lede:'[^']*'\}",
+               "master:{t:MASTER,s:'2026-08-01',e:'2027-12-31',title:'Master schedule',lede:'Confirmed dates only. Bid, contract, closing and construction dates are not set yet; they are in the approval path below.'}", s)
+    a = s.index(" {t:'Building & site'"); b = s.index(" {t:'Village / DA'"); s = s[:a] + s[b:]
+    s = re.sub(r"\[\['WDNR construction stormwater permit coverage, FIN 103538'.*?\],\n\s*\['KWU approval letter'", "[['KWU approval letter'", s, flags=re.S)
+    s = _one(s, "{t:'Water main bid package'", "{t:'Bid package'")
+    s = _one(s, "d:'What goes out to water main bidders:", "d:'What goes out to bidders:")
+    return s
+def wm_page(s):
+    s = _one(s, '<title>L152 · Zilber Industrial 3</title>', '<title>Nitto Watermain</title>')
+    s = re.sub(r'<meta name="description" content="[^"]*">', '<meta name="description" content="ZPG project site for the Nitto public watermain at Zilber Industrial 3, LakeView Corporate Park, Pleasant Prairie.">', s, count=1)
+    s = _one(s, '<div class="ptitle">L152 <span>Zilber Industrial 3 · LakeView Corporate Park · Pleasant Prairie</span></div>', '<div class="ptitle">Nitto Watermain <span>Zilber Industrial 3 · LakeView Corporate Park</span></div>')
+    s = _one(s, '\n    <button class="tab" data-tab="watermain" type="button">Nitto Watermain</button>', '')
+    s = _one(s, '<button class="tab" data-tab="home" type="button">Home</button>', '<button class="tab" data-tab="home" type="button">Home</button>\n    <button class="tab" data-tab="review" type="button">Review</button>')
+    a = s.index('<section class="cover"'); b = s.index('</section>', a) + len('</section>')
+    s = s[:a] + """<section class="cover" style="background-image:linear-gradient(90deg,rgba(14,28,42,.92) 0%,rgba(14,28,42,.70) 42%,rgba(14,28,42,.05) 75%),url('img/docs/cover-plan.jpg')">
+  <div class="cover-in">
+    <span class="cover-eye">Nitto Watermain · LakeView Corporate Park · Pleasant Prairie, WI</span>
+    <div class="cover-big"><b>1,100 ft</b><span>public 16″ water main<br>west side of Green Bay Road (STH 31)</span></div>
+    <p>Goal: get a winning contractor under contract, send it to Kurt, and post the financial security the DA requires. The water main must be installed and accepted by Nov 15, 2027.</p>
+    <div class="status" id="status"><span class="chip now"><span class="dot"></span>Fix the project manual</span><span class="chip">Plans approved 11/4</span><span class="chip">Accept by 11/15/27</span></div>
+  </div>
+  <button type="button" class="cover-zoom" data-sheets="PL-1,PL-2,PL-3,PL-4,PL-5,PL-6,PL-7,PL-8">Open the bid set ⤢</button>
+</section>""" + s[b:]
+    s = _one(s, 'Nitto Watermain bid set · Pinnacle 11/3/26 · building plan set not on file here', 'Public watermain plans, bid set · Pinnacle 11/3/26')
+    rv = re.search(r'<section id="review">.*?</section>', s, re.S).group(0)
+    a = s.index('<div class="panel" data-panel="watermain" hidden>'); b = s.index('</main>', a)
+    s = s[:a] + '<div class="panel" data-panel="review" hidden>\n' + rv + '\n<section class="box" aria-label="About the water main"><span class="eyebrow">The work</span><p class="about">%%SUMMARY%%</p></section>\n</div>\n' + s[b:]
+    s = _one(s, '<span class="eyebrow">From the DA and site &amp; operational plan approval letters (8/25/26)</span><h2>Approval path, from water main bid to permits</h2>', '<span class="eyebrow">From the DA approval letter and DA draft</span><h2>Approval path, from plan approval to acceptance</h2>')
+    s = re.sub(r'<p class="lede">The DA must be executed and the water main financial security provided.*?</p>', "<p class=\"lede\">The Village sizes the financial security at 120% of the public improvements, inspections and construction-related services, from the signed contract and Pinnacle's construction management estimate (DA Article VI, Ordinance s.395-17; conditions 6 and 7). The DA, Memorandum of DA and Stormwater Maintenance Agreement are signed at closing and recorded before any permits for the watermain (conditions 8 and 9). The Village schedules the preconstruction meeting once all documents and permits are in (condition 11). Dates for bidding, contract, closing and construction are not set yet.</p>", s, count=1, flags=re.S)
+    s = _one(s, 'L152 · Zilber Industrial 3 · LakeView Corporate Park</span><h2>Project directory</h2>', 'Nitto Watermain · LakeView Corporate Park</span><h2>Project directory</h2>')
+    s = _one(s, 'No recurring meeting is set for L152 yet.', 'No recurring meeting is set for the water main yet.')
+    return s
+def wm_final(s):
+    for a, b in [("watermain:'Nitto Watermain'", "review:'Review'"), ("L152_project_directory.vcf", "Nitto_watermain_directory.vcf"),
+                 ("NOTE:L152 - Zilber Industrial 3 (LakeView Corporate Park)", "NOTE:Nitto Watermain (Zilber Industrial 3, LakeView Corporate Park)"),
+                 ("markups from the L152 project site", "markups from the Nitto watermain project site"), ("const fn=`L152_", "const fn=`Nitto_")]:
+        s = _one(s, a, b)
+    s = re.sub(r'keep the tracker for project L152 \([^)]*\) correct\.', 'keep the tracker for the Nitto public watermain (Zilber Industrial 3, LakeView Corporate Park, Pleasant Prairie) correct.', s)
+    left = [m.start() for m in re.finditer('L152', s)]
+    assert not left, [s[i-60:i+40] for i in left[:5]]
+    return s
 
 tracker = sec(247, 362)
 tracker = R(tracker, "const DNAME={Design:'Drawings and Design',Approvals:'Village, DSPS & permits',Steel:'Structural & steel',Fire:'Fire protection',MEP:'MEP & process piping','General Contractor':'General Contractor',Jaquet:'Owner decisions (Jaquet)'};",
@@ -106,7 +166,10 @@ for m in man:
     m['pdf'], m['pg'] = pdfmap[m['id']]
 sheets_js = 'window.NW_SHEETS=' + json.dumps(man, separators=(',', ':')) + ';'
 
-js = '\n'.join([sheets_js, open(SP + 'own_top.js').read(), tracker, directory, shell, issue_modal, visuals, drawings, viewer, docsdb, val, meetings])
+OWN_TOP = open(SP + 'own_top.js').read()
+if SITE == 'watermain':
+    OWN_TOP = wm_top(OWN_TOP)
+js = '\n'.join([sheets_js, OWN_TOP, tracker, directory, shell, issue_modal, visuals, drawings, viewer, docsdb, val, meetings])
 assert '</script' not in js
 
 # ---------- Home content from _data.json ----------
@@ -149,11 +212,18 @@ def rail4(steps):  # playbook 1.4: Now, Next, Gate, Target
     return '\n'.join(out)
 AREAOPTS = ''.join(f'<option value="{E(k)}">{E(n)}</option>' for k, n in DISCS)
 page = open(SP + 'page.html').read()
+if SITE == 'watermain':
+    page = wm_page(page)
 for k, v in {'%%CSS%%': css, '%%JS%%': js,
              '%%SUMMARY%%': E(DATA['summary']), '%%STEPS%%': steps_html,
-             '%%BUILD%%': BUILD, '%%RAIL4%%': rail4(PROJ['rail']), '%%WRAIL4%%': rail4(PROJ['wrail']), '%%AREAOPTS%%': AREAOPTS}.items():
+             '%%BUILD%%': BUILD, '%%RAIL4%%': rail4(PROJ['wrail'] if SITE == 'watermain' else PROJ['rail']), '%%WRAIL4%%': rail4(PROJ['wrail']), '%%AREAOPTS%%': AREAOPTS}.items():
+    if k == '%%WRAIL4%%' and SITE == 'watermain': continue
     assert k in page, k
     page = page.replace(k, v)
-open(PUB + 'index.html', 'w').write(page)
+OUTF = PUB + 'index.html' if SITE == 'watermain' else '/home/user/claude/zpg-site-platform/l152/index.html'
+import os; os.makedirs(os.path.dirname(OUTF), exist_ok=True)
+if SITE == 'watermain':
+    page = wm_final(page)
+open(OUTF, 'w').write(page)
 open(SP + 'app_extracted.js', 'w').write(js)
-print('index.html', len(page) // 1024, 'KB')
+print(SITE, OUTF, len(page) // 1024, 'KB')
