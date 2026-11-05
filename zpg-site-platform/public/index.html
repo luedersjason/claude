@@ -620,7 +620,7 @@ body{margin:0}
   <div class="box vbox"><div class="eyebrow">Needs your check</div><button type="button" class="btn vbtn" id="vBtn">Validation requests <b id="vCount">0</b></button><p class="note" id="vNote">Nothing waiting.</p></div>
 <div class="prof" id="vModal" hidden role="dialog" aria-modal="true" aria-labelledby="vH"><div class="prof-card vmc" style="max-width:1280px;width:96vw"><button class="btn prof-x" type="button" id="vX">Close</button><h2 id="vH" style="margin-bottom:12px">Validation requests</h2><div id="vList"></div></div></div>
 <div class="prof" id="vRef" hidden role="dialog" aria-modal="true" aria-labelledby="vRefT"><div class="prof-card" style="max-width:720px"><button class="btn prof-x" type="button" id="vRefX">Close</button><h2 id="vRefT" style="margin-bottom:10px"></h2><div id="vRefB" style="white-space:pre-wrap;font-size:14px;line-height:1.5"></div></div></div>
-  <div class="box" id="fixBox"><div class="eyebrow">Tell Claude</div><form id="fixForm" class="post-form"><textarea id="fixText" rows="3" maxlength="600" placeholder="Something wrong or missing? Describe the change and Claude will make it." required></textarea><button class="btn go" type="submit">Send to Claude</button></form><ul id="fixList" class="feed"><li class="note">Loading…</li></ul></div>
+  <div class="box"><div class="eyebrow">Change something on the tracker</div><form id="askForm" class="post-form"><textarea id="askText" rows="3" placeholder="What do you want changed? e.g. N-19 title, owner, status, a missing item…" required></textarea><button class="btn go" type="submit">Send to Claude</button></form><ul id="askList" class="feed"></ul></div>
   <div class="box">
     <div class="eyebrow">Forum</div>
     <form id="postForm" class="post-form"><textarea id="postText" rows="3" placeholder="Post a note or question to the team…" required></textarea><button class="btn go" type="submit">Post</button></form>
@@ -632,7 +632,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build a9d4211 2026-11-05</span>
+  <span>Owner: Jason Lueders, ZPG · build f41d4b9 2026-11-05</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -899,19 +899,22 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   document.addEventListener('click',e=>{const b=e.target.closest('[data-sheets]');if(!b||!window.jqOpenSheets)return;const ids=b.dataset.sheets.split(',');window.jqOpenSheets(ids,ids[0]);});
 })();
 
-// Tell Claude: change requests for the site or the data. Claude reads `fixes`, makes the change, then marks it done with a reply.
-(function fixes(){
-  const $=id=>document.getElementById(id);if(!$('fixForm'))return;
-  const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const md=ms=>{const d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate();};
+// Change something on the tracker (playbook 1.3, `asks`). A typed change becomes a check request (kind "check", askId)
+// under Needs your check; Jason approves it with Apply changes and the comment then shows Done.
+// This site has no `sample`, so Claude picks up "new" asks on its next check and writes the request itself.
+(function asks(){
+  const $=id=>document.getElementById(id);if(!$('askForm'))return;
+  const esc=x=>String(x??'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const LBL={done:'Done',working:'Claude is reading it…',proposed:'Ready under Needs your check'};
   (async()=>{let db=null,me=null;try{db=window.claude?await window.claude.use('db'):null;const u=await window.claude.use('user');me=u&&u.id?await u.id():null;}catch(e){}
-    if(!db){$('fixForm').hidden=true;$('fixList').innerHTML='<li class="note">Sign in to send changes.</li>';return;}
-    db.collection('fixes').onSnapshot(s=>{const rows=Array.from(s.docs||[]).map(d=>({...d.data(),_id:d.id})).sort((a,b)=>b.at-a.at).slice(0,8);
-      $('fixList').innerHTML=rows.length?rows.map(r=>`<li><time>${md(r.at)}</time><span>${esc(r.text)}<br><b style="font-size:12px;color:${r.state==='done'?'#007A39':'#A15C00'}">${r.state==='done'?'Done':'Sent'}</b>${r.reply?' · <span class="note">'+esc(r.reply)+'</span>':''}</span></li>`).join(''):'<li class="note">Nothing sent yet.</li>';},()=>{});
-    $('fixForm').addEventListener('submit',async e=>{e.preventDefault();const t=$('fixText').value.trim();if(!t)return;
-      let tab='';try{tab=sessionStorage.getItem('jqTab')||'';}catch(x){}
-      try{await db.collection('fixes').doc('f'+Date.now()).set({text:t,at:Date.now(),by:me||'',tab,page:location.pathname,state:'open'});$('fixText').value='';say('Sent to Claude.');}
-      catch(x){say('That did not send. You may have view-only access.');}});
+    if(!db){$('askForm').hidden=true;$('askList').innerHTML='<li class="note">Sign in to send changes.</li>';return;}
+    const norm=s=>Array.from((s&&(s.docs||s))||[]).map(d=>({...(typeof d.data==='function'?d.data():d.data),_id:d.id}));
+    db.collection('asks').onSnapshot(s=>{const rows=norm(s).sort((a,b)=>b.at-a.at).slice(0,5);
+      $('askList').innerHTML=rows.map(r=>{const d=new Date(r.at||0);return '<li><span class="note">'+(d.getMonth()+1)+'/'+d.getDate()+' · '+(LBL[r.state]||'Waiting')+'</span><br>'+esc(r.text)+'</li>';}).join('');},()=>{});
+    $('askForm').addEventListener('submit',async ev=>{ev.preventDefault();const v=$('askText').value.trim();if(!v)return;
+      try{await db.collection('asks').doc('a'+Date.now()).set({text:v,at:Date.now(),by:me||'',state:'new'});$('askText').value='';say('Sent to Claude.');}
+      catch(e){say('That did not send. You may have view-only access.');}});
+    db.collection('validations').onSnapshot(s=>{norm(s).filter(v=>v.askId&&v.state==='resolved').forEach(v=>db.collection('asks').doc(v.askId).update({state:'done'}).catch(()=>{}));},()=>{});
   })();
 })();
 

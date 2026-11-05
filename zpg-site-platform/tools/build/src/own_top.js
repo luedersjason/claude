@@ -194,18 +194,21 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   document.addEventListener('click',e=>{const b=e.target.closest('[data-sheets]');if(!b||!window.jqOpenSheets)return;const ids=b.dataset.sheets.split(',');window.jqOpenSheets(ids,ids[0]);});
 })();
 
-// Tell Claude: change requests for the site or the data. Claude reads `fixes`, makes the change, then marks it done with a reply.
-(function fixes(){
-  const $=id=>document.getElementById(id);if(!$('fixForm'))return;
-  const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const md=ms=>{const d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate();};
+// Change something on the tracker (playbook 1.3, `asks`). A typed change becomes a check request (kind "check", askId)
+// under Needs your check; Jason approves it with Apply changes and the comment then shows Done.
+// This site has no `sample`, so Claude picks up "new" asks on its next check and writes the request itself.
+(function asks(){
+  const $=id=>document.getElementById(id);if(!$('askForm'))return;
+  const esc=x=>String(x??'').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const LBL={done:'Done',working:'Claude is reading it…',proposed:'Ready under Needs your check'};
   (async()=>{let db=null,me=null;try{db=window.claude?await window.claude.use('db'):null;const u=await window.claude.use('user');me=u&&u.id?await u.id():null;}catch(e){}
-    if(!db){$('fixForm').hidden=true;$('fixList').innerHTML='<li class="note">Sign in to send changes.</li>';return;}
-    db.collection('fixes').onSnapshot(s=>{const rows=Array.from(s.docs||[]).map(d=>({...d.data(),_id:d.id})).sort((a,b)=>b.at-a.at).slice(0,8);
-      $('fixList').innerHTML=rows.length?rows.map(r=>`<li><time>${md(r.at)}</time><span>${esc(r.text)}<br><b style="font-size:12px;color:${r.state==='done'?'#007A39':'#A15C00'}">${r.state==='done'?'Done':'Sent'}</b>${r.reply?' · <span class="note">'+esc(r.reply)+'</span>':''}</span></li>`).join(''):'<li class="note">Nothing sent yet.</li>';},()=>{});
-    $('fixForm').addEventListener('submit',async e=>{e.preventDefault();const t=$('fixText').value.trim();if(!t)return;
-      let tab='';try{tab=sessionStorage.getItem('jqTab')||'';}catch(x){}
-      try{await db.collection('fixes').doc('f'+Date.now()).set({text:t,at:Date.now(),by:me||'',tab,page:location.pathname,state:'open'});$('fixText').value='';say('Sent to Claude.');}
-      catch(x){say('That did not send. You may have view-only access.');}});
+    if(!db){$('askForm').hidden=true;$('askList').innerHTML='<li class="note">Sign in to send changes.</li>';return;}
+    const norm=s=>Array.from((s&&(s.docs||s))||[]).map(d=>({...(typeof d.data==='function'?d.data():d.data),_id:d.id}));
+    db.collection('asks').onSnapshot(s=>{const rows=norm(s).sort((a,b)=>b.at-a.at).slice(0,5);
+      $('askList').innerHTML=rows.map(r=>{const d=new Date(r.at||0);return '<li><span class="note">'+(d.getMonth()+1)+'/'+d.getDate()+' · '+(LBL[r.state]||'Waiting')+'</span><br>'+esc(r.text)+'</li>';}).join('');},()=>{});
+    $('askForm').addEventListener('submit',async ev=>{ev.preventDefault();const v=$('askText').value.trim();if(!v)return;
+      try{await db.collection('asks').doc('a'+Date.now()).set({text:v,at:Date.now(),by:me||'',state:'new'});$('askText').value='';say('Sent to Claude.');}
+      catch(e){say('That did not send. You may have view-only access.');}});
+    db.collection('validations').onSnapshot(s=>{norm(s).filter(v=>v.askId&&v.state==='resolved').forEach(v=>db.collection('asks').doc(v.askId).update({state:'done'}).catch(()=>{}));},()=>{});
   })();
 })();
