@@ -34,7 +34,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} td,th{text-align:left;
 <p class="note">Each link signs in one person. Send it to them privately. Creating a new link for the same person replaces their old one.</p>
 <div id="out" hidden><h2>Invite link</h2><div class="link" id="link"></div><p><a id="mail" style="display:inline-block;font:600 14px inherit;font-family:inherit;padding:8px 14px;border-radius:6px;background:#00A94F;color:#fff;text-decoration:none;margin-right:8px" hidden>Email it</a><button type="button" id="copy">Copy link</button></p></div>
 </div>
-<div class="card"><h2>People with access</h2><table><thead><tr><th>Name</th><th>Company</th><th>Role</th><th></th></tr></thead><tbody id="ppl"></tbody></table></div>
+<div class="card"><h2>People with access</h2><table><thead><tr><th>Name</th><th>Company</th><th>Access</th><th>Status</th><th></th></tr></thead><tbody id="ppl"></tbody></table></div>
 <p><a href="/">Open the project site</a></p>
 </main>
 <script>
@@ -42,8 +42,19 @@ const $=id=>document.getElementById(id);
 let me='';
 async function load(){me=(await (await fetch('/api/me')).json().catch(()=>({}))).id||'';const r=await fetch('/api/admin/people');if(!r.ok){document.querySelector('main').innerHTML='<p>Only the site admin can open this page.</p>';return;}
  const {people}=await r.json();$('ppl').textContent='';
- for(const p of people){const tr=document.createElement('tr');for(const v of [p.name,p.company||'',p.role]){const td=document.createElement('td');td.textContent=v;tr.appendChild(td);}
-  const td=document.createElement('td');const b=document.createElement('button');b.textContent='New link';b.onclick=()=>invite({id:p.id,name:p.name,company:p.company,email:p.email,role:p.role});td.appendChild(b);if(p.id!==me){const x=document.createElement('button');x.textContent='Remove';x.style.cssText='margin-left:6px;background:#9B1C1C';x.onclick=async()=>{if(!confirm('Remove '+p.name+'? Their link and any open sessions stop working.'))return;const d=await fetch('/api/admin/people?id='+encodeURIComponent(p.id),{method:'DELETE'});if(!d.ok){alert((await d.json()).error||'Could not remove');return;}load();};td.appendChild(x);}tr.appendChild(td);$('ppl').appendChild(tr);}}
+ const md=ms=>{const d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate()+'/'+String(d.getFullYear()).slice(2);};
+ for(const p of people){const tr=document.createElement('tr');
+  for(const v of [p.name,p.company||'']){const td=document.createElement('td');td.textContent=v;tr.appendChild(td);}
+  const tr1=document.createElement('td');
+  if(p.id===me){tr1.textContent='Admin (you)';}else{const sel=document.createElement('select');[['viewer','Viewer'],['editor','Editor'],['admin','Admin']].forEach(([v,t])=>{const o=document.createElement('option');o.value=v;o.textContent=t;if(p.role===v)o.selected=true;sel.appendChild(o);});
+   sel.onchange=async()=>{const r=await fetch('/api/admin/people',{method:'PATCH',headers:{'content-type':'application/json'},body:JSON.stringify({id:p.id,role:sel.value})});if(!r.ok){alert((await r.json()).error||'Could not change');load();}};tr1.appendChild(sel);}
+  tr.appendChild(tr1);
+  const st=document.createElement('td');st.style.fontSize='13px';
+  st.textContent=p.devices>0?('Signed in on '+p.devices+' device'+(p.devices>1?'s':'')+(p.signed_in_at?' · since '+md(p.signed_in_at):'')):(p.link_open?'Link sent, not used yet':(p.signed_in_at?'Signed out (expired '+md(p.last_exp)+')':'No access link'));
+  tr.appendChild(st);
+  const td=document.createElement('td');const b=document.createElement('button');b.textContent='New link';b.onclick=()=>invite({id:p.id,name:p.name,company:p.company,email:p.email,role:p.role});td.appendChild(b);
+  if(p.id!==me){const x=document.createElement('button');x.textContent='Remove';x.style.cssText='margin-left:6px;background:#9B1C1C';x.onclick=async()=>{if(!confirm('Remove '+p.name+'? Their link and any open sessions stop working.'))return;const d=await fetch('/api/admin/people?id='+encodeURIComponent(p.id),{method:'DELETE'});if(!d.ok){alert((await d.json()).error||'Could not remove');return;}load();};td.appendChild(x);}
+  tr.appendChild(td);$('ppl').appendChild(tr);}}
 async function invite(p){const r=await fetch('/api/admin/people',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(p)});const j=await r.json();
  if(!r.ok){alert(j.error||'Could not create the link');return;}$('link').textContent=j.link;$('out').hidden=false;
  const first=(p.name||'').split(' ')[0]||'there';

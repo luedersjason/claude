@@ -112,8 +112,18 @@ async function setup(env, url) {
 async function admin(req, env, person, url) {
   if (!person || person.role !== "admin") return json({ error: "not_admin" }, 403);
   if (req.method === "GET") {
-    const { results } = await env.DB.prepare("SELECT id, name, email, company, role FROM people ORDER BY created_at").all();
-    return json({ people: results });
+    const { results } = await env.DB.prepare(
+      "SELECT p.id, p.name, p.email, p.company, p.role, p.created_at, (p.invite_hash IS NOT NULL) AS link_open, " +
+      "(SELECT COUNT(*) FROM sessions s WHERE s.person_id = p.id AND s.expires_at > ?) AS devices, " +
+      "(SELECT MAX(s.expires_at) FROM sessions s WHERE s.person_id = p.id) AS last_exp FROM people p ORDER BY p.created_at").bind(Date.now()).all();
+    return json({ people: results.map((r) => ({ ...r, signed_in_at: r.last_exp ? r.last_exp - SESSION_DAYS * 864e5 : null })) });
+  }
+  if (req.method === "PATCH") {  // change someone's role without issuing a new link
+    const b = await req.json().catch(() => ({}));
+    if (!["admin", "editor", "viewer"].includes(b.role)) return json({ error: "bad role" }, 400);
+    if (b.id === person.id) return json({ error: "You cannot change your own role." }, 400);
+    await env.DB.prepare("UPDATE people SET role = ? WHERE id = ?").bind(b.role, String(b.id || "")).run();
+    return json({ ok: true });
   }
   if (req.method === "DELETE") {  // remove someone: their link stops working and their sessions end
     const rid = url.searchParams.get("id") || "";
