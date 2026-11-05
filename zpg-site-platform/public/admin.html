@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head><meta name="robots" content="noindex, nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>People and invites</title>
 <style>
 :root{--bg:#fff;--sunk:#F2F4F7;--line:#DDE3E9;--fg:#16212C;--muted:#5B6877;--steel:#1E3448;--accent:#00A94F;--accent-ink:#007A39}
@@ -18,6 +18,9 @@ table{width:100%;border-collapse:collapse;font-size:14px} td,th{text-align:left;
 </style></head><body>
 <header><h1>People and invites</h1></header>
 <main>
+<div class="card"><h2>Shared team link</h2>
+<p class="note">One private link for the whole team (Pinnacle, the Village). Anyone who opens it can see the site and save review decisions as "Project team". Making a new one turns the old one off.</p>
+<p><button type="button" id="team">Create shared team link</button></p></div>
 <div class="card"><h2>Invite someone</h2>
 <form id="f">
 <input id="name" placeholder="Full name (e.g. Andy Shoaf)" required>
@@ -42,5 +45,6 @@ async function invite(p){const r=await fetch('/api/admin/people',{method:'POST',
  if(!r.ok){alert(j.error||'Could not create the link');return;}$('link').textContent=j.link;$('out').hidden=false;load();}
 $('f').onsubmit=e=>{e.preventDefault();const name=$('name').value.trim();invite({id:name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),name,company:$('company').value.trim(),email:$('email').value.trim(),role:$('role').value});};
 $('copy').onclick=()=>{navigator.clipboard.writeText($('link').textContent).then(()=>{$('copy').textContent='Copied';setTimeout(()=>$('copy').textContent='Copy link',1500)},()=>{});};
+$('team').onclick=()=>invite({id:'team',name:'Project team',company:'',email:'',role:'editor'});
 load();
 </script></body></html>

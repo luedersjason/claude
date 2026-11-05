@@ -169,7 +169,18 @@ async function sample(req, env, person) {
 }
 
 export async function handle(req, env) {
+  const res = await route(req, env);
+  // Private site: never indexed, never cached by shared caches.
+  const out = new Response(res.body, res);
+  out.headers.set("x-robots-tag", "noindex, nofollow, noarchive");
+  out.headers.set("referrer-policy", "no-referrer");
+  if (!out.headers.has("cache-control")) out.headers.set("cache-control", "private, no-store");
+  return out;
+}
+
+async function route(req, env) {
   {
+    if (new URL(req.url).pathname === "/robots.txt") return new Response("User-agent: *\nDisallow: /\n", { headers: { "content-type": "text/plain" } });
     await ensureReady(env);
     const url = new URL(req.url);
     const p = url.pathname;
