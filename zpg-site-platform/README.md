@@ -11,7 +11,7 @@ Every push to the connected branch deploys automatically. `functions/_middleware
 
 One-time setup in the Cloudflare dashboard:
 1. Storage & Databases > D1 > Create database `nitto-watermain`.
-2. Workers & Pages > Create > Pages > Connect to Git > `luedersjason/claude`; production branch `claude/gallant-allen-1vreeq`; root directory `zpg-site-platform`; build command empty; build output directory `public`. Save and deploy.
+2. Workers & Pages > Create > Pages > Connect to Git > `luedersjason/claude`; production branch `claude/gallant-allen-1vreeq`; root directory `zpg-site-platform`; build command `npm install` (Functions need @anthropic-ai/sdk); build output directory `public`. Save and deploy.
 3. Project > Settings > Runtime: compatibility date 2026-10-01, flag `nodejs_compat`.
 4. Project > Settings > Bindings > Add > D1: variable `DB`, database `nitto-watermain`.
 5. Project > Settings > Variables and Secrets > Add secret `SETUP_KEY` = a phrase you pick (keep it private). Then Deployments > Retry deployment so the settings apply.
