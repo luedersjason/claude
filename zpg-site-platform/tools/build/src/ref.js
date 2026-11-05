@@ -988,7 +988,7 @@ OPEN ITEMS: ${JSON.stringify(slim)}`;}
   async function revise(v,card){const ci=card.querySelector('[data-f=c]'),c=ci?ci.value.trim():'';
     if(!c){$('vNote').textContent='Type a comment first, then press Enter.';return;}
     let sample=null;try{sample=window.claude?await window.claude.use('sample'):null;}catch(e){}
-    if(!sample){$('vNote').textContent='Revising is not available in this view.';return;}
+    if(!sample){try{await upd(v._id,{lastComment:c,commentPending:true,commentAt:Date.now()});ci.value='';$('vNote').textContent='Comment saved. Claude will revise this request the next time it processes new emails.';}catch(err){$('vNote').textContent='That comment did not save. You may have view-only access.';}return;}
     const sb=card.querySelector('.vsend');sb.disabled=true;ci.disabled=true;$('vNote').textContent='Revising…';
     try{const r=await sample.json(buildPrompt(v,c),{modelTier:'default',cache:false});
       const clean=x=>String(x??'').slice(0,300);

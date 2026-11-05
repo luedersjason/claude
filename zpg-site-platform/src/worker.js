@@ -123,7 +123,7 @@ export default {
     const person = await currentPerson(req, env);
     if (p.startsWith("/api/")) {
       if (!person) return json({ error: "signed_out" }, 401);
-      if (p === "/api/me") return json({ id: person.id, name: person.name, company: person.company, role: person.role });
+      if (p === "/api/me") return json({ id: person.id, name: person.name, company: person.company, role: person.role, ai: !!env.ANTHROPIC_API_KEY });
       if (p === "/api/profiles") {
         const ids = (url.searchParams.get("ids") || "").split(",").filter(Boolean).slice(0, 200);
         if (!ids.length) return json({});

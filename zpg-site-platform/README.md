@@ -11,7 +11,7 @@ A Jaquet-style ZPG project site that runs on Jason's Cloudflare instead of a Cla
 2. `npx wrangler d1 create nitto-watermain`, paste the `database_id` into `wrangler.toml`.
 3. `npx wrangler d1 execute nitto-watermain --remote --file=schema.sql`
 4. `npx wrangler d1 execute nitto-watermain --remote --file=seed/seed.sql`
-5. `npx wrangler secret put ANTHROPIC_API_KEY` (typed at the prompt; never in chat or git).
+5. (Optional, not used for Nitto) `npx wrangler secret put ANTHROPIC_API_KEY` turns on live Claude revising in validation requests. Without it, comments are saved and Claude revises them when it next processes emails.
 6. `npx wrangler deploy`
 7. Add people and invite links: `node tools/invite.mjs` (prints the SQL and each person's link).
 

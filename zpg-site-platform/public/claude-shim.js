@@ -88,5 +88,5 @@
   sample.limits = async () => ({ images: false });
 
   const caps = { db: { collection }, user, downloads, sample, permissions: { state: async () => ({}), request: async () => ({}), manage: async () => {} } };
-  window.claude = { use: async (name) => (name in caps ? caps[name] : null) };
+  window.claude = { use: async (name) => { if (name === 'sample') { const m = await me(); if (!m || !m.ai) return null; } return name in caps ? caps[name] : null; } };
 })();
