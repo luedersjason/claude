@@ -1,371 +1,730 @@
 {
-"v": 1,
-"note": "Project-wide site: tracker areas regrouped; site & operational plan items added.",
+"v": 2,
+"note": "Playbook alignment: disciplines by who does the work; site & ops items moved to validation requests.",
+"delete": {
+"issues": [
+"N-41",
+"N-42",
+"N-43",
+"N-44",
+"N-45",
+"N-46",
+"N-47",
+"N-48",
+"N-49",
+"N-50",
+"N-51",
+"N-52",
+"N-53",
+"N-54",
+"N-55",
+"N-56"
+],
+"doclog": [
+"d12",
+"d13",
+"d14",
+"d15"
+]
+},
 "merge": {
 "issues": {
 "N-01": {
-"area": "Public water main"
-},
-"N-07": {
-"area": "Public water main"
-},
-"N-08": {
-"area": "Public water main"
-},
-"N-09": {
-"area": "Public water main"
-},
-"N-10": {
-"area": "Public water main"
-},
-"N-11": {
-"area": "Public water main"
-},
-"N-12": {
-"area": "Public water main"
-},
-"N-13": {
-"area": "Public water main"
-},
-"N-14": {
-"area": "Public water main"
-},
-"N-15": {
-"area": "Public water main"
-},
-"N-16": {
-"area": "Public water main"
-},
-"N-17": {
-"area": "Public water main"
-},
-"N-18": {
-"area": "Public water main"
-},
-"N-19": {
-"area": "Public water main"
-},
-"N-20": {
-"area": "Public water main"
-},
-"N-21": {
-"area": "Public water main"
-},
-"N-22": {
-"area": "Public water main"
-},
-"N-23": {
-"area": "Public water main"
-},
-"N-24": {
-"area": "Public water main"
-},
-"N-25": {
-"area": "Public water main"
-},
-"N-26": {
-"area": "Public water main"
-},
-"N-27": {
-"area": "Public water main"
-},
-"N-38": {
-"area": "Public water main"
-},
-"N-39": {
-"area": "Public water main"
-},
-"N-40": {
-"area": "Public water main"
+"area": "Approvals"
 },
 "N-02": {
-"area": "Village approvals & agreements"
-},
-"N-28": {
-"area": "Village approvals & agreements"
-},
-"N-29": {
-"area": "Village approvals & agreements"
-},
-"N-30": {
-"area": "Village approvals & agreements"
-},
-"N-31": {
-"area": "Village approvals & agreements"
-},
-"N-32": {
-"area": "Village approvals & agreements"
+"area": "Approvals"
 },
 "N-03": {
-"area": "Wetlands, floodplain & stormwater"
+"area": "Approvals"
 },
 "N-04": {
-"area": "Wetlands, floodplain & stormwater"
+"area": "Approvals"
 },
 "N-05": {
-"area": "Wetlands, floodplain & stormwater"
+"area": "Approvals"
 },
 "N-06": {
-"area": "Wetlands, floodplain & stormwater"
+"area": "Approvals",
+"ball": "Lorin Kinney (Army Corps)"
+},
+"N-07": {
+"area": "Approvals"
+},
+"N-08": {
+"area": "Approvals"
+},
+"N-09": {
+"area": "Design"
+},
+"N-10": {
+"area": "Approvals"
+},
+"N-11": {
+"area": "Approvals"
+},
+"N-12": {
+"area": "Design",
+"ball": "Andy Shoaf (Pinnacle)"
+},
+"N-13": {
+"area": "Design",
+"now": "Pinnacle prepared WDNR Forms 3300-260 and 3300-066 for 1,088 LF of 16-inch PVC; the copy on file is unsigned and undated, and no WDNR approval is on file.",
+"ball": "Andy Shoaf (Pinnacle)",
+"confirmed": "11/5",
+"source": "WDNR Forms 3300-260 and 3300-066 (Pinnacle)",
+"updated": "11/5",
+"next": "11/4: Imported from the watermain portal (step list).\n11/5: Pinnacle prepared WDNR Forms 3300-260 and 3300-066 for 1,088 LF of 16-inch PVC; the copy on file is unsigned and undated, and no WDNR approval is on file."
+},
+"N-14": {
+"area": "Approvals"
+},
+"N-15": {
+"area": "General Contractor"
+},
+"N-16": {
+"area": "Design",
+"ball": "Andy Shoaf (Pinnacle)"
+},
+"N-17": {
+"area": "ZPG"
+},
+"N-18": {
+"area": "ZPG",
+"ball": "Lisa Kleinke (ZPG)"
+},
+"N-19": {
+"area": "Design"
+},
+"N-20": {
+"area": "General Contractor"
+},
+"N-21": {
+"area": "ZPG"
+},
+"N-22": {
+"area": "ZPG"
+},
+"N-23": {
+"area": "Design",
+"ball": "Andy Shoaf (Pinnacle)"
+},
+"N-24": {
+"area": "Approvals"
+},
+"N-25": {
+"area": "Approvals"
+},
+"N-26": {
+"area": "ZPG"
+},
+"N-27": {
+"area": "Approvals"
+},
+"N-28": {
+"area": "Design"
+},
+"N-29": {
+"area": "Design"
+},
+"N-30": {
+"area": "ZPG"
+},
+"N-31": {
+"area": "ZPG"
+},
+"N-32": {
+"area": "ZPG"
 },
 "N-33": {
-"area": "Permits & preconstruction"
+"area": "Design"
 },
 "N-34": {
-"area": "Permits & preconstruction"
+"area": "Design",
+"now": "WDNR construction stormwater coverage (FIN 103538) has been in place since 2/25/26; the Village erosion control permit application is not on file.",
+"confirmed": "11/5",
+"source": "WDNR coverage letter, 2/25/26",
+"updated": "11/5",
+"next": "11/4: Imported from the watermain portal (step list).\n11/5: WDNR construction stormwater coverage (FIN 103538) has been in place since 2/25/26; the Village erosion control permit application is not on file."
 },
 "N-35": {
-"area": "Permits & preconstruction"
+"area": "General Contractor"
 },
 "N-36": {
-"area": "Permits & preconstruction"
+"area": "Approvals"
 },
 "N-37": {
-"area": "Permits & preconstruction"
+"area": "General Contractor"
+},
+"N-38": {
+"area": "General Contractor"
+},
+"N-39": {
+"area": "Approvals"
+},
+"N-40": {
+"area": "ZPG"
 }
 }
 },
-"insert": {
-"issues": {
-"N-41": {
-"ref": "N-41",
-"title": "Plan Commission approval of site & operational plans",
-"owner": "Village",
-"area": "Village approvals & agreements",
-"status": "Done",
-"now": "Approved 8/17/26 with 21 conditions; letter dated 8/25/26.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 41,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26",
-"confirmed": "8/17"
+"put": {
+"validations": {
+"v-n-fmt": {
+"state": "pending",
+"kind": "check",
+"doc": "Playbook format check, 11/5",
+"at": 1793908800000,
+"detail": "The 40 tracker items were imported from the watermain portal on 11/4 with noun titles, company-only owners and no predecessors. The playbook asks for outcome titles, owners as Name (Company), and predecessors so nobody holds an item they cannot act on yet. This request rewrites the 30 open items that way. Owners are from the project directory; the WDNR reviewer and the contractor are not known yet.",
+"evidence": "Playbook sections 4 and 6; DA approval letter conditions 6 to 12; site & operational plan approval letter condition 1.",
+"refs": [
+{
+"label": "DA approval letter",
+"kind": "sheet",
+"ids": [
+"AL-1",
+"AL-2",
+"AL-3",
+"AL-4",
+"AL-5"
+]
 },
-"N-42": {
-"ref": "N-42",
-"title": "Revised site & operational plan PDF to Village for final staff review",
-"owner": "Pinnacle",
-"area": "Village approvals & agreements",
-"status": "Open",
-"now": "S&O condition 3 (Village Engineering comments 8/11/26). Status not on file here.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 42,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"label": "Site & ops approval letter p.2",
+"kind": "sheet",
+"ids": [
+"SO-2"
+]
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Rewrite titles and owners on the 30 open items and set predecessors from the DA and site & ops conditions. Statuses do not change.",
+"items": [],
+"itemUpdates": [
+{
+"ref": "N-06",
+"title": "Get the final Army Corps Section 404 permit MVP-2017-01912-LRK",
+"owner": "Lorin Kinney (Army Corps)",
+"blockedBy": []
 },
-"N-43": {
-"ref": "N-43",
-"title": "Written approval from the LakeView Owners Association",
-"owner": "ZPG",
-"area": "Village approvals & agreements",
-"status": "Open",
-"now": "S&O condition 5a; required before the Village schedules the preconstruction meeting. Status not on file here.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 43,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-12",
+"title": "Send the Village the CAD file of the proposed main for GIS",
+"owner": "Andy Shoaf (Pinnacle)",
+"blockedBy": []
 },
-"N-44": {
-"ref": "N-44",
-"title": "WDNR construction stormwater permit coverage (NOI), FIN 103538",
-"owner": "ZPG",
-"area": "Wetlands, floodplain & stormwater",
-"status": "Done",
-"now": "General permit WI-S067831-06; coverage 2/25/26 to 2/25/2029. Feeds the erosion control permit (S&O 5e).",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 44,
-"updated": "11/5",
-"blockedBy": [],
-"source": "WDNR coverage letter, 2/25/26",
-"confirmed": "2/25"
+{
+"ref": "N-13",
+"title": "File the WDNR water main extension submittal",
+"owner": "Andy Shoaf (Pinnacle)",
+"blockedBy": []
 },
-"N-45": {
-"ref": "N-45",
-"title": "Floodplain Development Permit application",
-"owner": "Pinnacle",
-"area": "Wetlands, floodplain & stormwater",
-"status": "Open",
-"now": "S&O condition 5f, with the Village erosion control permit. Boundary adjustment: fill about 256 CY, create about 1,347 CY (Resolution 20-08; CLOMR 20-05-3166R).",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 45,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-14",
+"title": "Get WDNR approval of the water main extension",
+"owner": "WDNR (reviewer to confirm)",
+"blockedBy": [
+"N-13"
+]
 },
-"N-46": {
-"ref": "N-46",
-"title": "Floodplain as-built, LOMR from FEMA, CAD and PDF of amended floodplain",
-"owner": "Pinnacle",
-"area": "Wetlands, floodplain & stormwater",
-"status": "Open",
-"now": "After the floodplain work; required before the certificate of occupancy (S&O condition 13b).",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 46,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-15",
+"title": "Confirm whether any work needs a WisDOT permit in the STH 31 right-of-way",
+"owner": "Contractor (to be selected)",
+"blockedBy": [
+"N-21"
+]
 },
-"N-47": {
-"ref": "N-47",
-"title": "Village commercial driveway permit application",
-"owner": "Pinnacle / Contractor",
-"area": "Permits & preconstruction",
-"status": "Open",
-"now": "S&O condition 5h; before the preconstruction meeting is scheduled. Two driveways on 108th Street.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 47,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-16",
+"title": "Close the 11/4 project manual items before bidding",
+"owner": "Andy Shoaf (Pinnacle)",
+"blockedBy": []
 },
-"N-48": {
-"ref": "N-48",
-"title": "New commercial building permit application and issuance",
-"owner": "ZPG / Architect",
-"area": "Permits & preconstruction",
-"status": "Open",
-"now": "S&O conditions 2 and 5i: the building permit must be submitted and issued before the approval lapses, 6 months from 8/17/26. Impact fees (Ch. 379) are paid at issuance (condition 12).",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 48,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-17",
+"title": "Get attorney review of the project manual",
+"owner": "Jason Lueders (ZPG)",
+"blockedBy": [
+"N-16"
+]
 },
-"N-49": {
-"ref": "N-49",
-"title": "Commercial mechanical, electrical, HVAC permit applications",
-"owner": "Contractors",
-"area": "Permits & preconstruction",
-"status": "Open",
-"now": "S&O condition 5j, as applicable.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 49,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-18",
+"title": "Compare the project manual with the Zilber owner-direct contract",
+"owner": "Lisa Kleinke (ZPG) \u00b7 Jason Lueders (ZPG)",
+"blockedBy": []
 },
-"N-50": {
-"ref": "N-50",
-"title": "Contractor parking and trailer locations approved with the erosion control permit",
-"owner": "Contractor",
-"area": "Permits & preconstruction",
-"status": "Open",
-"now": "S&O condition 11; no trailers or construction vehicles parked on public streets. Work hours M-F 6am-9pm, Sat-Sun 6am-6pm (condition 10).",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 50,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-19",
+"title": "Issue the water main for bid",
+"owner": "Andy Shoaf (Pinnacle)",
+"blockedBy": [
+"N-16",
+"N-17",
+"N-18"
+]
 },
-"N-51": {
-"ref": "N-51",
-"title": "Landscaping installed; installer verification letter (or 110% landscaping security if weather delays)",
-"owner": "Landscaper",
-"area": "Building & closeout",
-"status": "Open",
-"now": "S&O condition 13c; before the certificate of occupancy.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 51,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-20",
+"title": "Receive and level the water main bids",
+"owner": "Andy Shoaf (Pinnacle) \u00b7 Jason Lueders (ZPG)",
+"blockedBy": [
+"N-19"
+]
 },
-"N-52": {
-"ref": "N-52",
-"title": "Man-door numbering (3-inch numbers, clockwise from the front door as 1)",
-"owner": "Contractor",
-"area": "Building & closeout",
-"status": "Open",
-"now": "S&O condition 13d; before the certificate of occupancy.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 52,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-21",
+"title": "Select the water main contractor",
+"owner": "Jason Lueders (ZPG)",
+"blockedBy": [
+"N-20"
+]
 },
-"N-53": {
-"ref": "N-53",
-"title": "As-built survey stamped by a Wisconsin land surveyor",
-"owner": "Surveyor",
-"area": "Building & closeout",
-"status": "Open",
-"now": "S&O condition 13e; before the certificate of occupancy.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 53,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-22",
+"title": "Send the Village the draft contract, bid documents and COI",
+"owner": "Jason Lueders (ZPG)",
+"blockedBy": [
+"N-21"
+]
 },
-"N-54": {
-"ref": "N-54",
-"title": "As-built record drawings of private sewer, water, storm and irrigation (electronic for GIS + stamped paper)",
-"owner": "Pinnacle",
-"area": "Building & closeout",
-"status": "Open",
-"now": "S&O condition 13f; before the certificate of occupancy.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 54,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-23",
+"title": "Send the construction management cost estimate",
+"owner": "Andy Shoaf (Pinnacle)",
+"blockedBy": []
 },
-"N-55": {
-"ref": "N-55",
-"title": "Exterior building and site improvements completed and inspected",
-"owner": "Contractor",
-"area": "Building & closeout",
-"status": "Open",
-"now": "S&O condition 13a; before the certificate of occupancy.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 55,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-24",
+"title": "Get Village approval of the water main contract",
+"owner": "Kurt Davidsen (Village)",
+"blockedBy": [
+"N-22"
+]
 },
-"N-56": {
-"ref": "N-56",
-"title": "Monument sign installed before a tenant occupies",
-"owner": "ZPG",
-"area": "Building & closeout",
-"status": "Open",
-"now": "S&O conditions 8 and the Site and Operational Plan section; a tenant also needs its own S&O approval before occupying.",
-"next": "11/5: Added from the site & operational plan approval letter.",
-"order": 56,
-"updated": "11/5",
-"blockedBy": [],
-"source": "Site & operational plan approval letter, 8/25/26"
+{
+"ref": "N-25",
+"title": "Get the itemized cost breakdown for DA Exhibit D1",
+"owner": "Kurt Davidsen (Village)",
+"blockedBy": [
+"N-23",
+"N-24"
+]
+},
+{
+"ref": "N-26",
+"title": "Prepare the financial security instrument at 120%",
+"owner": "Jason Lueders (ZPG)",
+"blockedBy": [
+"N-25"
+]
+},
+{
+"ref": "N-27",
+"title": "Update DA Exhibit D to the 11/3 bid set",
+"owner": "Kurt Davidsen (Village)",
+"blockedBy": []
+},
+{
+"ref": "N-28",
+"title": "Submit the revised CSM for staff review",
+"owner": "Andy Shoaf (Pinnacle)",
+"blockedBy": []
+},
+{
+"ref": "N-29",
+"title": "Finalize the Stormwater Maintenance Agreement with Exhibit B",
+"owner": "Andy Shoaf (Pinnacle) \u00b7 Jason Lueders (ZPG)",
+"blockedBy": []
+},
+{
+"ref": "N-30",
+"title": "Pay taxes and special assessments due before closing",
+"owner": "Jason Lueders (ZPG)",
+"blockedBy": []
+},
+{
+"ref": "N-31",
+"title": "Close: execute the DA with Tax Agreements, Memorandum of DA and SWMA; deliver security",
+"owner": "Jason Lueders (ZPG) \u00b7 Kurt Davidsen (Village)",
+"blockedBy": [
+"N-26",
+"N-27",
+"N-29",
+"N-30"
+]
+},
+{
+"ref": "N-32",
+"title": "Record the Memorandum of DA, Tax Agreements, CSM and SWMA",
+"owner": "Jason Lueders (ZPG)",
+"blockedBy": [
+"N-31"
+]
+},
+{
+"ref": "N-33",
+"title": "Prepare the preconstruction agenda, site logistics plan and construction schedule",
+"owner": "Andy Shoaf (Pinnacle)",
+"blockedBy": []
+},
+{
+"ref": "N-34",
+"title": "Apply for the Village erosion control permit with the WDNR NOI",
+"owner": "Andy Shoaf (Pinnacle)",
+"blockedBy": []
+},
+{
+"ref": "N-35",
+"title": "Apply for the Village right-of-way permit",
+"owner": "Contractor (to be selected)",
+"blockedBy": [
+"N-21"
+]
+},
+{
+"ref": "N-36",
+"title": "Hold the preconstruction meeting",
+"owner": "Kurt Davidsen (Village)",
+"blockedBy": [
+"N-32",
+"N-33",
+"N-34",
+"N-35"
+]
+},
+{
+"ref": "N-37",
+"title": "Pay permit fees and pick up permits",
+"owner": "Contractor (to be selected)",
+"blockedBy": [
+"N-36"
+]
+},
+{
+"ref": "N-38",
+"title": "Install the water main",
+"owner": "Contractor (to be selected)",
+"blockedBy": [
+"N-37"
+]
+},
+{
+"ref": "N-39",
+"title": "Test, inspect and conditionally accept the water main",
+"owner": "Kurt Davidsen (Village)",
+"blockedBy": [
+"N-38"
+]
+},
+{
+"ref": "N-40",
+"title": "Reduce and release the financial security",
+"owner": "Jason Lueders (ZPG)",
+"blockedBy": [
+"N-39"
+]
+}
+]
+}
+},
+"v-n-so5": {
+"state": "pending",
+"doc": "Site & operational plan approval letter, 8/25/26",
+"at": 1793908800000,
+"detail": "The Plan Commission approved the site and operational plans on 8/17/26. Condition 5 lists what must be submitted before the Village schedules the preconstruction meeting. The tracker already covers the recorded CSM and SWMA (N-32), the wetland permits (N-03 to N-06), WisDOT (N-15), erosion control with the NOI (N-34) and the right-of-way permit (N-35). Four are not in the tracker: the revised site & ops PDF (condition 3), LakeView Owners Association approval (5a), the Floodplain Development Permit application (5f) and the commercial driveway permit application (5h). I do not know whether any of these is already done.",
+"evidence": "Site & operational plan approval letter, 8/25/26",
+"refs": [
+{
+"label": "Site & ops letter p.2",
+"kind": "sheet",
+"ids": [
+"SO-2"
+]
+},
+{
+"label": "Site & ops letter p.3",
+"kind": "sheet",
+"ids": [
+"SO-3"
+]
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Add four items for the condition 3 and 5 submittals not yet tracked. The preconstruction meeting (N-36) should then wait on them too.",
+"items": [
+{
+"title": "Send the Village the revised site & operational plan PDF for final staff review",
+"owner": "Andy Shoaf (Pinnacle)",
+"area": "Design",
+"blockedBy": []
+},
+{
+"title": "Get written approval from the LakeView Owners Association",
+"owner": "Jason Lueders (ZPG)",
+"area": "ZPG",
+"blockedBy": []
+},
+{
+"title": "Apply for the Village Floodplain Development Permit",
+"owner": "Andy Shoaf (Pinnacle)",
+"area": "Design",
+"blockedBy": []
+},
+{
+"title": "Apply for the Village commercial driveway permit for the two 108th Street driveways",
+"owner": "Andy Shoaf (Pinnacle)",
+"area": "Design",
+"blockedBy": []
+}
+],
+"itemUpdates": []
+}
+},
+"v-n-bp": {
+"state": "pending",
+"doc": "Site & operational plan approval letter, 8/25/26",
+"at": 1793908800000,
+"detail": "Condition 2: the approval is valid for 6 months, and the commercial building permit must be submitted and issued before it expires, which by count is 2/17/27. Condition 5i and 5j list the building permit and the mechanical, electrical and HVAC permit applications; condition 12 requires impact fees when the building permit is issued; condition 11 has the Village approve contractor parking and trailer locations with the erosion control permit. The WDNR coverage letter (2/25/26) also requires the certificate of permit coverage to be posted on site.",
+"evidence": "Site & operational plan approval letter, 8/25/26",
+"refs": [
+{
+"label": "Site & ops letter p.2",
+"kind": "sheet",
+"ids": [
+"SO-2"
+]
+},
+{
+"label": "Site & ops letter p.3-4",
+"kind": "sheet",
+"ids": [
+"SO-3",
+"SO-4"
+]
+},
+{
+"label": "WDNR coverage letter",
+"kind": "sheet",
+"ids": [
+"NOI-1",
+"NOI-3"
+]
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Add the building permit with its 2/17/27 deadline and the related permit steps. The building permit waits on the preconstruction meeting (N-36), because no permits issue before the DA closing and recording.",
+"items": [
+{
+"title": "Get the commercial building permit issued before the site & ops approval lapses (2/17/27)",
+"owner": "Jason Lueders (ZPG)",
+"area": "ZPG",
+"blockedBy": [
+"N-36"
+]
+},
+{
+"title": "Apply for the mechanical, electrical and HVAC permits",
+"owner": "Contractor (to be selected)",
+"area": "General Contractor",
+"blockedBy": [
+"N-36"
+]
+},
+{
+"title": "Get Village approval of contractor parking and trailer locations",
+"owner": "Contractor (to be selected)",
+"area": "General Contractor",
+"blockedBy": [
+"N-34"
+]
+},
+{
+"title": "Post the WDNR certificate of permit coverage on site",
+"owner": "Contractor (to be selected)",
+"area": "General Contractor",
+"blockedBy": []
+}
+],
+"itemUpdates": []
+}
+},
+"v-n-flood": {
+"state": "pending",
+"doc": "Site & operational plan approval letter, 8/25/26",
+"at": 1793908800000,
+"detail": "The site has a floodplain boundary adjustment (Resolution 20-08): fill about 256 CY and create about 1,347 CY. FEMA issued CLOMR 20-05-3166R on 12/22/2020. After the work, the as-built drawing with calculations goes to the Village, then FEMA issues a Letter of Map Revision. Condition 13b makes the LOMR and a CAD and PDF of the amended floodplain a requirement for the certificate of occupancy.",
+"evidence": "Site & operational plan approval letter, 8/25/26",
+"refs": [
+{
+"label": "Site & ops letter p.2",
+"kind": "sheet",
+"ids": [
+"SO-2"
+]
+},
+{
+"label": "Site & ops letter p.4",
+"kind": "sheet",
+"ids": [
+"SO-4"
+]
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Add one item for the floodplain as-built and LOMR, after the floodplain permit.",
+"items": [
+{
+"title": "Get the FEMA Letter of Map Revision from the floodplain as-built, with CAD and PDF to the Village",
+"owner": "Andy Shoaf (Pinnacle)",
+"area": "Design",
+"blockedBy": []
+}
+],
+"itemUpdates": []
+}
+},
+"v-n-co": {
+"state": "pending",
+"doc": "Site & operational plan approval letter, 8/25/26",
+"at": 1793908800000,
+"detail": "Condition 13 lists what the Village needs before the certificate of occupancy: exterior and site work inspected (13a), the LOMR (13b, separate request), landscaping installed with the installer verification letter or a 110% landscaping guarantee in cold weather (13c), man-door numbering (13d), a stamped as-built survey (13e) and as-built record drawings of private sewer, water, storm and irrigation for GIS (13f). A monument sign is required before a tenant occupies.",
+"evidence": "Site & operational plan approval letter, 8/25/26",
+"refs": [
+{
+"label": "Site & ops letter p.4",
+"kind": "sheet",
+"ids": [
+"SO-4"
+]
+},
+{
+"label": "Site & ops letter p.5",
+"kind": "sheet",
+"ids": [
+"SO-5"
+]
+}
+],
+"proposal": {
+"invalid": false,
+"summary": "Add the certificate of occupancy items. They are far off; they can also wait until the building contract is let.",
+"items": [
+{
+"title": "Complete the exterior building and site work and pass Village inspection",
+"owner": "Contractor (to be selected)",
+"area": "General Contractor",
+"blockedBy": []
+},
+{
+"title": "Install the landscaping and send the installer verification letter",
+"owner": "Contractor (to be selected)",
+"area": "General Contractor",
+"blockedBy": []
+},
+{
+"title": "Number the man doors clockwise from the front door",
+"owner": "Contractor (to be selected)",
+"area": "General Contractor",
+"blockedBy": []
+},
+{
+"title": "Send the Village a stamped as-built survey",
+"owner": "Surveyor (to confirm)",
+"area": "Design",
+"blockedBy": []
+},
+{
+"title": "Send the Village as-built record drawings of private sewer, water, storm and irrigation",
+"owner": "Andy Shoaf (Pinnacle)",
+"area": "Design",
+"blockedBy": []
+},
+{
+"title": "Install a monument sign before a tenant occupies",
+"owner": "Jason Lueders (ZPG)",
+"area": "ZPG",
+"blockedBy": []
+}
+],
+"itemUpdates": []
+}
+}
+},
+"sweeps": {
+"s20261105": {
+"date": "2026-11-05",
+"at": 1793908800000,
+"checked": 30,
+"changed": 7,
+"statusChanges": [],
+"requests": [
+"v-n-fmt",
+"v-n-so5",
+"v-n-bp",
+"v-n-flood",
+"v-n-co"
+],
+"sources": [
+"Site & operational plan approval letter 8/25/26",
+"WDNR coverage letter 2/25/26",
+"WDNR Forms 3300-260 and 3300-066",
+"Site lighting layout 3/18/26"
+],
+"missing": [
+"Draft preconstruction agenda the site & ops letter says is attached",
+"The 8/11/26 Village Engineering comments on the site & ops plans (the 8/11 comments on file are on the water main plans)",
+"Cover email and filing date for the WDNR water main forms; WDNR approval",
+"Final Army Corps 404 permit"
+],
+"stale": [],
+"note": "Run by Claude without the independent sweep agent. Changed: area regrouping is format only; Now lines on N-13 and N-34; Ball on N-06, N-12, N-13, N-16, N-18, N-23."
 }
 },
 "doclog": {
 "d12": {
 "date": "8/25/26",
 "doc": "Site & operational plan approval letter",
-"change": "Plan Commission approval 8/17/26, 21 conditions; building permit within 6 months; preconstruction submittals 5a-j.",
+"change": "Plan Commission approval 8/17/26 with 21 conditions; building permit within 6 months; condition 5 preconstruction submittals. Added to Building & site.",
 "from": "Rob Hanson, Village",
 "at": 1787652000000
 },
 "d13": {
 "date": "2/25/26",
 "doc": "WDNR construction stormwater permit coverage, FIN 103538",
-"change": "Coverage under WI-S067831-06 from 2/25/26 for up to 3 years.",
-"from": "WDNR",
+"change": "Coverage under WI-S067831-06 from 2/25/26 for up to 3 years; weekly inspections; certificate posted on site. Added to Approvals & permits.",
+"from": "Peter Wood, WDNR",
 "at": 1772042400000
 },
 "d14": {
-"date": "10/2/26",
-"doc": "Site lighting photometrics",
-"change": "Site calcs: site avg 0.54 fc; parking avg 1.58 fc; truck area avg 1.91 fc.",
-"from": "Lighting designer (not named on the sheet)",
-"at": 1791000000000
+"date": "3/18/26",
+"doc": "Site lighting layout and photometrics",
+"change": "Sheet dated 3/18/26, file named 10/2/26; site average 0.54 fc. Added to Building & site.",
+"from": "Lighting designer (initials AD; firm not named)",
+"at": 1773835200000
 },
 "d15": {
-"date": "11/5/26",
-"doc": "WDNR water main submittal (Forms 3300-260, 3300-066)",
-"change": "Pinnacle submittal for 1,088 LF of 16-inch PVC; WDNR approval not on file.",
+"date": "undated",
+"doc": "WDNR Forms 3300-260 and 3300-066 (water main submittal)",
+"change": "1,088 LF of 16-inch PVC and 10 LF of 6-inch hydrant stubs; unsigned copy. Added to Approvals & permits.",
 "from": "Andy Shoaf, Pinnacle",
-"at": 1793901600000
+"at": 1793908800000
+}
+},
+"feed": {
+"e20261105-1": {
+"text": "Village site & operational plan approval letter (8/25/26) logged: building permit due within 6 months of 8/17/26.",
+"at": 1793908800000,
+"by": ""
+},
+"e20261105-2": {
+"text": "WDNR stormwater permit coverage (FIN 103538, from 2/25/26) and the water main submittal forms logged.",
+"at": 1793908800001,
+"by": ""
 }
 }
 }

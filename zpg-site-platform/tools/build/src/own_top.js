@@ -77,9 +77,9 @@ let CUR='master';
 // Documents: cards are views over files. Item = [title, PDF path, version/date, viewer sheet ids, status lines?]
 const SR=(p,n)=>Array.from({length:n},(_,i)=>p+'-'+(i+1));
 const dcards=[
- {t:'Building & site',img:'img/docs/cover-plan.jpg',d:'Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting photometrics.',
+ {t:'Building & site',img:'img/docs/site-plan.jpg',d:'Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting layout.',
   it:[['Site & operational plan approval letter','docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('SO',5),['Building permit must issue within 6 months of 8/17/26','DA executed, security posted, CSM and SWMA recorded before any permits']],
-   ['Site lighting photometrics','docs/NZ-Site-Lighting-Calcs-10.2.26.pdf','10/2/26',['LT-1']]]},
+   ['Site lighting layout and photometrics','docs/NZ-Site-Lighting-Calcs-10.2.26.pdf','Sheet dated 3/18/26 · file 10/2/26',['LT-1']]]},
  {t:'Village / DA',img:'img/docs/village-da.jpg',d:'Village approval letter, Development Agreement draft, CSM language, stormwater agreement draft and the Village Engineer comments.',
   it:[['DA conditional approval letter','docs/NW-Village-DA-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('AL',5)],
    ['Development Agreement (draft) with exhibits','docs/NW-Development-Agreement-DRAFT.pdf','08/2026 draft · pp.1-18 and Exhibits D, D1, D2',SR('DA',18).concat(['DA-D','DA-D1','DA-D2']),['Exhibits D1 (cost breakdown) and D2 (security) are blank','Full 57-page PDF: Open full PDF']],

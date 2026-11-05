@@ -78,9 +78,9 @@ let CUR='master';
 // Documents: cards are views over files. Item = [title, PDF path, version/date, viewer sheet ids, status lines?]
 const SR=(p,n)=>Array.from({length:n},(_,i)=>p+'-'+(i+1));
 const dcards=[
- {t:'Building & site',img:'img/docs/cover-plan.jpg',d:'Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting photometrics.',
+ {t:'Building & site',img:'img/docs/site-plan.jpg',d:'Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting layout.',
   it:[['Site & operational plan approval letter','docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('SO',5),['Building permit must issue within 6 months of 8/17/26','DA executed, security posted, CSM and SWMA recorded before any permits']],
-   ['Site lighting photometrics','docs/NZ-Site-Lighting-Calcs-10.2.26.pdf','10/2/26',['LT-1']]]},
+   ['Site lighting layout and photometrics','docs/NZ-Site-Lighting-Calcs-10.2.26.pdf','Sheet dated 3/18/26 · file 10/2/26',['LT-1']]]},
  {t:'Village / DA',img:'img/docs/village-da.jpg',d:'Village approval letter, Development Agreement draft, CSM language, stormwater agreement draft and the Village Engineer comments.',
   it:[['DA conditional approval letter','docs/NW-Village-DA-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('AL',5)],
    ['Development Agreement (draft) with exhibits','docs/NW-Development-Agreement-DRAFT.pdf','08/2026 draft · pp.1-18 and Exhibits D, D1, D2',SR('DA',18).concat(['DA-D','DA-D1','DA-D2']),['Exhibits D1 (cost breakdown) and D2 (security) are blank','Full 57-page PDF: Open full PDF']],
@@ -200,7 +200,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const NEXT={Open:'In progress',Pending:'In progress','In progress':'Done',Done:'Open'};
   let rows=[], canWrite=true, tkGrp='area', tkOnly=null, detailId=null; const tkOpen=new Set(), doneOpen=new Set();
-  const DNAME={'Village approvals & agreements':'Village approvals & agreements','Public water main':'Public water main','Wetlands, floodplain & stormwater':'Wetlands, floodplain & stormwater','Permits & preconstruction':'Permits & preconstruction','Building & closeout':'Building & closeout'};
+  const DNAME={'Design':'Drawings and Design','Approvals':'Village, WDNR, Corps & KWU','General Contractor':'General Contractor','ZPG':'Developer (ZPG)'};
   const syncSw=()=>document.querySelectorAll('#tkGrpSw button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.tg===tkGrp)));
   window.jqOpenItem=id=>{detailId=id;render();if(window.jqTab)window.jqTab('tracker',true);};
   window.jqOpenGroup=(kind,key,withDone)=>{detailId=null;tkGrp=kind;tkOnly=key;syncSw();tkOpen.add(kind+':'+key);if(withDone)doneOpen.add(kind+':'+key);showSel.value=showSel.value==='Done'?'active':showSel.value;render();if(window.jqTab)window.jqTab('tracker',true);};
@@ -415,7 +415,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 
   // search
   const q=document.getElementById('q'), res=document.getElementById('qres');
-  const label={home:'Home',watermain:'Nitto Watermain',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team'};
+  const label={home:'Home',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team',meetings:'Meetings',photos:'Photos',watermain:'Nitto Watermain'};
   q.addEventListener('input',()=>{
     const s=q.value.trim().toLowerCase(); if(s.length<2){res.innerHTML='';return;}
     const els=[...document.querySelectorAll('.panel tbody tr, .panel li, .panel .pcard, .panel .ri, .panel .step, .panel section > header h2, .panel .g-row, .panel .act')];
@@ -426,7 +426,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   });
 
   // left-bar issue tracker grouped by discipline
-  const DISC=[['Village approvals & agreements','Village approvals & agreements'],['Public water main','Public water main'],['Wetlands, floodplain & stormwater','Wetlands, floodplain & stormwater'],['Permits & preconstruction','Permits & preconstruction'],['Building & closeout','Building & closeout']];
+  const DISC=[['Design','Drawings and Design'],['Approvals','Village, WDNR, Corps & KWU'],['General Contractor','General Contractor'],['ZPG','Developer (ZPG)']];
   const discEl=document.getElementById('disc'); const openSet=new Set();
   let grp='area';
   function renderOwner(rows){
@@ -453,19 +453,25 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const pre=e.target.closest('.pre');if(pre){window.jqGoRef(pre.dataset.pre);return;}
     const b=e.target.closest('button[data-ref]');if(!b)return;goTo(b.dataset.ref);});
   // feed + forum (shared database)
-  const feedEl=document.getElementById('feed');
+  const feedEl=document.getElementById('feed'), postsEl=document.getElementById('posts'), form=document.getElementById('postForm');
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const md=ms=>{const d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate();};
   const norm=snap=>Array.from((snap&&(snap.docs||snap))||[]).map(d=>{const v=typeof d.data==='function'?d.data():(d.data||d);return {...v,_id:d.id||v.id};});
   (async()=>{
     const db=window.claude?await window.claude.use('db'):null;
-    if(!db){document.getElementById('feedForm').hidden=true;feedEl.innerHTML='<li class="note">Sign in to see the feed.</li>';return;}
+    if(!db){document.getElementById('feedForm').hidden=true;feedEl.innerHTML='<li class="note">Sign in to see the feed.</li>';postsEl.innerHTML='<p class="note">Sign in to see the forum.</p>';form.hidden=true;return;}
     const user=await window.claude.use('user');
     const me=user&&user.id?await user.id().catch(()=>null):null;
     window.jqFeed=async text=>{try{await db.collection('feed').doc('e'+Date.now()).set({text,at:Date.now(),by:me||''});}catch(e){}};
     document.getElementById('feedForm').addEventListener('submit',async ev=>{ev.preventDefault();const i=document.getElementById('feedText');const v=i.value.trim();if(!v)return;await window.jqFeed(v);i.value='';});
     db.collection('feed').onSnapshot(s=>{const rows=norm(s).sort((a,b)=>b.at-a.at).slice(0,30);
       feedEl.innerHTML=rows.length?rows.map(r=>`<li><time>${md(r.at)}</time><span>${esc(r.text)}</span></li>`).join(''):'<li class="note">Nothing yet.</li>';},()=>{});
+    db.collection('posts').onSnapshot(async s=>{const rows=norm(s).sort((a,b)=>b.at-a.at).slice(0,20);
+      let names={}; try{const ids=[...new Set(rows.map(r=>r.by).filter(Boolean))]; if(ids.length&&user&&user.profiles) names=await user.profiles(ids);}catch(e){}
+      postsEl.innerHTML=rows.length?rows.map(r=>`<div class="post"><b>${esc((names[r.by]&&names[r.by].name)||'Someone')}</b><time>${md(r.at)}</time><p>${esc(r.text)}</p></div>`).join(''):'<p class="note">No posts yet. Start the conversation.</p>';},()=>{});
+    form.addEventListener('submit',async e=>{e.preventDefault();const ta=document.getElementById('postText');const text=ta.value.trim();if(!text)return;
+      try{await db.collection('posts').doc('p'+Date.now()).set({text,at:Date.now(),by:me||''});ta.value='';}
+      catch(err){const t=document.getElementById('toast');t.textContent='That post did not save. You may have view-only access.';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}});
   })();
 })();
 
@@ -485,6 +491,16 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true;});
 })();
 
+(function drawings(){
+  const SHEETS=window.NW_SHEETS.filter(s=>/^PL-/.test(s.id)).map(s=>({id:s.lab.split(' ')[0],t:s.lab.split(' ').slice(1).join(' '),img:s.img,sid:s.id}));
+  const tabs=document.getElementById('dwTabs'),view=document.getElementById('dwView'),img=document.getElementById('dwImg'),ttl=document.getElementById('dwTitle');
+  tabs.innerHTML=SHEETS.map((s,i)=>`<button class="dw-tab" role="tab" data-i="${i}" aria-selected="false">${s.id}<small>${s.t}</small></button>`).join('');
+  function show(i){const s=SHEETS[i];img.src=s.img;img.alt=s.id+' '+s.t;ttl.textContent=s.id+' · '+s.t;view.dataset.sid=s.sid;
+    tabs.querySelectorAll('.dw-tab').forEach((b,k)=>b.setAttribute('aria-selected',String(k===i)));try{sessionStorage.setItem('jqSheet',i)}catch(e){}}
+  tabs.addEventListener('click',e=>{const b=e.target.closest('.dw-tab');if(b)show(+b.dataset.i);});
+  view.addEventListener('click',()=>{if(window.jqOpenSheets)window.jqOpenSheets(SHEETS.map(s=>s.sid),view.dataset.sid);});
+  let n=0;try{n=+sessionStorage.getItem('jqSheet')||0}catch(e){} show(Math.min(n,SHEETS.length-1));
+})();
 (function drawingViewer(){
   let W=2016,H=1344,PW=2592,PH=1728,K=PW/W;
   const SHEETS=window.NW_SHEETS.map(x=>Object.assign({},x));
@@ -807,13 +823,13 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const ci=document.querySelector('#vList [data-f=c]');if(ci&&oid===v._id&&document.activeElement===old){ci.focus();}}
   const upd=(id,d)=>db.collection('validations').doc(id).update(d);
   async function applyProposal(v){const p=v.proposal;if(!p)return [];const rows=window.jqIssues||[];let n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0);const made=[];
-    for(const it of (p.items||[])){if(!it.title)continue;n++;const ref='N-'+String(n).padStart(2,'0');await db.collection('issues').doc(ref).set({ref,title:it.title,owner:it.owner||'Unassigned',area:it.area||'Public water main',status:'Open',next:it.next||'',order:n,updated:today(),blockedBy:it.blockedBy||[]});made.push(ref);}
+    for(const it of (p.items||[])){if(!it.title)continue;n++;const ref='N-'+String(n).padStart(2,'0');await db.collection('issues').doc(ref).set({ref,title:it.title,owner:it.owner||'Unassigned',area:it.area||'Design',status:'Open',next:it.next||'',order:n,updated:today(),blockedBy:it.blockedBy||[]});made.push(ref);}
     for(const u of (p.itemUpdates||[])){if(!u.ref)continue;const P={};['next','title','owner','status','now','ball','due'].forEach(k=>{if(u[k]!=null&&u[k]!=='')P[k]=String(u[k]);});if(Array.isArray(u.blockedBy))P.blockedBy=u.blockedBy;if(P.status&&!['Open','Pending','In progress','Done'].includes(P.status))delete P.status;if(Object.keys(P).length){P.updated=today();await db.collection('issues').doc(u.ref).update(P);}}
     return made;}
   function buildPrompt(v,c){const rows=(window.jqIssues||[]),is=rows.find(r=>r.ref===v.ref)||{};
     const slim=rows.filter(r=>r.status!=='Done').map(r=>({ref:r.ref,title:cut(r.title,100),owner:r.owner,area:r.area,blockedBy:r.blockedBy||[]}));
     return `You help Jason Lueders (Director of Construction, Zilber Property Group) keep the tracker for project L152 (Zilber Industrial 3, Nitto parcel, LakeView Corporate Park, Pleasant Prairie: building, site, approvals and the public water main) correct. A validation card shows something that happened, what the tracker will do next, and Jason's comment. Revise the proposed outcome so it follows Jason's comment exactly. Return JSON only, no other text: {"invalid":false,"summary":"1 to 3 plain sentences: what happens to the item and what happens next","items":[{"title":"","owner":"","area":"","blockedBy":["N-00"]}],"itemUpdates":[{"ref":"N-00","next":"note text","now":"optional one-sentence current state","status":"optional Open|Pending|In progress|Done","ball":"optional who moves next","title":"optional new title","owner":"optional new owner"}]}. Use empty arrays when nothing is added. Omit optional fields you are not changing.
-Rules: owner is the person who does the action (never put ZPG's action under another party). Use blockedBy with existing refs when a step cannot start until another finishes, so nobody gets an item they cannot act on yet. One item per hand-off; do not duplicate an existing open item (update it instead). Areas allowed (use the exact text): Village approvals & agreements, Public water main, Wetlands, floodplain & stormwater, Permits & preconstruction, Building & closeout. Do not invent steps Jason did not ask for. If his comment adds an interim step or a follow-up (for example an email to send), add it as an item. If Jason says the request itself is wrong, does not apply, or the premise is mistaken, set "invalid":true, make the summary say plainly that nothing changes in the tracker and why in his words, and return empty arrays. Plain wording, short.
+Rules: owner is the person who does the action (never put ZPG's action under another party). Use blockedBy with existing refs when a step cannot start until another finishes, so nobody gets an item they cannot act on yet. One item per hand-off; do not duplicate an existing open item (update it instead). Areas allowed (use the exact key): Design (Drawings and Design, Pinnacle), Approvals (only what the Village, WDNR, Army Corps or KWU itself decides), General Contractor (bidding, cost, construction), ZPG (what ZPG itself must do). Do not invent steps Jason did not ask for. If his comment adds an interim step or a follow-up (for example an email to send), add it as an item. If Jason says the request itself is wrong, does not apply, or the premise is mistaken, set "invalid":true, make the summary say plainly that nothing changes in the tracker and why in his words, and return empty arrays. Plain wording, short.
 ITEM: ${JSON.stringify({ref:v.ref,title:is.title,owner:is.owner,area:is.area,status:is.status,next:cut(is.next,400),blockedBy:is.blockedBy||[]})}
 WHAT HAPPENED (${v.doc}): ${v.detail||v.evidence}
 CURRENT PROPOSAL: ${v.proposal&&v.proposal.summary?JSON.stringify(v.proposal):(v.ref?'Close the item and unblock anything waiting on it.':'Add this follow-up to the tracker: '+(v.nextTitle||''))}
@@ -852,7 +868,7 @@ OPEN ITEMS: ${JSON.stringify(slim)}`;}
       if(a==='add'){let made=[];
         if(v.proposal&&((v.proposal.items||[]).length||(v.proposal.itemUpdates||[]).length))made=await applyProposal(v);
         else if(v.nextTitle){const rows=window.jqIssues||[],n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0)+1,ref='N-'+String(n).padStart(2,'0');
-          await db.collection('issues').doc(ref).set({ref,title:v.nextTitle,owner:v.nextOwner||'Unassigned',area:v.nextArea||'Public water main',status:'Open',next:'',order:n,updated:today()});made=[ref];}
+          await db.collection('issues').doc(ref).set({ref,title:v.nextTitle,owner:v.nextOwner||'Unassigned',area:v.nextArea||'Design',status:'Open',next:'',order:n,updated:today()});made=[ref];}
         await upd(v._id,{nextDone:true,nextAdded:made.join(','),state:'resolved',at:Date.now()});return;}
       if(a==='skip'){await upd(v._id,{nextDone:true,nextAdded:'',state:'resolved',at:Date.now()});return;}
       if(a==='close'){const ci=card.querySelector('[data-f=c]'),c=ci?ci.value.trim():'';await upd(v._id,{state:'resolved',at:Date.now(),dismissed:true,comment:c||v.lastComment||''});return;}
@@ -861,4 +877,57 @@ OPEN ITEMS: ${JSON.stringify(slim)}`;}
   (async()=>{try{db=window.claude?await window.claude.use('db'):null;}catch(e){}if(!db)return;
     db.collection('validations').onSnapshot(s=>{list=Array.from((s&&(s.docs||s))||[]).map(d=>{const v=typeof d.data==='function'?d.data():(d.data||d);return {...v,_id:d.id};}).filter(v=>v.state==='pending').sort((x,y)=>(x.at||0)-(y.at||0));paint();},()=>{});})();
   paint();
+})();
+
+(function meetings(){
+  const $=id=>document.getElementById(id);const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let list=[],db=null,openId=null;
+  const ul=a=>'<ul>'+(a||[]).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
+  function draw(){
+    const L=$('mtList'),D=$('mtDetail');
+    if(openId){const m=list.find(x=>x._id===openId);if(m){L.hidden=true;D.hidden=false;
+      D.innerHTML=`<button type="button" class="btn mt-back" id="mtBack">← All meetings</button> <button type="button" class="btn go mt-back" id="mtCopy">Copy for email</button><textarea id="mtCopyTxt" hidden style="width:100%;height:220px;font:13px/1.4 monospace;margin:8px 0"></textarea><div class="eyebrow">${esc(m.kind||'Meeting')} · ${esc(m.dateLabel||m.date)}</div><h2>${esc(m.title)}</h2><p class="sum">${esc(m.summary)}</p><div class="mt-meta"><b>Who:</b> ${esc(m.attendees)}</div>${m.note?`<div class="mt-note">${esc(m.note)}</div>`:''}`+
+      `<h3>Executive summary</h3><p style="max-width:80ch;font-size:14px;line-height:1.55">${esc(m.exec)}</p><h3>${esc(m.progressLabel||'Progress and decisions')}</h3>${ul(m.progress)}<h3>${esc(m.objectivesLabel||'Current objectives to keep the critical path')}</h3>${ul(m.objectives)}`+
+      `<h3>Details by discipline</h3><div class="mt-grid">${(m.disciplines||[]).map(d=>`<div class="mt-box"><h4>${esc(d.n)}</h4>${ul(d.items)}</div>`).join('')}</div>`+
+      `<h3>Assignments and follow-ups</h3><div class="mt-grid">${(m.assignments||[]).map(d=>`<div class="mt-box"><h4>${esc(d.who)}</h4>${ul(d.items)}</div>`).join('')}</div>`+
+      `<div class="mt-tr"><b>Full transcript</b><br>${m.transcript?`<a href="${esc(m.transcript)}" target="_blank" rel="noopener">Open the full transcript</a>`:`<span class="note">Not attached yet. Paste a link:</span> <input id="mtTrIn" placeholder="https://…"> <button type="button" class="btn" id="mtTrSave">Save</button>`}</div>`;
+      return;}openId=null;}
+    D.hidden=true;L.hidden=false;
+    L.innerHTML=list.length?list.map(m=>`<button type="button" class="mt-card" data-id="${esc(m._id)}"><div class="d">${esc(m.dateLabel||m.date)} · ${esc(m.kind||'Meeting')}</div><h3>${esc(m.title)}</h3><p>${esc(m.summary)}</p></button>`).join(''):'<p class="note">No meeting notes yet.</p>';
+  }
+
+  const H=x=>esc(x);
+  function emailText(m){const L=a=>(a||[]).map(x=>(/^\d+\./.test(x)?'':'- ')+x).join('\n');
+    return [m.title+' ('+(m.dateLabel||m.date)+')','','Attendees: '+(m.attendees||''),m.note?'\n'+m.note:'','','EXECUTIVE SUMMARY',m.exec||'','',(m.progressLabel||'Progress and decisions').toUpperCase(),L(m.progress),'',(m.objectivesLabel||'Current objectives').toUpperCase(),L(m.objectives),'','DETAILS BY DISCIPLINE',...(m.disciplines||[]).map(d=>d.n+'\n'+L(d.items)+'\n'),'ASSIGNMENTS',...(m.assignments||[]).map(a=>a.who+'\n'+L(a.items)+'\n')].join('\n');}
+  function emailHtml(m){
+    const ul=a=>'<ul style="margin:6px 0 0;padding-left:22px">'+(a||[]).map(x=>'<li style="margin:3px 0">'+H(x)+'</li>').join('')+'</ul>';
+    const h3=t=>'<h3 style="margin:22px 0 6px;padding-bottom:4px;border-bottom:1px solid #D5DDE5;font-size:16px;color:#1E3448;font-family:Arial,Helvetica,sans-serif">'+H(t)+'</h3>';
+    const box=(t,a)=>'<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border:1px solid #D5DDE5;margin:0 0 10px"><tr><td style="padding:8px 12px;font-family:Arial,Helvetica,sans-serif;font-size:14px"><b style="color:#1E3448">'+H(t)+'</b>'+ul(a)+'</td></tr></table>';
+    return '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#1b2733;max-width:760px;background:#ffffff">'+
+      '<div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6B7C8C">'+H(m.kind||'Meeting')+' &middot; '+H(m.dateLabel||m.date)+'</div>'+
+      '<h2 style="margin:4px 0 6px;font-size:22px;color:#1E3448;font-family:Arial,Helvetica,sans-serif">'+H(m.title)+'</h2>'+
+      '<p style="margin:0 0 8px;color:#4a5b6b">'+H(m.summary)+'</p>'+
+      '<p style="margin:8px 0"><b>Who:</b> '+H(m.attendees)+'</p>'+
+      (m.note?'<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:8px 0"><tr><td style="background:#FFF7E6;border:1px solid #F3D9A4;padding:8px 10px;font-size:13px;font-family:Arial,Helvetica,sans-serif">'+H(m.note)+'</td></tr></table>':'')+
+      h3('Executive summary')+'<p style="margin:6px 0">'+H(m.exec)+'</p>'+
+      h3(m.progressLabel||'Progress and decisions')+ul(m.progress)+
+      h3(m.objectivesLabel||'Current objectives to keep the critical path')+ul(m.objectives)+
+      h3('Details by discipline')+(m.disciplines||[]).map(d=>box(d.n,d.items)).join('')+
+      h3('Assignments and follow-ups')+(m.assignments||[]).map(d=>box(d.who,d.items)).join('')+'</div>';}
+  async function copyRich(html,text){
+    try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([text],{type:'text/plain'})})]);return true;}}catch(e){}
+    try{const d=document.createElement('div');d.contentEditable='true';d.style.cssText='position:fixed;left:-9999px;top:0;background:#fff';d.innerHTML=html;document.body.appendChild(d);const r=document.createRange();r.selectNodeContents(d);const sl=getSelection();sl.removeAllRanges();sl.addRange(r);const ok=document.execCommand('copy');sl.removeAllRanges();d.remove();return ok;}catch(e){return false;}
+  }
+  document.addEventListener('click',async e=>{
+    const c=e.target.closest('.mt-card');if(c){openId=c.dataset.id;draw();window.scrollTo(0,0);return;}
+    if(e.target.closest('#mtBack')){openId=null;draw();return;}
+    if(e.target.closest('#mtCopy')){const m=list.find(x=>x._id===openId);if(!m)return;const btn=e.target.closest('#mtCopy');
+      const ok=await copyRich(emailHtml(m),emailText(m));
+      if(ok){btn.textContent='Copied. Paste into your email';setTimeout(()=>{btn.textContent='Copy for email'},2600);}
+      else{const ta=$('mtCopyTxt');ta.value=emailText(m);ta.hidden=false;ta.select();btn.textContent='Press Ctrl+C';}
+      return;}
+    if(e.target.closest('#mtTrSave')&&db){const v=$('mtTrIn').value.trim();if(!/^https?:\/\//.test(v))return;try{await db.collection('meetings').doc(openId).update({transcript:v});}catch(err){}}
+  });
+  (async()=>{try{db=window.claude?await window.claude.use('db'):null;}catch(e){}if(!db){$('mtList').innerHTML='<p class="note">Sign in to claude.ai to see meeting notes.</p>';return;}
+    db.collection('meetings').onSnapshot(s=>{list=Array.from((s&&(s.docs||s))||[]).map(d=>{const v=typeof d.data==='function'?d.data():(d.data||d);return {...v,_id:d.id};}).sort((a,b)=>(b.sortAt||0)-(a.sortAt||0));draw();},()=>{$('mtList').innerHTML='<p class="note">Meeting notes could not load. Reload to try again.</p>';});})();
 })();

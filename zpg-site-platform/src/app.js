@@ -58,8 +58,8 @@ function ensureReady(env) {
   return ready;
 }
 
-// Applies public/migrate.json once per version to a live database: "merge" patches fields on existing docs,
-// "insert" adds docs that are not there yet. Never touches decisions the team has recorded unless a migration names them.
+// Applies public/migrate.json once per version to a live database: "delete" removes docs, "put" writes docs whole,
+// "insert" adds docs that are not there yet, "merge" patches fields on existing docs. Touches only the docs it names.
 async function migrate(env) {
   const r = await env.ASSETS.fetch(new Request("https://assets.local/migrate.json"));
   if (!r.ok) return;
@@ -67,6 +67,11 @@ async function migrate(env) {
   const cur = await env.DB.prepare("SELECT data FROM docs WHERE col = '_meta' AND id = 'migrate'").first();
   if (cur && (JSON.parse(cur.data).v || 0) >= m.v) return;
   const now = Date.now(), stmts = [];
+  for (const [col, ids] of Object.entries(m.delete || {}))
+    for (const id of ids) stmts.push(env.DB.prepare("DELETE FROM docs WHERE col = ? AND id = ?").bind(col, id));
+  for (const [col, docs] of Object.entries(m.put || {}))
+    for (const [id, data] of Object.entries(docs))
+      stmts.push(env.DB.prepare("INSERT OR REPLACE INTO docs (col, id, data, ver, updated_at, updated_by) VALUES (?, ?, ?, 1, ?, 'migrate')").bind(col, id, JSON.stringify(data), now));
   for (const [col, docs] of Object.entries(m.insert || {}))
     for (const [id, data] of Object.entries(docs))
       stmts.push(env.DB.prepare("INSERT OR IGNORE INTO docs (col, id, data, ver, updated_at, updated_by) VALUES (?, ?, ?, 1, ?, 'migrate')").bind(col, id, JSON.stringify(data), now));

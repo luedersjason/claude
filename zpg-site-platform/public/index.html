@@ -270,6 +270,15 @@ table.tk tr.done td.t{text-decoration:line-through}
 .cover p{margin:0;opacity:.85;max-width:52ch}
 .cover .chip{border-color:rgba(255,255,255,.35);background:rgba(255,255,255,.1);color:#fff}
 .cover .chip.now{background:var(--accent);border-color:var(--accent)}
+.cover-zoom{position:absolute;top:14px;right:14px;width:auto;border:1px solid rgba(255,255,255,.5);background:rgba(14,28,42,.55);color:#fff;font:inherit;font-size:12px;padding:6px 12px;border-radius:999px;cursor:zoom-in}
+.bp-card{position:relative;display:block;padding:0;border:0;border-radius:10px;overflow:hidden;background:#142C42;cursor:zoom-in;min-width:0}
+.bp-card img{display:block;width:100%;height:380px;object-fit:contain;transition:transform .4s ease}
+.bp-card:hover img{transform:scale(1.04)}
+.bp-card::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);background-size:24px 24px;pointer-events:none}
+.bp-tag{position:absolute;top:14px;left:14px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;color:#142C42;background:#9FE3BE;padding:3px 8px;border-radius:3px;font-weight:600}
+.bp-meta{position:absolute;top:16px;right:14px;font-family:var(--mono);font-size:11px;color:#C9DCEA}
+.bp-stats{position:absolute;left:14px;bottom:12px;display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:#C9DCEA}
+.bp-stats b{font-family:var(--display);font-size:18px;color:#fff;margin-right:3px}
 .rail{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;position:relative;background:linear-gradient(180deg,#F4F7FA,#E9EEF3);border:1px solid #C9D3DC;border-radius:10px;padding:22px 18px 18px;box-shadow:0 1px 0 #fff inset,0 6px 18px rgba(20,44,66,.08)}
 .rail::before{content:"";position:absolute;top:38px;left:34px;right:34px;height:3px;background:linear-gradient(90deg,var(--accent) 0 12%,#B9C6D2 12% 100%);border-radius:2px}
 .rstep{position:relative;display:grid;gap:3px;padding:0 14px;align-content:start}
@@ -282,6 +291,17 @@ table.tk tr.done td.t{text-decoration:line-through}
 .rstep b{font-family:var(--display);font-size:17px;line-height:1.2}
 .rstep small{font-size:12.5px;color:var(--muted)}
 @media (max-width:760px){.bp{grid-template-columns:1fr}.rail{grid-template-columns:1fr 1fr;gap:16px}.rail::before{display:none}}
+.dw{display:grid;gap:10px}
+.dw-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.dw-tabs{display:flex;gap:6px;flex-wrap:wrap}
+.dw-tab{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--bg);color:var(--fg);border-radius:6px;padding:7px 12px;cursor:pointer;display:grid;gap:0;text-align:left}
+.dw-tab small{font-weight:400;font-size:11px;color:var(--muted)}
+.dw-tab[aria-selected="true"]{background:var(--steel);border-color:var(--steel);color:#fff}
+.dw-tab[aria-selected="true"] small{color:#C9DCEA}
+.dw-view{position:relative;background:#fff;border:1px solid #C9D3DC;border-radius:10px;padding:0;overflow:hidden;cursor:zoom-in;display:block;width:100%}
+.dw-view img{display:block;width:100%;height:auto;max-height:560px;object-fit:contain;background:#fff}
+.dw-open{position:absolute;right:12px;top:10px;font-size:12px;background:rgba(20,44,66,.85);color:#fff;padding:4px 10px;border-radius:999px}
+.dw-title{position:absolute;left:12px;bottom:10px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;background:rgba(20,44,66,.85);color:#fff;padding:3px 9px;border-radius:3px}
 .dv{position:fixed;inset:0;z-index:90;background:#F4F6F8;display:grid;grid-template-rows:auto minmax(0,1fr);padding-top:env(safe-area-inset-top,0px)}
 .dv[hidden]{display:none}
 .dv-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:8px 12px;background:var(--steel);color:#fff}
@@ -349,6 +369,10 @@ table.tk tr.done td.t{text-decoration:line-through}
 .disc li.done button,.disc li.done button i,.disc li.done button span{color:#9AA7B4;font-weight:400}table.tk tr.done td{color:#9AA7B4}table.tk tr.done .pri-b{display:none}.disc li.done .pri-b{display:none}
 .disc li button.pri-b{width:auto;display:block;flex:none;grid-template-columns:none;padding:0 4px;margin-top:5px;font-size:14px;color:#B8C3CE}.disc li button.pri-b.on{color:#d97706}.disc li button.pri-b:hover{background:none;color:#d97706}
 table.tk tr.grp{cursor:pointer;background:#F3F6F9}table.tk tr.grp td{padding:10px 12px;font-size:14px;border-top:1px solid #D5DDE5}table.tk tr.grp .car{color:#6B7C8C;display:inline-block;width:14px}table.tk tr.grp .gc{float:right;font-family:var(--mono);font-size:12px;color:#6B7C8C}table.tk tr.grp .gc b{color:#d97706}table.tk tr.grp:hover{background:#E9EEF3}
+.mt-list{display:grid;gap:10px}.mt-card{display:block;width:100%;text-align:left;font:inherit;background:#fff;border:1px solid #D5DDE5;border-radius:10px;padding:14px 16px;cursor:pointer;box-shadow:0 1px 2px rgba(30,52,72,.06)}.mt-card:hover{border-color:#00A94F;box-shadow:0 2px 8px rgba(30,52,72,.12)}.mt-card .d{font-family:var(--mono);font-size:11.5px;color:#6B7C8C;letter-spacing:.04em;text-transform:uppercase}.mt-card h3{margin:2px 0 4px;font-size:17px;font-weight:700;color:#1E3448}.mt-card p{margin:0;font-size:13.5px;color:#4a5b6b;line-height:1.45}
+.mt-detail h2{font-size:24px;margin:4px 0 6px}.mt-back{margin-bottom:10px}.mt-detail .sum{font-size:15px;color:#4a5b6b;max-width:80ch}.mt-meta{font-size:13px;color:#4a5b6b;margin:10px 0}.mt-note{font-size:12.5px;background:#FFF7E6;border:1px solid #F3D9A4;border-radius:8px;padding:8px 10px;margin:10px 0;max-width:80ch}
+.mt-detail h3{font-size:15px;margin:20px 0 6px;color:#1E3448;border-bottom:1px solid #D5DDE5;padding-bottom:4px}.mt-detail ul{margin:6px 0 0;padding-left:20px;font-size:14px;line-height:1.5}.mt-detail li{margin:2px 0}
+.mt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}.mt-box{border:1px solid #D5DDE5;border-radius:8px;padding:10px 12px;background:#fff}.mt-box h4{margin:0 0 4px;font-size:14px;color:#1E3448}.mt-tr{margin-top:18px;padding:10px 12px;border:1px dashed #9FB0C0;border-radius:8px;font-size:13px}.mt-tr input{font:inherit;font-size:13px;padding:5px 7px;border:1px solid #C5CFD9;border-radius:6px;width:min(420px,70%)}
 .wait{display:inline-block;font-size:11.5px;font-weight:600;color:#9A5B00;background:#FFF3DC;border:1px solid #F3D9A4;border-radius:999px;padding:1px 8px;margin-right:4px}table.tk tr.blocked td.t{opacity:.8}.pre{font-style:normal;font-size:11px;font-weight:600;color:#9A5B00;text-decoration:underline;cursor:pointer;display:block}.wait a.pre{display:inline;font-size:inherit}
 .tk-only{margin:0 0 10px;font-size:14px}.tk-only .btn{margin-left:8px;padding:2px 10px;font-size:12px}.tk-detail{padding-bottom:30px}.tk-detail h3{font-size:15px;margin:20px 0 6px;color:#1E3448;border-bottom:1px solid #D5DDE5;padding-bottom:4px}.tk-detail ul{margin:6px 0 0;padding-left:20px;font-size:14px;line-height:1.55}
 .tk-facts{display:flex;flex-wrap:wrap;gap:10px 28px;font-size:14px}.tk-facts>div{display:grid;gap:3px}.tk-facts span{font:11px var(--mono);letter-spacing:.05em;text-transform:uppercase;color:#6B7C8C}
@@ -453,11 +477,14 @@ body{margin:0}
   <div class="ptitle">L152 <span>Zilber Industrial 3 · LakeView Corporate Park · Pleasant Prairie</span></div>
   <nav class="tabs" aria-label="Project sections">
     <button class="tab" data-tab="home" type="button">Home</button>
-    <button class="tab" data-tab="watermain" type="button">Nitto Watermain</button>
+    
     <button class="tab" data-tab="tracker" type="button">Tracker</button>
     <button class="tab" data-tab="documents" type="button">Documents</button>
     <button class="tab" data-tab="schedule" type="button">Schedule</button>
     <button class="tab" data-tab="team" type="button">Team</button>
+    <button class="tab" data-tab="meetings" type="button">Meetings</button>
+    <button class="tab" data-tab="photos" type="button">Photos</button>
+    <button class="tab" data-tab="watermain" type="button">Nitto Watermain</button>
   </nav>
 </div></div>
 
@@ -475,67 +502,40 @@ body{margin:0}
   </div>
 </aside>
 <main id="main">
-
 <div class="panel" data-panel="home">
-<section class="cover" style="background-image:linear-gradient(90deg,rgba(14,28,42,.94) 0%,rgba(14,28,42,.82) 48%,rgba(14,28,42,.35) 100%),url('img/docs/cover-plan.jpg')">
+<section class="cover" style="background-image:linear-gradient(90deg,rgba(14,28,42,.92) 0%,rgba(14,28,42,.70) 42%,rgba(14,28,42,.05) 75%),url('img/docs/site-plan.jpg')">
   <div class="cover-in">
-    <span class="cover-eye">LakeView Corporate Park · SW corner of STH 31 and 108th Street · Pleasant Prairie, WI</span>
-    <div class="cover-big"><b>152,334 sf</b><span>speculative industrial building<br>Tax parcel 92-4-122-272-0502</span></div>
-    <p>TI Investors of Lakeview Nitto Parcel LLC is building a 152,334 sf speculative industrial building: 91 parking spaces (4 ADA), 15 trailer stalls, 2 drive-in doors and 16 docks on the south side. Access is two driveways on 108th Street; none on STH 31. The Plan Commission approved the site and operational plans on 8/17/26 with 21 conditions.</p>
-    <div class="status"><span class="chip now"><span class="dot"></span>Step 2 of 8: bid the public water main</span><span class="chip">Site &amp; operational plans approved 8/17/26</span><span class="chip">Building permit must issue before the approval lapses (6 months)</span></div>
-    <button type="button" class="cover-btn" data-sheets="SO-1,SO-2,SO-3,SO-4,SO-5">Open the site &amp; operational approval letter ⤢</button>
+    <span class="cover-eye">LakeView Corporate Park · STH 31 and 108th Street · Pleasant Prairie, WI</span>
+    <div class="cover-big"><b>152,334</b><span>SF speculative industrial<br>Zilber Industrial 3 · Nitto parcel</span></div>
+    <p>ZPG develops for TI Investors of Lakeview Nitto Parcel LLC; Pinnacle is civil engineer. The Nitto Watermain must be bid and secured before the Village issues any permits.</p>
+    <div class="status" id="status"><span class="chip now"><span class="dot"></span>Site &amp; Ops approved 8/17/26</span><span class="chip">Building permit by 2/17/27</span></div>
   </div>
+  <button type="button" class="vimg cover-zoom" data-full="sheets/LT-1.jpg" data-cap="Site lighting layout · Zilber Lakeview 3 · sheet dated 3/18/26">View site plan ⤢</button>
 </section>
-<section aria-label="Where we are">
-  <header><span class="eyebrow">Where we are · 8 steps to occupancy</span><h2>Path to occupancy</h2>
-  <p class="lede">From the Village site &amp; operational plan approval letter (8/25/26) and the DA approval letter: the DA must be executed and the water main security provided, and the CSM and stormwater agreement recorded, before the Village issues any permits for the project.</p></header>
-  <ol class="prail"><li class="pstep done"><i>&#10003;</i><div><span class="eyebrow">Done</span><b>Village approvals: site &amp; operational plans, DA, CSM, public improvement plans</b><small>8/17 and 8/24</small></div></li><li class="pstep now"><i>2</i><div><span class="eyebrow">Now</span><b>Bid the public water main; contract approved by the Village</b><small>Project manual items with Pinnacle</small></div></li><li class="pstep next"><i>3</i><div><span class="eyebrow">Next</span><b>DA executed and water main security posted; CSM and SWMA recorded</b><small>Required before any permits</small></div></li><li class="pstep "><i>4</i><div><span class="eyebrow">Step 4</span><b>Preconstruction submittals (S&amp;O condition 5a-h)</b></div></li><li class="pstep "><i>5</i><div><span class="eyebrow">Step 5</span><b>Village holds the preconstruction meeting</b></div></li><li class="pstep "><i>6</i><div><span class="eyebrow">Step 6</span><b>Permits issued and fees paid; building permit before the S&amp;O approval lapses</b></div></li><li class="pstep "><i>7</i><div><span class="eyebrow">Step 7</span><b>Build; water main accepted by 11/15/27</b></div></li><li class="pstep key"><i>8</i><div><span class="eyebrow">Step 8</span><b>Certificate of occupancy (S&amp;O condition 13)</b></div></li></ol>
+<section id="visuals" class="dw">
+  <div class="dw-bar">
+    <div><span class="bp-tag" style="position:static">DRAWINGS</span> <span class="note" id="dwSet">Nitto Watermain bid set · Pinnacle 11/3/26 · building plan set not on file here</span></div>
+    <div class="row"><a class="btn" id="dwPdf" href="docs/NW-Public-Watermain-Plans-BidSet-11.3.26.pdf" target="_blank" rel="noopener">Open PDF ↗</a></div>
+  </div>
+  <div class="dw-tabs" id="dwTabs" role="tablist"></div>
+  <button type="button" class="dw-view" id="dwView"><img id="dwImg" alt=""><span class="dw-title" id="dwTitle"></span><span class="dw-open">Click to open full screen · markup tools ⤢</span></button>
 </section>
-<section class="two" aria-label="Do next and waiting on">
-  <div class="box"><span class="eyebrow">Do next</span><div class="act"><span class="eyebrow">ZPG + Pinnacle</span><b>Settle the 11/4 project manual items with Pinnacle, then bid the water main</b></div><div class="act"><span class="eyebrow">ZPG · status not on file here</span><b>Written approval from the LakeView Owners Association (S&amp;O 5a)</b></div><div class="act"><span class="eyebrow">Pinnacle · status not on file here</span><b>Revised site &amp; operational plan PDF to the Village for final staff review (S&amp;O 3)</b></div><div class="act"><span class="eyebrow">Pinnacle · status not on file here</span><b>Floodplain Development Permit application (S&amp;O 5f)</b></div><button type="button" class="btn" data-tabgo="watermain" style="justify-self:start;margin-top:4px">Open the Nitto Watermain →</button></div>
-  <div class="box"><span class="eyebrow">Waiting on</span><div class="act"><span class="eyebrow">Pinnacle</span><b>Answers to the 8 project manual items</b><em>Sent 11/4</em></div><div class="act"><span class="eyebrow">Lisa Kleinke</span><b>Sample owner-direct plan-and-spec contract</b><em>Requested</em></div><div class="act"><span class="eyebrow">Army Corps</span><b>Final Section 404 permit MVP-2017-01912-LRK</b><em>Not on file here</em></div><div class="act"><span class="eyebrow">WDNR</span><b>Water main plan approval (Forms 3300-260 and 3300-066 submitted)</b><em>Approval not on file here</em></div></div>
+<section class="rail" aria-label="Where the project stands">
+  <div class="rstep now"><i></i><span class="eyebrow">Now</span><b>Bid the Nitto Watermain</b><small>Project manual items with Pinnacle, sent 11/4</small></div>
+  <div class="rstep"><i></i><span class="eyebrow">Next · date not set</span><b>Close and record</b><small>DA executed, security posted, CSM and SWMA recorded; required before any permits</small></div>
+  <div class="rstep"><i></i><span class="eyebrow">Gate · by 2/17/27</span><b>Building permit issued</b><small>The site &amp; ops approval lapses 6 months after 8/17/26</small></div>
+  <div class="rstep key"><i></i><span class="eyebrow">Target · 1/1/28</span><b>Phase A substantial completion</b><small>DA approval letter, p.1</small></div>
 </section>
-<section class="box" aria-label="Workstreams"><span class="eyebrow">Workstreams</span><div class="ws-grid"><button type="button" class="ws-card" data-tabgo="tracker"><b>Village approvals &amp; agreements</b><span>S&amp;O approval, DA, CSM, stormwater agreement, closing and recording.</span></button><button type="button" class="ws-card" data-tabgo="tracker"><b>Public water main</b><span>1,100 ft of 16-inch main along STH 31: bid, contract, financial security, construction, acceptance.</span></button><button type="button" class="ws-card" data-tabgo="tracker"><b>Wetlands, floodplain &amp; stormwater</b><span>WDNR and Corps fill permits, floodplain boundary adjustment and LOMR, construction stormwater permit.</span></button><button type="button" class="ws-card" data-tabgo="tracker"><b>Permits &amp; preconstruction</b><span>Erosion control, right-of-way, driveway, building and trade permits; the preconstruction meeting.</span></button><button type="button" class="ws-card" data-tabgo="tracker"><b>Building &amp; closeout</b><span>Building construction and what the Village needs before the certificate of occupancy.</span></button></div></section>
+
 <div class="prof" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image viewer"><div class="prof-card lb"><button class="btn prof-x" type="button" id="lbX">Close</button><img id="lbImg" alt="" style="width:100%;height:auto"><p class="note" id="lbCap"></p></div></div>
-</div>
 
-<div class="panel" data-panel="watermain" hidden>
-<section class="cover" style="background-image:linear-gradient(90deg,rgba(14,28,42,.94) 0%,rgba(14,28,42,.82) 48%,rgba(14,28,42,.35) 100%),url('img/docs/bid-package.jpg')">
-  <div class="cover-in">
-    <span class="cover-eye">Nitto Watermain · public water main for L152</span>
-    <div class="cover-big"><b>1,100 ft</b><span>public 16″ water main<br>west side of Green Bay Road (STH 31)</span></div>
-    <p>Goal: get a winning contractor under contract, send it to Kurt, and post the financial security the DA requires. The water main must be installed and accepted by Nov 15, 2027.</p>
-    <div class="status"><span class="chip now"><span class="dot"></span>Step 2 of 8: fix the project manual</span><span class="chip">Plans approved 11/4</span><span class="chip">Accept by 11/15/27</span></div>
-    <button type="button" class="cover-btn" data-sheets="PL-1,PL-2,PL-3,PL-4,PL-5,PL-6,PL-7,PL-8">Open the bid set plans ⤢</button>
-  </div>
-</section>
-<section aria-label="Water main path">
-  <header><span class="eyebrow">8 steps to an accepted water main</span><h2>Nitto Watermain: path to acceptance</h2></header>
-  <ol class="prail"><li class="pstep done"><i>&#10003;</i><div><span class="eyebrow">Done · 11/4</span><b>Plans approved (Village + KWU)</b></div></li><li class="pstep now"><i>2</i><div><span class="eyebrow">Now</span><b>Fix project manual</b><small>List sent to Pinnacle 11/4</small></div></li><li class="pstep next"><i>3</i><div><span class="eyebrow">Next</span><b>Bid to Village-prequalified contractors</b></div></li><li class="pstep "><i>4</i><div><span class="eyebrow">Step 4</span><b>Sign contract; Village approves it</b></div></li><li class="pstep "><i>5</i><div><span class="eyebrow">Step 5</span><b>Village sets security (120%)</b></div></li><li class="pstep "><i>6</i><div><span class="eyebrow">Step 6</span><b>Closing: security, DA, SWMA signed</b></div></li><li class="pstep "><i>7</i><div><span class="eyebrow">Step 7</span><b>Record documents; get permits</b></div></li><li class="pstep key"><i>8</i><div><span class="eyebrow">Step 8</span><b>Build; Village accepts by 11/15/27</b></div></li></ol>
-</section>
-<section class="two" aria-label="Water main do next and waiting on">
-  <div class="box"><span class="eyebrow">Do next</span><div class="act"><span class="eyebrow">Jason</span><b>Review the A/B/C list below with Claude, one item at a time</b></div><div class="act"><span class="eyebrow">Jason</span><b>Ask Kurt for the Village prequalified contractor list (Ch. 405)</b></div><div class="act"><span class="eyebrow">Pinnacle</span><b>Send DNR submittal, CAD file to Village, CM estimate</b></div><div class="act"><span class="eyebrow">Jason / Pinnacle</span><b>Later (not bidding): confirm when the building needs fire-protection water; send permit copies to the Village (DA s.7.3)</b></div></div>
-  <div class="box"><span class="eyebrow">Waiting on</span><div class="act"><span class="eyebrow">Pinnacle</span><b>Answers to the 8 manual items</b><em>sent 11/4</em></div><div class="act"><span class="eyebrow">Lisa Kleinke</span><b>Zilber standard owner-direct contract</b><em>asked 11/4</em></div><div class="act"><span class="eyebrow">WDNR</span><b>Water main extension approval</b><em>Pinnacle submitting</em></div><div class="act"><span class="eyebrow">Sent to Pinnacle 11/4</span><div class="sent"><span>Completion date still 7/31/2026</span><span>Bid form: item 17 twice, no 18</span><span>Scope missing from bid form</span><span>Permits clause too broad</span><span>No bid instructions</span><span>CM estimate (condition 6d)</span><span>CSM spelled &#x27;Lakeveiw&#x27;</span><span>Cleanup: names, 60-day pay, s.24 wording</span></div></div></div>
-</section>
-<section id="village">
-  <header><span class="eyebrow">From the DA approval letter and DA draft</span><h2>Approval path, from plan approval to acceptance</h2>
-  <p class="lede">The Village sizes the financial security at 120% of the public improvements, inspections and construction-related services, from the signed contract and Pinnacle's construction management estimate (DA Article VI, Ordinance s.395-17; conditions 6 and 7). The DA, Memorandum of DA and Stormwater Maintenance Agreement are signed at closing and recorded before any permits (conditions 8 and 9). The Village schedules the preconstruction meeting once all documents and permits are in (condition 11). Dates for bidding, contract, closing and construction are not set yet.</p></header>
-  <div class="village"><div class="step next"><span class="eyebrow">In progress · List sent to Pinnacle 11/4</span><b>Fix project manual</b><span>Eight items sent to Pinnacle 11/4; answers awaited.</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Bid to Village-prequalified contractors</b><span>Village-prequalified contractors only (Ch. 405). Bid date not set.</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Sign contract; Village approves it</b><span>Village checks the itemized contract, owner name and COI (condition 6c).</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Village sets security (120%)</b><span>120% of public improvements, inspections and construction services (condition 7).</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Closing: security, DA, SWMA signed</b><span>DA, Memorandum of DA and SWMA executed; security delivered (condition 8).</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Record documents; get permits</b><span>Recorded copies to the Village within 72 hours; then permits (conditions 9-12).</span></div><div class="step"><span class="eyebrow">Village acceptance by Mon Nov 15, 2027</span><b>Build; Village accepts by 11/15/27</b><span>Installed, inspected and accepted by the Village (DA s.6.1, condition 4). Construction dates not set.</span></div></div>
-</section>
-<section id="review">
-  <header><span class="eyebrow">For the review with Pinnacle · decisions save for the whole team</span><h2>Bid package review: who should do what</h2>
-  <p class="lede">Each item shows where the text is, the current wording, the proposed wording, and what Claude will produce once you accept it. Every button press saves right away; click it again to set the item back to open.</p></header>
-  <div class="rtools"><span id="rcount"></span><span class="row"><button class="btn" type="button" id="rOpen">Expand all</button><button class="btn" type="button" id="rClose">Collapse all</button></span></div>
-  <div id="rList"><p class="note">Loading…</p></div>
-  <p class="note" id="rMsg"></p>
-</section>
-<section class="box" aria-label="About the water main"><span class="eyebrow">The work</span><p class="about">Public 16&quot; PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16&quot; main at 108th Street. Parcel owner (CSM, contract): TI Investors of Lakeview Nitto Parcel LLC. DA party: TI Investors of Pleasant Prairie Holding Company LLC, covering the Nitto parcel and two other properties. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.</p></section>
-</div>
 
+
+</div>
 <div class="panel" data-panel="tracker" hidden>
 <section id="tracker">
   <header><span class="eyebrow">Shared with everyone who can open this page</span><h2>Issue tracker</h2>
-  <p class="lede">Every open step on the project, grouped by workstream. Click a status to move it along. Changes save for the whole team.</p></header>
+  <p class="lede">Every open step on the project, grouped by who does the work. Click a status to move it along. Changes save for the whole team.</p></header>
   <div class="tk-bar" id="tkBar">
     <div class="tk-counts" id="tkCounts"></div><span id="tkSweep" class="note"></span>
     <div class="grpsw" id="tkGrpSw" style="margin:0 0 8px"><button type="button" data-tg="area" aria-pressed="true">By discipline</button><button type="button" data-tg="owner" aria-pressed="false">By owner</button><button type="button" data-tg="none" aria-pressed="false">Flat list</button></div>
@@ -553,9 +553,9 @@ body{margin:0}
     <tbody id="tkBody"><tr><td colspan="5" class="note">Loading tracker…</td></tr></tbody>
   </table></div>
   <p class="note" id="tkMsg"></p>
+
 </section>
 </div>
-
 <div class="panel" data-panel="documents" hidden>
 <section id="files">
   <header><span class="eyebrow">Latest versions only</span><h2>Documents by group</h2></header>
@@ -564,19 +564,23 @@ body{margin:0}
 <div class="prof" id="dcModal" hidden role="dialog" aria-modal="true" aria-labelledby="dcH"><div class="prof-card dcm"><button class="btn prof-x" type="button" id="dcX">Close</button><h2 id="dcH"></h2><p class="note" id="dcSub"></p><div id="dcList" class="dcg"></div></div></div>
 <section id="doclog">
   <header><span class="eyebrow">What changed</span><h2>Document log</h2></header>
-  <div class="files-scroll"><table><thead><tr><th>Date</th><th>Document</th><th>Change</th><th>From</th></tr></thead><tbody id="doclogbody"><tr><td colspan="4" class="note">Loading…</td></tr></tbody></table></div>
+  <div class="files-scroll"><table><thead><tr><th>Date</th><th>Document</th><th>Change</th><th>From</th></tr></thead><tbody id="doclogbody"></tbody></table></div>
 </section>
 </div>
-
 <div class="panel" data-panel="schedule" hidden>
 <section id="schedule">
   <header class="g-hdr"><div><span class="eyebrow">From the Village approval letters, DA draft and agency permits · confirmed dates only</span><h2 id="gTitle">Master schedule</h2>
-  <p class="lede" id="gLede"></p></div></header>
+  <p class="lede" id="gLede"></p></div>
+  <div class="gviews" role="group" aria-label="Schedule view"><button class="gview" data-v="master" type="button" aria-pressed="true">Master</button></div></header>
   <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
   <div class="g-legend"><span><i class="ms done" style="position:static;display:inline-block;width:10px;height:10px;transform:rotate(45deg);margin-right:8px;border:0"></i>Done</span><span><i style="position:static;display:inline-block;width:10px;height:10px;transform:rotate(45deg);margin-right:8px;border:0;background:var(--accent)"></i>Key date</span><span><i style="position:static;display:inline-block;width:0;height:12px;border:0;border-left:2px dashed var(--accent);margin-right:8px"></i>Today</span></div>
 </section>
+<section id="village">
+  <header><span class="eyebrow">From the DA and site &amp; operational plan approval letters (8/25/26)</span><h2>Approval path, from water main bid to permits</h2>
+  <p class="lede">The DA must be executed and the water main financial security provided, and the CSM and Stormwater Maintenance Agreement recorded, before the Village issues any permits for the project (S&amp;O condition 1). The Village sizes the security at 120% of the public improvements, inspections and construction-related services, from the signed contract (DA conditions 6 and 7). The Village schedules the preconstruction meeting once all S&amp;O condition 5 submittals are in. The building permit must be issued within 6 months of the 8/17/26 approval. Bid, contract, closing and construction dates are not set.</p></header>
+  <div class="village"><div class="step next"><span class="eyebrow">In progress · List sent to Pinnacle 11/4</span><b>Fix project manual</b><span>Eight items sent to Pinnacle 11/4; answers awaited.</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Bid to Village-prequalified contractors</b><span>Village-prequalified contractors only (Ch. 405). Bid date not set.</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Sign contract; Village approves it</b><span>Village checks the itemized contract, owner name and COI (condition 6c).</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Village sets security (120%)</b><span>120% of public improvements, inspections and construction services (condition 7).</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Closing: security, DA, SWMA signed</b><span>DA, Memorandum of DA and SWMA executed; security delivered (condition 8).</span></div><div class="step"><span class="eyebrow nd">Date not set</span><b>Record documents; get permits</b><span>Recorded copies to the Village within 72 hours; then permits (conditions 9-12).</span></div><div class="step"><span class="eyebrow">Village acceptance by Mon Nov 15, 2027</span><b>Build; Village accepts by 11/15/27</b><span>Installed, inspected and accepted by the Village (DA s.6.1, condition 4). Construction dates not set.</span></div></div>
+</section>
 </div>
-
 <div class="panel" data-panel="team" hidden>
 <section id="team">
     <div class="dir-top">
@@ -586,14 +590,48 @@ body{margin:0}
     <header><span class="eyebrow">L152 · Zilber Industrial 3 · LakeView Corporate Park</span><h2>Project directory</h2>
     <p class="lede">Grouped by role, developer first. Click a card for the person's profile. Use the contact-card button to add someone to Outlook.</p></header>
     <div id="dirList"></div>
-    <p class="note">Names, roles, phones and emails come from the project correspondence. Titles are shown only where the correspondence states them. Missing details are marked "to confirm."</p>
+    <p class="note">Names, roles, phones and emails come from the project correspondence. Titles are shown only where a source states them. Missing details are marked "to confirm."</p>
   </section>
+</div>
+<div class="panel" data-panel="meetings" hidden>
+<section id="cadence"><header><span class="eyebrow">Recurring</span><h2>Meetings</h2>
+<p class="lede">No recurring meeting is set for L152 yet. Notes from each meeting appear below, newest first, once Jason has reviewed them.</p></header></section>
+<section id="meeting"><header><span class="eyebrow">Newest first</span><h2>Meeting notes</h2></header><div id="mtList" class="mt-list"><p class="note">Loading…</p></div><div id="mtDetail" class="mt-detail" hidden></div></section>
+</div>
+<div class="panel" data-panel="photos" hidden>
+<section id="photos"><header><span class="eyebrow">Site and progress photos</span><h2>Photos</h2>
+<p class="lede">No photos yet. Site photos start once the team mobilizes. Until then this tab can hold renderings and site-visit pictures.</p></header>
+<div class="empty">Photos will appear here.</div></section>
+</div>
+<div class="panel" data-panel="watermain" hidden>
+<section aria-label="Nitto Watermain">
+  <header><span class="eyebrow">Public 16-inch water main along STH 31 · part of L152</span><h2>Nitto Watermain</h2><p class="lede">Public 16&quot; PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16&quot; main at 108th Street. Parcel owner (CSM, contract): TI Investors of Lakeview Nitto Parcel LLC. DA party: TI Investors of Pleasant Prairie Holding Company LLC, covering the Nitto parcel and two other properties. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.</p></header>
+</section>
+<section class="rail" aria-label="Where the water main stands">
+  <div class="rstep now"><i></i><span class="eyebrow">Now</span><b>Fix the project manual</b><small>8 items sent to Pinnacle 11/4</small></div>
+  <div class="rstep"><i></i><span class="eyebrow">Next · date not set</span><b>Bid</b><small>Village-prequalified contractors</small></div>
+  <div class="rstep"><i></i><span class="eyebrow">Gate · date not set</span><b>Contract approved, security posted</b><small>120% of the work (DA conditions 6 to 8)</small></div>
+  <div class="rstep key"><i></i><span class="eyebrow">Target · 11/15/27</span><b>Accepted by the Village</b><small>DA s.6.1</small></div>
+</section>
+<section id="review">
+  <header><span class="eyebrow">For the review with Pinnacle · decisions save for the whole team</span><h2>Bid package review: who should do what</h2>
+  <p class="lede">Each item shows where the text is, the current wording, the proposed wording, and what Claude will produce once you accept it. Every button press saves right away; click it again to set the item back to open.</p></header>
+  <div class="rtools"><span id="rcount"></span><span class="row"><button class="btn" type="button" id="rOpen">Expand all</button><button class="btn" type="button" id="rClose">Collapse all</button></span></div>
+  <div id="rList"><p class="note">Loading…</p></div>
+  <p class="note" id="rMsg"></p>
+</section>
+
 </div>
 </main>
 <aside class="rbar">
   <div class="box vbox"><div class="eyebrow">Needs your check</div><button type="button" class="btn vbtn" id="vBtn">Validation requests <b id="vCount">0</b></button><p class="note" id="vNote">Nothing waiting.</p></div>
 <div class="prof" id="vModal" hidden role="dialog" aria-modal="true" aria-labelledby="vH"><div class="prof-card vmc" style="max-width:1280px;width:96vw"><button class="btn prof-x" type="button" id="vX">Close</button><h2 id="vH" style="margin-bottom:12px">Validation requests</h2><div id="vList"></div></div></div>
 <div class="prof" id="vRef" hidden role="dialog" aria-modal="true" aria-labelledby="vRefT"><div class="prof-card" style="max-width:720px"><button class="btn prof-x" type="button" id="vRefX">Close</button><h2 id="vRefT" style="margin-bottom:10px"></h2><div id="vRefB" style="white-space:pre-wrap;font-size:14px;line-height:1.5"></div></div></div>
+  <div class="box">
+    <div class="eyebrow">Forum</div>
+    <form id="postForm" class="post-form"><textarea id="postText" rows="3" placeholder="Post a note or question to the team…" required></textarea><button class="btn go" type="submit">Post</button></form>
+    <div id="posts" class="posts"><p class="note">Loading…</p></div>
+  </div>
   <div class="box"><div class="eyebrow">Project feed</div><form id="feedForm" class="feed-form"><input id="feedText" maxlength="90" placeholder="Add a project update, e.g. Bids received" autocomplete="off"><button class="btn" type="submit">Add</button></form><ul id="feed" class="feed"><li class="note">Loading…</li></ul></div>
 </aside>
 </div>
@@ -612,7 +650,7 @@ body{margin:0}
     <form id="tkForm" class="tk-form">
       <label>Item<input id="tkTitle" required></label>
       <label>Owner<input id="tkWho" placeholder="e.g. Pinnacle"></label>
-      <label>Area<select id="tkArea"><option>Village approvals &amp; agreements</option><option>Public water main</option><option>Wetlands, floodplain &amp; stormwater</option><option>Permits &amp; preconstruction</option><option>Building &amp; closeout</option></select></label>
+      <label>Area<select id="tkArea"><option value="Design">Drawings and Design</option><option value="Approvals">Village, WDNR, Corps &amp; KWU</option><option value="General Contractor">General Contractor</option><option value="ZPG">Developer (ZPG)</option></select></label>
       <label>Next step<input id="tkNext"></label>
       <button class="btn go" type="submit">Add item</button>
     </form>
@@ -757,9 +795,9 @@ let CUR='master';
 // Documents: cards are views over files. Item = [title, PDF path, version/date, viewer sheet ids, status lines?]
 const SR=(p,n)=>Array.from({length:n},(_,i)=>p+'-'+(i+1));
 const dcards=[
- {t:'Building & site',img:'img/docs/cover-plan.jpg',d:'Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting photometrics.',
+ {t:'Building & site',img:'img/docs/site-plan.jpg',d:'Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting layout.',
   it:[['Site & operational plan approval letter','docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('SO',5),['Building permit must issue within 6 months of 8/17/26','DA executed, security posted, CSM and SWMA recorded before any permits']],
-   ['Site lighting photometrics','docs/NZ-Site-Lighting-Calcs-10.2.26.pdf','10/2/26',['LT-1']]]},
+   ['Site lighting layout and photometrics','docs/NZ-Site-Lighting-Calcs-10.2.26.pdf','Sheet dated 3/18/26 · file 10/2/26',['LT-1']]]},
  {t:'Village / DA',img:'img/docs/village-da.jpg',d:'Village approval letter, Development Agreement draft, CSM language, stormwater agreement draft and the Village Engineer comments.',
   it:[['DA conditional approval letter','docs/NW-Village-DA-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('AL',5)],
    ['Development Agreement (draft) with exhibits','docs/NW-Development-Agreement-DRAFT.pdf','08/2026 draft · pp.1-18 and Exhibits D, D1, D2',SR('DA',18).concat(['DA-D','DA-D1','DA-D2']),['Exhibits D1 (cost breakdown) and D2 (security) are blank','Full 57-page PDF: Open full PDF']],
@@ -879,7 +917,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const NEXT={Open:'In progress',Pending:'In progress','In progress':'Done',Done:'Open'};
   let rows=[], canWrite=true, tkGrp='area', tkOnly=null, detailId=null; const tkOpen=new Set(), doneOpen=new Set();
-  const DNAME={'Village approvals & agreements':'Village approvals & agreements','Public water main':'Public water main','Wetlands, floodplain & stormwater':'Wetlands, floodplain & stormwater','Permits & preconstruction':'Permits & preconstruction','Building & closeout':'Building & closeout'};
+  const DNAME={'Design':'Drawings and Design','Approvals':'Village, WDNR, Corps & KWU','General Contractor':'General Contractor','ZPG':'Developer (ZPG)'};
   const syncSw=()=>document.querySelectorAll('#tkGrpSw button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.tg===tkGrp)));
   window.jqOpenItem=id=>{detailId=id;render();if(window.jqTab)window.jqTab('tracker',true);};
   window.jqOpenGroup=(kind,key,withDone)=>{detailId=null;tkGrp=kind;tkOnly=key;syncSw();tkOpen.add(kind+':'+key);if(withDone)doneOpen.add(kind+':'+key);showSel.value=showSel.value==='Done'?'active':showSel.value;render();if(window.jqTab)window.jqTab('tracker',true);};
@@ -1094,7 +1132,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 
   // search
   const q=document.getElementById('q'), res=document.getElementById('qres');
-  const label={home:'Home',watermain:'Nitto Watermain',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team'};
+  const label={home:'Home',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team',meetings:'Meetings',photos:'Photos',watermain:'Nitto Watermain'};
   q.addEventListener('input',()=>{
     const s=q.value.trim().toLowerCase(); if(s.length<2){res.innerHTML='';return;}
     const els=[...document.querySelectorAll('.panel tbody tr, .panel li, .panel .pcard, .panel .ri, .panel .step, .panel section > header h2, .panel .g-row, .panel .act')];
@@ -1105,7 +1143,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   });
 
   // left-bar issue tracker grouped by discipline
-  const DISC=[['Village approvals & agreements','Village approvals & agreements'],['Public water main','Public water main'],['Wetlands, floodplain & stormwater','Wetlands, floodplain & stormwater'],['Permits & preconstruction','Permits & preconstruction'],['Building & closeout','Building & closeout']];
+  const DISC=[['Design','Drawings and Design'],['Approvals','Village, WDNR, Corps & KWU'],['General Contractor','General Contractor'],['ZPG','Developer (ZPG)']];
   const discEl=document.getElementById('disc'); const openSet=new Set();
   let grp='area';
   function renderOwner(rows){
@@ -1132,19 +1170,25 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const pre=e.target.closest('.pre');if(pre){window.jqGoRef(pre.dataset.pre);return;}
     const b=e.target.closest('button[data-ref]');if(!b)return;goTo(b.dataset.ref);});
   // feed + forum (shared database)
-  const feedEl=document.getElementById('feed');
+  const feedEl=document.getElementById('feed'), postsEl=document.getElementById('posts'), form=document.getElementById('postForm');
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const md=ms=>{const d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate();};
   const norm=snap=>Array.from((snap&&(snap.docs||snap))||[]).map(d=>{const v=typeof d.data==='function'?d.data():(d.data||d);return {...v,_id:d.id||v.id};});
   (async()=>{
     const db=window.claude?await window.claude.use('db'):null;
-    if(!db){document.getElementById('feedForm').hidden=true;feedEl.innerHTML='<li class="note">Sign in to see the feed.</li>';return;}
+    if(!db){document.getElementById('feedForm').hidden=true;feedEl.innerHTML='<li class="note">Sign in to see the feed.</li>';postsEl.innerHTML='<p class="note">Sign in to see the forum.</p>';form.hidden=true;return;}
     const user=await window.claude.use('user');
     const me=user&&user.id?await user.id().catch(()=>null):null;
     window.jqFeed=async text=>{try{await db.collection('feed').doc('e'+Date.now()).set({text,at:Date.now(),by:me||''});}catch(e){}};
     document.getElementById('feedForm').addEventListener('submit',async ev=>{ev.preventDefault();const i=document.getElementById('feedText');const v=i.value.trim();if(!v)return;await window.jqFeed(v);i.value='';});
     db.collection('feed').onSnapshot(s=>{const rows=norm(s).sort((a,b)=>b.at-a.at).slice(0,30);
       feedEl.innerHTML=rows.length?rows.map(r=>`<li><time>${md(r.at)}</time><span>${esc(r.text)}</span></li>`).join(''):'<li class="note">Nothing yet.</li>';},()=>{});
+    db.collection('posts').onSnapshot(async s=>{const rows=norm(s).sort((a,b)=>b.at-a.at).slice(0,20);
+      let names={}; try{const ids=[...new Set(rows.map(r=>r.by).filter(Boolean))]; if(ids.length&&user&&user.profiles) names=await user.profiles(ids);}catch(e){}
+      postsEl.innerHTML=rows.length?rows.map(r=>`<div class="post"><b>${esc((names[r.by]&&names[r.by].name)||'Someone')}</b><time>${md(r.at)}</time><p>${esc(r.text)}</p></div>`).join(''):'<p class="note">No posts yet. Start the conversation.</p>';},()=>{});
+    form.addEventListener('submit',async e=>{e.preventDefault();const ta=document.getElementById('postText');const text=ta.value.trim();if(!text)return;
+      try{await db.collection('posts').doc('p'+Date.now()).set({text,at:Date.now(),by:me||''});ta.value='';}
+      catch(err){const t=document.getElementById('toast');t.textContent='That post did not save. You may have view-only access.';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2200);}});
   })();
 })();
 
@@ -1164,6 +1208,16 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   document.addEventListener('keydown',e=>{if(e.key==='Escape')lb.hidden=true;});
 })();
 
+(function drawings(){
+  const SHEETS=window.NW_SHEETS.filter(s=>/^PL-/.test(s.id)).map(s=>({id:s.lab.split(' ')[0],t:s.lab.split(' ').slice(1).join(' '),img:s.img,sid:s.id}));
+  const tabs=document.getElementById('dwTabs'),view=document.getElementById('dwView'),img=document.getElementById('dwImg'),ttl=document.getElementById('dwTitle');
+  tabs.innerHTML=SHEETS.map((s,i)=>`<button class="dw-tab" role="tab" data-i="${i}" aria-selected="false">${s.id}<small>${s.t}</small></button>`).join('');
+  function show(i){const s=SHEETS[i];img.src=s.img;img.alt=s.id+' '+s.t;ttl.textContent=s.id+' · '+s.t;view.dataset.sid=s.sid;
+    tabs.querySelectorAll('.dw-tab').forEach((b,k)=>b.setAttribute('aria-selected',String(k===i)));try{sessionStorage.setItem('jqSheet',i)}catch(e){}}
+  tabs.addEventListener('click',e=>{const b=e.target.closest('.dw-tab');if(b)show(+b.dataset.i);});
+  view.addEventListener('click',()=>{if(window.jqOpenSheets)window.jqOpenSheets(SHEETS.map(s=>s.sid),view.dataset.sid);});
+  let n=0;try{n=+sessionStorage.getItem('jqSheet')||0}catch(e){} show(Math.min(n,SHEETS.length-1));
+})();
 (function drawingViewer(){
   let W=2016,H=1344,PW=2592,PH=1728,K=PW/W;
   const SHEETS=window.NW_SHEETS.map(x=>Object.assign({},x));
@@ -1486,13 +1540,13 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const ci=document.querySelector('#vList [data-f=c]');if(ci&&oid===v._id&&document.activeElement===old){ci.focus();}}
   const upd=(id,d)=>db.collection('validations').doc(id).update(d);
   async function applyProposal(v){const p=v.proposal;if(!p)return [];const rows=window.jqIssues||[];let n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0);const made=[];
-    for(const it of (p.items||[])){if(!it.title)continue;n++;const ref='N-'+String(n).padStart(2,'0');await db.collection('issues').doc(ref).set({ref,title:it.title,owner:it.owner||'Unassigned',area:it.area||'Public water main',status:'Open',next:it.next||'',order:n,updated:today(),blockedBy:it.blockedBy||[]});made.push(ref);}
+    for(const it of (p.items||[])){if(!it.title)continue;n++;const ref='N-'+String(n).padStart(2,'0');await db.collection('issues').doc(ref).set({ref,title:it.title,owner:it.owner||'Unassigned',area:it.area||'Design',status:'Open',next:it.next||'',order:n,updated:today(),blockedBy:it.blockedBy||[]});made.push(ref);}
     for(const u of (p.itemUpdates||[])){if(!u.ref)continue;const P={};['next','title','owner','status','now','ball','due'].forEach(k=>{if(u[k]!=null&&u[k]!=='')P[k]=String(u[k]);});if(Array.isArray(u.blockedBy))P.blockedBy=u.blockedBy;if(P.status&&!['Open','Pending','In progress','Done'].includes(P.status))delete P.status;if(Object.keys(P).length){P.updated=today();await db.collection('issues').doc(u.ref).update(P);}}
     return made;}
   function buildPrompt(v,c){const rows=(window.jqIssues||[]),is=rows.find(r=>r.ref===v.ref)||{};
     const slim=rows.filter(r=>r.status!=='Done').map(r=>({ref:r.ref,title:cut(r.title,100),owner:r.owner,area:r.area,blockedBy:r.blockedBy||[]}));
     return `You help Jason Lueders (Director of Construction, Zilber Property Group) keep the tracker for project L152 (Zilber Industrial 3, Nitto parcel, LakeView Corporate Park, Pleasant Prairie: building, site, approvals and the public water main) correct. A validation card shows something that happened, what the tracker will do next, and Jason's comment. Revise the proposed outcome so it follows Jason's comment exactly. Return JSON only, no other text: {"invalid":false,"summary":"1 to 3 plain sentences: what happens to the item and what happens next","items":[{"title":"","owner":"","area":"","blockedBy":["N-00"]}],"itemUpdates":[{"ref":"N-00","next":"note text","now":"optional one-sentence current state","status":"optional Open|Pending|In progress|Done","ball":"optional who moves next","title":"optional new title","owner":"optional new owner"}]}. Use empty arrays when nothing is added. Omit optional fields you are not changing.
-Rules: owner is the person who does the action (never put ZPG's action under another party). Use blockedBy with existing refs when a step cannot start until another finishes, so nobody gets an item they cannot act on yet. One item per hand-off; do not duplicate an existing open item (update it instead). Areas allowed (use the exact text): Village approvals & agreements, Public water main, Wetlands, floodplain & stormwater, Permits & preconstruction, Building & closeout. Do not invent steps Jason did not ask for. If his comment adds an interim step or a follow-up (for example an email to send), add it as an item. If Jason says the request itself is wrong, does not apply, or the premise is mistaken, set "invalid":true, make the summary say plainly that nothing changes in the tracker and why in his words, and return empty arrays. Plain wording, short.
+Rules: owner is the person who does the action (never put ZPG's action under another party). Use blockedBy with existing refs when a step cannot start until another finishes, so nobody gets an item they cannot act on yet. One item per hand-off; do not duplicate an existing open item (update it instead). Areas allowed (use the exact key): Design (Drawings and Design, Pinnacle), Approvals (only what the Village, WDNR, Army Corps or KWU itself decides), General Contractor (bidding, cost, construction), ZPG (what ZPG itself must do). Do not invent steps Jason did not ask for. If his comment adds an interim step or a follow-up (for example an email to send), add it as an item. If Jason says the request itself is wrong, does not apply, or the premise is mistaken, set "invalid":true, make the summary say plainly that nothing changes in the tracker and why in his words, and return empty arrays. Plain wording, short.
 ITEM: ${JSON.stringify({ref:v.ref,title:is.title,owner:is.owner,area:is.area,status:is.status,next:cut(is.next,400),blockedBy:is.blockedBy||[]})}
 WHAT HAPPENED (${v.doc}): ${v.detail||v.evidence}
 CURRENT PROPOSAL: ${v.proposal&&v.proposal.summary?JSON.stringify(v.proposal):(v.ref?'Close the item and unblock anything waiting on it.':'Add this follow-up to the tracker: '+(v.nextTitle||''))}
@@ -1531,7 +1585,7 @@ OPEN ITEMS: ${JSON.stringify(slim)}`;}
       if(a==='add'){let made=[];
         if(v.proposal&&((v.proposal.items||[]).length||(v.proposal.itemUpdates||[]).length))made=await applyProposal(v);
         else if(v.nextTitle){const rows=window.jqIssues||[],n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0)+1,ref='N-'+String(n).padStart(2,'0');
-          await db.collection('issues').doc(ref).set({ref,title:v.nextTitle,owner:v.nextOwner||'Unassigned',area:v.nextArea||'Public water main',status:'Open',next:'',order:n,updated:today()});made=[ref];}
+          await db.collection('issues').doc(ref).set({ref,title:v.nextTitle,owner:v.nextOwner||'Unassigned',area:v.nextArea||'Design',status:'Open',next:'',order:n,updated:today()});made=[ref];}
         await upd(v._id,{nextDone:true,nextAdded:made.join(','),state:'resolved',at:Date.now()});return;}
       if(a==='skip'){await upd(v._id,{nextDone:true,nextAdded:'',state:'resolved',at:Date.now()});return;}
       if(a==='close'){const ci=card.querySelector('[data-f=c]'),c=ci?ci.value.trim():'';await upd(v._id,{state:'resolved',at:Date.now(),dismissed:true,comment:c||v.lastComment||''});return;}
@@ -1542,6 +1596,58 @@ OPEN ITEMS: ${JSON.stringify(slim)}`;}
   paint();
 })();
 
+(function meetings(){
+  const $=id=>document.getElementById(id);const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  let list=[],db=null,openId=null;
+  const ul=a=>'<ul>'+(a||[]).map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul>';
+  function draw(){
+    const L=$('mtList'),D=$('mtDetail');
+    if(openId){const m=list.find(x=>x._id===openId);if(m){L.hidden=true;D.hidden=false;
+      D.innerHTML=`<button type="button" class="btn mt-back" id="mtBack">← All meetings</button> <button type="button" class="btn go mt-back" id="mtCopy">Copy for email</button><textarea id="mtCopyTxt" hidden style="width:100%;height:220px;font:13px/1.4 monospace;margin:8px 0"></textarea><div class="eyebrow">${esc(m.kind||'Meeting')} · ${esc(m.dateLabel||m.date)}</div><h2>${esc(m.title)}</h2><p class="sum">${esc(m.summary)}</p><div class="mt-meta"><b>Who:</b> ${esc(m.attendees)}</div>${m.note?`<div class="mt-note">${esc(m.note)}</div>`:''}`+
+      `<h3>Executive summary</h3><p style="max-width:80ch;font-size:14px;line-height:1.55">${esc(m.exec)}</p><h3>${esc(m.progressLabel||'Progress and decisions')}</h3>${ul(m.progress)}<h3>${esc(m.objectivesLabel||'Current objectives to keep the critical path')}</h3>${ul(m.objectives)}`+
+      `<h3>Details by discipline</h3><div class="mt-grid">${(m.disciplines||[]).map(d=>`<div class="mt-box"><h4>${esc(d.n)}</h4>${ul(d.items)}</div>`).join('')}</div>`+
+      `<h3>Assignments and follow-ups</h3><div class="mt-grid">${(m.assignments||[]).map(d=>`<div class="mt-box"><h4>${esc(d.who)}</h4>${ul(d.items)}</div>`).join('')}</div>`+
+      `<div class="mt-tr"><b>Full transcript</b><br>${m.transcript?`<a href="${esc(m.transcript)}" target="_blank" rel="noopener">Open the full transcript</a>`:`<span class="note">Not attached yet. Paste a link:</span> <input id="mtTrIn" placeholder="https://…"> <button type="button" class="btn" id="mtTrSave">Save</button>`}</div>`;
+      return;}openId=null;}
+    D.hidden=true;L.hidden=false;
+    L.innerHTML=list.length?list.map(m=>`<button type="button" class="mt-card" data-id="${esc(m._id)}"><div class="d">${esc(m.dateLabel||m.date)} · ${esc(m.kind||'Meeting')}</div><h3>${esc(m.title)}</h3><p>${esc(m.summary)}</p></button>`).join(''):'<p class="note">No meeting notes yet.</p>';
+  }
+
+  const H=x=>esc(x);
+  function emailText(m){const L=a=>(a||[]).map(x=>(/^\d+\./.test(x)?'':'- ')+x).join('\n');
+    return [m.title+' ('+(m.dateLabel||m.date)+')','','Attendees: '+(m.attendees||''),m.note?'\n'+m.note:'','','EXECUTIVE SUMMARY',m.exec||'','',(m.progressLabel||'Progress and decisions').toUpperCase(),L(m.progress),'',(m.objectivesLabel||'Current objectives').toUpperCase(),L(m.objectives),'','DETAILS BY DISCIPLINE',...(m.disciplines||[]).map(d=>d.n+'\n'+L(d.items)+'\n'),'ASSIGNMENTS',...(m.assignments||[]).map(a=>a.who+'\n'+L(a.items)+'\n')].join('\n');}
+  function emailHtml(m){
+    const ul=a=>'<ul style="margin:6px 0 0;padding-left:22px">'+(a||[]).map(x=>'<li style="margin:3px 0">'+H(x)+'</li>').join('')+'</ul>';
+    const h3=t=>'<h3 style="margin:22px 0 6px;padding-bottom:4px;border-bottom:1px solid #D5DDE5;font-size:16px;color:#1E3448;font-family:Arial,Helvetica,sans-serif">'+H(t)+'</h3>';
+    const box=(t,a)=>'<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;border:1px solid #D5DDE5;margin:0 0 10px"><tr><td style="padding:8px 12px;font-family:Arial,Helvetica,sans-serif;font-size:14px"><b style="color:#1E3448">'+H(t)+'</b>'+ul(a)+'</td></tr></table>';
+    return '<div style="font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.5;color:#1b2733;max-width:760px;background:#ffffff">'+
+      '<div style="font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#6B7C8C">'+H(m.kind||'Meeting')+' &middot; '+H(m.dateLabel||m.date)+'</div>'+
+      '<h2 style="margin:4px 0 6px;font-size:22px;color:#1E3448;font-family:Arial,Helvetica,sans-serif">'+H(m.title)+'</h2>'+
+      '<p style="margin:0 0 8px;color:#4a5b6b">'+H(m.summary)+'</p>'+
+      '<p style="margin:8px 0"><b>Who:</b> '+H(m.attendees)+'</p>'+
+      (m.note?'<table role="presentation" cellpadding="0" cellspacing="0" style="width:100%;margin:8px 0"><tr><td style="background:#FFF7E6;border:1px solid #F3D9A4;padding:8px 10px;font-size:13px;font-family:Arial,Helvetica,sans-serif">'+H(m.note)+'</td></tr></table>':'')+
+      h3('Executive summary')+'<p style="margin:6px 0">'+H(m.exec)+'</p>'+
+      h3(m.progressLabel||'Progress and decisions')+ul(m.progress)+
+      h3(m.objectivesLabel||'Current objectives to keep the critical path')+ul(m.objectives)+
+      h3('Details by discipline')+(m.disciplines||[]).map(d=>box(d.n,d.items)).join('')+
+      h3('Assignments and follow-ups')+(m.assignments||[]).map(d=>box(d.who,d.items)).join('')+'</div>';}
+  async function copyRich(html,text){
+    try{if(window.ClipboardItem&&navigator.clipboard&&navigator.clipboard.write){await navigator.clipboard.write([new ClipboardItem({'text/html':new Blob([html],{type:'text/html'}),'text/plain':new Blob([text],{type:'text/plain'})})]);return true;}}catch(e){}
+    try{const d=document.createElement('div');d.contentEditable='true';d.style.cssText='position:fixed;left:-9999px;top:0;background:#fff';d.innerHTML=html;document.body.appendChild(d);const r=document.createRange();r.selectNodeContents(d);const sl=getSelection();sl.removeAllRanges();sl.addRange(r);const ok=document.execCommand('copy');sl.removeAllRanges();d.remove();return ok;}catch(e){return false;}
+  }
+  document.addEventListener('click',async e=>{
+    const c=e.target.closest('.mt-card');if(c){openId=c.dataset.id;draw();window.scrollTo(0,0);return;}
+    if(e.target.closest('#mtBack')){openId=null;draw();return;}
+    if(e.target.closest('#mtCopy')){const m=list.find(x=>x._id===openId);if(!m)return;const btn=e.target.closest('#mtCopy');
+      const ok=await copyRich(emailHtml(m),emailText(m));
+      if(ok){btn.textContent='Copied. Paste into your email';setTimeout(()=>{btn.textContent='Copy for email'},2600);}
+      else{const ta=$('mtCopyTxt');ta.value=emailText(m);ta.hidden=false;ta.select();btn.textContent='Press Ctrl+C';}
+      return;}
+    if(e.target.closest('#mtTrSave')&&db){const v=$('mtTrIn').value.trim();if(!/^https?:\/\//.test(v))return;try{await db.collection('meetings').doc(openId).update({transcript:v});}catch(err){}}
+  });
+  (async()=>{try{db=window.claude?await window.claude.use('db'):null;}catch(e){}if(!db){$('mtList').innerHTML='<p class="note">Sign in to claude.ai to see meeting notes.</p>';return;}
+    db.collection('meetings').onSnapshot(s=>{list=Array.from((s&&(s.docs||s))||[]).map(d=>{const v=typeof d.data==='function'?d.data():(d.data||d);return {...v,_id:d.id};}).sort((a,b)=>(b.sortAt||0)-(a.sortAt||0));draw();},()=>{$('mtList').innerHTML='<p class="note">Meeting notes could not load. Reload to try again.</p>';});})();
+})();
 </script>
 </body>
 </html>

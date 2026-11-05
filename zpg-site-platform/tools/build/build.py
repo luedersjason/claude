@@ -7,14 +7,16 @@ PUB = '/home/user/claude/zpg-site-platform/public/'
 E = html.escape
 DATA = json.load(open('/home/user/claude/nitto-portal/_data.json'))
 PROJ = json.load(open(SP + 'project.json'))
-AREAS = [w[0] for w in PROJ['ws']]
-AREA0 = 'Public water main'
-DNAME_JS = '{' + ','.join("'%s':'%s'" % (a, a) for a in AREAS) + '}'
-DISC_JS = '[' + ','.join("['%s','%s']" % (a, a) for a in AREAS) + ']'
+# Playbook 6.4: discipline buckets by who does the work. Approvals = only what an agency itself decides.
+DISCS = PROJ['disciplines']
+AREAS = [k for k, n in DISCS]
+AREA0 = 'Design'
+DNAME_JS = '{' + ','.join("'%s':'%s'" % (k, n) for k, n in DISCS) + '}'
+DISC_JS = '[' + ','.join("['%s','%s']" % (k, n) for k, n in DISCS) + ']'
 
 # ---------- CSS: reference tokens and components, minus parts this site does not use ----------
 css_lines = open(SP + 'ref.css').read().replace('</style>', '').split('\n')
-DROP = ('.m3d', '.panel.m3d-only', '.bp', '.cp', '.vcp', '.mt-', '.vq .vcpin', '.weeks', '.vis', '.prof-card.lb', '.cover-zoom', '.dw', '.facts', '.fact', '.team', '.hero', '.chip', '.status{', '.links', '.link', '.path{', '.od', '@media(max-width:600px){.od', '@media(max-width:600px){.cp')
+DROP = ('.m3d', '.panel.m3d-only', '.bp{', '.bp ', '.cp', '.vcp', '.vq .vcpin', '.weeks', '.vis', '.prof-card.lb', '.facts', '.fact', '.team', '.hero', '.chip', '.status{', '.links', '.link', '.path{', '.od', '@media(max-width:600px){.od', '@media(max-width:600px){.cp')
 css = '\n'.join(l for l in css_lines if not l.strip().startswith(DROP))
 css += open(SP + 'own.css').read()
 
@@ -51,20 +53,22 @@ directory = R(directory, "save('Jaquet_project_directory.vcf'", "save('L152_proj
 
 shell = sec(464, 543)
 shell = R(shell, "const label={home:'Home',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team',meetings:'Meetings',photos:'Photos'};",
-          "const label={home:'Home',watermain:'Nitto Watermain',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team'};")
+          "const label={home:'Home',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team',meetings:'Meetings',photos:'Photos',watermain:'Nitto Watermain'};")
 shell = R(shell, "'.panel tbody tr, .panel li, .panel .pcard, .panel .item, .panel .step, .panel section > header h2, .panel .g-row'",
           "'.panel tbody tr, .panel li, .panel .pcard, .panel .ri, .panel .step, .panel section > header h2, .panel .g-row, .panel .act'")
 shell = R(shell, "const DISC=[['Design','Drawings and Design'],['Approvals','Village, DSPS & permits'],['Steel','Structural & steel'],['Fire','Fire protection'],['MEP','MEP & process piping'],['General Contractor','General Contractor'],['Jaquet','Owner decisions (Jaquet)']];",
           "const DISC=" + DISC_JS + ";")
-shell = R(shell, "const feedEl=document.getElementById('feed'), postsEl=document.getElementById('posts'), form=document.getElementById('postForm');", "const feedEl=document.getElementById('feed');")
-shell = R(shell, "if(!db){document.getElementById('feedForm').hidden=true;feedEl.innerHTML='<li class=\"note\">Sign in to claude.ai to see the feed.</li>';postsEl.innerHTML='<p class=\"note\">Sign in to see the forum.</p>';form.hidden=true;return;}",
-          "if(!db){document.getElementById('feedForm').hidden=true;feedEl.innerHTML='<li class=\"note\">Sign in to see the feed.</li>';return;}")
-a = shell.index("    db.collection('posts').onSnapshot("); b = shell.index("\n  })();\n})();", a)
-shell = shell[:a].rstrip('\n') + shell[b:]
-# Search hits inside a closed review item: open it so the hit is visible (details handled already)
+shell = R(shell, "Sign in to claude.ai to see the feed.", "Sign in to see the feed.")
 
 issue_modal = sec(544, 551)
 visuals = sec(552, 559)
+drawings = sec(620, 633)
+a = drawings.index('  const SHEETS=['); b = drawings.index('  const tabs=')
+drawings = drawings[:a] + "  const SHEETS=window.NW_SHEETS.filter(s=>/^PL-/.test(s.id)).map(s=>({id:s.lab.split(' ')[0],t:s.lab.split(' ').slice(1).join(' '),img:s.img,sid:s.id}));\n" + drawings[b:]
+drawings = R(drawings, "view.dataset.full=s.img;view.dataset.cap=s.id+' · '+s.t+' · PIDA 10/28/26';", "view.dataset.sid=s.sid;")
+drawings = R(drawings, "  tabs.addEventListener('click',e=>{const b=e.target.closest('.dw-tab');if(b)show(+b.dataset.i);});",
+  "  tabs.addEventListener('click',e=>{const b=e.target.closest('.dw-tab');if(b)show(+b.dataset.i);});\n  view.addEventListener('click',()=>{if(window.jqOpenSheets)window.jqOpenSheets(SHEETS.map(s=>s.sid),view.dataset.sid);});")
+meetings = sec(1033, 1084)
 
 viewer = sec(634, 906)
 a = viewer.index("  const SHEETS=[{id:'A1'"); b = viewer.index("  let vis=[0,1,2,3,4];")
@@ -91,7 +95,7 @@ val = R(val, "area:v.nextArea||'Design'", "area:v.nextArea||'" + AREA0 + "'")
 val = R(val, '"blockedBy":["J-00"]}],"itemUpdates":[{"ref":"J-00"', '"blockedBy":["N-00"]}],"itemUpdates":[{"ref":"N-00"')
 val = R(val, "keep a construction project tracker correct.", "keep the tracker for project L152 (Zilber Industrial 3, Nitto parcel, LakeView Corporate Park, Pleasant Prairie: building, site, approvals and the public water main) correct.")
 val = R(val, "Areas allowed: Design (Drawings and Design), Approvals (only what the Village or DSPS itself decides), Steel, Fire, MEP, General Contractor, Jaquet (what Jaquet itself must do).",
-        "Areas allowed (use the exact text): " + ", ".join(AREAS) + ".")
+        "Areas allowed (use the exact key): Design (Drawings and Design, Pinnacle), Approvals (only what the Village, WDNR, Army Corps or KWU itself decides), General Contractor (bidding, cost, construction), ZPG (what ZPG itself must do).")
 
 man = json.load(open(PUB + 'sheets/manifest.json'))
 spec = json.load(open(SP + 'spec.json'))
@@ -100,7 +104,7 @@ for m in man:
     m['pdf'], m['pg'] = pdfmap[m['id']]
 sheets_js = 'window.NW_SHEETS=' + json.dumps(man, separators=(',', ':')) + ';'
 
-js = '\n'.join([sheets_js, open(SP + 'own_top.js').read(), tracker, directory, shell, issue_modal, visuals, viewer, docsdb, val])
+js = '\n'.join([sheets_js, open(SP + 'own_top.js').read(), tracker, directory, shell, issue_modal, visuals, drawings, viewer, docsdb, val, meetings])
 assert '</script' not in js
 
 # ---------- Home content from _data.json ----------
@@ -136,26 +140,16 @@ for i, (t, st, n) in enumerate(path):
     steps_html.append(f'<div class="step{" next" if st == "now" else ""}"><span class="eyebrow{" nd" if eye == "Date not set" else ""}">{E(eye)}</span><b>{E(t)}</b><span>{E(note)}</span></div>')
 steps_html = ''.join(steps_html)
 
-pp = PROJ['path']
-pnow = next(i for i, x in enumerate(pp) if x[1] == 'now')
-def prail(path):
+def rail4(steps):  # playbook 1.4: Now, Next, Gate, Target
     out = []
-    for i, (t, st, n) in enumerate(path):
-        cls = {'done': 'done', 'now': 'now', 'next': 'next'}.get(st, '') + (' key' if i == len(path) - 1 else '')
-        eye = {'done': 'Done' + (' · ' + n if n and len(n) <= 12 else ''), 'now': 'Now', 'next': 'Next'}.get(st, 'Step %d' % (i + 1))
-        note = n if (n and not (st == 'done' and len(n) <= 12)) else ''
-        mark = '&#10003;' if st == 'done' else str(i + 1)
-        out.append(f'<li class="pstep {cls.strip()}"><i>{mark}</i><div><span class="eyebrow">{E(eye)}</span><b>{E(t)}</b>' + (f'<small>{E(note)}</small>' if note else '') + '</div></li>')
-    return ''.join(out)
-P_DONEXT = ''.join(f'<div class="act"><span class="eyebrow">{E(o)}</span><b>{E(t)}</b></div>' for t, o in PROJ['donext'])
-P_WAIT = ''.join(f'<div class="act"><span class="eyebrow">{E(w)}</span><b>{E(t)}</b><em>{E(d)}</em></div>' for w, t, d in PROJ['waiting'])
-P_WS = ''.join(f'<button type="button" class="ws-card" data-tabgo="tracker"><b>{E(a)}</b><span>{E(d)}</span></button>' for a, d in PROJ['ws'])
-AREAOPTS = ''.join(f'<option>{E(a)}</option>' for a in AREAS)
+    for cls, eye, t, n in steps:
+        out.append(f'  <div class="rstep{(" " + cls) if cls else ""}"><i></i><span class="eyebrow">{E(eye)}</span><b>{E(t)}</b><small>{E(n)}</small></div>')
+    return '\n'.join(out)
+AREAOPTS = ''.join(f'<option value="{E(k)}">{E(n)}</option>' for k, n in DISCS)
 page = open(SP + 'page.html').read()
-for k, v in {'%%CSS%%': css, '%%JS%%': js, '%%RAIL%%': rail, '%%DONEXT%%': donext, '%%WAITING%%': waiting, '%%SENT%%': sent,
-             '%%SUMMARY%%': E(DATA['summary']), '%%STEPN%%': str(now_i + 1), '%%STEPS%%': steps_html, '%%PATHN%%': str(len(path)),
-             '%%PSUMMARY%%': E(PROJ['summary']), '%%PSTEPN%%': str(pnow + 1), '%%PPATHN%%': str(len(pp)), '%%PRAIL%%': prail(pp),
-             '%%PDONEXT%%': P_DONEXT, '%%PWAITING%%': P_WAIT, '%%PWS%%': P_WS, '%%AREAOPTS%%': AREAOPTS}.items():
+for k, v in {'%%CSS%%': css, '%%JS%%': js,
+             '%%SUMMARY%%': E(DATA['summary']), '%%STEPS%%': steps_html,
+             '%%RAIL4%%': rail4(PROJ['rail']), '%%WRAIL4%%': rail4(PROJ['wrail']), '%%AREAOPTS%%': AREAOPTS}.items():
     assert k in page, k
     page = page.replace(k, v)
 open(PUB + 'index.html', 'w').write(page)

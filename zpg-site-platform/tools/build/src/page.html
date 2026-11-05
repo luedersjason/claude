@@ -20,11 +20,14 @@
   <div class="ptitle">L152 <span>Zilber Industrial 3 · LakeView Corporate Park · Pleasant Prairie</span></div>
   <nav class="tabs" aria-label="Project sections">
     <button class="tab" data-tab="home" type="button">Home</button>
-    <button class="tab" data-tab="watermain" type="button">Nitto Watermain</button>
+    
     <button class="tab" data-tab="tracker" type="button">Tracker</button>
     <button class="tab" data-tab="documents" type="button">Documents</button>
     <button class="tab" data-tab="schedule" type="button">Schedule</button>
     <button class="tab" data-tab="team" type="button">Team</button>
+    <button class="tab" data-tab="meetings" type="button">Meetings</button>
+    <button class="tab" data-tab="photos" type="button">Photos</button>
+    <button class="tab" data-tab="watermain" type="button">Nitto Watermain</button>
   </nav>
 </div></div>
 
@@ -42,67 +45,37 @@
   </div>
 </aside>
 <main id="main">
-
 <div class="panel" data-panel="home">
-<section class="cover" style="background-image:linear-gradient(90deg,rgba(14,28,42,.94) 0%,rgba(14,28,42,.82) 48%,rgba(14,28,42,.35) 100%),url('img/docs/cover-plan.jpg')">
+<section class="cover" style="background-image:linear-gradient(90deg,rgba(14,28,42,.92) 0%,rgba(14,28,42,.70) 42%,rgba(14,28,42,.05) 75%),url('img/docs/site-plan.jpg')">
   <div class="cover-in">
-    <span class="cover-eye">LakeView Corporate Park · SW corner of STH 31 and 108th Street · Pleasant Prairie, WI</span>
-    <div class="cover-big"><b>152,334 sf</b><span>speculative industrial building<br>Tax parcel 92-4-122-272-0502</span></div>
-    <p>%%PSUMMARY%%</p>
-    <div class="status"><span class="chip now"><span class="dot"></span>Step %%PSTEPN%% of %%PPATHN%%: bid the public water main</span><span class="chip">Site &amp; operational plans approved 8/17/26</span><span class="chip">Building permit must issue before the approval lapses (6 months)</span></div>
-    <button type="button" class="cover-btn" data-sheets="SO-1,SO-2,SO-3,SO-4,SO-5">Open the site &amp; operational approval letter ⤢</button>
+    <span class="cover-eye">LakeView Corporate Park · STH 31 and 108th Street · Pleasant Prairie, WI</span>
+    <div class="cover-big"><b>152,334</b><span>SF speculative industrial<br>Zilber Industrial 3 · Nitto parcel</span></div>
+    <p>ZPG develops for TI Investors of Lakeview Nitto Parcel LLC; Pinnacle is civil engineer. The Nitto Watermain must be bid and secured before the Village issues any permits.</p>
+    <div class="status" id="status"><span class="chip now"><span class="dot"></span>Site &amp; Ops approved 8/17/26</span><span class="chip">Building permit by 2/17/27</span></div>
   </div>
+  <button type="button" class="vimg cover-zoom" data-full="sheets/LT-1.jpg" data-cap="Site lighting layout · Zilber Lakeview 3 · sheet dated 3/18/26">View site plan ⤢</button>
 </section>
-<section aria-label="Where we are">
-  <header><span class="eyebrow">Where we are · %%PPATHN%% steps to occupancy</span><h2>Path to occupancy</h2>
-  <p class="lede">From the Village site &amp; operational plan approval letter (8/25/26) and the DA approval letter: the DA must be executed and the water main security provided, and the CSM and stormwater agreement recorded, before the Village issues any permits for the project.</p></header>
-  <ol class="prail">%%PRAIL%%</ol>
+<section id="visuals" class="dw">
+  <div class="dw-bar">
+    <div><span class="bp-tag" style="position:static">DRAWINGS</span> <span class="note" id="dwSet">Nitto Watermain bid set · Pinnacle 11/3/26 · building plan set not on file here</span></div>
+    <div class="row"><a class="btn" id="dwPdf" href="docs/NW-Public-Watermain-Plans-BidSet-11.3.26.pdf" target="_blank" rel="noopener">Open PDF ↗</a></div>
+  </div>
+  <div class="dw-tabs" id="dwTabs" role="tablist"></div>
+  <button type="button" class="dw-view" id="dwView"><img id="dwImg" alt=""><span class="dw-title" id="dwTitle"></span><span class="dw-open">Click to open full screen · markup tools ⤢</span></button>
 </section>
-<section class="two" aria-label="Do next and waiting on">
-  <div class="box"><span class="eyebrow">Do next</span>%%PDONEXT%%<button type="button" class="btn" data-tabgo="watermain" style="justify-self:start;margin-top:4px">Open the Nitto Watermain →</button></div>
-  <div class="box"><span class="eyebrow">Waiting on</span>%%PWAITING%%</div>
+<section class="rail" aria-label="Where the project stands">
+%%RAIL4%%
 </section>
-<section class="box" aria-label="Workstreams"><span class="eyebrow">Workstreams</span><div class="ws-grid">%%PWS%%</div></section>
+
 <div class="prof" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image viewer"><div class="prof-card lb"><button class="btn prof-x" type="button" id="lbX">Close</button><img id="lbImg" alt="" style="width:100%;height:auto"><p class="note" id="lbCap"></p></div></div>
-</div>
 
-<div class="panel" data-panel="watermain" hidden>
-<section class="cover" style="background-image:linear-gradient(90deg,rgba(14,28,42,.94) 0%,rgba(14,28,42,.82) 48%,rgba(14,28,42,.35) 100%),url('img/docs/bid-package.jpg')">
-  <div class="cover-in">
-    <span class="cover-eye">Nitto Watermain · public water main for L152</span>
-    <div class="cover-big"><b>1,100 ft</b><span>public 16″ water main<br>west side of Green Bay Road (STH 31)</span></div>
-    <p>Goal: get a winning contractor under contract, send it to Kurt, and post the financial security the DA requires. The water main must be installed and accepted by Nov 15, 2027.</p>
-    <div class="status"><span class="chip now"><span class="dot"></span>Step %%STEPN%% of %%PATHN%%: fix the project manual</span><span class="chip">Plans approved 11/4</span><span class="chip">Accept by 11/15/27</span></div>
-    <button type="button" class="cover-btn" data-sheets="PL-1,PL-2,PL-3,PL-4,PL-5,PL-6,PL-7,PL-8">Open the bid set plans ⤢</button>
-  </div>
-</section>
-<section aria-label="Water main path">
-  <header><span class="eyebrow">%%PATHN%% steps to an accepted water main</span><h2>Nitto Watermain: path to acceptance</h2></header>
-  <ol class="prail">%%RAIL%%</ol>
-</section>
-<section class="two" aria-label="Water main do next and waiting on">
-  <div class="box"><span class="eyebrow">Do next</span>%%DONEXT%%</div>
-  <div class="box"><span class="eyebrow">Waiting on</span>%%WAITING%%<div class="act"><span class="eyebrow">Sent to Pinnacle 11/4</span><div class="sent">%%SENT%%</div></div></div>
-</section>
-<section id="village">
-  <header><span class="eyebrow">From the DA approval letter and DA draft</span><h2>Approval path, from plan approval to acceptance</h2>
-  <p class="lede">The Village sizes the financial security at 120% of the public improvements, inspections and construction-related services, from the signed contract and Pinnacle's construction management estimate (DA Article VI, Ordinance s.395-17; conditions 6 and 7). The DA, Memorandum of DA and Stormwater Maintenance Agreement are signed at closing and recorded before any permits (conditions 8 and 9). The Village schedules the preconstruction meeting once all documents and permits are in (condition 11). Dates for bidding, contract, closing and construction are not set yet.</p></header>
-  <div class="village">%%STEPS%%</div>
-</section>
-<section id="review">
-  <header><span class="eyebrow">For the review with Pinnacle · decisions save for the whole team</span><h2>Bid package review: who should do what</h2>
-  <p class="lede">Each item shows where the text is, the current wording, the proposed wording, and what Claude will produce once you accept it. Every button press saves right away; click it again to set the item back to open.</p></header>
-  <div class="rtools"><span id="rcount"></span><span class="row"><button class="btn" type="button" id="rOpen">Expand all</button><button class="btn" type="button" id="rClose">Collapse all</button></span></div>
-  <div id="rList"><p class="note">Loading…</p></div>
-  <p class="note" id="rMsg"></p>
-</section>
-<section class="box" aria-label="About the water main"><span class="eyebrow">The work</span><p class="about">%%SUMMARY%%</p></section>
-</div>
 
+
+</div>
 <div class="panel" data-panel="tracker" hidden>
 <section id="tracker">
   <header><span class="eyebrow">Shared with everyone who can open this page</span><h2>Issue tracker</h2>
-  <p class="lede">Every open step on the project, grouped by workstream. Click a status to move it along. Changes save for the whole team.</p></header>
+  <p class="lede">Every open step on the project, grouped by who does the work. Click a status to move it along. Changes save for the whole team.</p></header>
   <div class="tk-bar" id="tkBar">
     <div class="tk-counts" id="tkCounts"></div><span id="tkSweep" class="note"></span>
     <div class="grpsw" id="tkGrpSw" style="margin:0 0 8px"><button type="button" data-tg="area" aria-pressed="true">By discipline</button><button type="button" data-tg="owner" aria-pressed="false">By owner</button><button type="button" data-tg="none" aria-pressed="false">Flat list</button></div>
@@ -120,9 +93,9 @@
     <tbody id="tkBody"><tr><td colspan="5" class="note">Loading tracker…</td></tr></tbody>
   </table></div>
   <p class="note" id="tkMsg"></p>
+
 </section>
 </div>
-
 <div class="panel" data-panel="documents" hidden>
 <section id="files">
   <header><span class="eyebrow">Latest versions only</span><h2>Documents by group</h2></header>
@@ -131,19 +104,23 @@
 <div class="prof" id="dcModal" hidden role="dialog" aria-modal="true" aria-labelledby="dcH"><div class="prof-card dcm"><button class="btn prof-x" type="button" id="dcX">Close</button><h2 id="dcH"></h2><p class="note" id="dcSub"></p><div id="dcList" class="dcg"></div></div></div>
 <section id="doclog">
   <header><span class="eyebrow">What changed</span><h2>Document log</h2></header>
-  <div class="files-scroll"><table><thead><tr><th>Date</th><th>Document</th><th>Change</th><th>From</th></tr></thead><tbody id="doclogbody"><tr><td colspan="4" class="note">Loading…</td></tr></tbody></table></div>
+  <div class="files-scroll"><table><thead><tr><th>Date</th><th>Document</th><th>Change</th><th>From</th></tr></thead><tbody id="doclogbody"></tbody></table></div>
 </section>
 </div>
-
 <div class="panel" data-panel="schedule" hidden>
 <section id="schedule">
   <header class="g-hdr"><div><span class="eyebrow">From the Village approval letters, DA draft and agency permits · confirmed dates only</span><h2 id="gTitle">Master schedule</h2>
-  <p class="lede" id="gLede"></p></div></header>
+  <p class="lede" id="gLede"></p></div>
+  <div class="gviews" role="group" aria-label="Schedule view"><button class="gview" data-v="master" type="button" aria-pressed="true">Master</button></div></header>
   <div class="gantt-scroll"><div class="gantt" id="gantt"></div></div>
   <div class="g-legend"><span><i class="ms done" style="position:static;display:inline-block;width:10px;height:10px;transform:rotate(45deg);margin-right:8px;border:0"></i>Done</span><span><i style="position:static;display:inline-block;width:10px;height:10px;transform:rotate(45deg);margin-right:8px;border:0;background:var(--accent)"></i>Key date</span><span><i style="position:static;display:inline-block;width:0;height:12px;border:0;border-left:2px dashed var(--accent);margin-right:8px"></i>Today</span></div>
 </section>
+<section id="village">
+  <header><span class="eyebrow">From the DA and site &amp; operational plan approval letters (8/25/26)</span><h2>Approval path, from water main bid to permits</h2>
+  <p class="lede">The DA must be executed and the water main financial security provided, and the CSM and Stormwater Maintenance Agreement recorded, before the Village issues any permits for the project (S&amp;O condition 1). The Village sizes the security at 120% of the public improvements, inspections and construction-related services, from the signed contract (DA conditions 6 and 7). The Village schedules the preconstruction meeting once all S&amp;O condition 5 submittals are in. The building permit must be issued within 6 months of the 8/17/26 approval. Bid, contract, closing and construction dates are not set.</p></header>
+  <div class="village">%%STEPS%%</div>
+</section>
 </div>
-
 <div class="panel" data-panel="team" hidden>
 <section id="team">
     <div class="dir-top">
@@ -153,14 +130,45 @@
     <header><span class="eyebrow">L152 · Zilber Industrial 3 · LakeView Corporate Park</span><h2>Project directory</h2>
     <p class="lede">Grouped by role, developer first. Click a card for the person's profile. Use the contact-card button to add someone to Outlook.</p></header>
     <div id="dirList"></div>
-    <p class="note">Names, roles, phones and emails come from the project correspondence. Titles are shown only where the correspondence states them. Missing details are marked "to confirm."</p>
+    <p class="note">Names, roles, phones and emails come from the project correspondence. Titles are shown only where a source states them. Missing details are marked "to confirm."</p>
   </section>
+</div>
+<div class="panel" data-panel="meetings" hidden>
+<section id="cadence"><header><span class="eyebrow">Recurring</span><h2>Meetings</h2>
+<p class="lede">No recurring meeting is set for L152 yet. Notes from each meeting appear below, newest first, once Jason has reviewed them.</p></header></section>
+<section id="meeting"><header><span class="eyebrow">Newest first</span><h2>Meeting notes</h2></header><div id="mtList" class="mt-list"><p class="note">Loading…</p></div><div id="mtDetail" class="mt-detail" hidden></div></section>
+</div>
+<div class="panel" data-panel="photos" hidden>
+<section id="photos"><header><span class="eyebrow">Site and progress photos</span><h2>Photos</h2>
+<p class="lede">No photos yet. Site photos start once the team mobilizes. Until then this tab can hold renderings and site-visit pictures.</p></header>
+<div class="empty">Photos will appear here.</div></section>
+</div>
+<div class="panel" data-panel="watermain" hidden>
+<section aria-label="Nitto Watermain">
+  <header><span class="eyebrow">Public 16-inch water main along STH 31 · part of L152</span><h2>Nitto Watermain</h2><p class="lede">%%SUMMARY%%</p></header>
+</section>
+<section class="rail" aria-label="Where the water main stands">
+%%WRAIL4%%
+</section>
+<section id="review">
+  <header><span class="eyebrow">For the review with Pinnacle · decisions save for the whole team</span><h2>Bid package review: who should do what</h2>
+  <p class="lede">Each item shows where the text is, the current wording, the proposed wording, and what Claude will produce once you accept it. Every button press saves right away; click it again to set the item back to open.</p></header>
+  <div class="rtools"><span id="rcount"></span><span class="row"><button class="btn" type="button" id="rOpen">Expand all</button><button class="btn" type="button" id="rClose">Collapse all</button></span></div>
+  <div id="rList"><p class="note">Loading…</p></div>
+  <p class="note" id="rMsg"></p>
+</section>
+
 </div>
 </main>
 <aside class="rbar">
   <div class="box vbox"><div class="eyebrow">Needs your check</div><button type="button" class="btn vbtn" id="vBtn">Validation requests <b id="vCount">0</b></button><p class="note" id="vNote">Nothing waiting.</p></div>
 <div class="prof" id="vModal" hidden role="dialog" aria-modal="true" aria-labelledby="vH"><div class="prof-card vmc" style="max-width:1280px;width:96vw"><button class="btn prof-x" type="button" id="vX">Close</button><h2 id="vH" style="margin-bottom:12px">Validation requests</h2><div id="vList"></div></div></div>
 <div class="prof" id="vRef" hidden role="dialog" aria-modal="true" aria-labelledby="vRefT"><div class="prof-card" style="max-width:720px"><button class="btn prof-x" type="button" id="vRefX">Close</button><h2 id="vRefT" style="margin-bottom:10px"></h2><div id="vRefB" style="white-space:pre-wrap;font-size:14px;line-height:1.5"></div></div></div>
+  <div class="box">
+    <div class="eyebrow">Forum</div>
+    <form id="postForm" class="post-form"><textarea id="postText" rows="3" placeholder="Post a note or question to the team…" required></textarea><button class="btn go" type="submit">Post</button></form>
+    <div id="posts" class="posts"><p class="note">Loading…</p></div>
+  </div>
   <div class="box"><div class="eyebrow">Project feed</div><form id="feedForm" class="feed-form"><input id="feedText" maxlength="90" placeholder="Add a project update, e.g. Bids received" autocomplete="off"><button class="btn" type="submit">Add</button></form><ul id="feed" class="feed"><li class="note">Loading…</li></ul></div>
 </aside>
 </div>

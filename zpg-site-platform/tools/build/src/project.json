@@ -1,32 +1,72 @@
 {
-"summary": "TI Investors of Lakeview Nitto Parcel LLC is building a 152,334 sf speculative industrial building: 91 parking spaces (4 ADA), 15 trailer stalls, 2 drive-in doors and 16 docks on the south side. Access is two driveways on 108th Street; none on STH 31. The Plan Commission approved the site and operational plans on 8/17/26 with 21 conditions.",
-"path": [
- ["Village approvals: site & operational plans, DA, CSM, public improvement plans", "done", "8/17 and 8/24"],
- ["Bid the public water main; contract approved by the Village", "now", "Project manual items with Pinnacle"],
- ["DA executed and water main security posted; CSM and SWMA recorded", "next", "Required before any permits"],
- ["Preconstruction submittals (S&O condition 5a-h)", "", ""],
- ["Village holds the preconstruction meeting", "", ""],
- ["Permits issued and fees paid; building permit before the S&O approval lapses", "", ""],
- ["Build; water main accepted by 11/15/27", "", ""],
- ["Certificate of occupancy (S&O condition 13)", "", ""]
-],
-"donext": [
- ["Settle the 11/4 project manual items with Pinnacle, then bid the water main", "ZPG + Pinnacle"],
- ["Written approval from the LakeView Owners Association (S&O 5a)", "ZPG · status not on file here"],
- ["Revised site & operational plan PDF to the Village for final staff review (S&O 3)", "Pinnacle · status not on file here"],
- ["Floodplain Development Permit application (S&O 5f)", "Pinnacle · status not on file here"]
-],
-"waiting": [
- ["Pinnacle", "Answers to the 8 project manual items", "Sent 11/4"],
- ["Lisa Kleinke", "Sample owner-direct plan-and-spec contract", "Requested"],
- ["Army Corps", "Final Section 404 permit MVP-2017-01912-LRK", "Not on file here"],
- ["WDNR", "Water main plan approval (Forms 3300-260 and 3300-066 submitted)", "Approval not on file here"]
-],
-"ws": [
- ["Village approvals & agreements", "S&O approval, DA, CSM, stormwater agreement, closing and recording."],
- ["Public water main", "1,100 ft of 16-inch main along STH 31: bid, contract, financial security, construction, acceptance."],
- ["Wetlands, floodplain & stormwater", "WDNR and Corps fill permits, floodplain boundary adjustment and LOMR, construction stormwater permit."],
- ["Permits & preconstruction", "Erosion control, right-of-way, driveway, building and trade permits; the preconstruction meeting."],
- ["Building & closeout", "Building construction and what the Village needs before the certificate of occupancy."]
-]
+ "disciplines": [
+  [
+   "Design",
+   "Drawings and Design"
+  ],
+  [
+   "Approvals",
+   "Village, WDNR, Corps & KWU"
+  ],
+  [
+   "General Contractor",
+   "General Contractor"
+  ],
+  [
+   "ZPG",
+   "Developer (ZPG)"
+  ]
+ ],
+ "rail": [
+  [
+   "now",
+   "Now",
+   "Bid the Nitto Watermain",
+   "Project manual items with Pinnacle, sent 11/4"
+  ],
+  [
+   "",
+   "Next \u00b7 date not set",
+   "Close and record",
+   "DA executed, security posted, CSM and SWMA recorded; required before any permits"
+  ],
+  [
+   "",
+   "Gate \u00b7 by 2/17/27",
+   "Building permit issued",
+   "The site & ops approval lapses 6 months after 8/17/26"
+  ],
+  [
+   "key",
+   "Target \u00b7 1/1/28",
+   "Phase A substantial completion",
+   "DA approval letter, p.1"
+  ]
+ ],
+ "wrail": [
+  [
+   "now",
+   "Now",
+   "Fix the project manual",
+   "8 items sent to Pinnacle 11/4"
+  ],
+  [
+   "",
+   "Next \u00b7 date not set",
+   "Bid",
+   "Village-prequalified contractors"
+  ],
+  [
+   "",
+   "Gate \u00b7 date not set",
+   "Contract approved, security posted",
+   "120% of the work (DA conditions 6 to 8)"
+  ],
+  [
+   "key",
+   "Target \u00b7 11/15/27",
+   "Accepted by the Village",
+   "DA s.6.1"
+  ]
+ ]
 }
