@@ -238,6 +238,16 @@ async function claim(req, env, url) {
   return startSession(env, "jason", "/");
 }
 
+// Claude's own access, so it can read comments on validation requests and write revised proposals.
+// Only the hash of its token is stored here. It acts as an editor named "Claude".
+const BOT_HASH = "99f2a037440bb170308207731bc9faf9c6ebfe952935a828afea795d02e0b13d";
+async function bot(req, env, p) {
+  if ((await sha256(req.headers.get("x-bot-token") || "")) !== BOT_HASH) return json({ error: "forbidden" }, 403);
+  await ensureReady(env);
+  const [, , , col, id] = p.split("/").map(decodeURIComponent);
+  return collection(req, env, { id: "claude", name: "Claude", role: "editor" }, col, id);
+}
+
 async function route(req, env) {
   {
     if (new URL(req.url).pathname === "/robots.txt") return new Response("User-agent: *\nDisallow: /\n", { headers: { "content-type": "text/plain" } });
@@ -247,6 +257,7 @@ async function route(req, env) {
     if (p === "/join") return join(req, env, url);
     if (p === "/setup") return setup(env, url);
     if (p === "/claim") return claim(req, env, url);
+    if (p.startsWith("/api/bot/")) return bot(req, env, p);
     const person = await currentPerson(req, env);
     if (p === "/api/admin/people") return admin(req, env, person, url);
     if (p.startsWith("/api/")) {
