@@ -989,6 +989,21 @@
 }
 }
 }
+},
+{
+"v": 5,
+"merge": {
+"issues": {
+"N-18": {
+"now": "Contract base chosen: the C251 Reesman form (owner-direct, plan and spec, not design-build). Draft Nitto Watermain contract built 11/5 with the CM, Architect and tenant language removed and Pinnacle as Owner's Engineer. Open decisions are marked in the draft: B1 late-finish damages, B4 insurance limits, B5 indemnity, A1 permits, retainage, Village warranty. Needs counsel review (N-17).",
+"ball": "Jason Lueders (ZPG)",
+"confirmed": "11/5",
+"source": "C251 Reesman contract 6/15/26; Lisa Kleinke reply",
+"updated": "11/5",
+"next": "11/4: Imported from the watermain portal (step list).\n11/5: Lisa replied; sample certificate and waiver compared in review items B4 and B8. Contract choice with Jason.\n11/5: Jason picked the C251 Reesman form. Draft contract built; decisions marked in yellow."
+}
+}
+}
 }
 ],
 "note": "Steps run once each, in order, when the live database is below that version. Step 3 only inserts."
