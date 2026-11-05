@@ -59,7 +59,12 @@ async function invite(p){const r=await fetch('/api/admin/people',{method:'POST',
  if(!r.ok){alert(j.error||'Could not create the link');return;}$('link').textContent=j.link;$('out').hidden=false;
  const first=(p.name||'').split(' ')[0]||'there';
  const body=`Hi ${first},\n\nHere is your link to the Nitto Watermain project site:\n${j.link}\n\nClick it, then "Open the project site". It works once, on one device, so please do not forward it. After that, https://nitto-watermain.pages.dev/ opens for you directly.\n\nJason`;
- const m=$('mail');m.hidden=!p.email;if(p.email){m.href='mailto:'+encodeURIComponent(p.email)+'?subject='+encodeURIComponent('Nitto Watermain project site access')+'&body='+encodeURIComponent(body);m.textContent='Email it to '+p.email;}
+ const m=$('mail');m.hidden=!p.email;
+ if(p.email){m.textContent='Email it to '+p.email+' (opens in Outlook)';m.removeAttribute('href');m.style.cursor='pointer';
+  m.onclick=()=>{const esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+   const html=`<p>Hi ${esc(first)},</p><p>Here is your link to the Nitto Watermain project site:<br><a href="${esc(j.link)}">${esc(j.link)}</a></p><p>Click it, then "Open the project site". It works once, on one device, so please do not forward it. After that, <a href="https://nitto-watermain.pages.dev/">https://nitto-watermain.pages.dev/</a> opens for you directly.</p><p>Jason</p>`;
+   const eml=['To: '+p.email,'Subject: Nitto Watermain project site access','X-Unsent: 1','MIME-Version: 1.0','Content-Type: text/html; charset=utf-8','',html].join('\r\n');
+   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([eml],{type:'message/rfc822'}));a.download='Nitto Watermain access - '+p.name+'.eml';document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},2000);};}
  load();}
 $('f').onsubmit=e=>{e.preventDefault();const name=$('name').value.trim();invite({id:name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),name,company:$('company').value.trim(),email:$('email').value.trim(),role:$('role').value});};
 $('copy').onclick=()=>{navigator.clipboard.writeText($('link').textContent).then(()=>{$('copy').textContent='Copied';setTimeout(()=>$('copy').textContent='Copy link',1500)},()=>{});};
