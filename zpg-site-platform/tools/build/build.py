@@ -220,10 +220,14 @@ for k, v in {'%%CSS%%': css, '%%JS%%': js,
     if k == '%%WRAIL4%%' and SITE == 'watermain': continue
     assert k in page, k
     page = page.replace(k, v)
-OUTF = PUB + 'index.html' if SITE == 'watermain' else '/home/user/claude/zpg-site-platform/l152/index.html'
+OUTF = PUB + 'index.html' if SITE == 'watermain' else PUB + 'l152/index.html'
 import os; os.makedirs(os.path.dirname(OUTF), exist_ok=True)
 if SITE == 'watermain':
     page = wm_final(page)
+else:
+    page = page.replace('<head>', '<head>\n<base href="/">', 1)   # assets are shared at the site root
+    i = page.index('<div class="panel" data-panel="watermain" hidden>'); j = page.index('</main>', i)
+    page = page[:i] + '<div class="panel" data-panel="watermain" hidden>\n<section><header><span class="eyebrow">Public water main · its own site</span><h2>Nitto Watermain</h2><p class="lede">The public water main has its own project site with the bid package review, tracker, documents and schedule.</p></header><p><a class="btn go" href="/">Open the Nitto Watermain site →</a></p></section>\n</div>\n' + page[j:]
 open(OUTF, 'w').write(page)
 open(SP + 'app_extracted.js', 'w').write(js)
 print(SITE, OUTF, len(page) // 1024, 'KB')

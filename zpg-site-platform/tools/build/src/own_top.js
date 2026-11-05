@@ -123,6 +123,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 // Review list: item text in `reviewItems` (Claude edits it there), decisions in `reviews` (doc id = item key).
 (function review(){
   const $=id=>document.getElementById(id);
+  if(!$('rList'))return;   // pages without a review list
   const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const LABEL={open:['n','Open'],accept:['g','Accepted'],change:['g','Accepted w/ changes'],reject:['r','Rejected'],discuss:['a','Discuss']};
   let items=[],decs={},db=null,me=null,user=null,names={},canWrite=true,sig='';

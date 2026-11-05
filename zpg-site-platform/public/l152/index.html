@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<base href="/">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -604,23 +605,7 @@ body{margin:0}
 <div class="empty">Photos will appear here.</div></section>
 </div>
 <div class="panel" data-panel="watermain" hidden>
-<section aria-label="Nitto Watermain">
-  <header><span class="eyebrow">Public 16-inch water main along STH 31 · part of L152</span><h2>Nitto Watermain</h2><p class="lede">Public 16&quot; PVC (C900 DR18) water main, about 1,100 ft, in easement on the west side of Green Bay Road (STH 31), connecting to the existing 16&quot; main at 108th Street. Parcel owner (CSM, contract): TI Investors of Lakeview Nitto Parcel LLC. DA party: TI Investors of Pleasant Prairie Holding Company LLC, covering the Nitto parcel and two other properties. The Development Agreement requires financial security for this work, sized from the signed construction contract. Getting the job bid and under contract is the critical path.</p></header>
-</section>
-<section class="rail" aria-label="Where the water main stands">
-  <div class="rstep now"><i></i><span class="eyebrow">Now</span><b>Fix the project manual</b><small>8 items sent to Pinnacle 11/4</small></div>
-  <div class="rstep"><i></i><span class="eyebrow">Next · date not set</span><b>Bid</b><small>Village-prequalified contractors</small></div>
-  <div class="rstep"><i></i><span class="eyebrow">Gate · date not set</span><b>Contract approved, security posted</b><small>120% of the work (DA conditions 6 to 8)</small></div>
-  <div class="rstep key"><i></i><span class="eyebrow">Target · 11/15/27</span><b>Accepted by the Village</b><small>DA s.6.1</small></div>
-</section>
-<section id="review">
-  <header><span class="eyebrow">For the review with Pinnacle · decisions save for the whole team</span><h2>Bid package review: who should do what</h2>
-  <p class="lede">Each item shows where the text is, the current wording, the proposed wording, and what Claude will produce once you accept it. Every button press saves right away; click it again to set the item back to open.</p></header>
-  <div class="rtools"><span id="rcount"></span><span class="row"><button class="btn" type="button" id="rOpen">Expand all</button><button class="btn" type="button" id="rClose">Collapse all</button></span></div>
-  <div id="rList"><p class="note">Loading…</p></div>
-  <p class="note" id="rMsg"></p>
-</section>
-
+<section><header><span class="eyebrow">Public water main · its own site</span><h2>Nitto Watermain</h2><p class="lede">The public water main has its own project site with the bid package review, tracker, documents and schedule.</p></header><p><a class="btn go" href="/">Open the Nitto Watermain site →</a></p></section>
 </div>
 </main>
 <aside class="rbar">
@@ -639,7 +624,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 4c08c88 2026-11-05</span>
+  <span>Owner: Jason Lueders, ZPG · build b2392cf 2026-11-05</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -843,6 +828,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 // Review list: item text in `reviewItems` (Claude edits it there), decisions in `reviews` (doc id = item key).
 (function review(){
   const $=id=>document.getElementById(id);
+  if(!$('rList'))return;   // pages without a review list
   const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const LABEL={open:['n','Open'],accept:['g','Accepted'],change:['g','Accepted w/ changes'],reject:['r','Rejected'],discuss:['a','Discuss']};
   let items=[],decs={},db=null,me=null,user=null,names={},canWrite=true,sig='';

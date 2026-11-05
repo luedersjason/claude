@@ -12,7 +12,8 @@
   const subs = {};
   const kick = (name) => (subs[name] || new Set()).forEach((fn) => fn());
   function collection(name) {
-    const base = "/c/" + encodeURIComponent(name);
+    const NS = location.pathname.startsWith("/l152") ? "l152_" : "";   // L152 site data is separate from the watermain site
+    const base = "/c/" + encodeURIComponent(NS + name);
     const docRef = (id) => ({
       id,
       set: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); },

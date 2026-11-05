@@ -1,5 +1,6 @@
-# L152 building project site (parked, not deployed)
+# L152 building project site
 
-Built with `python3 tools/build/build.py l152` into `l152/index.html`.
-`seed.l152.json` is the data as it stood on 11/5/26, including the four site & operational plan validation requests.
-Deploying it needs its own Cloudflare Pages project and D1 database (G14). The Nitto Watermain site at public/ is separate.
+Live at https://nitto-watermain.pages.dev/l152/ (same deployment and sign-in as the watermain site).
+Built with `python3 tools/build/build.py l152` into `public/l152/index.html`.
+Its data lives in `l152_*` collections (the shim adds the prefix on /l152 pages), so it never mixes with the watermain site.
+`seed.l152.json` is the 11/5/26 snapshot the building items came from (migration step 7).
