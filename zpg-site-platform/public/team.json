@@ -1,0 +1,107 @@
+[
+{
+"id": "lueders",
+"name": "Jason Lueders",
+"company": "Zilber Property Group",
+"email": "jason.lueders@zilber.com",
+"role": "Director of Construction"
+},
+{
+"id": "kleinke",
+"name": "Lisa Kleinke",
+"company": "Zilber Property Group",
+"email": "lisa.kleinke@zilber.com",
+"role": "Standard contract forms"
+},
+{
+"id": "navis",
+"name": "Chad Navis",
+"company": "Zilber Property Group",
+"email": "chad.navis@zilber.com",
+"role": "cc on the bid thread"
+},
+{
+"id": "shoaf",
+"name": "Andy Shoaf",
+"company": "Pinnacle Engineering Group",
+"email": "Andrew.Shoaf@pinnacle-engr.com",
+"role": "Associate Project Manager, PE"
+},
+{
+"id": "johnson",
+"name": "Justin Johnson",
+"company": "Pinnacle Engineering Group",
+"email": "jjohnson@pinnacle-engr.com",
+"role": ""
+},
+{
+"id": "artz",
+"name": "Adam Artz",
+"company": "Pinnacle Engineering Group",
+"email": "Adam.Artz@pinnacle-engr.com",
+"role": ""
+},
+{
+"id": "zanon",
+"name": "Anthony Zanon",
+"company": "Pinnacle Engineering Group",
+"email": "",
+"role": "Named on the proposal form"
+},
+{
+"id": "davidsen",
+"name": "Kurt Davidsen",
+"company": "Village of Pleasant Prairie",
+"email": "kdavidsen@pleasantprairiewi.gov",
+"role": "Village Engineer, PE"
+},
+{
+"id": "herrick",
+"name": "Peggy Herrick",
+"company": "Village of Pleasant Prairie",
+"email": "pherrick@pleasantprairiewi.gov",
+"role": "Assistant Community Development Director"
+},
+{
+"id": "hanson",
+"name": "Rob Hanson",
+"company": "Village of Pleasant Prairie",
+"email": "",
+"role": "Community Development Director"
+},
+{
+"id": "tomczyk",
+"name": "Sarah Tomczyk",
+"company": "Village of Pleasant Prairie",
+"email": "stomczyk@pleasantprairiewi.gov",
+"role": "Assistant Village Engineer"
+},
+{
+"id": "bagley",
+"name": "Ian Bagley",
+"company": "Kenosha Water Utility",
+"email": "ibagley@kenosha.org",
+"role": "Director of Engineering, PE"
+},
+{
+"id": "czarnecki",
+"name": "Curt Czarnecki",
+"company": "Kenosha Water Utility",
+"email": "cczarnecki@kenosha.org",
+"role": "General Manager, PE"
+},
+{
+"id": "ponzi",
+"name": "Sonya Ponzi",
+"company": "Wisconsin DNR",
+"email": "sonya.ponzi@wisconsin.gov",
+"role": "Wetland and pond permits"
+},
+{
+"id": "kinney",
+"name": "Lorin Kinney",
+"company": "US Army Corps of Engineers, St. Paul District",
+"email": "Lorin.R.Kinney@usace.army.mil",
+"role": "Section 404 permit MVP-2017-01912-LRK"
+}
+]

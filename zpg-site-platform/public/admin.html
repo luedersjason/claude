@@ -24,7 +24,8 @@ table{width:100%;border-collapse:collapse;font-size:14px} td,th{text-align:left;
 <div class="card"><h2>Invite someone</h2>
 <p class="note">A personal link works once, on one device, and expires after 7 days. If it is forwarded, the second person gets "already used". Each person can stay signed in on two devices. Use "New link" to reissue.</p>
 <form id="f">
-<input id="name" placeholder="Full name (e.g. Andy Shoaf)" required>
+<select id="pick" class="full"><option value="">Pick someone from the project team…</option></select>
+<input id="name" list="teamList" placeholder="Or type a full name" required><datalist id="teamList"></datalist>
 <input id="company" placeholder="Company">
 <input id="email" placeholder="Email" class="">
 <select id="role"><option value="viewer">Viewer (read only)</option><option value="editor">Editor (can save decisions and notes)</option><option value="admin">Admin</option></select>
@@ -48,5 +49,13 @@ async function invite(p){const r=await fetch('/api/admin/people',{method:'POST',
 $('f').onsubmit=e=>{e.preventDefault();const name=$('name').value.trim();invite({id:name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),name,company:$('company').value.trim(),email:$('email').value.trim(),role:$('role').value});};
 $('copy').onclick=()=>{navigator.clipboard.writeText($('link').textContent).then(()=>{$('copy').textContent='Copied';setTimeout(()=>$('copy').textContent='Copy link',1500)},()=>{});};
 $('team').onclick=()=>invite({id:'team',name:'Project team',company:'',email:'',role:'editor'});
-load();
+let TEAM=[];
+async function loadTeam(){try{TEAM=await (await fetch('/team.json',{cache:'no-store'})).json();}catch(e){TEAM=[];}
+ const has=new Set([...document.querySelectorAll('#ppl tr td:first-child')].map(td=>td.textContent.trim()));
+ $('pick').innerHTML='<option value="">Pick someone from the project team…</option>'+TEAM.map((p,i)=>`<option value="${i}">${p.name} · ${p.company}${has.has(p.name)?' (has access)':''}</option>`).join('');
+ $('teamList').innerHTML=TEAM.map(p=>`<option value="${p.name}">${p.company}</option>`).join('');}
+function fill(p){if(!p)return;$('name').value=p.name;$('company').value=p.company||'';$('email').value=p.email||'';}
+$('pick').onchange=()=>fill(TEAM[+$('pick').value]);
+$('name').addEventListener('change',()=>fill(TEAM.find(p=>p.name===$('name').value.trim())));
+load().then(loadTeam);
 </script></body></html>

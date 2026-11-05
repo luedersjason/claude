@@ -166,6 +166,12 @@ for m in man:
     m['pdf'], m['pg'] = pdfmap[m['id']]
 sheets_js = 'window.NW_SHEETS=' + json.dumps(man, separators=(',', ':')) + ';'
 
+_t = open(SP + 'own_team.js').read()
+_firms = json.loads(re.search(r'const firms=(\{.*?\});\n', _t, re.S).group(1))
+_people = json.loads(re.search(r'const P=(\[.*?\]);', _t, re.S).group(1))
+json.dump([{'id': x['id'], 'name': (x['fn'] + ' ' + x['ln']).strip(), 'company': _firms.get(x['f'], {}).get('n', ''),
+            'email': x.get('em', ''), 'role': x.get('t', '') or x.get('r', '')} for x in _people],
+          open(PUB + 'team.json', 'w'), indent=0)
 OWN_TOP = open(SP + 'own_top.js').read()
 if SITE == 'watermain':
     OWN_TOP = wm_top(OWN_TOP)
