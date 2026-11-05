@@ -558,5 +558,103 @@
 "pdf": "/home/user/claude/nitto-portal/NW-Development-Agreement-DRAFT.pdf",
 "page": 57,
 "label": "Exhibit D2"
+},
+{
+"id": "SO-1",
+"title": "Site & operational plan approval letter (8/25/26), p.1",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf",
+"page": 1,
+"label": "p.1"
+},
+{
+"id": "SO-2",
+"title": "Site & operational plan approval letter (8/25/26), p.2",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf",
+"page": 2,
+"label": "p.2"
+},
+{
+"id": "SO-3",
+"title": "Site & operational plan approval letter (8/25/26), p.3",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf",
+"page": 3,
+"label": "p.3"
+},
+{
+"id": "SO-4",
+"title": "Site & operational plan approval letter (8/25/26), p.4",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf",
+"page": 4,
+"label": "p.4"
+},
+{
+"id": "SO-5",
+"title": "Site & operational plan approval letter (8/25/26), p.5",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf",
+"page": 5,
+"label": "p.5"
+},
+{
+"id": "LT-1",
+"title": "Site lighting photometrics (10/2/26)",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-Site-Lighting-Calcs-10.2.26.pdf",
+"page": 1,
+"label": "Plan"
+},
+{
+"id": "NOI-1",
+"title": "WDNR construction stormwater permit coverage (2/25/26), p.1",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-WDNR-NOI-Coverage-103538-2.25.26.pdf",
+"page": 1,
+"label": "p.1"
+},
+{
+"id": "NOI-2",
+"title": "WDNR construction stormwater permit coverage (2/25/26), p.2",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-WDNR-NOI-Coverage-103538-2.25.26.pdf",
+"page": 2,
+"label": "p.2"
+},
+{
+"id": "NOI-3",
+"title": "WDNR construction stormwater permit coverage (2/25/26), p.3",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NZ-WDNR-NOI-Coverage-103538-2.25.26.pdf",
+"page": 3,
+"label": "p.3"
+},
+{
+"id": "WSA-1",
+"title": "WDNR Form 3300-260 water system approval request",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NW-WDNR-Form-3300-260-Water-System-Approval-Request.pdf",
+"page": 1,
+"label": "p."
+},
+{
+"id": "WMC-1",
+"title": "WDNR Form 3300-066 water main submittal checklist, p.1",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NW-WDNR-Form-3300-066-Water-Main-Checklist.pdf",
+"page": 1,
+"label": "p.1"
+},
+{
+"id": "WMC-2",
+"title": "WDNR Form 3300-066 water main submittal checklist, p.2",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NW-WDNR-Form-3300-066-Water-Main-Checklist.pdf",
+"page": 2,
+"label": "p.2"
+},
+{
+"id": "WMC-3",
+"title": "WDNR Form 3300-066 water main submittal checklist, p.3",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NW-WDNR-Form-3300-066-Water-Main-Checklist.pdf",
+"page": 3,
+"label": "p.3"
+},
+{
+"id": "WMC-4",
+"title": "WDNR Form 3300-066 water main submittal checklist, p.4",
+"pdf": "/home/user/claude/zpg-site-platform/public/docs/NW-WDNR-Form-3300-066-Water-Main-Checklist.pdf",
+"page": 4,
+"label": "p.4"
 }
 ]

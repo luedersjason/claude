@@ -84,3 +84,6 @@ body{margin:0}
 @media print{.ri .rd{display:grid}.ri{break-inside:avoid}}
 .cover-big{flex-wrap:wrap;gap:6px 14px}
 .cover-big b{white-space:nowrap;font-size:clamp(44px,5vw,72px)}
+.ws-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:8px}
+.ws-card{border:1px solid var(--line,#d9dee5);border-radius:8px;padding:10px 12px;background:var(--card,#fff);text-align:left;cursor:pointer;font:inherit;color:inherit}
+.ws-card b{display:block;margin-bottom:4px}.ws-card span{font-size:13px;opacity:.8}.ws-card em{display:block;margin-top:6px;font-style:normal;font-size:12px;opacity:.7}
