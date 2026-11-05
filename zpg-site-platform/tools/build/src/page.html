@@ -161,6 +161,7 @@
 </div>
 </main>
 <aside class="rbar">
+  <div class="box" id="inviteBox" hidden><div class="eyebrow">Access</div><a class="btn" href="/admin">Invite people</a></div>
   <div class="box vbox"><div class="eyebrow">Needs your check</div><button type="button" class="btn vbtn" id="vBtn">Validation requests <b id="vCount">0</b></button><p class="note" id="vNote">Nothing waiting.</p></div>
 <div class="prof" id="vModal" hidden role="dialog" aria-modal="true" aria-labelledby="vH"><div class="prof-card vmc" style="max-width:1280px;width:96vw"><button class="btn prof-x" type="button" id="vX">Close</button><h2 id="vH" style="margin-bottom:12px">Validation requests</h2><div id="vList"></div></div></div>
 <div class="prof" id="vRef" hidden role="dialog" aria-modal="true" aria-labelledby="vRefT"><div class="prof-card" style="max-width:720px"><button class="btn prof-x" type="button" id="vRefX">Close</button><h2 id="vRefT" style="margin-bottom:10px"></h2><div id="vRefB" style="white-space:pre-wrap;font-size:14px;line-height:1.5"></div></div></div>
@@ -251,6 +252,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <script src="claude-shim.js"></script>
+<script>fetch("/api/me").then(r=>r.ok?r.json():null).then(m=>{if(m&&m.role==="admin"){var b=document.getElementById("inviteBox");if(b)b.hidden=false;}}).catch(function(){});</script>
 <script>
 %%JS%%
 </script>

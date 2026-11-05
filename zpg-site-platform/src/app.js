@@ -110,6 +110,12 @@ async function admin(req, env, person, url) {
     const { results } = await env.DB.prepare("SELECT id, name, email, company, role FROM people ORDER BY created_at").all();
     return json({ people: results });
   }
+  if (req.method === "DELETE") {  // remove someone: their link stops working and their sessions end
+    const rid = url.searchParams.get("id") || "";
+    if (rid === person.id) return json({ error: "You cannot remove yourself." }, 400);
+    await env.DB.batch([env.DB.prepare("DELETE FROM sessions WHERE person_id = ?").bind(rid), env.DB.prepare("DELETE FROM people WHERE id = ?").bind(rid)]);
+    return json({ ok: true });
+  }
   const b = await req.json().catch(() => ({}));
   const id = String(b.id || "").toLowerCase().replace(/[^a-z0-9_-]/g, "").slice(0, 40);
   const role = ["admin", "editor", "viewer"].includes(b.role) ? b.role : "viewer";
