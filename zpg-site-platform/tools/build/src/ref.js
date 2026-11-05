@@ -957,7 +957,7 @@ document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',(
   document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches&&e.target.matches('#vList [data-f=cp]')){e.preventDefault();const card=e.target.closest('.vq'),v=list.find(x=>x._id===card.dataset.id),t=e.target.value.trim();if(v)openCp(v,t);}});
   function paint(){const n=list.length;$('vCount').textContent=n;$('vBtn').closest('.vbox').classList.toggle('has',n>0);$('vNote').textContent=n?(n+' item'+(n===1?'':'s')+' to confirm from new documents.'):'Nothing waiting.';
     if(cur>=n)cur=Math.max(0,n-1);
-    const old=document.querySelector('#vList .vq [data-f=c]'),oid=old&&old.closest('.vq').dataset.id,oval=old?old.value:'';
+    const old=document.querySelector('#vList .vq [data-f=c]'),oid=old&&old.closest('.vq').dataset.id,oval=old?old.value:'',hadFocus=!!old&&document.activeElement===old,ss=old?old.selectionStart:0,se=old?old.selectionEnd:0;
     if(!n){$('vList').innerHTML='<p class="note">Nothing waiting.</p>';return;}
     const v=list[cur],is=(window.jqIssues||[]).find(r=>r.ref===v.ref);
     const hdr=v.ref?`<span class="eyebrow">${esc(v.ref)} · ${esc(is?is.owner:'')}</span><h3>${esc(is?is.title:'')}</h3>`:`<span class="eyebrow">New follow-up from ${esc(v.doc)}</span>`;
@@ -970,7 +970,7 @@ document.querySelectorAll('[data-copy]').forEach(b=>b.addEventListener('click',(
       <div class="vcol">${proposalHtml(v)}
       <div class="vcomposer"><input data-f="c" value="${esc(oid===v._id?oval:'')}" placeholder="Correct me or add a step, then press Enter to revise" maxlength="400"><button type="button" class="vsend" data-a="revise" title="Revise per comment" aria-label="Revise per comment">&#10148;</button></div><div class="vfl vcpr"><button type="button" class="vcp" data-a="cp" title="Open Copilot (placeholder)"><span class="cp-ic"><img src="img/copilot.png" alt="" width="28" height="28"></span>Copilot</button><input class="vcpin" data-f="cp" placeholder="Ask Copilot…" maxlength="300" aria-label="Ask Copilot"></div></div>
       <div class="vfoot"><div class="vfr">${foot}</div></div></div>`;
-    const ci=document.querySelector('#vList [data-f=c]');if(ci&&oid===v._id&&document.activeElement===old){ci.focus();}}
+    const ci=document.querySelector('#vList [data-f=c]');if(ci&&oid===v._id&&hadFocus){ci.focus();try{ci.setSelectionRange(ss,se);}catch(e){}}}
   const upd=(id,d)=>db.collection('validations').doc(id).update(d);
   async function applyProposal(v){const p=v.proposal;if(!p)return [];const rows=window.jqIssues||[];let n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0);const made=[];
     for(const it of (p.items||[])){if(!it.title)continue;n++;const ref='J-'+String(n).padStart(2,'0');await db.collection('issues').doc(ref).set({ref,title:it.title,owner:it.owner||'Unassigned',area:it.area||'Design',status:'Open',next:it.next||'',order:n,updated:today(),blockedBy:it.blockedBy||[]});made.push(ref);}

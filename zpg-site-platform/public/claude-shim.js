@@ -20,12 +20,15 @@
       delete: async () => { const r = await api(base + "/" + encodeURIComponent(id), { method: "DELETE" }); if (!r.ok) await fail(r); kick(name); },
       get: async () => { const s = await getAll(); const d = s.docs.find((x) => x.id === id); return d || { id, exists: false, data: () => undefined }; },
     });
-    let etag = null, last = null;
+    let etag = null, last = null, lastTxt = null;
     async function getAll(force) {
       const r = await api(base, { headers: force || !etag ? {} : { "if-none-match": etag }, cache: "no-store" });
       if (r.status === 304 && last) return last;
       if (!r.ok) await fail(r);
-      etag = r.headers.get("etag"); last = snapshot((await r.json()).docs); return last;
+      etag = r.headers.get("etag");
+      const txt = await r.text();
+      if (last && txt === lastTxt) return last;   // same data: keep the old snapshot so pages do not redraw
+      lastTxt = txt; last = snapshot(JSON.parse(txt).docs); return last;
     }
     return {
       doc: docRef,

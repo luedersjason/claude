@@ -136,7 +136,7 @@ async function collection(req, env, person, col, id) {
   if (req.method === "GET") {
     const mark = await env.DB.prepare("SELECT COUNT(*) n, COALESCE(MAX(updated_at),0) m, COALESCE(SUM(ver),0) v FROM docs WHERE col = ?").bind(col).first();
     const etag = `"${mark.n}-${mark.m}-${mark.v}"`;
-    if (req.headers.get("if-none-match") === etag) return new Response(null, { status: 304, headers: { etag } });
+    if ((req.headers.get("if-none-match") || "").replace(/^W\//, "") === etag) return new Response(null, { status: 304, headers: { etag } });
     const { results } = await env.DB.prepare("SELECT id, data FROM docs WHERE col = ?").bind(col).all();
     return json({ docs: results.map((r) => ({ id: r.id, data: JSON.parse(r.data) })) }, 200, { etag, "cache-control": "no-store" });
   }
