@@ -223,6 +223,21 @@ export async function handle(req, env) {
   return out;
 }
 
+// One-time owner sign-in link (emailed to Jason 11/5/26). Only the hash is stored here; it works once and expires 11/12/26.
+const CLAIM_HASH = "fdf67a8fcbc8e2deacabc9284844f8888839a5998ef962a9b0094407f5847bf8";
+const CLAIM_UNTIL = Date.UTC(2026, 10, 12, 23, 59);
+async function claim(req, env, url) {
+  const t = url.searchParams.get("t") || "";
+  const used = await env.DB.prepare("SELECT data FROM docs WHERE col = '_meta' AND id = 'claim'").first();
+  if (used || Date.now() > CLAIM_UNTIL || (await sha256(t)) !== CLAIM_HASH) return new Response("This sign-in link was already used or has expired.", { status: 403 });
+  if (req.method !== "POST") return new Response(`<!doctype html><meta charset=utf-8><meta name=robots content="noindex"><meta name=viewport content="width=device-width,initial-scale=1"><title>Nitto Watermain</title><body style="font:16px system-ui;padding:40px;max-width:520px"><h1 style="font-size:20px">Nitto Watermain</h1><p>Sign in as the site owner (Jason Lueders).</p><form method=post><button style="font:600 16px system-ui;padding:12px 20px;border:0;border-radius:6px;background:#00A94F;color:#fff;cursor:pointer">Sign in</button></form>`, { headers: { "content-type": "text/html; charset=utf-8" } });
+  await env.DB.batch([
+    env.DB.prepare("INSERT INTO people (id, name, email, company, role, created_at) VALUES ('jason', 'Jason Lueders', 'jason.lueders@zilber.com', 'Zilber Property Group', 'admin', ?) ON CONFLICT(id) DO UPDATE SET role = 'admin'").bind(Date.now()),
+    env.DB.prepare("INSERT INTO docs (col, id, data, ver, updated_at, updated_by) VALUES ('_meta', 'claim', ?, 1, ?, 'claim')").bind(JSON.stringify({ at: Date.now() }), Date.now()),
+  ]);
+  return startSession(env, "jason", "/");
+}
+
 async function route(req, env) {
   {
     if (new URL(req.url).pathname === "/robots.txt") return new Response("User-agent: *\nDisallow: /\n", { headers: { "content-type": "text/plain" } });
@@ -231,6 +246,7 @@ async function route(req, env) {
     const p = url.pathname;
     if (p === "/join") return join(req, env, url);
     if (p === "/setup") return setup(env, url);
+    if (p === "/claim") return claim(req, env, url);
     const person = await currentPerson(req, env);
     if (p === "/api/admin/people") return admin(req, env, person, url);
     if (p.startsWith("/api/")) {
