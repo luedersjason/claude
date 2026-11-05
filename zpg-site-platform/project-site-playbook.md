@@ -298,6 +298,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 - **Disciplines:** Design, Approvals (only what an agency decides), General Contractor, ZPG. Refs N-nn. The watermain site keeps a Review tab for the bid package review list (Jason's request).
 - **Job queue.** `repoqueue` jobs are done by the G14 Claude session, which reads the queue at session start.
 - **The G14 is Claude's tool.** It is inside Jason's ecosystem and pre-approved: relay Jason's answers and jobs to it directly. Never ask Jason to type something into the G14 or run commands himself when the G14 can do it.
+- **Pre-approve before sending.** If a G14 job could hit one of Jason's confirm-first items (Gmail send, account recovery or passwords, public posts under his name, money, TQQQ) or anything else that needs his permission, ask him first in this chat with a notification, then send the job with his approval quoted, so the G14 never stalls waiting for him.
 
 ## Appendix B: Independent sweep agent brief (copy, fill the brackets)
 
