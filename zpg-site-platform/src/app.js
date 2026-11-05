@@ -166,8 +166,18 @@ async function collection(req, env, person, col, id) {
     const { results } = await env.DB.prepare("SELECT id, data FROM docs WHERE col = ?").bind(col).all();
     return json({ docs: results.map((r) => ({ id: r.id, data: JSON.parse(r.data) })) }, 200, { etag, "cache-control": "no-store" });
   }
-  if (!canWrite(person)) return json({ error: "not_writer" }, 403);
   if (!id || id.length > 120) return json({ error: "bad id" }, 400);
+  // Viewers can add new forum posts (their own, new ids only). Everything else needs editor or admin.
+  if (!canWrite(person)) {
+    const forum = col === "posts" || col === "l152_posts";
+    if (!forum || req.method !== "PUT") return json({ error: "not_writer" }, 403);
+    if (await env.DB.prepare("SELECT 1 FROM docs WHERE col = ? AND id = ?").bind(col, id).first()) return json({ error: "not_writer" }, 403);
+    const b = await req.json().catch(() => null);
+    if (!b || typeof b.text !== "string" || !b.text.trim() || b.text.length > 4000) return json({ error: "post needs text" }, 400);
+    await env.DB.prepare("INSERT INTO docs (col, id, data, ver, updated_at, updated_by) VALUES (?, ?, ?, 1, ?, ?)")
+      .bind(col, id, JSON.stringify({ text: b.text.trim(), at: Date.now(), by: person.id }), Date.now(), person.id).run();
+    return json({ ok: true });
+  }
   const now = Date.now();
   if (req.method === "DELETE") {
     await env.DB.prepare("DELETE FROM docs WHERE col = ? AND id = ?").bind(col, id).run();
