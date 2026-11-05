@@ -32,7 +32,7 @@ table{width:100%;border-collapse:collapse;font-size:14px} td,th{text-align:left;
 <div class="full"><button type="submit">Create invite link</button></div>
 </form>
 <p class="note">Each link signs in one person. Send it to them privately. Creating a new link for the same person replaces their old one.</p>
-<div id="out" hidden><h2>Invite link</h2><div class="link" id="link"></div><p><button type="button" id="copy">Copy link</button></p></div>
+<div id="out" hidden><h2>Invite link</h2><div class="link" id="link"></div><p><a id="mail" style="display:inline-block;font:600 14px inherit;font-family:inherit;padding:8px 14px;border-radius:6px;background:#00A94F;color:#fff;text-decoration:none;margin-right:8px" hidden>Email it</a><button type="button" id="copy">Copy link</button></p></div>
 </div>
 <div class="card"><h2>People with access</h2><table><thead><tr><th>Name</th><th>Company</th><th>Role</th><th></th></tr></thead><tbody id="ppl"></tbody></table></div>
 <p><a href="/">Open the project site</a></p>
@@ -45,7 +45,11 @@ async function load(){me=(await (await fetch('/api/me')).json().catch(()=>({})))
  for(const p of people){const tr=document.createElement('tr');for(const v of [p.name,p.company||'',p.role]){const td=document.createElement('td');td.textContent=v;tr.appendChild(td);}
   const td=document.createElement('td');const b=document.createElement('button');b.textContent='New link';b.onclick=()=>invite({id:p.id,name:p.name,company:p.company,email:p.email,role:p.role});td.appendChild(b);if(p.id!==me){const x=document.createElement('button');x.textContent='Remove';x.style.cssText='margin-left:6px;background:#9B1C1C';x.onclick=async()=>{if(!confirm('Remove '+p.name+'? Their link and any open sessions stop working.'))return;const d=await fetch('/api/admin/people?id='+encodeURIComponent(p.id),{method:'DELETE'});if(!d.ok){alert((await d.json()).error||'Could not remove');return;}load();};td.appendChild(x);}tr.appendChild(td);$('ppl').appendChild(tr);}}
 async function invite(p){const r=await fetch('/api/admin/people',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(p)});const j=await r.json();
- if(!r.ok){alert(j.error||'Could not create the link');return;}$('link').textContent=j.link;$('out').hidden=false;load();}
+ if(!r.ok){alert(j.error||'Could not create the link');return;}$('link').textContent=j.link;$('out').hidden=false;
+ const first=(p.name||'').split(' ')[0]||'there';
+ const body=`Hi ${first},\n\nHere is your link to the Nitto Watermain project site:\n${j.link}\n\nClick it, then "Open the project site". It works once, on one device, and expires in 7 days, so please do not forward it. After that, https://nitto-watermain.pages.dev/ opens for you directly.\n\nJason`;
+ const m=$('mail');m.hidden=!p.email;if(p.email){m.href='mailto:'+encodeURIComponent(p.email)+'?subject='+encodeURIComponent('Nitto Watermain project site access')+'&body='+encodeURIComponent(body);m.textContent='Email it to '+p.email;}
+ load();}
 $('f').onsubmit=e=>{e.preventDefault();const name=$('name').value.trim();invite({id:name.toLowerCase().replace(/[^a-z0-9]+/g,'-'),name,company:$('company').value.trim(),email:$('email').value.trim(),role:$('role').value});};
 $('copy').onclick=()=>{navigator.clipboard.writeText($('link').textContent).then(()=>{$('copy').textContent='Copied';setTimeout(()=>$('copy').textContent='Copy link',1500)},()=>{});};
 $('team').onclick=()=>invite({id:'team',name:'Project team',company:'',email:'',role:'editor'});

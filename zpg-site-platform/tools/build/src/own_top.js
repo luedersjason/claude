@@ -193,3 +193,19 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   // Home buttons: [data-sheets] opens the drawing viewer
   document.addEventListener('click',e=>{const b=e.target.closest('[data-sheets]');if(!b||!window.jqOpenSheets)return;const ids=b.dataset.sheets.split(',');window.jqOpenSheets(ids,ids[0]);});
 })();
+
+// Tell Claude: change requests for the site or the data. Claude reads `fixes`, makes the change, then marks it done with a reply.
+(function fixes(){
+  const $=id=>document.getElementById(id);if(!$('fixForm'))return;
+  const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const md=ms=>{const d=new Date(ms);return (d.getMonth()+1)+'/'+d.getDate();};
+  (async()=>{let db=null,me=null;try{db=window.claude?await window.claude.use('db'):null;const u=await window.claude.use('user');me=u&&u.id?await u.id():null;}catch(e){}
+    if(!db){$('fixForm').hidden=true;$('fixList').innerHTML='<li class="note">Sign in to send changes.</li>';return;}
+    db.collection('fixes').onSnapshot(s=>{const rows=Array.from(s.docs||[]).map(d=>({...d.data(),_id:d.id})).sort((a,b)=>b.at-a.at).slice(0,8);
+      $('fixList').innerHTML=rows.length?rows.map(r=>`<li><time>${md(r.at)}</time><span>${esc(r.text)}<br><b style="font-size:12px;color:${r.state==='done'?'#007A39':'#A15C00'}">${r.state==='done'?'Done':'Sent'}</b>${r.reply?' · <span class="note">'+esc(r.reply)+'</span>':''}</span></li>`).join(''):'<li class="note">Nothing sent yet.</li>';},()=>{});
+    $('fixForm').addEventListener('submit',async e=>{e.preventDefault();const t=$('fixText').value.trim();if(!t)return;
+      let tab='';try{tab=sessionStorage.getItem('jqTab')||'';}catch(x){}
+      try{await db.collection('fixes').doc('f'+Date.now()).set({text:t,at:Date.now(),by:me||'',tab,page:location.pathname,state:'open'});$('fixText').value='';say('Sent to Claude.');}
+      catch(x){say('That did not send. You may have view-only access.');}});
+  })();
+})();
