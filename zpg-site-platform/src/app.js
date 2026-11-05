@@ -203,7 +203,7 @@ async function route(req, env) {
       return json({ error: "not_found" }, 404);
     }
     if (!person) {
-      return new Response(`<!doctype html><meta charset=utf-8><title>${env.SITE_TITLE}</title><body style="font:16px system-ui;padding:40px;max-width:560px"><h1 style="font-size:20px">${env.SITE_TITLE}</h1><p>This project site is private. Open it from your personal invite link, or ask Jason Lueders (Zilber Property Group) for one.</p>`,
+      return new Response(`<!doctype html><meta charset=utf-8><title>${env.SITE_TITLE || "Nitto Public Watermain"}</title><body style="font:16px system-ui;padding:40px;max-width:560px"><h1 style="font-size:20px">${env.SITE_TITLE || "Nitto Public Watermain"}</h1><p>This project site is private. Open it from your personal invite link, or ask Jason Lueders (Zilber Property Group) for one.</p>`,
         { status: 401, headers: { "content-type": "text/html; charset=utf-8" } });
     }
     return env.ASSETS.fetch(req);
