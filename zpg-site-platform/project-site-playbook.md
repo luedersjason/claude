@@ -297,6 +297,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 - **Access.** Private and not indexed. Jason is the only admin; the Admin pill in the ribbon is shown only to him. Admin page: team pick-list, single-use personal links (no expiry; a forwarded link fails), Email it (.eml for Outlook), Access dropdown, status per person, Remove. Viewers can read and post in the Forum only.
 - **Disciplines:** Design, Approvals (only what an agency decides), General Contractor, ZPG. Refs N-nn. The watermain site keeps a Review tab for the bid package review list (Jason's request).
 - **Job queue.** `repoqueue` jobs are done by the G14 Claude session, which reads the queue at session start.
+- **The G14 is Claude's tool.** It is inside Jason's ecosystem and pre-approved: relay Jason's answers and jobs to it directly. Never ask Jason to type something into the G14 or run commands himself when the G14 can do it.
 
 ## Appendix B: Independent sweep agent brief (copy, fill the brackets)
 
@@ -313,6 +314,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+- 2026-11-05: Process fix: Claude asked Jason to answer the G14 himself; the G14 is Claude's pre-approved tool, so Claude relays instead (Appendix C).
 - 2026-11-05: Appendix C added for the Nitto Watermain and L152 Cloudflare sites (hosting, no sample, access and invites, two sites, job queue).
 - 2026-11-05: Right bar: tracker comment box (`asks`) that turns a typed change into a check request automatically. Added `repoqueue` (web chat to desktop chat job queue), section 13a (where each Claude can work), and rules 10 and 11 on the start page. J-20 closed as merged into J-19; J-47 removed. 11/3 internal recap posted to `meetings` (format: Executive Summary, Progress, Objectives, Details by Discipline written as what was discussed, Assignments by person once each, with decisions kept out of the details). MPC HVAC and plumbing cost items (11/4) and HVAC equipment list (11/5) traced into J-08, J-11, J-13, J-17, J-32.
 - 2026-11-04: Added section 1 site anatomy (shell, left and right bars, Home cover, drawings strip, 3D model, status rail, Schedule Gantt rules and data format, approval path, week-by-week, Team directory with vCards, Teams chat, QR and photos, Meetings, Photos) and the consistency map. Maintenance rule: the playbook is updated with every Jaquet site change. ifc2mesh.py added to the handoff folder.
