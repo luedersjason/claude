@@ -1,6 +1,6 @@
 {
-"v": 3,
-"note": "Playbook alignment: disciplines by who does the work; site & ops items moved to validation requests. v3: five validation requests from the Nitto email index (10/27 and earlier).",
+"steps": [
+{
 "delete": {
 "issues": [
 "N-41",
@@ -653,7 +653,87 @@
 ],
 "itemUpdates": []
 }
+}
 },
+"sweeps": {
+"s20261105": {
+"date": "2026-11-05",
+"at": 1793908800000,
+"checked": 30,
+"changed": 7,
+"statusChanges": [],
+"requests": [
+"v-n-fmt",
+"v-n-so5",
+"v-n-bp",
+"v-n-flood",
+"v-n-co"
+],
+"sources": [
+"Site & operational plan approval letter 8/25/26",
+"WDNR coverage letter 2/25/26",
+"WDNR Forms 3300-260 and 3300-066",
+"Site lighting layout 3/18/26"
+],
+"missing": [
+"Draft preconstruction agenda the site & ops letter says is attached",
+"The 8/11/26 Village Engineering comments on the site & ops plans (the 8/11 comments on file are on the water main plans)",
+"Cover email and filing date for the WDNR water main forms; WDNR approval",
+"Final Army Corps 404 permit"
+],
+"stale": [],
+"note": "Run by Claude without the independent sweep agent. Changed: area regrouping is format only; Now lines on N-13 and N-34; Ball on N-06, N-12, N-13, N-16, N-18, N-23."
+}
+},
+"doclog": {
+"d12": {
+"date": "8/25/26",
+"doc": "Site & operational plan approval letter",
+"change": "Plan Commission approval 8/17/26 with 21 conditions; building permit within 6 months; condition 5 preconstruction submittals. Added to Building & site.",
+"from": "Rob Hanson, Village",
+"at": 1787652000000
+},
+"d13": {
+"date": "2/25/26",
+"doc": "WDNR construction stormwater permit coverage, FIN 103538",
+"change": "Coverage under WI-S067831-06 from 2/25/26 for up to 3 years; weekly inspections; certificate posted on site. Added to Approvals & permits.",
+"from": "Peter Wood, WDNR",
+"at": 1772042400000
+},
+"d14": {
+"date": "3/18/26",
+"doc": "Site lighting layout and photometrics",
+"change": "Sheet dated 3/18/26, file named 10/2/26; site average 0.54 fc. Added to Building & site.",
+"from": "Lighting designer (initials AD; firm not named)",
+"at": 1773835200000
+},
+"d15": {
+"date": "undated",
+"doc": "WDNR Forms 3300-260 and 3300-066 (water main submittal)",
+"change": "1,088 LF of 16-inch PVC and 10 LF of 6-inch hydrant stubs; unsigned copy. Added to Approvals & permits.",
+"from": "Andy Shoaf, Pinnacle",
+"at": 1793908800000
+}
+},
+"feed": {
+"e20261105-1": {
+"text": "Village site & operational plan approval letter (8/25/26) logged: building permit due within 6 months of 8/17/26.",
+"at": 1793908800000,
+"by": ""
+},
+"e20261105-2": {
+"text": "WDNR stormwater permit coverage (FIN 103538, from 2/25/26) and the water main submittal forms logged.",
+"at": 1793908800001,
+"by": ""
+}
+}
+},
+"v": 2
+},
+{
+"v": 3,
+"insert": {
+"validations": {
 "v-n-rev": {
 "state": "pending",
 "doc": "Justin Johnson email, 10/23/26: revised DNR permits",
@@ -834,78 +914,9 @@
 ]
 }
 }
-},
-"sweeps": {
-"s20261105": {
-"date": "2026-11-05",
-"at": 1793908800000,
-"checked": 30,
-"changed": 7,
-"statusChanges": [],
-"requests": [
-"v-n-fmt",
-"v-n-so5",
-"v-n-bp",
-"v-n-flood",
-"v-n-co"
+}
+}
+}
 ],
-"sources": [
-"Site & operational plan approval letter 8/25/26",
-"WDNR coverage letter 2/25/26",
-"WDNR Forms 3300-260 and 3300-066",
-"Site lighting layout 3/18/26"
-],
-"missing": [
-"Draft preconstruction agenda the site & ops letter says is attached",
-"The 8/11/26 Village Engineering comments on the site & ops plans (the 8/11 comments on file are on the water main plans)",
-"Cover email and filing date for the WDNR water main forms; WDNR approval",
-"Final Army Corps 404 permit"
-],
-"stale": [],
-"note": "Run by Claude without the independent sweep agent. Changed: area regrouping is format only; Now lines on N-13 and N-34; Ball on N-06, N-12, N-13, N-16, N-18, N-23."
-}
-},
-"doclog": {
-"d12": {
-"date": "8/25/26",
-"doc": "Site & operational plan approval letter",
-"change": "Plan Commission approval 8/17/26 with 21 conditions; building permit within 6 months; condition 5 preconstruction submittals. Added to Building & site.",
-"from": "Rob Hanson, Village",
-"at": 1787652000000
-},
-"d13": {
-"date": "2/25/26",
-"doc": "WDNR construction stormwater permit coverage, FIN 103538",
-"change": "Coverage under WI-S067831-06 from 2/25/26 for up to 3 years; weekly inspections; certificate posted on site. Added to Approvals & permits.",
-"from": "Peter Wood, WDNR",
-"at": 1772042400000
-},
-"d14": {
-"date": "3/18/26",
-"doc": "Site lighting layout and photometrics",
-"change": "Sheet dated 3/18/26, file named 10/2/26; site average 0.54 fc. Added to Building & site.",
-"from": "Lighting designer (initials AD; firm not named)",
-"at": 1773835200000
-},
-"d15": {
-"date": "undated",
-"doc": "WDNR Forms 3300-260 and 3300-066 (water main submittal)",
-"change": "1,088 LF of 16-inch PVC and 10 LF of 6-inch hydrant stubs; unsigned copy. Added to Approvals & permits.",
-"from": "Andy Shoaf, Pinnacle",
-"at": 1793908800000
-}
-},
-"feed": {
-"e20261105-1": {
-"text": "Village site & operational plan approval letter (8/25/26) logged: building permit due within 6 months of 8/17/26.",
-"at": 1793908800000,
-"by": ""
-},
-"e20261105-2": {
-"text": "WDNR stormwater permit coverage (FIN 103538, from 2/25/26) and the water main submittal forms logged.",
-"at": 1793908800001,
-"by": ""
-}
-}
-}
+"note": "Steps run once each, in order, when the live database is below that version. Step 3 only inserts."
 }
