@@ -916,6 +916,79 @@
 }
 }
 }
+},
+{
+"v": 4,
+"merge": {
+"issues": {
+"N-18": {
+"now": "Lisa Kleinke replied with SharePoint links (Reesman's direct-hire and unit rate contracts, a Greenway template) and a sample Riley insurance certificate and lien waiver. No plan-and-spec contract is attached. She asks whether you want the Heartland Produce or Biofab one. Two of her links are identical.",
+"ball": "Jason Lueders (ZPG)",
+"confirmed": "11/5",
+"source": "Lisa Kleinke reply to 11/4 request",
+"updated": "11/5",
+"next": "11/4: Imported from the watermain portal (step list).\n11/5: Lisa replied; sample certificate and waiver compared in review items B4 and B8. Contract choice with Jason."
+}
+},
+"reviewItems": {
+"B4": {
+"where": [
+[
+"Project manual 11/3/26",
+"Standard Terms s.9, PDF p.6"
+],
+[
+"Lisa Kleinke sample (Riley certificate)",
+"Exhibit G, ACORD 25"
+]
+],
+"new": [
+"Decision for you. Lisa's only sample is Zilber's certificate for Riley (GC on the Janesville shell building). It is higher than Pinnacle's form on every line: general aggregate $2M (manual $1M), products-completed operations $2M ($1M), auto $2M ($1M), umbrella $10M ($5M), plus employers' liability $1M. Matching it would raise the limits, not lower them.",
+"Options: (a) keep the manual's limits, umbrella $5M; (b) match Zilber's sample; (c) ask Lisa whether a lower standard exists for site work.",
+"Whichever you pick, fix the wording. The manual names the Owner and the Village as additional insured under (i), (ii) and (iii), but (i) is workers' compensation. The sample puts additional insured on general liability only (endorsements CG 2038 and CG 2037) and waives subrogation on general liability and workers' comp. Keep the Village, which the sample does not name. The manual asks for 30 days' written notice of cancellation; the sample only says notice per policy provisions."
+],
+"why": "You asked to see Zilber's insurance first (11/4). Lisa's sample is a Riley certificate, not a utility-contractor standard, and she did not say it applies to site work. The Village as additional insured stays either way (DA approval letter, condition 6c).",
+"deliver": "Claude drafts the revised s.9 text (redline) for Pinnacle once you pick a, b or c"
+}
+}
+},
+"insert": {
+"reviewItems": {
+"B8": {
+"k": "B8",
+"g": "B. Terms that make bidders add money",
+"order": 17,
+"t": "Lien waivers: use Zilber's partial and final form",
+"where": [
+[
+"Project manual 11/3/26",
+"Standard Terms s.10(c), Application for Payment"
+],
+[
+"Lisa Kleinke sample (Riley waiver)",
+"one page, Partial or Final"
+]
+],
+"who": "Owner / attorney (project manual)",
+"cur": [
+"\"(d) duly executed full and final lien waivers of all mechanics' and materialmen's liens from the Contractor and each of its subcontractors and material suppliers for all Work the Owner is requested to pay in the current Application for Payment\""
+],
+"new": [
+"Use Zilber's form. Partial with each progress payment (unconditional for amounts already paid, conditional for the current draw) and Final with the last payment. Attach it as an exhibit with the owner and project names changed. The sample is made out to TI Janesville III LLC by Towne Realty, Inc., Manager, so the Nitto owner line needs your confirmation."
+],
+"why": "A 'full and final' waiver with every progress payment is hard to give before the final payment, so bidders will likely ask about it or add money. Lisa's form is what Zilber uses with its GC; she did not say it is the owner-direct site work form.",
+"deliver": "Claude drafts the replacement s.10(c) wording and a Nitto version of the waiver form for you and Pinnacle to review"
+}
+},
+"reviews": {
+"B8": {
+"dec": "open",
+"note": "",
+"at": 0,
+"by": ""
+}
+}
+}
 }
 ],
 "note": "Steps run once each, in order, when the live database is below that version. Step 3 only inserts."
