@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build public/index.html for the Nitto project site (Zilber Industrial 3) from the Jaquet reference + Nitto data."""
+"""Build public/index.html for the L152 project site (Zilber Industrial 3) from the Jaquet reference + Nitto data."""
 import json, html, re
 import os
 SP = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'src') + '/'
@@ -40,18 +40,18 @@ directory = directory[:a] + open(SP + 'own_team.js').read() + directory[b:]
 directory = R(directory, "    ${f.ph?`<div class=\"ln\">${I.ph}${esc(f.ph)}</div>`:''}",
               "    ${p.ph?`<div class=\"ln\">${I.ph}${esc(p.ph)}</div>`:''}\n    ${f.ph?`<div class=\"ln\" title=\"Office main line\">${I.ph}${esc(f.ph)}</div>`:(p.ph?'':'<div class=\"tbc\">Phone to confirm</div>')}")
 directory = R(directory, "f.ph?`TEL;TYPE=WORK,VOICE:${f.ph}`:''", "p.ph?`TEL;TYPE=WORK,VOICE:${p.ph}`:'',f.ph&&f.ph!==p.ph?`TEL;TYPE=WORK,VOICE:${f.ph}`:''")
-directory = R(directory, "`NOTE:Jaquet USA BTS (LakeView Corporate Park) – ${f.g}${p.r?': '+p.r:''}`", "`NOTE:Nitto - Zilber Industrial 3 (LakeView Corporate Park) – ${f.g}${p.r?': '+p.r:''}`")
+directory = R(directory, "`NOTE:Jaquet USA BTS (LakeView Corporate Park) – ${f.g}${p.r?': '+p.r:''}`", "`NOTE:L152 - Zilber Industrial 3 (LakeView Corporate Park) – ${f.g}${p.r?': '+p.r:''}`")
 directory = R(directory, "[['Project role',p.r],['Email',p.em||'To confirm'],['Office',f.ph],", "[['Project role',p.r],['Email',p.em||'To confirm'],['Phone',p.ph],['Office',f.ph||'To confirm'],")
 directory = R(directory, "${[f.addr,f.ph].filter(Boolean).map(esc).join(' · ')}", "${[f.addr,f.ph||'Main line to confirm'].filter(Boolean).map(esc).join(' · ')}")
 directory = R(directory, "'<span class=\"note\">No published bio on the company website yet.</span>'", "'<span class=\"note\">Bio to confirm.</span>'")
 # qrcodejs 1.0.0 sizes the code by characters, not UTF-8 bytes, so a non-ASCII character (the en dash in NOTE) overflows it
 directory = R(directory, "new QRCode(q,{text:vcf(p),", "new QRCode(q,{text:vcf(p).replace(/[\\u2013\\u2014]/g,'-').replace(/[^\\x00-\\x7F]/g,''),")
 directory = R(directory, "  const order=['jaq','zpg','riley','pida','ras','pin','mpc','next','ahern','card','tbd'];", "  const order=['zpg','pin','vpp','kwu','wdnr','usace'];")
-directory = R(directory, "save('Jaquet_project_directory.vcf'", "save('Nitto_project_directory.vcf'")
+directory = R(directory, "save('Jaquet_project_directory.vcf'", "save('L152_project_directory.vcf'")
 
 shell = sec(464, 543)
 shell = R(shell, "const label={home:'Home',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team',meetings:'Meetings',photos:'Photos'};",
-          "const label={home:'Home',watermain:'Water main',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team'};")
+          "const label={home:'Home',watermain:'Nitto Watermain',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team'};")
 shell = R(shell, "'.panel tbody tr, .panel li, .panel .pcard, .panel .item, .panel .step, .panel section > header h2, .panel .g-row'",
           "'.panel tbody tr, .panel li, .panel .pcard, .panel .ri, .panel .step, .panel section > header h2, .panel .g-row, .panel .act'")
 shell = R(shell, "const DISC=[['Design','Drawings and Design'],['Approvals','Village, DSPS & permits'],['Steel','Structural & steel'],['Fire','Fire protection'],['MEP','MEP & process piping'],['General Contractor','General Contractor'],['Jaquet','Owner decisions (Jaquet)']];",
@@ -74,8 +74,8 @@ viewer = R(viewer, "img.src=S.img;$('dvSheets')", "img.src=S.img;{const o=$('dvO
 a = viewer.index("  // open from the Home page drawing"); b = viewer.index("  /* ---------- shared database")
 viewer = viewer[:a] + viewer[b:]
 viewer = R(viewer, "Sign in to claude.ai to save markup layers.", "Sign in to save markup layers.")
-viewer = R(viewer, "markups from jaquet project site", "markups from the Nitto project site")
-viewer = R(viewer, "const fn=`Jaquet_", "const fn=`Nitto_")
+viewer = R(viewer, "markups from jaquet project site", "markups from the L152 project site")
+viewer = R(viewer, "const fn=`Jaquet_", "const fn=`L152_")
 
 docsdb = sec(907, 915)
 
@@ -89,7 +89,7 @@ val = R(val, "ref='J-'+", "ref='N-'+", 2)
 val = R(val, "area:it.area||'Design'", "area:it.area||'" + AREA0 + "'")
 val = R(val, "area:v.nextArea||'Design'", "area:v.nextArea||'" + AREA0 + "'")
 val = R(val, '"blockedBy":["J-00"]}],"itemUpdates":[{"ref":"J-00"', '"blockedBy":["N-00"]}],"itemUpdates":[{"ref":"N-00"')
-val = R(val, "keep a construction project tracker correct.", "keep the tracker for the Nitto project (Zilber Industrial 3, LakeView Corporate Park, Pleasant Prairie: building, site, approvals and the public water main) correct.")
+val = R(val, "keep a construction project tracker correct.", "keep the tracker for project L152 (Zilber Industrial 3, Nitto parcel, LakeView Corporate Park, Pleasant Prairie: building, site, approvals and the public water main) correct.")
 val = R(val, "Areas allowed: Design (Drawings and Design), Approvals (only what the Village or DSPS itself decides), Steel, Fire, MEP, General Contractor, Jaquet (what Jaquet itself must do).",
         "Areas allowed (use the exact text): " + ", ".join(AREAS) + ".")
 

@@ -344,7 +344,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const full=p=>(p.fn+' '+p.ln).trim();
   const vcf=p=>{const f=firms[p.f];return ['BEGIN:VCARD','VERSION:3.0',`N:${p.ln};${p.fn};;;`,`FN:${full(p)}`,`ORG:${f.n.replace(' (to confirm)','')}`,
     p.t?`TITLE:${p.t}`:'',p.em?`EMAIL;TYPE=INTERNET,WORK:${p.em}`:'',p.ph?`TEL;TYPE=WORK,VOICE:${p.ph}`:'',f.ph&&f.ph!==p.ph?`TEL;TYPE=WORK,VOICE:${f.ph}`:'',p.cell?`TEL;TYPE=CELL:${p.cell}`:'',
-    f.web?`URL:${f.web}`:'',`NOTE:Nitto - Zilber Industrial 3 (LakeView Corporate Park) – ${f.g}${p.r?': '+p.r:''}`,'END:VCARD'].filter(Boolean).join('\r\n');};
+    f.web?`URL:${f.web}`:'',`NOTE:L152 - Zilber Industrial 3 (LakeView Corporate Park) – ${f.g}${p.r?': '+p.r:''}`,'END:VCARD'].filter(Boolean).join('\r\n');};
   const toast=m=>{const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1800);};
   let dl=null; window.claude&&window.claude.use('downloads').then(x=>dl=x).catch(()=>{});
   async function save(name,text){
@@ -391,7 +391,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   document.getElementById('profX').addEventListener('click',()=>prof.hidden=true);
   prof.addEventListener('click',e=>{if(e.target===prof)prof.hidden=true;});
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!prof.hidden)prof.hidden=true;}});
-  document.getElementById('vcAll').addEventListener('click',()=>save('Nitto_project_directory.vcf',P.map(vcf).join('\r\n')));
+  document.getElementById('vcAll').addEventListener('click',()=>save('L152_project_directory.vcf',P.map(vcf).join('\r\n')));
 
 })();
 
@@ -415,7 +415,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 
   // search
   const q=document.getElementById('q'), res=document.getElementById('qres');
-  const label={home:'Home',watermain:'Water main',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team'};
+  const label={home:'Home',watermain:'Nitto Watermain',tracker:'Tracker',documents:'Documents',schedule:'Schedule',team:'Team'};
   q.addEventListener('input',()=>{
     const s=q.value.trim().toLowerCase(); if(s.length<2){res.innerHTML='';return;}
     const els=[...document.querySelectorAll('.panel tbody tr, .panel li, .panel .pcard, .panel .ri, .panel .step, .panel section > header h2, .panel .g-row, .panel .act')];
@@ -740,11 +740,11 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
           ls.forEach((l,j)=>pg.drawText(l,{x:P[0][0],y:PH-P[0][1]-j*sz*LH,size:sz,font,color:col}));}
       }));
       const who=(names[me]&&names[me].name)||'';
-      pg.drawText(`${S0.id} ${S0.t} · ${S0.x?'':'PIDA '+SETDATE+' · '}markups from the Nitto project site · ${dateStr(Date.now())}${who?' · '+who:''}`,{x:24*(S0.x?K:1),y:10*(S0.x?K:1),size:11*(S0.x?K:1),font,color:rgb(.35,.4,.45)});
+      pg.drawText(`${S0.id} ${S0.t} · ${S0.x?'':'PIDA '+SETDATE+' · '}markups from the L152 project site · ${dateStr(Date.now())}${who?' · '+who:''}`,{x:24*(S0.x?K:1),y:10*(S0.x?K:1),size:11*(S0.x?K:1),font,color:rgb(.35,.4,.45)});
       if(rot[sheet])pg.setRotation(window.PDFLib.degrees(rot[sheet]));
       const bytes=await out.save();
       const blob=new Blob([bytes],{type:'application/pdf'});
-      const fn=`Nitto_${SHEETS[sheet].id}_${SHEETS[sheet].t.replace(/[^A-Za-z0-9]+/g,'_')}_markup.pdf`;
+      const fn=`L152_${SHEETS[sheet].id}_${SHEETS[sheet].t.replace(/[^A-Za-z0-9]+/g,'_')}_markup.pdf`;
       if(!dl){say('Downloads are not available in this view.');return;}
       try{await dl.save({filename:fn,data:blob});say(count?'PDF ready with '+count+' mark'+(count===1?'':'s')+'.':'PDF ready (no markups on this sheet).');}
       catch(e){try{await dl.save({filename:fn,data:bytes});say('PDF ready.');}catch(e2){say('The download was not saved.');}}
@@ -812,7 +812,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     return made;}
   function buildPrompt(v,c){const rows=(window.jqIssues||[]),is=rows.find(r=>r.ref===v.ref)||{};
     const slim=rows.filter(r=>r.status!=='Done').map(r=>({ref:r.ref,title:cut(r.title,100),owner:r.owner,area:r.area,blockedBy:r.blockedBy||[]}));
-    return `You help Jason Lueders (Director of Construction, Zilber Property Group) keep the tracker for the Nitto project (Zilber Industrial 3, LakeView Corporate Park, Pleasant Prairie: building, site, approvals and the public water main) correct. A validation card shows something that happened, what the tracker will do next, and Jason's comment. Revise the proposed outcome so it follows Jason's comment exactly. Return JSON only, no other text: {"invalid":false,"summary":"1 to 3 plain sentences: what happens to the item and what happens next","items":[{"title":"","owner":"","area":"","blockedBy":["N-00"]}],"itemUpdates":[{"ref":"N-00","next":"note text","now":"optional one-sentence current state","status":"optional Open|Pending|In progress|Done","ball":"optional who moves next","title":"optional new title","owner":"optional new owner"}]}. Use empty arrays when nothing is added. Omit optional fields you are not changing.
+    return `You help Jason Lueders (Director of Construction, Zilber Property Group) keep the tracker for project L152 (Zilber Industrial 3, Nitto parcel, LakeView Corporate Park, Pleasant Prairie: building, site, approvals and the public water main) correct. A validation card shows something that happened, what the tracker will do next, and Jason's comment. Revise the proposed outcome so it follows Jason's comment exactly. Return JSON only, no other text: {"invalid":false,"summary":"1 to 3 plain sentences: what happens to the item and what happens next","items":[{"title":"","owner":"","area":"","blockedBy":["N-00"]}],"itemUpdates":[{"ref":"N-00","next":"note text","now":"optional one-sentence current state","status":"optional Open|Pending|In progress|Done","ball":"optional who moves next","title":"optional new title","owner":"optional new owner"}]}. Use empty arrays when nothing is added. Omit optional fields you are not changing.
 Rules: owner is the person who does the action (never put ZPG's action under another party). Use blockedBy with existing refs when a step cannot start until another finishes, so nobody gets an item they cannot act on yet. One item per hand-off; do not duplicate an existing open item (update it instead). Areas allowed (use the exact text): Village approvals & agreements, Public water main, Wetlands, floodplain & stormwater, Permits & preconstruction, Building & closeout. Do not invent steps Jason did not ask for. If his comment adds an interim step or a follow-up (for example an email to send), add it as an item. If Jason says the request itself is wrong, does not apply, or the premise is mistaken, set "invalid":true, make the summary say plainly that nothing changes in the tracker and why in his words, and return empty arrays. Plain wording, short.
 ITEM: ${JSON.stringify({ref:v.ref,title:is.title,owner:is.owner,area:is.area,status:is.status,next:cut(is.next,400),blockedBy:is.blockedBy||[]})}
 WHAT HAPPENED (${v.doc}): ${v.detail||v.evidence}
