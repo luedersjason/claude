@@ -88,7 +88,7 @@ def wm_final(s):
                  ("markups from the L152 project site", "markups from the Nitto watermain project site"), ("const fn=`L152_", "const fn=`Nitto_")]:
         s = _one(s, a, b)
     s = re.sub(r'keep the tracker for project L152 \([^)]*\) correct\.', 'keep the tracker for the Nitto public watermain (Zilber Industrial 3, LakeView Corporate Park, Pleasant Prairie) correct.', s)
-    left = [m.start() for m in re.finditer('L152', s)]
+    left = [m.start() for m in re.finditer('L152', s.replace('>L152 project →<', ''))]
     assert not left, [s[i-60:i+40] for i in left[:5]]
     return s
 
@@ -222,7 +222,7 @@ if SITE == 'watermain':
     page = wm_page(page)
 for k, v in {'%%CSS%%': css, '%%JS%%': js,
              '%%SUMMARY%%': E(DATA['summary']), '%%STEPS%%': steps_html,
-             '%%BUILD%%': BUILD, '%%RAIL4%%': rail4(PROJ['wrail'] if SITE == 'watermain' else PROJ['rail']), '%%WRAIL4%%': rail4(PROJ['wrail']), '%%AREAOPTS%%': AREAOPTS}.items():
+             '%%BUILD%%': BUILD, '%%SITELINK%%': ('<a class="tab" href="/l152/" style="text-decoration:none;border:1px solid rgba(255,255,255,.45);border-radius:6px;padding:6px 12px;margin-left:8px">L152 project →</a>' if SITE == 'watermain' else '<a class="tab" href="/" style="text-decoration:none;border:1px solid rgba(255,255,255,.45);border-radius:6px;padding:6px 12px;margin-left:8px">Nitto Watermain →</a>'), '%%RAIL4%%': rail4(PROJ['wrail'] if SITE == 'watermain' else PROJ['rail']), '%%WRAIL4%%': rail4(PROJ['wrail']), '%%AREAOPTS%%': AREAOPTS}.items():
     if k == '%%WRAIL4%%' and SITE == 'watermain': continue
     assert k in page, k
     page = page.replace(k, v)
