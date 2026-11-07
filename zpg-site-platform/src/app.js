@@ -2,6 +2,7 @@
 // and a plain Worker (src/worker.js). Gives the page the same database / people /
 // Claude features the Claude artifact runtime provided.
 import Anthropic from "@anthropic-ai/sdk";
+import { applyMutation, d1Docs, listCollection, parseIfMatch } from "./docstore.js";
 
 const COOKIE = "zpg_s";
 const SESSION_DAYS = 60;
@@ -156,15 +157,16 @@ async function join(req, env, url) {
   return startSession(env, person.id);
 }
 
-// Collections: GET list (with a change marker for cheap polling), PUT set, PATCH update (shallow merge), DELETE.
+// Collections: GET list (ETag, one response per fetch — the page does not poll),
+// PUT set, PATCH update (shallow merge), DELETE. If-Match is the record version;
+// a mismatch returns 409 and does not write. Omitting If-Match keeps the old upsert.
 async function collection(req, env, person, col, id) {
   if (!/^[a-z][a-z0-9_-]{0,40}$/i.test(col)) return json({ error: "bad collection" }, 400);
+  const docs = d1Docs(env.DB);
   if (req.method === "GET") {
-    const mark = await env.DB.prepare("SELECT COUNT(*) n, COALESCE(MAX(updated_at),0) m, COALESCE(SUM(ver),0) v FROM docs WHERE col = ?").bind(col).first();
-    const etag = `"${mark.n}-${mark.m}-${mark.v}"`;
+    const { etag, docs: rows } = await listCollection(docs, col);
     if ((req.headers.get("if-none-match") || "").replace(/^W\//, "") === etag) return new Response(null, { status: 304, headers: { etag } });
-    const { results } = await env.DB.prepare("SELECT id, data FROM docs WHERE col = ?").bind(col).all();
-    return json({ docs: results.map((r) => ({ id: r.id, data: JSON.parse(r.data) })) }, 200, { etag, "cache-control": "no-store" });
+    return json({ docs: rows }, 200, { etag, "cache-control": "no-store" });
   }
   if (!id || id.length > 120) return json({ error: "bad id" }, 400);
   // Viewers can add new forum posts (their own, new ids only). Everything else needs editor or admin.
@@ -185,24 +187,12 @@ async function collection(req, env, person, col, id) {
   }
   const body = await req.json().catch(() => null);
   if (!body || typeof body !== "object" || Array.isArray(body)) return json({ error: "body must be an object" }, 400);
-  const text = JSON.stringify(body);
-  if (text.length > 900_000) return json({ error: "document too large" }, 413);
-  if (req.method === "PUT") {
-    await env.DB.prepare(
-      "INSERT INTO docs (col, id, data, ver, updated_at, updated_by) VALUES (?, ?, ?, 1, ?, ?) " +
-      "ON CONFLICT(col, id) DO UPDATE SET data = excluded.data, ver = docs.ver + 1, updated_at = excluded.updated_at, updated_by = excluded.updated_by"
-    ).bind(col, id, text, now, person.id).run();
-    return json({ ok: true });
-  }
-  if (req.method === "PATCH") {
-    const cur = await env.DB.prepare("SELECT data FROM docs WHERE col = ? AND id = ?").bind(col, id).first();
-    if (!cur) return json({ error: "not_found" }, 404);
-    const merged = { ...JSON.parse(cur.data), ...body };
-    await env.DB.prepare("UPDATE docs SET data = ?, ver = ver + 1, updated_at = ?, updated_by = ? WHERE col = ? AND id = ?")
-      .bind(JSON.stringify(merged), now, person.id, col, id).run();
-    return json({ ok: true });
-  }
-  return json({ error: "method" }, 405);
+  if (JSON.stringify(body).length > 900_000) return json({ error: "document too large" }, 413);
+  const expect = parseIfMatch(req);
+  if (expect === null) return json({ error: "bad_if_match", message: "If-Match must be a version number." }, 400);
+  if (req.method !== "PUT" && req.method !== "PATCH") return json({ error: "method" }, 405);
+  const result = await applyMutation(docs, { col, id, method: req.method, body, expect, personId: person.id, now });
+  return json(result.body, result.status);
 }
 
 // Claude for the page's "revise this proposal" comment box. Editors only.

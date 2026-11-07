@@ -147,6 +147,15 @@ footer .wrap{padding-block:18px;font-size:12.5px;color:var(--muted);display:flex
 .toast.show{opacity:1}
 @media (prefers-reduced-motion:reduce){.toast{transition:none}}
 .tk-bar{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center}
+.tk-sync{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:4px}
+.tk-sync .btn.go:disabled{opacity:.45;cursor:default}
+#tkSyncState{font-size:13px;font-weight:600}
+#tkSyncState.unsaved{color:var(--warn)}
+#tkSyncState.sending{color:var(--muted);font-weight:500}
+#tkSyncState.saved{color:var(--accent-ink)}
+#tkSyncState.error{color:#9B1C1C}
+table.tk tr.dirty td.t{box-shadow:inset 3px 0 0 var(--warn)}
+.unsaved-tag{font-family:var(--mono);font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:var(--warn);margin-left:6px}
 .tk-counts{display:flex;gap:8px;flex-wrap:wrap}
 .tk-counts span{font-family:var(--mono);font-size:12px;padding:3px 10px;border-radius:999px;background:var(--sunk)}
 select.btn{padding:5px 8px}
@@ -537,7 +546,13 @@ body{margin:0}
 <div class="panel" data-panel="tracker" hidden>
 <section id="tracker">
   <header><span class="eyebrow">Shared with everyone who can open this page</span><h2>Issue tracker</h2>
-  <p class="lede">Every open step on the project, grouped by who does the work. Click a status to move it along. Changes save for the whole team.</p></header>
+  <p class="lede">Every open step on the project, grouped by who does the work. Click a status to change it on this page. Nothing is saved for the team until you press Send.</p>
+  <div class="tk-sync" id="tkSync" data-phase="saved">
+    <button type="button" class="btn go" id="tkSend" disabled>Send</button>
+    <button type="button" class="btn" id="tkRefresh">Refresh</button>
+    <button type="button" class="btn" id="tkDiscard" hidden>Discard unsaved</button>
+    <span id="tkSyncState" role="status" aria-live="polite">Saved</span>
+  </div></header>
   <div class="tk-bar" id="tkBar">
     <div class="tk-counts" id="tkCounts"></div><span id="tkSweep" class="note"></span>
     <div class="grpsw" id="tkGrpSw" style="margin:0 0 8px"><button type="button" data-tg="area" aria-pressed="true">By discipline</button><button type="button" data-tg="owner" aria-pressed="false">By owner</button><button type="button" data-tg="none" aria-pressed="false">Flat list</button></div>
@@ -707,6 +722,7 @@ body{margin:0}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="tracker-sync.js"></script>
 <script src="claude-shim.js"></script>
 <script>fetch("/api/me").then(r=>r.ok?r.json():null).then(m=>{if(m&&m.role==="admin"&&m.id==="jason"){var b=document.getElementById("inviteBtn");if(b)b.hidden=false;}}).catch(function(){});</script>
 <script>
@@ -919,120 +935,9 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 })();
 
 (async function tracker(){
-  const body=document.getElementById('tkBody'), msg=document.getElementById('tkMsg');
-  const ownerSel=document.getElementById('tkOwner'), showSel=document.getElementById('tkShow');
-  const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const NEXT={Open:'In progress',Pending:'In progress','In progress':'Done',Done:'Open'};
-  let rows=[], canWrite=true, tkGrp='area', tkOnly=null, detailId=null; const tkOpen=new Set(), doneOpen=new Set();
   const DNAME={'Design':'Drawings and Design','Approvals':'Village, WDNR, Corps & KWU','General Contractor':'General Contractor','ZPG':'Developer (ZPG)'};
-  const syncSw=()=>document.querySelectorAll('#tkGrpSw button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.tg===tkGrp)));
-  window.jqOpenItem=id=>{detailId=id;render();if(window.jqTab)window.jqTab('tracker',true);};
-  window.jqOpenGroup=(kind,key,withDone)=>{detailId=null;tkGrp=kind;tkOnly=key;syncSw();tkOpen.add(kind+':'+key);if(withDone)doneOpen.add(kind+':'+key);showSel.value=showSel.value==='Done'?'active':showSel.value;render();if(window.jqTab)window.jqTab('tracker',true);};
-  document.getElementById('tkGrpSw').addEventListener('click',e=>{const b=e.target.closest('[data-tg]');if(!b)return;tkGrp=b.dataset.tg;tkOnly=null;document.querySelectorAll('#tkGrpSw button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render();});
-  try{ if(localStorage.getItem('tkShow')) showSel.value=localStorage.getItem('tkShow'); }catch(e){}
-  const db=window.claude?await window.claude.use('db'):null;
-  if(!db){ body.innerHTML='<tr><td colspan="5" class="note">Sign in to see the tracker.</td></tr>'; return; }
-  const user=await window.claude.use('user');
-  try{ const c=user&&user.can?await user.can('data.write'):null; if(c===false) canWrite=false; }catch(e){}
-  if(!canWrite){ document.getElementById('tkAdd').hidden=true; document.getElementById('newIss').hidden=true; }
-  const col=db.collection('issues');
-  function norm(snap){
-    const list=snap&&(snap.docs||snap)||[];
-    return Array.from(list).map(d=>{const v=typeof d.data==='function'?d.data():(d.data||d);return {...v,_id:d.id||v.id};});
-  }
-  window.jqWait=r=>(r.blockedBy||[]).map(ref=>rows.find(x=>x.ref===ref)).filter(x=>x&&x.status!=='Done');
-  const eff=r=>(r.status==='Open'&&window.jqWait(r).length)?'Pending':(r.status||'Open');window.jqEff=eff;
-  const stc=s=>s==='In progress'?'Progress':s;
-  const pd=t=>{const m=String(t||'').match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/);if(!m)return null;const now=new Date();let y=m[3]?+m[3]:now.getFullYear();if(y<100)y+=2000;let d=new Date(y,+m[1]-1,+m[2]);if(!m[3]&&d-now>60*864e5)d=new Date(y-1,+m[1]-1,+m[2]);return d;};
-  const age=t=>{const d=pd(t);return d?Math.floor((new Date()-d)/864e5):null;};
-  function flags(r){if(r.status==='Done')return '';let h='';if(r.ball)h+=`<span class="ball">Ball: ${esc(r.ball)}</span>`;const dd=pd(r.due);if(dd&&new Date()-dd>864e5*0.99)h+=`<span class="flag">Overdue ${esc(r.due)}</span>`;else if(r.due)h+=`<span class="wait">Due ${esc(r.due)}</span>`;const a=age(r.confirmed||r.updated);if(a!==null&&a>=7)h+=`<span class="flag">Not confirmed in ${a} days</span>`;return h;}
-  window.jqCmp=(a,b)=>((a.status==='Done')-(b.status==='Done'))||((b.pri?1:0)-(a.pri?1:0))||((parseInt(String(a.ref||'').replace(/\D/g,''))||999)-(parseInt(String(b.ref||'').replace(/\D/g,''))||999));
-  window.jqPri=async id=>{const r=rows.find(x=>x._id===id);if(!r)return;try{await col.doc(id).update({pri:!r.pri});}catch(e){msg.textContent='Could not change priority. You may have view-only access.';}};
-  function detailHtml(r){
-    const lab=DNAME[r.area]||r.area||'';const L=ref=>rows.find(x=>x.ref===ref);
-    const link=x=>`<li><a href="#" class="pre" data-pre="${esc(x.ref)}">${esc(x.ref)}</a> ${esc(x.title)} <span class="mono" style="font-size:11px">· ${esc(x.status)}</span></li>`;
-    const pre=(r.blockedBy||[]).map(L).filter(Boolean),unb=rows.filter(x=>(x.blockedBy||[]).includes(r.ref)),ve=(r.ve||[]).map(L).filter(Boolean),feeds=rows.filter(x=>(x.ve||[]).includes(r.ref));
-    const sec=(h,a)=>a.length?`<h3>${h}</h3><ul>${a.map(link).join('')}</ul>`:'';
-    return `<button type="button" class="btn" data-back>← Back to ${esc(tkOnly?(tkGrp==='area'?(DNAME[tkOnly]||tkOnly):tkOnly):'the tracker')}</button>
-    <div class="eyebrow" style="margin-top:12px">${esc(r.ref||'')} · ${esc(lab)}</div><h2 style="margin:4px 0 10px">${esc(r.title)}</h2>
-    <div class="tk-facts"><div><span>Status</span><button class="st ${esc(stc(eff(r)))}" data-id="${esc(r._id)}"${canWrite?'':' disabled'}>${esc(eff(r))}</button></div>
-    <div><span>Owner</span>${esc(r.owner||'Unassigned')}</div>${r.ball?`<div><span>Ball is with</span>${esc(r.ball)}</div>`:''}${r.due?`<div><span>Due</span>${esc(r.due)}</div>`:''}${r.confirmed?`<div><span>Last confirmed</span>${esc(r.confirmed)}${r.source?' · '+esc(r.source):''}</div>`:''}
-    <div><span>Priority</span><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" aria-pressed="${!!r.pri}">★ ${r.pri?'Priority':'Mark priority'}</button></div>
-    <div><span>Updated</span>${esc(r.updated||'')}</div></div>
-    ${sec('Predecessors (must finish first)',pre)}${sec('Unblocks',unb)}${sec('VE ideas for this item',ve)}${sec('Feeds the cost log item',feeds)}
-    ${flags(r)?`<p>${flags(r)}</p>`:''}${r.now?`<h3>Now</h3><p style="max-width:80ch;line-height:1.55" class="nowl">${esc(r.now)}</p>`:''}<h3>${r.now?'History':'Next step / notes'}</h3><p style="max-width:80ch;line-height:1.55" class="tk-hist">${esc(r.next||'No notes yet.')}</p>`;
-  }
-  function render(){
-    window.jqIssues=rows; window.dispatchEvent(new Event('jqissues'));
-    const detEl=document.getElementById('tkDetail'),barEl=document.getElementById('tkBar'),wrapEl=document.getElementById('tkWrap'),onlyEl=document.getElementById('tkOnly');
-    const dr=detailId?rows.find(x=>x._id===detailId):null; if(!dr)detailId=null;
-    barEl.hidden=!!dr; wrapEl.hidden=!!dr; detEl.hidden=!dr; onlyEl.hidden=!!dr||!tkOnly;
-    if(dr){detEl.innerHTML=detailHtml(dr);return;}
-    if(tkOnly)onlyEl.innerHTML='Showing <b>'+esc(tkGrp==='area'?(DNAME[tkOnly]||tkOnly):tkOnly)+'</b> <button type="button" class="btn" data-clearonly>Show all</button>';
-    const owners=[...new Set(rows.flatMap(r=>String(r.owner||'Unassigned').split(/\s*[·,]\s*/)))].sort();
-    const cur=ownerSel.value;
-    ownerSel.innerHTML='<option value="">Everyone</option>'+owners.map(o=>`<option${o===cur?' selected':''}>${esc(o)}</option>`).join('');
-    const c={Open:0,Pending:0,'In progress':0,Done:0}; rows.forEach(r=>{const e=eff(r);c[e]=(c[e]||0)+1;});
-    document.getElementById('tkCounts').innerHTML=`<span>${c.Open} open</span><span>${c.Pending} pending</span><span>${c['In progress']} in progress</span><span>${c.Done} done</span>`;
-    const show=showSel.value;
-    const vis=rows.filter(r=>(!cur||String(r.owner||'Unassigned').includes(cur))&&(tkGrp!=='none'||show==='all'||(show==='Done'?r.status==='Done':r.status!=='Done')))
-      .sort(window.jqCmp);
-    const rowHtml=r=>`<tr class="${r.status==='Done'?'done':''}${r.pri?' pri':''}${r.status!=='Done'&&window.jqWait(r).length?' blocked':''}">
-      <td class="id"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button> ${esc(r.ref||'')}</td>
-      <td class="t"><a href="#" class="itm" data-open="${esc(r._id)}">${esc(r.title)}</a><span class="area">${esc(r.area||'')}</span></td>
-      <td class="who">${esc(r.owner||'Unassigned')}</td>
-      <td><button class="st ${esc(stc(eff(r)))}" data-id="${esc(r._id)}"${canWrite?'':' disabled'} title="${canWrite?'Click to change status':'View only'}">${esc(eff(r))}</button></td>
-      <td class="nx">${(r.ve&&r.ve.length)?`<span class="wait" style="background:#E8F5EE;border-color:#BFE3CF;color:#1B6B3F">VE ideas: ${r.ve.map(x=>`<a href="#" class="pre" data-pre="${esc(x)}">${esc(x)}</a>`).join(', ')}</span> `:''}${r.status!=='Done'&&window.jqWait(r).length?`<span class="wait">Predecessor: ${window.jqWait(r).map(x=>`<a href="#" class="pre" data-pre="${esc(x.ref)}">${esc(x.ref)}</a>`).join(', ')}</span> `:''}${flags(r)}${r.now?`<span class="nowl">${esc(r.now)}</span>`:esc(r.next||'')}${r.updated?` <span class="mono" style="font-size:11px">· ${esc(r.updated)}</span>`:''}</td></tr>`;
-    const DN=DNAME;
-    if(!vis.length){body.innerHTML='<tr><td colspan="5" class="note">Nothing matches this filter.</td></tr>';return;}
-    if(tkGrp==='none'){body.innerHTML=vis.map(rowHtml).join('');return;}
-    const own=r=>String(r.owner||'Unassigned').split(/\s*[·,]\s*/).filter(Boolean);
-    let keys0=tkGrp==='area'?Object.keys(DN).concat([...new Set(vis.map(r=>r.area).filter(a=>a&&!DN[a]))]):[...new Set(vis.flatMap(own))].sort((a,b)=>a==='Unassigned'?1:b==='Unassigned'?-1:a==='Jason'?-1:b==='Jason'?1:a.localeCompare(b));
-    const keys=tkOnly?keys0.filter(k=>k===tkOnly):keys0;
-    body.innerHTML=keys.map(k=>{const items=vis.filter(r=>tkGrp==='area'?r.area===k:own(r).includes(k)).sort(window.jqCmp);if(!items.length)return '';
-      const op=items.filter(r=>r.status!=='Done'),dn=items.filter(r=>r.status==='Done'),open=op.length,key=tkGrp+':'+k,isOpen=tkOpen.has(key)||tkOnly===k,doneShown=doneOpen.has(key)||show!=='active';
-      return `<tr class="grp" data-gk="${esc(key)}" aria-expanded="${isOpen}"><td colspan="5"><span class="car">${isOpen?'▾':'▸'}</span> <b>${esc(tkGrp==='area'?(DN[k]||k):k)}</b><span class="gc"><b>${open}</b> open / ${items.length}</span></td></tr>`+(isOpen?((show==='Done'?[]:op).map(rowHtml).join('')+(dn.length?`<tr class="donetoggle" data-dk="${esc(key)}"><td colspan="5">${doneShown?'▾':'▸'} ${dn.length} completed</td></tr>`+(doneShown?dn.map(rowHtml).join(''):''):'')):'');
-    }).join('');
-  }
-  ownerSel.addEventListener('change',render);
-  showSel.addEventListener('change',()=>{try{localStorage.setItem('tkShow',showSel.value)}catch(e){};render();});
-  async function cycle(b){
-    if(!b||b.disabled) return;
-    const r=rows.find(x=>x._id===b.dataset.id); if(!r) return;
-    const s=NEXT[r.status]||'Open', d=new Date().toLocaleDateString('en-US',{month:'numeric',day:'numeric'});
-    b.disabled=true;
-    try{ await col.doc(r._id).update({status:s,updated:d}); msg.textContent=''; if(s==='Done'&&window.jqFeed) window.jqFeed(r.ref+' done: '+String(r.title).slice(0,60)); }
-    catch(err){ msg.textContent='That change did not save. You may have view-only access to this page.'; b.disabled=false; }
-  }
-  document.getElementById('tkDetail').addEventListener('click',e=>{
-    if(e.target.closest('[data-back]')){detailId=null;render();return;}
-    const pre=e.target.closest('a.pre'); if(pre){e.preventDefault();window.jqGoRef(pre.dataset.pre);return;}
-    const pb=e.target.closest('.pri-b'); if(pb){window.jqPri(pb.dataset.pid);return;}
-    cycle(e.target.closest('.st'));
-  });
-  document.querySelector('.tab[data-tab="tracker"]').addEventListener('click',()=>{detailId=null;tkOnly=null;render();});
-  document.getElementById('tkOnly').addEventListener('click',e=>{if(e.target.closest('[data-clearonly]')){tkOnly=null;render();}});
-  body.addEventListener('click',async e=>{
-    const gr=e.target.closest('tr.grp'); if(gr){const k=gr.dataset.gk;tkOpen.has(k)?tkOpen.delete(k):tkOpen.add(k);render();return;}
-    const pre=e.target.closest('a.pre'); if(pre){e.preventDefault();window.jqGoRef(pre.dataset.pre);return;}
-    const pb=e.target.closest('.pri-b'); if(pb){window.jqPri(pb.dataset.pid);return;}
-    const it=e.target.closest('a.itm'); if(it){e.preventDefault();detailId=it.dataset.open;render();window.scrollTo(0,0);return;}
-    const dt=e.target.closest('tr.donetoggle'); if(dt){const k=dt.dataset.dk;doneOpen.has(k)?doneOpen.delete(k):doneOpen.add(k);render();return;}
-    cycle(e.target.closest('.st'));
-  });
-  document.getElementById('tkForm').addEventListener('submit',async e=>{
-    e.preventDefault();
-    const t=document.getElementById('tkTitle').value.trim(); if(!t) return;
-    const n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0)+1;
-    const ref='N-'+String(n).padStart(2,'0');
-    try{
-      await col.doc(ref).set({ref,title:t,owner:document.getElementById('tkWho').value.trim()||'Unassigned',area:document.getElementById('tkArea').value,
-        status:'Open',next:document.getElementById('tkNext').value.trim(),order:n,updated:new Date().toLocaleDateString('en-US',{month:'numeric',day:'numeric'})});
-      e.target.reset(); msg.textContent='Added '+ref+'.'; document.getElementById('issModal').hidden=true;
-    }catch(err){ msg.textContent='Could not add the item. You may have view-only access to this page.'; }
-  });
-  try{db.collection('sweeps').onSnapshot(sn=>{const L=norm(sn).sort((a,b)=>(b.at||0)-(a.at||0))[0];const el=document.getElementById('tkSweep');if(el&&L)el.textContent=`Last full check: ${L.date||''} · ${L.checked||0} items checked · ${L.changed||0} changed`;},()=>{});}catch(e){}
-  col.onSnapshot(snap=>{rows=norm(snap);render();},()=>{body.innerHTML='<tr><td colspan="5" class="note">The tracker could not load. Reload the page to try again.</td></tr>';});
+  if(!window.NittoTrackerSync){const body=document.getElementById('tkBody');if(body)body.innerHTML='<tr><td colspan="5" class="note">The tracker could not load. Reload the page to try again.</td></tr>';return;}
+  await window.NittoTrackerSync.boot({DNAME:DNAME,signIn:'Sign in to see the tracker.',refPrefix:'N-'});
 })();
 (function directory(){
   // Firms and people from the watermain portal contacts (_data.json). Unknown = "to confirm"; nothing guessed.
@@ -1157,15 +1062,15 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const own=r=>String((r.owner&&String(r.owner).trim())||'Unassigned').split(/\s*[·,]\s*/).filter(Boolean);const names=[...new Set(rows.flatMap(own))];
     names.sort((a,b)=>a==='Unassigned'?1:b==='Unassigned'?-1:a==='Jason'?-1:b==='Jason'?1:a.localeCompare(b));
     discEl.innerHTML=names.map(n=>{const items=rows.filter(r=>own(r).includes(n)).sort(window.jqCmp);
-      const open=items.filter(r=>r.status!=='Done').length;if(!open&&!items.length)return '';
-      return `<details data-k="o:${esc(n)}"${(openSet.has('o:'+n)||(n==='Jason'&&!openSet.has('_x')))?' open':''}><summary>${esc(n)}<span><b>${open}</b> open / ${items.length}</span></summary><ul>${items.filter(r=>r.status!=='Done').map(r=>`<li class="${r.status==='Done'?'done':''}${r.pri?' pri':''}"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button><button type="button" data-ref="${esc(r._id)}"><i>${esc(r.ref||'')}</i><span>${esc(r.title)}${r.status!=='Done'&&window.jqWait&&window.jqWait(r).length?` <em class="pre" role="link" tabindex="0" data-pre="${window.jqWait(r)[0].ref}">Predecessor: ${window.jqWait(r).map(x=>esc(x.ref)).join(', ')}</em>`:''}</span></button></li>`).join('')}</ul>${items.filter(r=>r.status==='Done').length?`<button type="button" class="donelink" data-dl="owner:${esc(n)}">${items.filter(r=>r.status==='Done').length} completed →</button>`:''}</details>`;}).join('')||'<p class="note">No issues yet.</p>';}
+      const open=items.filter(r=>r.status!=='Done'||r._dirty).length;if(!open&&!items.length)return '';
+      return `<details data-k="o:${esc(n)}"${(openSet.has('o:'+n)||(n==='Jason'&&!openSet.has('_x')))?' open':''}><summary>${esc(n)}<span><b>${open}</b> open / ${items.length}</span></summary><ul>${items.filter(r=>r.status!=='Done'||r._dirty).map(r=>`<li class="${r.status==='Done'?'done':''}${r.pri?' pri':''}"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button><button type="button" data-ref="${esc(r._id)}"><i>${esc(r.ref||'')}</i><span>${esc(r.title)}${r.status!=='Done'&&window.jqWait&&window.jqWait(r).length?` <em class="pre" role="link" tabindex="0" data-pre="${window.jqWait(r)[0].ref}">Predecessor: ${window.jqWait(r).map(x=>esc(x.ref)).join(', ')}</em>`:''}</span></button></li>`).join('')}</ul>${items.filter(r=>r.status==='Done'&&!r._dirty).length?`<button type="button" class="donelink" data-dl="owner:${esc(n)}">${items.filter(r=>r.status==='Done'&&!r._dirty).length} completed →</button>`:''}</details>`;}).join('')||'<p class="note">No issues yet.</p>';}
   document.querySelector('.grpsw').addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;grp=b.dataset.g;document.querySelectorAll('.grpsw button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));renderDisc();});
   function renderDisc(){
     const rows=window.jqIssues||[];if(grp==='owner'){renderOwner(rows);return;} const known=DISC.map(d=>d[0]);
     const groups=DISC.concat(rows.some(r=>!known.includes(r.area))?[['__other','Other']]:[]);
     discEl.innerHTML=groups.map(([k,n])=>{const items=rows.filter(r=>k==='__other'?!known.includes(r.area):r.area===k).sort(window.jqCmp);
-      if(!items.length)return '';const open=items.filter(r=>r.status!=='Done').length;
-      return `<details data-k="${k}"${openSet.has(k)?' open':''}><summary>${n}<span><b>${open}</b> open / ${items.length}</span></summary><ul>${items.filter(r=>r.status!=='Done').map(r=>`<li class="${r.status==='Done'?'done':''}${r.pri?' pri':''}"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button><button type="button" data-ref="${esc(r._id)}"><i>${esc(r.ref||'')}</i><span>${esc(r.title)}${r.status!=='Done'&&window.jqWait&&window.jqWait(r).length?` <em class="pre" role="link" tabindex="0" data-pre="${window.jqWait(r)[0].ref}">Predecessor: ${window.jqWait(r).map(x=>esc(x.ref)).join(', ')}</em>`:''}</span></button></li>`).join('')}</ul>${items.filter(r=>r.status==='Done').length?`<button type="button" class="donelink" data-dl="area:${esc(k)}">${items.filter(r=>r.status==='Done').length} completed →</button>`:''}</details>`;}).join('')||'<p class="note">No issues yet.</p>';
+      if(!items.length)return '';const open=items.filter(r=>r.status!=='Done'||r._dirty).length;
+      return `<details data-k="${k}"${openSet.has(k)?' open':''}><summary>${n}<span><b>${open}</b> open / ${items.length}</span></summary><ul>${items.filter(r=>r.status!=='Done'||r._dirty).map(r=>`<li class="${r.status==='Done'?'done':''}${r.pri?' pri':''}"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button><button type="button" data-ref="${esc(r._id)}"><i>${esc(r.ref||'')}</i><span>${esc(r.title)}${r.status!=='Done'&&window.jqWait&&window.jqWait(r).length?` <em class="pre" role="link" tabindex="0" data-pre="${window.jqWait(r)[0].ref}">Predecessor: ${window.jqWait(r).map(x=>esc(x.ref)).join(', ')}</em>`:''}</span></button></li>`).join('')}</ul>${items.filter(r=>r.status==='Done'&&!r._dirty).length?`<button type="button" class="donelink" data-dl="area:${esc(k)}">${items.filter(r=>r.status==='Done'&&!r._dirty).length} completed →</button>`:''}</details>`;}).join('')||'<p class="note">No issues yet.</p>';
   }
   window.addEventListener('jqissues',renderDisc);
   discEl.addEventListener('toggle',e=>{const d=e.target;if(d.tagName==='DETAILS'){openSet.add('_x');d.open?openSet.add(d.dataset.k):openSet.delete(d.dataset.k);}},true);

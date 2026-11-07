@@ -2,22 +2,31 @@
 // backed by this site's Cloudflare Worker (/api). Load before the page's own script.
 (function () {
   const api = (path, opts) => fetch("/api" + path, Object.assign({ credentials: "same-origin" }, opts));
-  const fail = async (r) => { const b = await r.json().catch(() => ({})); const e = new Error(b.message || b.error || "Request failed"); e.code = b.code || b.error || "error"; throw e; };
+  const fail = async (r) => { const b = await r.json().catch(() => ({})); const e = new Error(b.message || b.error || "Request failed"); e.code = b.code || b.error || "error"; e.status = r.status; e.body = b; throw e; };
 
   function snapshot(docs) {
-    const list = docs.map((d) => ({ id: d.id, data: () => d.data, exists: true }));
+    const list = docs.map((d) => ({ id: d.id, data: () => d.data, ver: d.ver, exists: true }));
     return { docs: list, size: list.length, empty: !list.length, forEach: (fn) => list.forEach(fn) };
   }
-  // Listeners per collection name, so a write on this page refreshes them at once instead of at the next poll.
+  // Listeners per collection. They load once. A later fetch happens only when this
+  // page writes or when the page calls refresh(). There is no timer.
   const subs = {};
-  const kick = (name) => (subs[name] || new Set()).forEach((fn) => fn());
+  const kick = (name) => { (subs[name] || new Set()).forEach((fn) => { fn(true); }); };
   function collection(name) {
     const NS = location.pathname.startsWith("/l152") ? "l152_" : "";   // L152 site data is separate from the watermain site
     const base = "/c/" + encodeURIComponent(NS + name);
+    async function write(method, id, data, opts) {
+      const headers = { "content-type": "application/json" };
+      if (opts && opts.ifMatch != null) headers["if-match"] = String(opts.ifMatch);
+      const r = await api(base + "/" + encodeURIComponent(id), { method, headers, body: JSON.stringify(data), cache: "no-store" });
+      if (!r.ok) await fail(r);
+      if (!opts || !opts.quiet) kick(name);
+      return r.json().catch(() => ({ ok: true }));
+    }
     const docRef = (id) => ({
       id,
-      set: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); },
-      update: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); },
+      set: (data, opts) => write("PUT", id, data, opts),
+      update: (data, opts) => write("PATCH", id, data, opts),
       delete: async () => { const r = await api(base + "/" + encodeURIComponent(id), { method: "DELETE" }); if (!r.ok) await fail(r); kick(name); },
       get: async () => { const s = await getAll(); const d = s.docs.find((x) => x.id === id); return d || { id, exists: false, data: () => undefined }; },
     });
@@ -35,21 +44,24 @@
       doc: docRef,
       add: async (data) => { const id = "d" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); await docRef(id).set(data); return docRef(id); },
       get: () => getAll(true),
+      refresh() { const ticks = [...(subs[name] || [])]; return Promise.all(ticks.map((fn) => fn(true))); },
       onSnapshot(next, error) {
-        let stopped = false, prev = null, timer = null, busy = false, again = false;
-        const tick = async () => {
+        let stopped = false, prev = null, busy = false, again = false;
+        const tick = async (force) => {
           if (stopped) return;
-          if (busy) { again = true; return; }
-          busy = true; clearTimeout(timer);
-          try { const s = await getAll(); if (s !== prev) { prev = s; next(s); } }
+          if (busy) { again = force ? true : (again || "soft"); return; }
+          busy = true;
+          try { const s = await getAll(force === true); if (s !== prev) { prev = s; next(s); } }
           catch (e) { if (error) error(e); }
           busy = false;
-          if (again) { again = false; return tick(); }
-          if (!stopped) timer = setTimeout(tick, document.hidden ? 15000 : 4000);
+          if (stopped || !again) return;
+          const f = again === true;
+          again = false;
+          return tick(f);
         };
         (subs[name] = subs[name] || new Set()).add(tick);
-        tick();
-        return () => { stopped = true; clearTimeout(timer); subs[name].delete(tick); };
+        tick(false);
+        return () => { stopped = true; subs[name].delete(tick); };
       },
     };
   }
