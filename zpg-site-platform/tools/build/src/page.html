@@ -77,7 +77,13 @@
 <div class="panel" data-panel="tracker" hidden>
 <section id="tracker">
   <header><span class="eyebrow">Shared with everyone who can open this page</span><h2>Issue tracker</h2>
-  <p class="lede">Every open step on the project, grouped by who does the work. Click a status to move it along. Changes save for the whole team.</p></header>
+  <p class="lede">Every open step on the project, grouped by who does the work. Click a status to change it on this page. Nothing is saved for the team until you press Send.</p>
+  <div class="tk-sync" id="tkSync" data-phase="saved">
+    <button type="button" class="btn go" id="tkSend" disabled>Send</button>
+    <button type="button" class="btn" id="tkRefresh">Refresh</button>
+    <button type="button" class="btn" id="tkDiscard" hidden>Discard unsaved</button>
+    <span id="tkSyncState" role="status" aria-live="polite">Saved</span>
+  </div></header>
   <div class="tk-bar" id="tkBar">
     <div class="tk-counts" id="tkCounts"></div><span id="tkSweep" class="note"></span>
     <div class="grpsw" id="tkGrpSw" style="margin:0 0 8px"><button type="button" data-tg="area" aria-pressed="true">By discipline</button><button type="button" data-tg="owner" aria-pressed="false">By owner</button><button type="button" data-tg="none" aria-pressed="false">Flat list</button></div>
@@ -253,6 +259,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="tracker-sync.js"></script>
 <script src="claude-shim.js"></script>
 <script>fetch("/api/me").then(r=>r.ok?r.json():null).then(m=>{if(m&&m.role==="admin"&&m.id==="jason"){var b=document.getElementById("inviteBtn");if(b)b.hidden=false;}}).catch(function(){});</script>
 <script>

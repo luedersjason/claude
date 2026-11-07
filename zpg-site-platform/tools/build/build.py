@@ -92,11 +92,13 @@ def wm_final(s):
     assert not left, [s[i-60:i+40] for i in left[:5]]
     return s
 
-tracker = sec(247, 362)
+# The live tracker UI is public/tracker-sync.js. ref.js lines 247-362 stay so the
+# sec() slices below keep their line numbers; this boot call replaces that slice.
+tracker = open(SP + 'tracker-boot.js').read()
 tracker = R(tracker, "const DNAME={Design:'Drawings and Design',Approvals:'Village, DSPS & permits',Steel:'Structural & steel',Fire:'Fire protection',MEP:'MEP & process piping','General Contractor':'General Contractor',Jaquet:'Owner decisions (Jaquet)'};",
             "const DNAME=" + DNAME_JS + ";")
 tracker = R(tracker, "Sign in to claude.ai to see the tracker.", "Sign in to see the tracker.")
-tracker = R(tracker, "const ref='J-'+", "const ref='N-'+")
+tracker = R(tracker, "refPrefix:'J-'", "refPrefix:'N-'")
 
 directory = sec(363, 463)
 a = directory.index('  const firms={'); b = directory.index('  const esc=s=>')
