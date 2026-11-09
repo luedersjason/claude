@@ -13,10 +13,6 @@
   const NS0 = location.pathname.startsWith("/l152") ? "l152_" : "";
   const watchers = new Set();
   let pollTimer = null;
-  // After you send a comment or a change request, check every 4 s for 10 minutes so Claude's revision shows as soon as it lands.
-  let fastUntil = 0;
-  const delay = () => (Date.now() < fastUntil ? 4000 : 60000);
-  const hurry = () => { fastUntil = Date.now() + 600000; clearTimeout(pollTimer); pollTimer = setTimeout(() => poll(LIVE), 4000); };
   // Active parts (validation requests and the tracker change box) check once a minute while the tab is on screen.
   const LIVE = ["validations", "asks"].map((c) => NS0 + c);
   async function poll(only) {
@@ -28,14 +24,14 @@
       const r = await api("/marks?cols=" + cols.map(encodeURIComponent).join(","), { cache: "no-store" });
       if (r.ok) { const marks = await r.json(); for (const w of [...watchers]) if (marks[w.col] && marks[w.col] !== String(w.etag() || "").replace(/^W\//, "")) w.run(); }
     } catch (e) {}
-    if (!document.hidden) pollTimer = setTimeout(() => poll(LIVE), delay());   // keep the check going after a Refresh too
+    if (!document.hidden) pollTimer = setTimeout(() => poll(LIVE), 60000);   // keep the minute check going after a Refresh too
   }
   window.claudeRefresh = () => poll();   // Refresh button: every collection on the page, one call
   document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(LIVE); });
   pollTimer = setTimeout(() => poll(LIVE), 60000);
   // Listeners per collection name, so a write on this page refreshes them at once instead of at the next poll.
   const subs = {};
-  const kick = (name) => { (subs[name] || new Set()).forEach((fn) => fn()); if (name === "validations" || name === "asks") hurry(); };
+  const kick = (name) => (subs[name] || new Set()).forEach((fn) => fn());
   function collection(name) {
     const NS = location.pathname.startsWith("/l152") ? "l152_" : "";   // L152 site data is separate from the watermain site
     const base = "/c/" + encodeURIComponent(NS + name);
