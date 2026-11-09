@@ -71,7 +71,7 @@ A published Claude Artifact (one HTML page plus supporting files) shared with a 
 - **Status rail:** four steps on a line: Now (raised white card, green dot), Next, Gate, Target (steel diamond). Each has a mono eyebrow with the date, a bold title and a one-line note.
 
 ### 1.5 Tracker tab
-See sections 5 and 6. Header with counts (open / pending / in progress / done) and "Last full check"; grouping switch (By discipline, By owner, Flat list); Owner and Show filters; table columns #, Item, Owner, Status, Now / next step; item detail page with status, owner, ball, due, last confirmed, predecessors, what it unblocks, VE links, Now and History.
+See sections 5 and 6. Header with counts (open / pending / done) and "Last full check"; grouping switch (By discipline, By owner, Flat list); Owner and Show filters; table columns #, Item, Owner, Status, Now / next step; item detail page with status, owner, ball, due, last confirmed, predecessors, what it unblocks, VE links, Now and History.
 
 ### 1.6 Documents tab
 See section 9.
@@ -145,7 +145,7 @@ When one of these changes, update every place in the same session and say so in 
 **Layout:** three columns on wide screens (left bar 392px, main, right bar 392px), collapsing to one column on phones with a 16px gutter. Radius 6px for cards and inputs, 10px for hero panels. Popups are white cards on a dimmed backdrop; document popups up to 1400px wide.
 
 **Components**
-- **Status chips:** Open (amber), Pending (grey-blue), In progress (grey outline), Done (green). Mono, uppercase, 11px.
+- **Status chips:** Open (amber), Pending (grey-blue), Done (green). Mono, uppercase, 11px.
 - **Badges** in the Now column, in this order: VE ideas (green), Predecessor (amber, clickable), Ball (blue), Due (amber) or Overdue (red), Not confirmed in N days (red), then the Now sentence, then the updated date in mono.
 - **Priority:** a star before the ref; amber when on.
 - **Cards:** image on top (4:3, contain), title in bold, a mono meta line (date or version, sheet count). Folder-only files are not shown as cards.
@@ -179,9 +179,9 @@ When one of these changes, update every place in the same session and say so in 
 ## 5. Data model (artifact database)
 
 - **issues:** ref, title, owner, area (discipline key), status, now, ball, confirmed, source, due, next (history), order, updated, pri, blockedBy (predecessor refs), ve (VE idea refs feeding a cost-log item).
-- **Status definitions:** Open = the owner can act now. Pending = waits on a predecessor or an outside response (shown automatically when an Open item has an unfinished predecessor; set by hand for outside waits). In progress = the owner is actively working it. Done = finished, with evidence.
+- **Status definitions:** Open = the owner can act now. Pending = waits on a predecessor or an outside response (shown automatically when an Open item has an unfinished predecessor; set by hand for outside waits). There is no separate In progress status (merged into Open 2026-11-09). Done = finished, with evidence.
 - **Completeness (template, 11/9):** a not-Done item without a ball, a Now line or a confirmed date shows a red "Missing: ..." flag, the tracker header counts them as "N incomplete", the + New issue form asks for owner and ball, and a site with no `sweeps` record shows "No full check recorded yet."
-- **Flags on every not-Done item:** Ball; Due or Overdue; "Not confirmed in N days" when `confirmed` (or `updated`) is 7+ days old. Counter: open / pending / in progress / done.
+- **Flags on every not-Done item:** Ball; Due or Overdue; "Not confirmed in N days" when `confirmed` (or `updated`) is 7+ days old. Counter: open / pending / done.
 - **validations:** state (pending / resolved), kind ("check" for tracker corrections), ref, doc, detail, evidence, refs[] (`{label, kind:'text', title, body}` or `{label, kind:'sheet', ids:[...]}`), proposal {invalid, summary, items[], itemUpdates[]}, nextTitle, nextOwner, nextArea, answer (done / adv / apply), comment, lastComment, rev, applied, nextDone. `itemUpdates` may carry next, now, status, ball, title, owner, due, blockedBy; only fields present are written.
 - **sweeps:** date, at, checked, changed, statusChanges[], requests[], missing[], stale[], sources. The tracker shows "Last full check".
 - **meetings:** title, date, dateLabel, sortAt, kind, summary, attendees, note, exec, progress[], progressLabel, objectives[], objectivesLabel, disciplines[{n, items}], assignments[{who, items}], transcript.
@@ -316,7 +316,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 >
 > Inputs under [folder]: `db\issues\*.json` (tracker), `db\validations\*.json` (past review requests; `comment` and `lastComment` are the lead's own reasons, treat as authoritative), `db\meetings\*.json`, `db\doclog\*.json`, `sources\` (emails as text with forwarded and attached emails inlined, meeting transcripts; the newest are the most important; transcripts are speech-to-text, read for meaning).
 >
-> Definitions: Open = owner can act now; Pending = waits on a predecessor or an outside response; In progress = owner actively working; Done = finished with evidence. Ball = who must move next now. Now = one sentence of current state.
+> Definitions: Open = owner can act now; Pending = waits on a predecessor or an outside response; Done = finished with evidence. Ball = who must move next now. Now = one sentence of current state.
 >
 > For each not-Done item decide: status, ball, now, whether the title is still accurate (propose one if not), whether the owner is right, latest evidence (date, source file, short quote), confidence (high, medium, low). Also flag: passed due dates; items with no movement in 7+ days; Done items the sources do not support; commitments or decisions no item covers; missing links (emails or attachments referred to but absent, for example a reply whose question is missing). Do not invent tasks; a remark is not a commitment unless someone agreed. Quote evidence under 25 words. Where evidence is ambiguous say so and set confidence low.
 >
@@ -325,6 +325,8 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+
+- 2026-11-09: In progress merged into Open (Jason). Statuses are Open, Pending, Done; the chip cycles Open -> Done -> Open; resolving a not-done check no longer moves an item to In progress; legacy In progress rows display as Open and were migrated in D1 (Nitto, L152, C251).
 
 - 2026-11-09: Rule 12 added after the Refresh button was removed from C251 only and Jason had to ask for the template and Nitto. Header Refresh button removed from template, Nitto, L152 and C251 (auto-check every minute and on tab return covers it; `window.claudeRefresh` kept for the relay).
 - 2026-11-09: Template: tracker flags open items missing a ball, Now line or confirmed date, counts them, asks for the ball on new issues, and shows when no sweep is on record (section 5).

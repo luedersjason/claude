@@ -632,7 +632,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 3c20de3 2026-11-09</span>
+  <span>Owner: Jason Lueders, ZPG · build cc9f957 2026-11-09</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -898,7 +898,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const body=document.getElementById('tkBody'), msg=document.getElementById('tkMsg');
   const ownerSel=document.getElementById('tkOwner'), showSel=document.getElementById('tkShow');
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const NEXT={Open:'In progress',Pending:'In progress','In progress':'Done',Done:'Open'};
+  const NEXT={Open:'Done',Pending:'Done',Done:'Open'};
   let rows=[], canWrite=true, tkGrp='area', tkOnly=null, detailId=null; const tkOpen=new Set(), doneOpen=new Set();
   const DNAME=Object.fromEntries(CFG.disciplines);
   const syncSw=()=>document.querySelectorAll('#tkGrpSw button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.tg===tkGrp)));
@@ -917,7 +917,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     return Array.from(list).map(d=>{const v=typeof d.data==='function'?d.data():(d.data||d);return {...v,_id:d.id||v.id};});
   }
   window.jqWait=r=>(r.blockedBy||[]).map(ref=>rows.find(x=>x.ref===ref)).filter(x=>x&&x.status!=='Done');
-  const eff=r=>(r.status==='Open'&&window.jqWait(r).length)?'Pending':(r.status||'Open');window.jqEff=eff;
+  const eff=r=>{const s=r.status==='In progress'?'Open':(r.status||'Open');return (s==='Open'&&window.jqWait(r).length)?'Pending':s;};window.jqEff=eff;
   const stc=s=>s==='In progress'?'Progress':s;
   const pd=t=>{const m=String(t||'').match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/);if(!m)return null;const now=new Date();let y=m[3]?+m[3]:now.getFullYear();if(y<100)y+=2000;let d=new Date(y,+m[1]-1,+m[2]);if(!m[3]&&d-now>60*864e5)d=new Date(y-1,+m[1]-1,+m[2]);return d;};
   const age=t=>{const d=pd(t);return d?Math.floor((new Date()-d)/864e5):null;};
@@ -949,8 +949,8 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const owners=[...new Set(rows.flatMap(r=>String(r.owner||'Unassigned').split(/\s*[·,]\s*/)))].sort();
     const cur=ownerSel.value;
     ownerSel.innerHTML='<option value="">Everyone</option>'+owners.map(o=>`<option${o===cur?' selected':''}>${esc(o)}</option>`).join('');
-    const c={Open:0,Pending:0,'In progress':0,Done:0}; rows.forEach(r=>{const e=eff(r);c[e]=(c[e]||0)+1;});
-    document.getElementById('tkCounts').innerHTML=`<span>${c.Open} open</span><span>${c.Pending} pending</span><span>${c['In progress']} in progress</span><span>${c.Done} done</span>`+(()=>{const n=rows.filter(r=>gaps(r).length).length;return n?`<span class="flag" style="border-radius:999px">${n} incomplete</span>`:'';})();
+    const c={Open:0,Pending:0,Done:0}; rows.forEach(r=>{const e=eff(r);c[e]=(c[e]||0)+1;});
+    document.getElementById('tkCounts').innerHTML=`<span>${c.Open} open</span><span>${c.Pending} pending</span><span>${c.Done} done</span>`+(()=>{const n=rows.filter(r=>gaps(r).length).length;return n?`<span class="flag" style="border-radius:999px">${n} incomplete</span>`:'';})();
     const show=showSel.value;
     const vis=rows.filter(r=>(!cur||String(r.owner||'Unassigned').includes(cur))&&(tkGrp!=='none'||show==='all'||(show==='Done'?r.status==='Done':r.status!=='Done')))
       .sort(window.jqCmp);
@@ -1519,11 +1519,11 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     return VF[v._id]?'<div class="vwork done"><span>Revised</span></div>':'';}
   async function applyProposal(v){const p=v.proposal;if(!p)return [];const rows=window.jqIssues||[];let n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0);const made=[];
     for(const it of (p.items||[])){if(!it.title)continue;n++;const ref=CFG.refPrefix+'-'+String(n).padStart(2,'0');await db.collection('issues').doc(ref).set({ref,title:it.title,owner:it.owner||'Unassigned',area:it.area||CFG.disciplines[0][0],status:'Open',next:it.next||'',order:n,updated:today(),blockedBy:it.blockedBy||[]});made.push(ref);}
-    for(const u of (p.itemUpdates||[])){if(!u.ref)continue;const P={};['next','title','owner','status','now','ball','due'].forEach(k=>{if(u[k]!=null&&u[k]!=='')P[k]=String(u[k]);});if(Array.isArray(u.blockedBy))P.blockedBy=u.blockedBy;if(P.status&&!['Open','Pending','In progress','Done'].includes(P.status))delete P.status;if(Object.keys(P).length){P.updated=today();await db.collection('issues').doc(u.ref).update(P);}}
+    for(const u of (p.itemUpdates||[])){if(!u.ref)continue;const P={};['next','title','owner','status','now','ball','due'].forEach(k=>{if(u[k]!=null&&u[k]!=='')P[k]=String(u[k]);});if(Array.isArray(u.blockedBy))P.blockedBy=u.blockedBy;if(P.status&&!['Open','Pending','Done'].includes(P.status))delete P.status;if(Object.keys(P).length){P.updated=today();await db.collection('issues').doc(u.ref).update(P);}}
     return made;}
   function buildPrompt(v,c){const rows=(window.jqIssues||[]),is=rows.find(r=>r.ref===v.ref)||{};
     const slim=rows.filter(r=>r.status!=='Done').map(r=>({ref:r.ref,title:cut(r.title,100),owner:r.owner,area:r.area,blockedBy:r.blockedBy||[]}));
-    return `You help Jason Lueders (Director of Construction, Zilber Property Group) keep the tracker for ${CFG.trackerFor} correct. A validation card shows something that happened, what the tracker will do next, and Jason's comment. Revise the proposed outcome so it follows Jason's comment exactly. Return JSON only, no other text: {"invalid":false,"summary":"1 to 3 plain sentences: what happens to the item and what happens next","items":[{"title":"","owner":"","area":"","blockedBy":["${CFG.refPrefix}-00"]}],"itemUpdates":[{"ref":"${CFG.refPrefix}-00","next":"note text","now":"optional one-sentence current state","status":"optional Open|Pending|In progress|Done","ball":"optional who moves next","title":"optional new title","owner":"optional new owner"}]}. Use empty arrays when nothing is added. Omit optional fields you are not changing.
+    return `You help Jason Lueders (Director of Construction, Zilber Property Group) keep the tracker for ${CFG.trackerFor} correct. A validation card shows something that happened, what the tracker will do next, and Jason's comment. Revise the proposed outcome so it follows Jason's comment exactly. Return JSON only, no other text: {"invalid":false,"summary":"1 to 3 plain sentences: what happens to the item and what happens next","items":[{"title":"","owner":"","area":"","blockedBy":["${CFG.refPrefix}-00"]}],"itemUpdates":[{"ref":"${CFG.refPrefix}-00","next":"note text","now":"optional one-sentence current state","status":"optional Open|Pending|Done","ball":"optional who moves next","title":"optional new title","owner":"optional new owner"}]}. Use empty arrays when nothing is added. Omit optional fields you are not changing.
 Rules: owner is the person who does the action (never put ZPG's action under another party). Use blockedBy with existing refs when a step cannot start until another finishes, so nobody gets an item they cannot act on yet. One item per hand-off; do not duplicate an existing open item (update it instead). Areas allowed (use the exact key): ${CFG.areasText}. Do not invent steps Jason did not ask for. If his comment adds an interim step or a follow-up (for example an email to send), add it as an item. If Jason says the request itself is wrong, does not apply, or the premise is mistaken, set "invalid":true, make the summary say plainly that nothing changes in the tracker and why in his words, and return empty arrays. Plain wording, short.
 ITEM: ${JSON.stringify({ref:v.ref,title:is.title,owner:is.owner,area:is.area,status:is.status,next:cut(is.next,400),blockedBy:is.blockedBy||[]})}
 WHAT HAPPENED (${v.doc}): ${v.detail||v.evidence}
@@ -1553,7 +1553,7 @@ OPEN ITEMS: ${JSON.stringify(slim)}`;}
     try{
       if(a==='done'||a==='adv'){const ci=card.querySelector('[data-f=c]'),c=ci?ci.value.trim():'';
         const iu={updated:today()};
-        if(a==='done')iu.status='Done';else if((window.jqIssues||[]).find(r=>r.ref===v.ref&&r.status==='Open'))iu.status='In progress';
+        if(a==='done')iu.status='Done';
         if(c)iu.next='Update from '+v.doc+': '+c;
         await db.collection('issues').doc(v.ref).update(iu);
         if(a==='done'&&window.jqFeed)window.jqFeed(v.ref+' done: '+String(v.doc).slice(0,50));
