@@ -8,8 +8,8 @@
     const list = docs.map((d) => ({ id: d.id, data: () => d.data, exists: true }));
     return { docs: list, size: list.length, empty: !list.length, forEach: (fn) => list.forEach(fn) };
   }
-  // Data loads once when the page opens and your own saves refresh at once. The Refresh button asks /api/marks
-  // (one call) which collections changed and refetches only those.
+  // Data loads once when the page opens and your own saves refresh at once. Active collections re-check
+  // /api/marks (one call) and refetch only what changed.
   const NS0 = (typeof window.ZPG_NS === "string" ? window.ZPG_NS : (location.pathname.startsWith("/l152") ? "l152_" : ""));
   const watchers = new Set();
   let pollTimer = null;
@@ -24,9 +24,9 @@
       const r = await api("/marks?cols=" + cols.map(encodeURIComponent).join(","), { cache: "no-store" });
       if (r.ok) { const marks = await r.json(); for (const w of [...watchers]) if (marks[w.col] && marks[w.col] !== String(w.etag() || "").replace(/^W\//, "")) w.run(); }
     } catch (e) {}
-    if (!document.hidden) pollTimer = setTimeout(() => poll(LIVE), 60000);   // keep the minute check going after a Refresh too
+    if (!document.hidden) pollTimer = setTimeout(() => poll(LIVE), 60000);
   }
-  window.claudeRefresh = () => poll();   // Refresh button: every collection on the page, one call
+  window.claudeRefresh = () => poll();   // reload every collection on the page in one call (used when the relay reports Claude is done)
   document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(LIVE); });
   pollTimer = setTimeout(() => poll(LIVE), 60000);
   // Listeners per collection name, so a write on this page refreshes them at once instead of at the next poll.

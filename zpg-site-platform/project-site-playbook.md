@@ -39,6 +39,7 @@ This file is the single source of truth. If anything else (a skill, a handoff no
 9. Every change to the Jaquet site is written into this playbook in the same session (section 14).
 10. The desktop chat reads `repoqueue` and `asks` at the start of every session and does what is waiting.
 11. Keep dollar values out of tracker notes; they stay in the cost control log and the emails, because the owner may see the site.
+12. **One platform, every site.** A change to how a site looks or works goes into the template (`zpg-site-platform/template/`, `public/claude-shim.js`) AND every connected site in the same session: Nitto Watermain + L152 (`luedersjason/claude` branch `claude/gallant-allen-1vreeq`, `zpg-site-platform/public/`) and C251 (`luedersjason/c251-caledonia-portal` main, `public/`). Before reporting done, grep all three for the changed element. Jason should never have to ask for the other sites.
 
 ---
 
@@ -277,6 +278,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 
 ## 14. Maintenance
 
+- **Propagate platform changes (rule 12).** Template first, then every connected site listed in rule 12, in the same session, verified by grep. Data-only changes (one project's tracker) stay with that project.
 - **This playbook follows the Jaquet site.** Every adjustment or upgrade to the Jaquet site (look, layout, a tab, a field, a button, a rule) is written into the matching section here in the same session, before the work is reported as done. A change is not finished until the playbook describes it well enough for another AI to rebuild it.
 - After every publish, ask: did this change how the site looks or works? If yes, update the section, add a changelog line, copy the file to the handoff folder, and refresh `REFERENCE - jaquet-usa-bts.html` there.
 - Update this file in one batched edit whenever a rule, format, field or preference changes, with a dated changelog line. Read it first; Jason may have edited it.
@@ -323,6 +325,8 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+
+- 2026-11-09: Rule 12 added after the Refresh button was removed from C251 only and Jason had to ask for the template and Nitto. Header Refresh button removed from template, Nitto, L152 and C251 (auto-check every minute and on tab return covers it; `window.claudeRefresh` kept for the relay).
 - 2026-11-09: Template: tracker flags open items missing a ball, Now line or confirmed date, counts them, asks for the ball on new issues, and shows when no sweep is on record (section 5).
 - 2026-11-09: Sites are built from one shared template plus a config file per project (`template/`, `projects/`, `tools/build_site.py`); the per-site patch script is retired. Nitto Watermain and L152 rebuilt from it with identical output. Sections 2 and 12 updated.
 - 2026-11-05: Process fix: Claude asked Jason to answer the G14 himself; the G14 is Claude's pre-approved tool, so Claude relays instead (Appendix C).
