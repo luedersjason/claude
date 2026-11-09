@@ -640,7 +640,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 4a0c452 2026-11-09</span>
+  <span>Owner: Jason Lueders, ZPG · build 4ca9b94 2026-11-09</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -1493,7 +1493,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
       return `<button type="button" class="vt" data-a="show" data-r="${i}">${img}<div class="vt-b">${esc(x.label)}</div></button>`;}).join('')}</div></div>`;}
   function showRef(v,r){
     const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};const card=$('vRef').querySelector('.prof-card');card.style.maxWidth='720px';
-    if(r.kind==='img'){card.style.maxWidth='1200px';$('vRefT').textContent=r.title||r.label;$('vRefB').innerHTML='<img src="'+esc(r.img)+'" alt="'+esc(r.label)+'" style="display:block;width:100%;border:1px solid #D5DDE5;border-radius:6px">'+(r.body?'<p style="margin-top:10px">'+esc(r.body)+'</p>':'')+(r.src?'<p class="note" style="margin-top:6px">Source: '+esc(r.src)+'</p>':'');$('vModal').hidden=true;$('vRef').hidden=false;$('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};return;}
+    if(r.kind==='img'){card.style.maxWidth='1200px';$('vRefT').textContent=r.title||r.label;const im='<img src="'+esc(r.img)+'" alt="'+esc(r.label)+'" style="display:block;width:100%;border:1px solid #D5DDE5;border-radius:6px'+(r.href?';cursor:zoom-in':'')+'"'+(r.href?' title="Open the full document at this page"':'')+'>';$('vRefB').innerHTML=(r.href?'<a href="'+esc(r.href)+'" target="_blank" rel="noopener">'+im+'</a>':im)+(r.body?'<p style="margin-top:10px">'+esc(r.body)+'</p>':'')+(r.src?'<p class="note" style="margin-top:6px">Source: '+esc(r.src)+(r.href?' · <a href="'+esc(r.href)+'" target="_blank" rel="noopener">open the document ↗</a>':'')+'</p>':'');$('vModal').hidden=true;$('vRef').hidden=false;$('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};return;}
     if(r.kind==='sheet'&&window.jqOpenSheets){$('vModal').hidden=true;window.jqOpenSheets(r.ids,r.ids[0],()=>{$('vModal').hidden=false;});return;}
     let title=r.title||r.label,body=r.body||'';
     if(r.kind==='item'){const is=(window.jqIssues||[]).find(x=>x.ref===v.ref);if(!is)return;title=is.ref+' '+is.title;body='Owner: '+(is.owner||'Unassigned')+'\nArea: '+(is.area||'')+'\nStatus: '+is.status+((is.blockedBy||[]).length?'\nWaits on: '+is.blockedBy.join(', '):'')+'\n\n'+(is.next||'No note yet.');}
