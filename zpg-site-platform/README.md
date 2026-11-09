@@ -39,3 +39,13 @@ On the G14, once:
 3. `npx wrangler pages secret put RELAY_URL --project-name nitto-watermain` with the workers.dev URL (no trailing slash).
 4. Redeploy the Pages project (push a commit or retry the latest deployment) so the new variables load.
 Check: `curl https://nitto-watermain.pages.dev/api/relay/status -X POST -d '{}'` returns 400 (relay reached), not 503 (relay off).
+
+## Building the sites
+
+Every site is the same template with a different config:
+
+    python3 tools/build_site.py --all          # or one project: nitto-watermain, l152
+
+- `template/` : `page.html`, `site.css`, `app.js`, `panel-*.html`. Shared by all projects. Change here = change everywhere.
+- `projects/<name>/project.json` : everything project-specific.
+- `project-site-playbook.md` : the spec. Template changes get a playbook entry in the same commit.

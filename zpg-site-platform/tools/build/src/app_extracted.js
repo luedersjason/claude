@@ -6,16 +6,20 @@ const TODAY=new Date();
 // Bid, contract, closing and construction have no dates yet; they are approval-path cards marked "date not set".
 const MASTER=[
  {n:'Approvals',lab:1},
+ {n:'WDNR construction stormwater permit coverage starts (FIN 103538)',s:'2026-02-25',m:1},
+ {n:'Plan Commission approves the site & operational plans',s:'2026-08-17',m:1},
  {n:'Village Board approves the DA, CSM and public improvement plans',s:'2026-08-24',m:1},
- {n:'Village conditional approval letter (conditions 1-12)',s:'2026-08-25',m:1},
+ {n:'Village approval letters: DA (conditions 1-12) and site & operational plans (conditions 1-21)',s:'2026-08-25',m:1},
  {n:'WDNR wetland and pond individual permits',s:'2026-10-15',m:1},
  {n:'WDNR Section 401 water quality certification',s:'2026-10-16',m:1},
  {n:'Village + KWU approve the watermain plans',s:'2026-11-04',m:1},
  {n:'Deadlines',lab:1},
+ {n:'S&O approval lapses unless the building permit is issued (6 months from 8/17/26)',s:'2027-02-17',m:1,k:1},
  {n:'Watermain installed, inspected and accepted by the Village (DA s.6.1)',s:'2027-11-15',m:1,k:1},
+ {n:'Phase A substantial completion (approval letter p.1)',s:'2028-01-01',m:1,k:1},
 ];
 const VIEWS={
- master:{t:MASTER,s:'2026-08-01',e:'2027-12-31',title:'Master schedule',lede:'Confirmed dates only. Bid, contract, closing and construction dates are not set yet; they are in the approval path below.'},
+ master:{t:MASTER,s:'2026-02-01',e:'2028-02-29',title:'Master schedule',lede:'Confirmed dates only. The 2/17/27 date is 6 months after the 8/17/26 approval, counted from the letter, not a date the Village wrote. Bid, contract, closing and construction dates are not set yet; the water main tab has its approval path. WDNR stormwater permit coverage ends 2/25/2029.'},
 };
 
 let CUR='master';
@@ -74,6 +78,9 @@ let CUR='master';
 // Documents: cards are views over files. Item = [title, PDF path, version/date, viewer sheet ids, status lines?]
 const SR=(p,n)=>Array.from({length:n},(_,i)=>p+'-'+(i+1));
 const dcards=[
+ {t:'Building & site',img:'img/docs/site-plan.jpg',d:'Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting layout.',
+  it:[['Site & operational plan approval letter','docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('SO',5),['Building permit must issue within 6 months of 8/17/26','DA executed, security posted, CSM and SWMA recorded before any permits']],
+   ['Site lighting layout and photometrics','docs/NZ-Site-Lighting-Calcs-10.2.26.pdf','Sheet dated 3/18/26 · file 10/2/26',['LT-1']]]},
  {t:'Village / DA',img:'img/docs/village-da.jpg',d:'Village approval letter, Development Agreement draft, CSM language, stormwater agreement draft and the Village Engineer comments.',
   it:[['DA conditional approval letter','docs/NW-Village-DA-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('AL',5)],
    ['Development Agreement (draft) with exhibits','docs/NW-Development-Agreement-DRAFT.pdf','08/2026 draft · pp.1-18 and Exhibits D, D1, D2',SR('DA',18).concat(['DA-D','DA-D1','DA-D2']),['Exhibits D1 (cost breakdown) and D2 (security) are blank','Full 57-page PDF: Open full PDF']],
@@ -81,13 +88,14 @@ const dcards=[
    ['Stormwater Maintenance Agreement (draft)','docs/NW-Stormwater-Maintenance-Agreement-DRAFT.pdf','Draft, with the 8/25 packet',SR('SW',11),['Exhibit B still needed']],
    ['Village Engineer comments (marked plans)','docs/NW-Village-Engineer-Comments-8.11.26.pdf','8/11/26',SR('EC',5)]]},
  {t:'Approvals & permits',img:'img/docs/approvals.jpg',d:'KWU approval and the WDNR permits and water quality certification.',
-  it:[['KWU approval letter','docs/NW-KWU-Approval-11.4.26.pdf','Ian Bagley, 11/4/26',['KWU-1']],
+  it:[['WDNR construction stormwater permit coverage, FIN 103538','docs/NZ-WDNR-NOI-Coverage-103538-2.25.26.pdf','WDNR, 2/25/26 · general permit WI-S067831-06',SR('NOI',3),['Coverage ends 2/25/2029']],
+   ['KWU approval letter','docs/NW-KWU-Approval-11.4.26.pdf','Ian Bagley, 11/4/26',['KWU-1']],
    ['WDNR wetland individual permit IP-SE-2026-30-01917','docs/NW-WDNR-Wetland-IP-01917-10.15.26.pdf','Sonya Ponzi, 10/15/26',SR('WP',7),['Completion date and permit number need correcting']],
    ['WDNR pond individual permit IP-SE-2026-30-02789','docs/NW-WDNR-Pond-IP-02789-10.15.26.pdf','Sonya Ponzi, 10/15/26',SR('PP',5)],
    ['WDNR Section 401 water quality certification','docs/NW-WDNR-WQC-01917-10.16.26.pdf','10/16/26 · for Corps MVP-2017-01912-LRK',SR('WQC',3)],
    ['WDNR water system approval request (Form 3300-260)','docs/NW-WDNR-Form-3300-260-Water-System-Approval-Request.pdf','Pinnacle submittal · 1,088 LF of 16-inch PVC',['WSA-1'],['WDNR approval not on file here']],
    ['WDNR water main submittal checklist (Form 3300-066)','docs/NW-WDNR-Form-3300-066-Water-Main-Checklist.pdf','Pinnacle submittal',SR('WMC',4)]]},
- {t:'Bid package',img:'img/docs/bid-package.jpg',d:'What goes out to bidders: the Pinnacle project manual and the watermain plans bid set.',
+ {t:'Water main bid package',img:'img/docs/bid-package.jpg',d:'What goes out to water main bidders: the Pinnacle project manual and the watermain plans bid set.',
   it:[['Project manual (contract, terms, proposal form)','docs/NW-Project-Manual-Pinnacle-11.3.26.pdf','Pinnacle, 11/3/26',SR('PM',12),['Completion date still 7/31/2026; 8 items sent to Pinnacle 11/4']],
    ['Public watermain plans, bid set (rev. 4)','docs/NW-Public-Watermain-Plans-BidSet-11.3.26.pdf','Pinnacle 644.00, 11/3/26',SR('PL',8)]]},
 ];

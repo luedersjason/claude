@@ -111,7 +111,9 @@ When one of these changes, update every place in the same session and say so in 
 - **Publish:** edit the HTML, extract the inline script and run `node --check`, publish with the same file path (same URL). New supporting files go in `files` with `root` set to the outputs folder. Replacing files you have not read needs `overwrite_unread`; removing needs `{"path": null}`.
 - **If a newer live version exists** (someone else published or the page saved itself), read it, diff against the local file, merge your edits onto the live version, then publish.
 - Say plainly "syntax-checked only" unless it was tested in a browser.
-- **Known gap:** team directory, schedule rows, document cards, facts and titles are still hard-coded in the Jaquet page. Moving them into a per-project config is the next step toward a shared template (see section 12).
+- **One template, one config per project (Cloudflare sites, 11/9/26).** `template/` holds the page every site shares: `page.html` (layout), `site.css` (look), `app.js` (behavior), `panel-*.html` (optional tabs). `projects/<name>/project.json` holds everything that differs: name, title, tabs, cover, drawings strip, status rail, schedule rows, approval path, document cards, team directory, disciplines, ref prefix, data namespace, links to sister sites. `python3 tools/build_site.py --all` rebuilds every site. The build fails if a config value is missing.
+- **The loop.** A change to how sites look or work is made in `template/`, written into this playbook in the same commit, and rolled to every site with `--all`. A change to one project's content is made in that project's `project.json` only. Never patch a built page or add per-site code. Project data (tracker, requests, feed, decisions) lives in each site's database and is not touched by a rebuild.
+- **Still to move onto the template:** the Jaquet site (a Claude Artifact) and the master copy of this playbook in `AI Repo`.
 
 ## 3. Visual standard (cohesive appearance)
 
@@ -250,7 +252,7 @@ Run every time Jason supplies an email, drawing, CAD file, notes, transcript or 
 
 ## 12. Starting a new project site
 
-Collect: project name and address, ZPG lead, team directory (name, company, role, contact), disciplines, folder paths, schedule milestones, permits and meeting cadence, drawing set, logo or hero image. Then: copy the reference HTML, replace the Jaquet content (title, facts, team, schedule rows, document cards, sheet list, folder link), seed empty collections, load drawings, publish, share with the named team, run section 7 on the first documents. Next improvement: move per-project content into one config file so every site runs the same template and a standard change can be rolled out to all sites (rebuild each from template + config; data stays in each site's database).
+Collect: project name and address, ZPG lead, team directory (name, company, role, contact), disciplines, folder paths, schedule milestones, permits and meeting cadence, drawing set, logo or hero image. Then: copy the reference HTML, replace the Jaquet content (title, facts, team, schedule rows, document cards, sheet list, folder link), seed empty collections, load drawings, publish, share with the named team, run section 7 on the first documents. On the Cloudflare platform this is: copy `projects/l152/project.json` to `projects/<new>/project.json`, fill it in, give it its own `path` and `ns` (data namespace), render its sheets, run `python3 tools/build_site.py <new>`, push. The page code is not copied or edited.
 
 ## 13. Lessons and borrowed practices
 
@@ -319,6 +321,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+- 2026-11-09: Sites are built from one shared template plus a config file per project (`template/`, `projects/`, `tools/build_site.py`); the per-site patch script is retired. Nitto Watermain and L152 rebuilt from it with identical output. Sections 2 and 12 updated.
 - 2026-11-05: Process fix: Claude asked Jason to answer the G14 himself; the G14 is Claude's pre-approved tool, so Claude relays instead (Appendix C).
 - 2026-11-09: Section 8: refs as highlighted page excerpts with wide context (kind `img`); comment arrow labelled Send to Claude with a waiting state.
 - 2026-11-05: Appendix C added for the Nitto Watermain and L152 Cloudflare sites (hosting, no sample, access and invites, two sites, job queue).

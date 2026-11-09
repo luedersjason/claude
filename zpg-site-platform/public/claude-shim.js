@@ -10,7 +10,7 @@
   }
   // Data loads once when the page opens and your own saves refresh at once. The Refresh button asks /api/marks
   // (one call) which collections changed and refetches only those.
-  const NS0 = location.pathname.startsWith("/l152") ? "l152_" : "";
+  const NS0 = (typeof window.ZPG_NS === "string" ? window.ZPG_NS : (location.pathname.startsWith("/l152") ? "l152_" : ""));
   const watchers = new Set();
   let pollTimer = null;
   // Active parts (validation requests and the tracker change box) check once a minute while the tab is on screen.
@@ -33,7 +33,7 @@
   const subs = {};
   const kick = (name) => (subs[name] || new Set()).forEach((fn) => fn());
   function collection(name) {
-    const NS = location.pathname.startsWith("/l152") ? "l152_" : "";   // L152 site data is separate from the watermain site
+    const NS = (typeof window.ZPG_NS === "string" ? window.ZPG_NS : (location.pathname.startsWith("/l152") ? "l152_" : ""));   // L152 site data is separate from the watermain site
     const base = "/c/" + encodeURIComponent(NS + name);
     const docRef = (id) => ({
       id,
