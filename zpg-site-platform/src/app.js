@@ -278,6 +278,10 @@ async function route(req, env) {
     if (p === "/setup") return setup(env, url);
     if (p === "/claim") return claim(req, env, url);
     if (p.startsWith("/api/bot/")) return bot(req, env, p);
+    if (p === "/api/pending") {  // count only, no content: lets Claude's seat notice a sent comment within seconds
+      const r = await env.DB.prepare("SELECT COUNT(*) n, COALESCE(MAX(updated_at),0) m FROM docs WHERE (col IN ('validations','l152_validations') AND json_extract(data,'$.commentPending')=1) OR (col IN ('asks','l152_asks') AND json_extract(data,'$.state')='new')").first();
+      return json({ n: r.n, m: r.m }, 200, { "cache-control": "no-store" });
+    }
     const person = await currentPerson(req, env);
     if (p === "/api/admin/people") return admin(req, env, person, url);
     if (p.startsWith("/api/")) {
