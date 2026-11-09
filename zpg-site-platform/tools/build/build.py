@@ -183,6 +183,20 @@ js = R(js, "const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};", 
 js = R(js, 'title="Revise per comment" aria-label="Revise per comment"', 'title="Send to Claude" aria-label="Send to Claude"')
 js = R(js, 'placeholder="Correct me or add a step, then press Enter to revise"', 'placeholder="Correct me or add a step, then press Enter to send it to Claude"')
 js = R(js, "${v.lastComment?`<div class=\"vlc\">Your last comment: ${esc(v.lastComment)}</div>`:''}", "${v.lastComment?`<div class=\"vlc\">${v.commentPending?'Sent to Claude, waiting for its revision: ':'Your last comment: '}${esc(v.lastComment)}${!v.commentPending&&v.reply?'<br>Claude: '+esc(v.reply):''}</div>`:''}")
+# Claude relay: Enter sends the comment to Claude's seat; the card shows Claude working, you can move on, and it updates when Claude is done.
+js = R(js, "  const upd=(id,d)=>db.collection('validations').doc(id).update(d);", """  const upd=(id,d)=>db.collection('validations').doc(id).update(d);
+  const VW={},VF={};let vws=null;
+  function vSock(){if(vws&&vws.readyState<2)return;try{vws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/api/relay/page');}catch(e){return;}
+    vws.onmessage=ev=>{let m;try{m=JSON.parse(ev.data);}catch(e){return;}const NS=location.pathname.startsWith('/l152')?'l152_':'';if(m.col!==NS+'validations'||!VW[m.id])return;
+      if(m.type==='working'){VW[m.id].s='working';paint();}
+      if(m.type==='done'){delete VW[m.id];VF[m.id]=1;setTimeout(()=>{delete VF[m.id];paint();},5000);Promise.resolve(window.claudeRefresh&&window.claudeRefresh()).finally(paint);if(!Object.keys(VW).length)setTimeout(()=>{if(!Object.keys(VW).length&&vws)vws.close();},3000);}};
+    vws.onclose=()=>{vws=null;};}
+  function vWorkHtml(v){const w=VW[v._id];if(w&&v.commentPending===false)delete VW[v._id];
+    if(VW[v._id]){const s=VW[v._id].s,t=s==='working'?'Claude is revising this request…':s==='queued'?'Queued. No Claude session is open right now; it will be revised when one is.':'Sent to Claude. You can go to the next request.';return `<div class="vwork${s==='queued'?' q':''}"><i></i><span>${t}</span></div>`;}
+    return VF[v._id]?'<div class="vwork done"><span>Revised</span></div>':'';}""")
+js = R(js, '<div class="vcol">${proposalHtml(v)}', '<div class="vcol">${vWorkHtml(v)}${proposalHtml(v)}')
+js = R(js, '<span>Request ${cur+1} of ${n}</span>', "<span>Request ${cur+1} of ${n}${Object.keys(VW).length?' · '+Object.keys(VW).length+' with Claude':''}</span>")
+js = R(js, "try{await upd(v._id,{lastComment:c,commentPending:true,commentAt:Date.now()});ci.value='';$('vNote').textContent='Sent to Claude. The revised request shows here within about a minute.';}", "try{const res=await upd(v._id,{lastComment:c,commentPending:true,commentAt:Date.now()});ci.value='';ci.blur();const k=res&&res.claude;if(k==null){$('vNote').textContent='Sent to Claude. The revised request shows here when a Claude session picks it up.';return;}VW[v._id]={s:k>0?'sent':'queued',at:Date.now()};if(k>0)vSock();$('vNote').textContent=k>0?'Sent to Claude. You can go to the next request.':'Saved. No Claude session is open; it will be revised when one is.';paint();}")
 assert '</script' not in js
 
 # ---------- Home content from _data.json ----------

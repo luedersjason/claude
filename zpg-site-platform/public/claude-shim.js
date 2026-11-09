@@ -37,8 +37,8 @@
     const base = "/c/" + encodeURIComponent(NS + name);
     const docRef = (id) => ({
       id,
-      set: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); },
-      update: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); },
+      set: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); return r.json().catch(() => ({})); },
+      update: async (data) => { const r = await api(base + "/" + encodeURIComponent(id), { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify(data) }); if (!r.ok) await fail(r); kick(name); return r.json().catch(() => ({})); },
       delete: async () => { const r = await api(base + "/" + encodeURIComponent(id), { method: "DELETE" }); if (!r.ok) await fail(r); kick(name); },
       get: async () => { const s = await getAll(); const d = s.docs.find((x) => x.id === id); return d || { id, exists: false, data: () => undefined }; },
     });

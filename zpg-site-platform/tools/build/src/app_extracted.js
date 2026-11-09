@@ -826,15 +826,24 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const hdr=v.ref?`<span class="eyebrow">${esc(v.ref)} · ${esc(is?is.owner:'')}</span><h3>${esc(is?is.title:'')}</h3>`:`<span class="eyebrow">New follow-up from ${esc(v.doc)}</span>`;
     const foot=v.kind==='check'?`<button class="btn" data-a="skip" type="button">Skip</button><button class="btn go" data-a="apply" type="button">Apply changes</button>`:v.ref?(v.proposal&&v.proposal.invalid?`<button class="btn go" data-a="close" type="button">Dismiss invalid request</button>`:`<button class="btn" data-a="adv" type="button">Keep open and advance</button><button class="btn go" data-a="done" type="button">Close and advance</button>`):`<button class="btn" data-a="skip" type="button">Skip</button><button class="btn go" data-a="add" type="button">Add to tracker</button>`;
     $('vList').innerHTML=`<div class="vq vcard" data-id="${esc(v._id)}">
-      <div class="vnav"><button type="button" data-a="prev" ${n<2?'disabled':''} aria-label="Previous request">‹</button><span>Request ${cur+1} of ${n}</span><button type="button" data-a="nextr" ${n<2?'disabled':''} aria-label="Next request">›</button></div>
+      <div class="vnav"><button type="button" data-a="prev" ${n<2?'disabled':''} aria-label="Previous request">‹</button><span>Request ${cur+1} of ${n}${Object.keys(VW).length?' · '+Object.keys(VW).length+' with Claude':''}</span><button type="button" data-a="nextr" ${n<2?'disabled':''} aria-label="Next request">›</button></div>
       <div class="vcol">${hdr}
       <div class="vwh"><span class="eyebrow">What happened · ${esc(v.doc)}</span><p>${esc(v.detail||v.evidence)}</p></div>
       ${thumbs(v)}</div>
-      <div class="vcol">${proposalHtml(v)}
+      <div class="vcol">${vWorkHtml(v)}${proposalHtml(v)}
       <div class="vcomposer"><input data-f="c" value="${esc(oid===v._id?oval:'')}" placeholder="Correct me or add a step, then press Enter to send it to Claude" maxlength="400"><button type="button" class="vsend" data-a="revise" title="Send to Claude" aria-label="Send to Claude">&#10148;</button></div></div>
       <div class="vfoot"><div class="vfr">${foot}</div></div></div>`;
     const ci=document.querySelector('#vList [data-f=c]');if(ci&&oid===v._id&&hadFocus){ci.focus();try{ci.setSelectionRange(ss,se);}catch(e){}}}
   const upd=(id,d)=>db.collection('validations').doc(id).update(d);
+  const VW={},VF={};let vws=null;
+  function vSock(){if(vws&&vws.readyState<2)return;try{vws=new WebSocket((location.protocol==='https:'?'wss://':'ws://')+location.host+'/api/relay/page');}catch(e){return;}
+    vws.onmessage=ev=>{let m;try{m=JSON.parse(ev.data);}catch(e){return;}const NS=location.pathname.startsWith('/l152')?'l152_':'';if(m.col!==NS+'validations'||!VW[m.id])return;
+      if(m.type==='working'){VW[m.id].s='working';paint();}
+      if(m.type==='done'){delete VW[m.id];VF[m.id]=1;setTimeout(()=>{delete VF[m.id];paint();},5000);Promise.resolve(window.claudeRefresh&&window.claudeRefresh()).finally(paint);if(!Object.keys(VW).length)setTimeout(()=>{if(!Object.keys(VW).length&&vws)vws.close();},3000);}};
+    vws.onclose=()=>{vws=null;};}
+  function vWorkHtml(v){const w=VW[v._id];if(w&&v.commentPending===false)delete VW[v._id];
+    if(VW[v._id]){const s=VW[v._id].s,t=s==='working'?'Claude is revising this request…':s==='queued'?'Queued. No Claude session is open right now; it will be revised when one is.':'Sent to Claude. You can go to the next request.';return `<div class="vwork${s==='queued'?' q':''}"><i></i><span>${t}</span></div>`;}
+    return VF[v._id]?'<div class="vwork done"><span>Revised</span></div>':'';}
   async function applyProposal(v){const p=v.proposal;if(!p)return [];const rows=window.jqIssues||[];let n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0);const made=[];
     for(const it of (p.items||[])){if(!it.title)continue;n++;const ref='N-'+String(n).padStart(2,'0');await db.collection('issues').doc(ref).set({ref,title:it.title,owner:it.owner||'Unassigned',area:it.area||'Design',status:'Open',next:it.next||'',order:n,updated:today(),blockedBy:it.blockedBy||[]});made.push(ref);}
     for(const u of (p.itemUpdates||[])){if(!u.ref)continue;const P={};['next','title','owner','status','now','ball','due'].forEach(k=>{if(u[k]!=null&&u[k]!=='')P[k]=String(u[k]);});if(Array.isArray(u.blockedBy))P.blockedBy=u.blockedBy;if(P.status&&!['Open','Pending','In progress','Done'].includes(P.status))delete P.status;if(Object.keys(P).length){P.updated=today();await db.collection('issues').doc(u.ref).update(P);}}
@@ -851,7 +860,7 @@ OPEN ITEMS: ${JSON.stringify(slim)}`;}
   async function revise(v,card){const ci=card.querySelector('[data-f=c]'),c=ci?ci.value.trim():'';
     if(!c){$('vNote').textContent='Type a comment first, then press Enter.';return;}
     let sample=null;try{sample=window.claude?await window.claude.use('sample'):null;}catch(e){}
-    if(!sample){try{await upd(v._id,{lastComment:c,commentPending:true,commentAt:Date.now()});ci.value='';$('vNote').textContent='Sent to Claude. The revised request shows here within about a minute.';}catch(err){$('vNote').textContent='That comment did not save. You may have view-only access.';}return;}
+    if(!sample){try{const res=await upd(v._id,{lastComment:c,commentPending:true,commentAt:Date.now()});ci.value='';ci.blur();const k=res&&res.claude;if(k==null){$('vNote').textContent='Sent to Claude. The revised request shows here when a Claude session picks it up.';return;}VW[v._id]={s:k>0?'sent':'queued',at:Date.now()};if(k>0)vSock();$('vNote').textContent=k>0?'Sent to Claude. You can go to the next request.':'Saved. No Claude session is open; it will be revised when one is.';paint();}catch(err){$('vNote').textContent='That comment did not save. You may have view-only access.';}return;}
     const sb=card.querySelector('.vsend');sb.disabled=true;ci.disabled=true;$('vNote').textContent='Revising…';
     try{const r=await sample.json(buildPrompt(v,c),{modelTier:'default',cache:false});
       const clean=x=>String(x??'').slice(0,300);

@@ -157,6 +157,16 @@ async function join(req, env, url) {
 }
 
 // Collections: GET list (with a change marker for cheap polling), PUT set, PATCH update (shallow merge), DELETE.
+// Tell Claude's seat that a comment or change request was sent. Returns how many Claude sessions are listening (null if no relay).
+async function notifyClaude(env, col, id) {
+  if (!env.RELAY_URL || !env.RELAY_SECRET) return null;
+  try {
+    const r = await fetch(env.RELAY_URL + "/event", { method: "POST", headers: { "content-type": "application/json", "x-relay-secret": env.RELAY_SECRET }, body: JSON.stringify({ site: col.startsWith("l152_") ? "l152" : "watermain", col, id }) });
+    return r.ok ? (await r.json()).claude : null;
+  } catch (e) { return null; }
+}
+const wantsClaude = (col, body) => (/^(l152_)?validations$/.test(col) && body.commentPending === true) || (/^(l152_)?asks$/.test(col) && body.state === "new");
+
 async function collection(req, env, person, col, id) {
   if (!/^[a-z][a-z0-9_-]{0,40}$/i.test(col)) return json({ error: "bad collection" }, 400);
   if (req.method === "GET") {
@@ -192,7 +202,7 @@ async function collection(req, env, person, col, id) {
       "INSERT INTO docs (col, id, data, ver, updated_at, updated_by) VALUES (?, ?, ?, 1, ?, ?) " +
       "ON CONFLICT(col, id) DO UPDATE SET data = excluded.data, ver = docs.ver + 1, updated_at = excluded.updated_at, updated_by = excluded.updated_by"
     ).bind(col, id, text, now, person.id).run();
-    return json({ ok: true });
+    return json({ ok: true, claude: wantsClaude(col, body) ? await notifyClaude(env, col, id) : undefined });
   }
   if (req.method === "PATCH") {
     const cur = await env.DB.prepare("SELECT data FROM docs WHERE col = ? AND id = ?").bind(col, id).first();
@@ -200,7 +210,7 @@ async function collection(req, env, person, col, id) {
     const merged = { ...JSON.parse(cur.data), ...body };
     await env.DB.prepare("UPDATE docs SET data = ?, ver = ver + 1, updated_at = ?, updated_by = ? WHERE col = ? AND id = ?")
       .bind(JSON.stringify(merged), now, person.id, col, id).run();
-    return json({ ok: true });
+    return json({ ok: true, claude: wantsClaude(col, body) ? await notifyClaude(env, col, id) : undefined });
   }
   return json({ error: "method" }, 405);
 }
@@ -278,12 +288,10 @@ async function route(req, env) {
     if (p === "/setup") return setup(env, url);
     if (p === "/claim") return claim(req, env, url);
     if (p.startsWith("/api/bot/")) return bot(req, env, p);
-    if (p === "/api/ws-test" && req.headers.get("upgrade") === "websocket") {  // temporary: checks a Claude session can hold a websocket open
-      const [client, server] = Object.values(new WebSocketPair());
-      server.accept();
-      server.send("hello " + new Date().toISOString());
-      server.addEventListener("message", (e) => server.send("echo " + e.data));
-      return new Response(null, { status: 101, webSocket: client });
+    // Claude relay (relay/ Worker): Claude's seat listens here; Claude reports working/done here. Ids only, no text.
+    if ((p === "/api/relay/listen" && req.headers.get("upgrade") === "websocket") || (p === "/api/relay/status" && req.method === "POST")) {
+      if (!env.RELAY_URL) return json({ error: "relay_off" }, 503);
+      return fetch(new Request(env.RELAY_URL + p.slice("/api/relay".length), req));
     }
     if (p === "/api/pending") {  // count only, no content: lets Claude's seat notice a sent comment within seconds
       const r = await env.DB.prepare("SELECT COUNT(*) n, COALESCE(MAX(updated_at),0) m FROM docs WHERE (col IN ('validations','l152_validations') AND json_extract(data,'$.commentPending')=1) OR (col IN ('asks','l152_asks') AND json_extract(data,'$.state')='new')").first();
@@ -293,6 +301,10 @@ async function route(req, env) {
     if (p === "/api/admin/people") return admin(req, env, person, url);
     if (p.startsWith("/api/")) {
       if (!person) return json({ error: "signed_out" }, 401);
+      if (p === "/api/relay/page" && req.headers.get("upgrade") === "websocket") {   // a page waiting for Claude's revision
+        if (!env.RELAY_URL) return json({ error: "relay_off" }, 503);
+        return fetch(new Request(env.RELAY_URL + "/page", req));
+      }
       if (p === "/api/marks") {  // one cheap call tells the page which collections changed
         const cols = (url.searchParams.get("cols") || "").split(",").filter((c) => /^[a-z][a-z0-9_-]{0,40}$/i.test(c)).slice(0, 40);
         if (!cols.length) return json({});

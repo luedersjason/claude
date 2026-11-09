@@ -30,3 +30,12 @@ Optional: secret `ANTHROPIC_API_KEY` turns on live Claude revising in validation
 
 ## Updating
 Edit files, `npx wrangler deploy`. Data changes go through the API or `wrangler d1 execute`; no redeploy needed.
+
+## Claude relay (comment arrow wakes Claude's seat)
+On the G14, once:
+1. `cd relay && npx wrangler deploy` (Worker `zpg-claude-relay` with Durable Object `Hub`). Note the workers.dev URL it prints.
+2. Make a random secret and set it on both sides (never in chat or git):
+   `npx wrangler secret put RELAY_SECRET` (in `relay/`) and `npx wrangler pages secret put RELAY_SECRET --project-name nitto-watermain`.
+3. `npx wrangler pages secret put RELAY_URL --project-name nitto-watermain` with the workers.dev URL (no trailing slash).
+4. Redeploy the Pages project (push a commit or retry the latest deployment) so the new variables load.
+Check: `curl https://nitto-watermain.pages.dev/api/relay/status -X POST -d '{}'` returns 400 (relay reached), not 503 (relay off).

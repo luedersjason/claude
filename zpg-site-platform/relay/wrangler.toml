@@ -1,0 +1,13 @@
+# Claude relay: holds the open connections between the project sites and Claude's seat. Deploy from the G14:
+#   cd relay && npx wrangler deploy && npx wrangler secret put RELAY_SECRET
+name = "zpg-claude-relay"
+main = "relay.js"
+compatibility_date = "2026-10-01"
+
+[[durable_objects.bindings]]
+name = "HUB"
+class_name = "Hub"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Hub"]
