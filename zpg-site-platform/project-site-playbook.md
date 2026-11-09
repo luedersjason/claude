@@ -179,6 +179,7 @@ When one of these changes, update every place in the same session and say so in 
 
 - **issues:** ref, title, owner, area (discipline key), status, now, ball, confirmed, source, due, next (history), order, updated, pri, blockedBy (predecessor refs), ve (VE idea refs feeding a cost-log item).
 - **Status definitions:** Open = the owner can act now. Pending = waits on a predecessor or an outside response (shown automatically when an Open item has an unfinished predecessor; set by hand for outside waits). In progress = the owner is actively working it. Done = finished, with evidence.
+- **Completeness (template, 11/9):** a not-Done item without a ball, a Now line or a confirmed date shows a red "Missing: ..." flag, the tracker header counts them as "N incomplete", the + New issue form asks for owner and ball, and a site with no `sweeps` record shows "No full check recorded yet."
 - **Flags on every not-Done item:** Ball; Due or Overdue; "Not confirmed in N days" when `confirmed` (or `updated`) is 7+ days old. Counter: open / pending / in progress / done.
 - **validations:** state (pending / resolved), kind ("check" for tracker corrections), ref, doc, detail, evidence, refs[] (`{label, kind:'text', title, body}` or `{label, kind:'sheet', ids:[...]}`), proposal {invalid, summary, items[], itemUpdates[]}, nextTitle, nextOwner, nextArea, answer (done / adv / apply), comment, lastComment, rev, applied, nextDone. `itemUpdates` may carry next, now, status, ball, title, owner, due, blockedBy; only fields present are written.
 - **sweeps:** date, at, checked, changed, statusChanges[], requests[], missing[], stale[], sources. The tracker shows "Last full check".
@@ -322,6 +323,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+- 2026-11-09: Template: tracker flags open items missing a ball, Now line or confirmed date, counts them, asks for the ball on new issues, and shows when no sweep is on record (section 5).
 - 2026-11-09: Sites are built from one shared template plus a config file per project (`template/`, `projects/`, `tools/build_site.py`); the per-site patch script is retired. Nitto Watermain and L152 rebuilt from it with identical output. Sections 2 and 12 updated.
 - 2026-11-05: Process fix: Claude asked Jason to answer the G14 himself; the G14 is Claude's pre-approved tool, so Claude relays instead (Appendix C).
 - 2026-11-09: Section 8: refs as highlighted page excerpts with wide context (kind `img`); comment arrow labelled Send to Claude with a waiting state.

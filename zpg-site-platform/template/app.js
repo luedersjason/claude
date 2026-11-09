@@ -206,7 +206,8 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const stc=s=>s==='In progress'?'Progress':s;
   const pd=t=>{const m=String(t||'').match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/);if(!m)return null;const now=new Date();let y=m[3]?+m[3]:now.getFullYear();if(y<100)y+=2000;let d=new Date(y,+m[1]-1,+m[2]);if(!m[3]&&d-now>60*864e5)d=new Date(y-1,+m[1]-1,+m[2]);return d;};
   const age=t=>{const d=pd(t);return d?Math.floor((new Date()-d)/864e5):null;};
-  function flags(r){if(r.status==='Done')return '';let h='';if(r.ball)h+=`<span class="ball">Ball: ${esc(r.ball)}</span>`;const dd=pd(r.due);if(dd&&new Date()-dd>864e5*0.99)h+=`<span class="flag">Overdue ${esc(r.due)}</span>`;else if(r.due)h+=`<span class="wait">Due ${esc(r.due)}</span>`;const a=age(r.confirmed||r.updated);if(a!==null&&a>=7)h+=`<span class="flag">Not confirmed in ${a} days</span>`;return h;}
+  const gaps=r=>r.status==='Done'?[]:[!r.ball&&'ball',!r.now&&'Now line',!r.confirmed&&'confirmed date'].filter(Boolean);  // playbook 5: every open item carries these
+  function flags(r){if(r.status==='Done')return '';let h='';if(r.ball)h+=`<span class="ball">Ball: ${esc(r.ball)}</span>`;const g=gaps(r);if(g.length)h+=`<span class="flag" title="The playbook asks every open item for a ball, a Now line and a confirmed date">Missing: ${g.join(', ')}</span>`;const dd=pd(r.due);if(dd&&new Date()-dd>864e5*0.99)h+=`<span class="flag">Overdue ${esc(r.due)}</span>`;else if(r.due)h+=`<span class="wait">Due ${esc(r.due)}</span>`;const a=age(r.confirmed||r.updated);if(a!==null&&a>=7)h+=`<span class="flag">Not confirmed in ${a} days</span>`;return h;}
   window.jqCmp=(a,b)=>((a.status==='Done')-(b.status==='Done'))||((b.pri?1:0)-(a.pri?1:0))||((parseInt(String(a.ref||'').replace(/\D/g,''))||999)-(parseInt(String(b.ref||'').replace(/\D/g,''))||999));
   window.jqPri=async id=>{const r=rows.find(x=>x._id===id);if(!r)return;try{await col.doc(id).update({pri:!r.pri});}catch(e){msg.textContent='Could not change priority. You may have view-only access.';}};
   function detailHtml(r){
@@ -234,7 +235,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const cur=ownerSel.value;
     ownerSel.innerHTML='<option value="">Everyone</option>'+owners.map(o=>`<option${o===cur?' selected':''}>${esc(o)}</option>`).join('');
     const c={Open:0,Pending:0,'In progress':0,Done:0}; rows.forEach(r=>{const e=eff(r);c[e]=(c[e]||0)+1;});
-    document.getElementById('tkCounts').innerHTML=`<span>${c.Open} open</span><span>${c.Pending} pending</span><span>${c['In progress']} in progress</span><span>${c.Done} done</span>`;
+    document.getElementById('tkCounts').innerHTML=`<span>${c.Open} open</span><span>${c.Pending} pending</span><span>${c['In progress']} in progress</span><span>${c.Done} done</span>`+(()=>{const n=rows.filter(r=>gaps(r).length).length;return n?`<span class="flag" style="border-radius:999px">${n} incomplete</span>`:'';})();
     const show=showSel.value;
     const vis=rows.filter(r=>(!cur||String(r.owner||'Unassigned').includes(cur))&&(tkGrp!=='none'||show==='all'||(show==='Done'?r.status==='Done':r.status!=='Done')))
       .sort(window.jqCmp);
@@ -287,12 +288,12 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0)+1;
     const ref=CFG.refPrefix+'-'+String(n).padStart(2,'0');
     try{
-      await col.doc(ref).set({ref,title:t,owner:document.getElementById('tkWho').value.trim()||'Unassigned',area:document.getElementById('tkArea').value,
+      await col.doc(ref).set({ref,title:t,owner:document.getElementById('tkWho').value.trim()||'Unassigned',ball:document.getElementById('tkBall').value.trim()||document.getElementById('tkWho').value.trim(),area:document.getElementById('tkArea').value,
         status:'Open',next:document.getElementById('tkNext').value.trim(),order:n,updated:new Date().toLocaleDateString('en-US',{month:'numeric',day:'numeric'})});
       e.target.reset(); msg.textContent='Added '+ref+'.'; document.getElementById('issModal').hidden=true;
     }catch(err){ msg.textContent='Could not add the item. You may have view-only access to this page.'; }
   });
-  try{db.collection('sweeps').onSnapshot(sn=>{const L=norm(sn).sort((a,b)=>(b.at||0)-(a.at||0))[0];const el=document.getElementById('tkSweep');if(el&&L)el.textContent=`Last full check: ${L.date||''} · ${L.checked||0} items checked · ${L.changed||0} changed`;},()=>{});}catch(e){}
+  try{db.collection('sweeps').onSnapshot(sn=>{const L=norm(sn).sort((a,b)=>(b.at||0)-(a.at||0))[0];const el=document.getElementById('tkSweep');if(el&&!L){el.textContent='No full check recorded yet.';el.style.color='#9B1C1C';}if(el&&L)el.textContent=`Last full check: ${L.date||''} · ${L.checked||0} items checked · ${L.changed||0} changed`;},()=>{});}catch(e){}
   col.onSnapshot(snap=>{rows=norm(snap);render();},()=>{body.innerHTML='<tr><td colspan="5" class="note">The tracker could not load. Reload the page to try again.</td></tr>';});
 })();
 (function directory(){

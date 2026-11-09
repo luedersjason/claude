@@ -168,7 +168,8 @@
     <div id="tkAdd">
     <form id="tkForm" class="tk-form">
       <label>Item<input id="tkTitle" required></label>
-      <label>Owner<input id="tkWho" placeholder="e.g. Pinnacle"></label>
+      <label>Owner (who does it)<input id="tkWho" placeholder="Name (Company)" required></label>
+      <label>Ball (who moves next)<input id="tkBall" placeholder="Same as owner if blank"></label>
       <label>Area<select id="tkArea">{{areaOptions}}</select></label>
       <label>Next step<input id="tkNext"></label>
       <button class="btn go" type="submit">Add item</button>
