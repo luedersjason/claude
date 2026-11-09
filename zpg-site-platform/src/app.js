@@ -282,6 +282,14 @@ async function route(req, env) {
     if (p === "/api/admin/people") return admin(req, env, person, url);
     if (p.startsWith("/api/")) {
       if (!person) return json({ error: "signed_out" }, 401);
+      if (p === "/api/marks") {  // one cheap call tells the page which collections changed
+        const cols = (url.searchParams.get("cols") || "").split(",").filter((c) => /^[a-z][a-z0-9_-]{0,40}$/i.test(c)).slice(0, 40);
+        if (!cols.length) return json({});
+        const { results } = await env.DB.prepare(`SELECT col, COUNT(*) n, COALESCE(MAX(updated_at),0) m, COALESCE(SUM(ver),0) v FROM docs WHERE col IN (${cols.map(() => "?").join(",")}) GROUP BY col`).bind(...cols).all();
+        const out = Object.fromEntries(cols.map((c) => [c, '"0-0-0"']));
+        for (const r of results) out[r.col] = `"${r.n}-${r.m}-${r.v}"`;
+        return json(out, 200, { "cache-control": "no-store" });
+      }
       if (p === "/api/me") return json({ id: person.id, name: person.name, company: person.company, role: person.role, ai: !!env.ANTHROPIC_API_KEY });
       if (p === "/api/profiles") {
         const ids = (url.searchParams.get("ids") || "").split(",").filter(Boolean).slice(0, 200);

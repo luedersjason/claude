@@ -8,6 +8,20 @@
     const list = docs.map((d) => ({ id: d.id, data: () => d.data, exists: true }));
     return { docs: list, size: list.length, empty: !list.length, forEach: (fn) => list.forEach(fn) };
   }
+  // No background polling. Data loads once when the page opens; your own saves refresh at once;
+  // the Refresh button asks /api/marks (one call) which collections changed and refetches only those.
+  const watchers = new Set();
+  let pollTimer = null;
+  async function poll() {
+    clearTimeout(pollTimer); pollTimer = null;
+    if (!watchers.size) return;
+    try {
+      const cols = [...new Set([...watchers].map((w) => w.col))];
+      const r = await api("/marks?cols=" + cols.map(encodeURIComponent).join(","), { cache: "no-store" });
+      if (r.ok) { const marks = await r.json(); for (const w of [...watchers]) if (marks[w.col] && marks[w.col] !== String(w.etag() || "").replace(/^W\//, "")) w.run(); }
+    } catch (e) {}
+  }
+  window.claudeRefresh = poll;   // no automatic calls: the page's Refresh button runs this once
   // Listeners per collection name, so a write on this page refreshes them at once instead of at the next poll.
   const subs = {};
   const kick = (name) => (subs[name] || new Set()).forEach((fn) => fn());
@@ -36,20 +50,21 @@
       add: async (data) => { const id = "d" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); await docRef(id).set(data); return docRef(id); },
       get: () => getAll(true),
       onSnapshot(next, error) {
-        let stopped = false, prev = null, timer = null, busy = false, again = false;
-        const tick = async () => {
+        let stopped = false, prev = null, busy = false, again = false;
+        const run = async (force) => {
           if (stopped) return;
           if (busy) { again = true; return; }
-          busy = true; clearTimeout(timer);
-          try { const s = await getAll(); if (s !== prev) { prev = s; next(s); } }
+          busy = true;
+          try { const s = await getAll(force); if (s !== prev) { prev = s; next(s); } }
           catch (e) { if (error) error(e); }
           busy = false;
-          if (again) { again = false; return tick(); }
-          if (!stopped) timer = setTimeout(tick, document.hidden ? 15000 : 4000);
+          if (again) { again = false; return run(); }
         };
-        (subs[name] = subs[name] || new Set()).add(tick);
-        tick();
-        return () => { stopped = true; clearTimeout(timer); subs[name].delete(tick); };
+        const entry = { col: NS + name, etag: () => etag, run };
+        (subs[name] = subs[name] || new Set()).add(run);
+        watchers.add(entry);
+        run();
+        return () => { stopped = true; subs[name].delete(run); watchers.delete(entry); };
       },
     };
   }

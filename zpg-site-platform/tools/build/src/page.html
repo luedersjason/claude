@@ -28,6 +28,7 @@
     <button class="tab" data-tab="meetings" type="button">Meetings</button>
     <button class="tab" data-tab="photos" type="button">Photos</button>
     <button class="tab" data-tab="watermain" type="button">Nitto Watermain</button>
+    <button class="tab" type="button" id="refreshBtn" title="Load the latest changes" style="border:1px solid rgba(255,255,255,.45);border-radius:6px;padding:6px 12px;margin-left:8px" onclick="if(window.claudeRefresh){this.textContent='Refreshing…';window.claudeRefresh().finally(()=>{this.textContent='↻ Refresh';})}">↻ Refresh</button>
     %%SITELINK%%
     <a class="tab" id="inviteBtn" href="/admin" hidden style="text-decoration:none;border:1px solid rgba(255,255,255,.45);border-radius:6px;padding:6px 12px;margin-left:8px">Admin</a>
   </nav>
