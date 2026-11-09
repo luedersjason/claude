@@ -6,20 +6,16 @@ const TODAY=new Date();
 // Bid, contract, closing and construction have no dates yet; they are approval-path cards marked "date not set".
 const MASTER=[
  {n:'Approvals',lab:1},
- {n:'WDNR construction stormwater permit coverage starts (FIN 103538)',s:'2026-02-25',m:1},
- {n:'Plan Commission approves the site & operational plans',s:'2026-08-17',m:1},
  {n:'Village Board approves the DA, CSM and public improvement plans',s:'2026-08-24',m:1},
- {n:'Village approval letters: DA (conditions 1-12) and site & operational plans (conditions 1-21)',s:'2026-08-25',m:1},
+ {n:'Village conditional approval letter (conditions 1-12)',s:'2026-08-25',m:1},
  {n:'WDNR wetland and pond individual permits',s:'2026-10-15',m:1},
  {n:'WDNR Section 401 water quality certification',s:'2026-10-16',m:1},
  {n:'Village + KWU approve the watermain plans',s:'2026-11-04',m:1},
  {n:'Deadlines',lab:1},
- {n:'S&O approval lapses unless the building permit is issued (6 months from 8/17/26)',s:'2027-02-17',m:1,k:1},
  {n:'Watermain installed, inspected and accepted by the Village (DA s.6.1)',s:'2027-11-15',m:1,k:1},
- {n:'Phase A substantial completion (approval letter p.1)',s:'2028-01-01',m:1,k:1},
 ];
 const VIEWS={
- master:{t:MASTER,s:'2026-02-01',e:'2028-02-29',title:'Master schedule',lede:'Confirmed dates only. The 2/17/27 date is 6 months after the 8/17/26 approval, counted from the letter, not a date the Village wrote. Bid, contract, closing and construction dates are not set yet; the water main tab has its approval path. WDNR stormwater permit coverage ends 2/25/2029.'},
+ master:{t:MASTER,s:'2026-08-01',e:'2027-12-31',title:'Master schedule',lede:'Confirmed dates only. Bid, contract, closing and construction dates are not set yet; they are in the approval path below.'},
 };
 
 let CUR='master';
@@ -78,9 +74,6 @@ let CUR='master';
 // Documents: cards are views over files. Item = [title, PDF path, version/date, viewer sheet ids, status lines?]
 const SR=(p,n)=>Array.from({length:n},(_,i)=>p+'-'+(i+1));
 const dcards=[
- {t:'Building & site',img:'img/docs/site-plan.jpg',d:'Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting layout.',
-  it:[['Site & operational plan approval letter','docs/NZ-Village-Site-Ops-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('SO',5),['Building permit must issue within 6 months of 8/17/26','DA executed, security posted, CSM and SWMA recorded before any permits']],
-   ['Site lighting layout and photometrics','docs/NZ-Site-Lighting-Calcs-10.2.26.pdf','Sheet dated 3/18/26 · file 10/2/26',['LT-1']]]},
  {t:'Village / DA',img:'img/docs/village-da.jpg',d:'Village approval letter, Development Agreement draft, CSM language, stormwater agreement draft and the Village Engineer comments.',
   it:[['DA conditional approval letter','docs/NW-Village-DA-Approval-Letter-8.25.26.pdf','Rob Hanson, 8/25/26',SR('AL',5)],
    ['Development Agreement (draft) with exhibits','docs/NW-Development-Agreement-DRAFT.pdf','08/2026 draft · pp.1-18 and Exhibits D, D1, D2',SR('DA',18).concat(['DA-D','DA-D1','DA-D2']),['Exhibits D1 (cost breakdown) and D2 (security) are blank','Full 57-page PDF: Open full PDF']],
@@ -88,14 +81,13 @@ const dcards=[
    ['Stormwater Maintenance Agreement (draft)','docs/NW-Stormwater-Maintenance-Agreement-DRAFT.pdf','Draft, with the 8/25 packet',SR('SW',11),['Exhibit B still needed']],
    ['Village Engineer comments (marked plans)','docs/NW-Village-Engineer-Comments-8.11.26.pdf','8/11/26',SR('EC',5)]]},
  {t:'Approvals & permits',img:'img/docs/approvals.jpg',d:'KWU approval and the WDNR permits and water quality certification.',
-  it:[['WDNR construction stormwater permit coverage, FIN 103538','docs/NZ-WDNR-NOI-Coverage-103538-2.25.26.pdf','WDNR, 2/25/26 · general permit WI-S067831-06',SR('NOI',3),['Coverage ends 2/25/2029']],
-   ['KWU approval letter','docs/NW-KWU-Approval-11.4.26.pdf','Ian Bagley, 11/4/26',['KWU-1']],
+  it:[['KWU approval letter','docs/NW-KWU-Approval-11.4.26.pdf','Ian Bagley, 11/4/26',['KWU-1']],
    ['WDNR wetland individual permit IP-SE-2026-30-01917','docs/NW-WDNR-Wetland-IP-01917-10.15.26.pdf','Sonya Ponzi, 10/15/26',SR('WP',7),['Completion date and permit number need correcting']],
    ['WDNR pond individual permit IP-SE-2026-30-02789','docs/NW-WDNR-Pond-IP-02789-10.15.26.pdf','Sonya Ponzi, 10/15/26',SR('PP',5)],
    ['WDNR Section 401 water quality certification','docs/NW-WDNR-WQC-01917-10.16.26.pdf','10/16/26 · for Corps MVP-2017-01912-LRK',SR('WQC',3)],
    ['WDNR water system approval request (Form 3300-260)','docs/NW-WDNR-Form-3300-260-Water-System-Approval-Request.pdf','Pinnacle submittal · 1,088 LF of 16-inch PVC',['WSA-1'],['WDNR approval not on file here']],
    ['WDNR water main submittal checklist (Form 3300-066)','docs/NW-WDNR-Form-3300-066-Water-Main-Checklist.pdf','Pinnacle submittal',SR('WMC',4)]]},
- {t:'Water main bid package',img:'img/docs/bid-package.jpg',d:'What goes out to water main bidders: the Pinnacle project manual and the watermain plans bid set.',
+ {t:'Bid package',img:'img/docs/bid-package.jpg',d:'What goes out to bidders: the Pinnacle project manual and the watermain plans bid set.',
   it:[['Project manual (contract, terms, proposal form)','docs/NW-Project-Manual-Pinnacle-11.3.26.pdf','Pinnacle, 11/3/26',SR('PM',12),['Completion date still 7/31/2026; 8 items sent to Pinnacle 11/4']],
    ['Public watermain plans, bid set (rev. 4)','docs/NW-Public-Watermain-Plans-BidSet-11.3.26.pdf','Pinnacle 644.00, 11/3/26',SR('PL',8)]]},
 ];
@@ -812,14 +804,15 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     return (v.ref?`If you close it, ${esc(v.ref)} closes. `:'')+(parts.length?parts.map(x=>'<div>'+x+'</div>').join(''):(v.ref?'Nothing else is waiting on it.':''));}
   function proposalHtml(v){const p=v.proposal;
     if(!p||!p.summary)return `<div class="vnext"><b>What I think happens next</b><div>${pv(v)}</div></div>`;
-    return `<div class="vnext"><b>What I think happens next${v.rev?' (revised '+v.rev+(v.rev===1?' time':' times')+')':''}</b><div>${esc(p.summary)}</div>${(p.items||[]).map(it=>`<div>New item: ${esc(it.title)} · ${esc(it.owner||'Unassigned')} · ${esc(it.area||'')}${(it.blockedBy||[]).length?' · waits on '+esc(it.blockedBy.join(', ')):''}</div>`).join('')}${(p.itemUpdates||[]).map(u=>`<div>Update ${esc(u.ref)}: ${[u.status?'status → '+u.status:'',u.title?'title → '+u.title:'',u.owner?'owner → '+u.owner:'',u.ball?'ball → '+u.ball:'',u.now?'now: '+u.now:'',u.next?cut(u.next,160):''].filter(Boolean).map(esc).join(' · ')}</div>`).join('')}${v.lastComment?`<div class="vlc">Your last comment: ${esc(v.lastComment)}</div>`:''}</div>`;}
+    return `<div class="vnext"><b>What I think happens next${v.rev?' (revised '+v.rev+(v.rev===1?' time':' times')+')':''}</b><div>${esc(p.summary)}</div>${(p.items||[]).map(it=>`<div>New item: ${esc(it.title)} · ${esc(it.owner||'Unassigned')} · ${esc(it.area||'')}${(it.blockedBy||[]).length?' · waits on '+esc(it.blockedBy.join(', ')):''}</div>`).join('')}${(p.itemUpdates||[]).map(u=>`<div>Update ${esc(u.ref)}: ${[u.status?'status → '+u.status:'',u.title?'title → '+u.title:'',u.owner?'owner → '+u.owner:'',u.ball?'ball → '+u.ball:'',u.now?'now: '+u.now:'',u.next?cut(u.next,160):''].filter(Boolean).map(esc).join(' · ')}</div>`).join('')}${v.lastComment?`<div class="vlc">${v.commentPending?'Sent to Claude, waiting for its revision: ':'Your last comment: '}${esc(v.lastComment)}${!v.commentPending&&v.reply?'<br>Claude: '+esc(v.reply):''}</div>`:''}</div>`;}
   const refsOf=v=>{const a=(v.refs||[]).slice();if(v.ref)a.push({label:'Tracker item '+v.ref,kind:'item'});return a;};
   function thumbs(v){const r=refsOf(v);if(!r.length)return '';
     return `<div class="vsrc"><span class="eyebrow">Where this came from · click to open</span><div class="vthumbs">${r.map((x,i)=>{
-      const img=x.kind==='sheet'&&x.ids&&x.ids[0]?`<div class="vt-i" style="background-image:url('${'sheets/'+esc(x.ids[0])}.jpg')"></div>`:`<div class="vt-i">${x.kind==='item'?CLIP:MAIL}</div>`;
+      const img=x.kind==='img'&&x.img?`<div class="vt-i" style="background-image:url('${esc(x.img)}');background-size:cover;background-position:center top"></div>`:x.kind==='sheet'&&x.ids&&x.ids[0]?`<div class="vt-i" style="background-image:url('${'sheets/'+esc(x.ids[0])}.jpg')"></div>`:`<div class="vt-i">${x.kind==='item'?CLIP:MAIL}</div>`;
       return `<button type="button" class="vt" data-a="show" data-r="${i}">${img}<div class="vt-b">${esc(x.label)}</div></button>`;}).join('')}</div></div>`;}
   function showRef(v,r){
-    const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};
+    const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};const card=$('vRef').querySelector('.prof-card');card.style.maxWidth='720px';
+    if(r.kind==='img'){card.style.maxWidth='1200px';$('vRefT').textContent=r.title||r.label;$('vRefB').innerHTML='<img src="'+esc(r.img)+'" alt="'+esc(r.label)+'" style="display:block;width:100%;border:1px solid #D5DDE5;border-radius:6px">'+(r.body?'<p style="margin-top:10px">'+esc(r.body)+'</p>':'')+(r.src?'<p class="note" style="margin-top:6px">Source: '+esc(r.src)+'</p>':'');$('vModal').hidden=true;$('vRef').hidden=false;$('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};return;}
     if(r.kind==='sheet'&&window.jqOpenSheets){$('vModal').hidden=true;window.jqOpenSheets(r.ids,r.ids[0],()=>{$('vModal').hidden=false;});return;}
     let title=r.title||r.label,body=r.body||'';
     if(r.kind==='item'){const is=(window.jqIssues||[]).find(x=>x.ref===v.ref);if(!is)return;title=is.ref+' '+is.title;body='Owner: '+(is.owner||'Unassigned')+'\nArea: '+(is.area||'')+'\nStatus: '+is.status+((is.blockedBy||[]).length?'\nWaits on: '+is.blockedBy.join(', '):'')+'\n\n'+(is.next||'No note yet.');}
@@ -838,7 +831,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
       <div class="vwh"><span class="eyebrow">What happened · ${esc(v.doc)}</span><p>${esc(v.detail||v.evidence)}</p></div>
       ${thumbs(v)}</div>
       <div class="vcol">${proposalHtml(v)}
-      <div class="vcomposer"><input data-f="c" value="${esc(oid===v._id?oval:'')}" placeholder="Correct me or add a step, then press Enter to revise" maxlength="400"><button type="button" class="vsend" data-a="revise" title="Revise per comment" aria-label="Revise per comment">&#10148;</button></div></div>
+      <div class="vcomposer"><input data-f="c" value="${esc(oid===v._id?oval:'')}" placeholder="Correct me or add a step, then press Enter to send it to Claude" maxlength="400"><button type="button" class="vsend" data-a="revise" title="Send to Claude" aria-label="Send to Claude">&#10148;</button></div></div>
       <div class="vfoot"><div class="vfr">${foot}</div></div></div>`;
     const ci=document.querySelector('#vList [data-f=c]');if(ci&&oid===v._id&&hadFocus){ci.focus();try{ci.setSelectionRange(ss,se);}catch(e){}}}
   const upd=(id,d)=>db.collection('validations').doc(id).update(d);

@@ -176,6 +176,13 @@ OWN_TOP = open(SP + 'own_top.js').read()
 if SITE == 'watermain':
     OWN_TOP = wm_top(OWN_TOP)
 js = '\n'.join([sheets_js, OWN_TOP, tracker, directory, shell, issue_modal, visuals, drawings, viewer, docsdb, val, meetings])
+# Validation refs: kind 'img' = highlighted page excerpt (public/excerpts/*.png), shown wide with surrounding context.
+js = R(js, "const img=x.kind==='sheet'&&x.ids&&x.ids[0]?", "const img=x.kind==='img'&&x.img?`<div class=\"vt-i\" style=\"background-image:url('${esc(x.img)}');background-size:cover;background-position:center top\"></div>`:x.kind==='sheet'&&x.ids&&x.ids[0]?")
+js = R(js, "const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};", "const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};const card=$('vRef').querySelector('.prof-card');card.style.maxWidth='720px';\n    if(r.kind==='img'){card.style.maxWidth='1200px';$('vRefT').textContent=r.title||r.label;$('vRefB').innerHTML='<img src=\"'+esc(r.img)+'\" alt=\"'+esc(r.label)+'\" style=\"display:block;width:100%;border:1px solid #D5DDE5;border-radius:6px\">'+(r.body?'<p style=\"margin-top:10px\">'+esc(r.body)+'</p>':'')+(r.src?'<p class=\"note\" style=\"margin-top:6px\">Source: '+esc(r.src)+'</p>':'');$('vModal').hidden=true;$('vRef').hidden=false;$('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};return;}")
+# The arrow sends the comment to Claude's seat (no API on this site); show that it is waiting until Claude revises.
+js = R(js, 'title="Revise per comment" aria-label="Revise per comment"', 'title="Send to Claude" aria-label="Send to Claude"')
+js = R(js, 'placeholder="Correct me or add a step, then press Enter to revise"', 'placeholder="Correct me or add a step, then press Enter to send it to Claude"')
+js = R(js, "${v.lastComment?`<div class=\"vlc\">Your last comment: ${esc(v.lastComment)}</div>`:''}", "${v.lastComment?`<div class=\"vlc\">${v.commentPending?'Sent to Claude, waiting for its revision: ':'Your last comment: '}${esc(v.lastComment)}${!v.commentPending&&v.reply?'<br>Claude: '+esc(v.reply):''}</div>`:''}")
 assert '</script' not in js
 
 # ---------- Home content from _data.json ----------

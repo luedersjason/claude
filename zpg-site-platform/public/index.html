@@ -633,7 +633,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 206f092 2026-11-09</span>
+  <span>Owner: Jason Lueders, ZPG · build dee471c 2026-11-09</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -1517,14 +1517,15 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     return (v.ref?`If you close it, ${esc(v.ref)} closes. `:'')+(parts.length?parts.map(x=>'<div>'+x+'</div>').join(''):(v.ref?'Nothing else is waiting on it.':''));}
   function proposalHtml(v){const p=v.proposal;
     if(!p||!p.summary)return `<div class="vnext"><b>What I think happens next</b><div>${pv(v)}</div></div>`;
-    return `<div class="vnext"><b>What I think happens next${v.rev?' (revised '+v.rev+(v.rev===1?' time':' times')+')':''}</b><div>${esc(p.summary)}</div>${(p.items||[]).map(it=>`<div>New item: ${esc(it.title)} · ${esc(it.owner||'Unassigned')} · ${esc(it.area||'')}${(it.blockedBy||[]).length?' · waits on '+esc(it.blockedBy.join(', ')):''}</div>`).join('')}${(p.itemUpdates||[]).map(u=>`<div>Update ${esc(u.ref)}: ${[u.status?'status → '+u.status:'',u.title?'title → '+u.title:'',u.owner?'owner → '+u.owner:'',u.ball?'ball → '+u.ball:'',u.now?'now: '+u.now:'',u.next?cut(u.next,160):''].filter(Boolean).map(esc).join(' · ')}</div>`).join('')}${v.lastComment?`<div class="vlc">Your last comment: ${esc(v.lastComment)}</div>`:''}</div>`;}
+    return `<div class="vnext"><b>What I think happens next${v.rev?' (revised '+v.rev+(v.rev===1?' time':' times')+')':''}</b><div>${esc(p.summary)}</div>${(p.items||[]).map(it=>`<div>New item: ${esc(it.title)} · ${esc(it.owner||'Unassigned')} · ${esc(it.area||'')}${(it.blockedBy||[]).length?' · waits on '+esc(it.blockedBy.join(', ')):''}</div>`).join('')}${(p.itemUpdates||[]).map(u=>`<div>Update ${esc(u.ref)}: ${[u.status?'status → '+u.status:'',u.title?'title → '+u.title:'',u.owner?'owner → '+u.owner:'',u.ball?'ball → '+u.ball:'',u.now?'now: '+u.now:'',u.next?cut(u.next,160):''].filter(Boolean).map(esc).join(' · ')}</div>`).join('')}${v.lastComment?`<div class="vlc">${v.commentPending?'Sent to Claude, waiting for its revision: ':'Your last comment: '}${esc(v.lastComment)}${!v.commentPending&&v.reply?'<br>Claude: '+esc(v.reply):''}</div>`:''}</div>`;}
   const refsOf=v=>{const a=(v.refs||[]).slice();if(v.ref)a.push({label:'Tracker item '+v.ref,kind:'item'});return a;};
   function thumbs(v){const r=refsOf(v);if(!r.length)return '';
     return `<div class="vsrc"><span class="eyebrow">Where this came from · click to open</span><div class="vthumbs">${r.map((x,i)=>{
-      const img=x.kind==='sheet'&&x.ids&&x.ids[0]?`<div class="vt-i" style="background-image:url('${'sheets/'+esc(x.ids[0])}.jpg')"></div>`:`<div class="vt-i">${x.kind==='item'?CLIP:MAIL}</div>`;
+      const img=x.kind==='img'&&x.img?`<div class="vt-i" style="background-image:url('${esc(x.img)}');background-size:cover;background-position:center top"></div>`:x.kind==='sheet'&&x.ids&&x.ids[0]?`<div class="vt-i" style="background-image:url('${'sheets/'+esc(x.ids[0])}.jpg')"></div>`:`<div class="vt-i">${x.kind==='item'?CLIP:MAIL}</div>`;
       return `<button type="button" class="vt" data-a="show" data-r="${i}">${img}<div class="vt-b">${esc(x.label)}</div></button>`;}).join('')}</div></div>`;}
   function showRef(v,r){
-    const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};
+    const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};const card=$('vRef').querySelector('.prof-card');card.style.maxWidth='720px';
+    if(r.kind==='img'){card.style.maxWidth='1200px';$('vRefT').textContent=r.title||r.label;$('vRefB').innerHTML='<img src="'+esc(r.img)+'" alt="'+esc(r.label)+'" style="display:block;width:100%;border:1px solid #D5DDE5;border-radius:6px">'+(r.body?'<p style="margin-top:10px">'+esc(r.body)+'</p>':'')+(r.src?'<p class="note" style="margin-top:6px">Source: '+esc(r.src)+'</p>':'');$('vModal').hidden=true;$('vRef').hidden=false;$('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};return;}
     if(r.kind==='sheet'&&window.jqOpenSheets){$('vModal').hidden=true;window.jqOpenSheets(r.ids,r.ids[0],()=>{$('vModal').hidden=false;});return;}
     let title=r.title||r.label,body=r.body||'';
     if(r.kind==='item'){const is=(window.jqIssues||[]).find(x=>x.ref===v.ref);if(!is)return;title=is.ref+' '+is.title;body='Owner: '+(is.owner||'Unassigned')+'\nArea: '+(is.area||'')+'\nStatus: '+is.status+((is.blockedBy||[]).length?'\nWaits on: '+is.blockedBy.join(', '):'')+'\n\n'+(is.next||'No note yet.');}
@@ -1543,7 +1544,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
       <div class="vwh"><span class="eyebrow">What happened · ${esc(v.doc)}</span><p>${esc(v.detail||v.evidence)}</p></div>
       ${thumbs(v)}</div>
       <div class="vcol">${proposalHtml(v)}
-      <div class="vcomposer"><input data-f="c" value="${esc(oid===v._id?oval:'')}" placeholder="Correct me or add a step, then press Enter to revise" maxlength="400"><button type="button" class="vsend" data-a="revise" title="Revise per comment" aria-label="Revise per comment">&#10148;</button></div></div>
+      <div class="vcomposer"><input data-f="c" value="${esc(oid===v._id?oval:'')}" placeholder="Correct me or add a step, then press Enter to send it to Claude" maxlength="400"><button type="button" class="vsend" data-a="revise" title="Send to Claude" aria-label="Send to Claude">&#10148;</button></div></div>
       <div class="vfoot"><div class="vfr">${foot}</div></div></div>`;
     const ci=document.querySelector('#vList [data-f=c]');if(ci&&oid===v._id&&hadFocus){ci.focus();try{ci.setSelectionRange(ss,se);}catch(e){}}}
   const upd=(id,d)=>db.collection('validations').doc(id).update(d);
