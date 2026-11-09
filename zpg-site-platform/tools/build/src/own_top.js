@@ -205,7 +205,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     if(!db){$('askForm').hidden=true;$('askList').innerHTML='<li class="note">Sign in to send changes.</li>';return;}
     const norm=s=>Array.from((s&&(s.docs||s))||[]).map(d=>({...(typeof d.data==='function'?d.data():d.data),_id:d.id}));
     db.collection('asks').onSnapshot(s=>{const rows=norm(s).sort((a,b)=>b.at-a.at).slice(0,5);
-      $('askList').innerHTML=rows.map(r=>{const d=new Date(r.at||0);return '<li><span class="note">'+(d.getMonth()+1)+'/'+d.getDate()+' · '+(LBL[r.state]||'Waiting')+'</span><br>'+esc(r.text)+'</li>';}).join('');},()=>{});
+      $('askList').innerHTML=rows.map(r=>{const d=new Date(r.at||0);return '<li><span class="note">'+(d.getMonth()+1)+'/'+d.getDate()+' · '+(LBL[r.state]||'Waiting')+'</span><br>'+esc(r.text)+(r.reply?'<br><span class="note" style="color:#007A39">Claude: '+esc(r.reply)+'</span>':'')+'</li>';}).join('');},()=>{});
     $('askForm').addEventListener('submit',async ev=>{ev.preventDefault();const v=$('askText').value.trim();if(!v)return;
       try{await db.collection('asks').doc('a'+Date.now()).set({text:v,at:Date.now(),by:me||'',state:'new'});$('askText').value='';say('Sent to Claude.');}
       catch(e){say('That did not send. You may have view-only access.');}});
