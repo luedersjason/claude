@@ -3,6 +3,7 @@
 
     python3 tools/build_site.py <project>      # e.g. nitto-watermain, l152
     python3 tools/build_site.py --all
+    python3 tools/build_site.py --check        # before every push: every built page must equal template + config
 
 template/   page.html, site.css, app.js, panel-*.html  (the same for every project; playbook is the spec)
 projects/<name>/project.json                           (everything that differs per project)
@@ -69,10 +70,20 @@ def build(name):
     page = fill(read('page.html').replace('{{css}}', '\x00CSS').replace('{{js}}', '\x00JS'), {k: v for k, v in values.items() if k not in ('css', 'js')})
     page = page.replace('\x00CSS', values['css']).replace('\x00JS', js)
     out = os.path.join(PUB, c['path'].strip('/'), 'index.html'); os.makedirs(os.path.dirname(out), exist_ok=True)
+    if CHECK:   # has someone edited a built page (or the template) without rebuilding every site?
+        strip = lambda t: re.sub(r'· build [0-9a-f]* [0-9-]+', '', t)
+        same = os.path.exists(out) and strip(open(out, encoding='utf-8').read()) == strip(page)
+        print(name, 'OK' if same else 'OUT OF DATE: %s differs from template + config. Move the change into template/ or project.json, then --all.' % os.path.relpath(out, ROOT))
+        return same
     open(out, 'w', encoding='utf-8').write(page)
     print(name, '->', os.path.relpath(out, ROOT), len(page) // 1024, 'KB')
+    return True
 
+CHECK = False
 if __name__ == '__main__':
-    names = sorted(os.listdir(os.path.join(ROOT, 'projects'))) if sys.argv[1:] == ['--all'] else sys.argv[1:]
+    args = sys.argv[1:]
+    if '--check' in args: CHECK = True; args = [a for a in args if a != '--check'] or ['--all']
+    names = sorted(os.listdir(os.path.join(ROOT, 'projects'))) if args == ['--all'] else args
     assert names, __doc__
-    for n in names: build(n)
+    ok = all([build(n) for n in names])
+    sys.exit(0 if ok else 1)
