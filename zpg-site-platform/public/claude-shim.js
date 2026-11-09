@@ -8,20 +8,27 @@
     const list = docs.map((d) => ({ id: d.id, data: () => d.data, exists: true }));
     return { docs: list, size: list.length, empty: !list.length, forEach: (fn) => list.forEach(fn) };
   }
-  // No background polling. Data loads once when the page opens; your own saves refresh at once;
-  // the Refresh button asks /api/marks (one call) which collections changed and refetches only those.
+  // Data loads once when the page opens and your own saves refresh at once. The Refresh button asks /api/marks
+  // (one call) which collections changed and refetches only those.
+  const NS0 = location.pathname.startsWith("/l152") ? "l152_" : "";
   const watchers = new Set();
   let pollTimer = null;
-  async function poll() {
+  // Active parts (validation requests and the tracker change box) check once a minute while the tab is on screen.
+  const LIVE = ["validations", "asks"].map((c) => NS0 + c);
+  async function poll(only) {
     clearTimeout(pollTimer); pollTimer = null;
     if (!watchers.size) return;
     try {
-      const cols = [...new Set([...watchers].map((w) => w.col))];
+      const cols = [...new Set([...watchers].map((w) => w.col))].filter((c) => !only || only.includes(c));
+      if (!cols.length) throw 0;
       const r = await api("/marks?cols=" + cols.map(encodeURIComponent).join(","), { cache: "no-store" });
       if (r.ok) { const marks = await r.json(); for (const w of [...watchers]) if (marks[w.col] && marks[w.col] !== String(w.etag() || "").replace(/^W\//, "")) w.run(); }
     } catch (e) {}
+    if (!document.hidden) pollTimer = setTimeout(() => poll(LIVE), 60000);   // keep the minute check going after a Refresh too
   }
-  window.claudeRefresh = poll;   // no automatic calls: the page's Refresh button runs this once
+  window.claudeRefresh = () => poll();   // Refresh button: every collection on the page, one call
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(LIVE); });
+  pollTimer = setTimeout(() => poll(LIVE), 60000);
   // Listeners per collection name, so a write on this page refreshes them at once instead of at the next poll.
   const subs = {};
   const kick = (name) => (subs[name] || new Set()).forEach((fn) => fn());
