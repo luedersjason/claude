@@ -39,7 +39,7 @@ This file is the single source of truth. If anything else (a skill, a handoff no
 9. Every change to the Jaquet site is written into this playbook in the same session (section 14).
 10. The desktop chat reads `repoqueue` and `asks` at the start of every session and does what is waiting.
 11. Keep dollar values out of tracker notes; they stay in the cost control log and the emails, because the owner may see the site.
-12. **One platform, every site.** A change to how a site looks or works goes into the template (`zpg-site-platform/template/`, `public/claude-shim.js`) AND every connected site in the same session: Nitto Watermain + L152 (`luedersjason/claude` branch `claude/gallant-allen-1vreeq`, `zpg-site-platform/public/`) and C251 (`luedersjason/c251-caledonia-portal` main, `public/`). Before reporting done, grep all three for the changed element. Jason should never have to ask for the other sites.
+12. **One platform, every site.** A change to how a site looks or works goes into the template (`zpg-site-platform/template/`, `public/claude-shim.js`) AND every connected site in the same session: Nitto Watermain + L152 (`luedersjason/claude` branch `claude/gallant-allen-1vreeq`, `zpg-site-platform/public/`) and C251 + C251 Utilities (`luedersjason/c251-caledonia-portal` main, `public/` and `public/utilities/`). All four are built from `projects/<name>/project.json` with `python3 tools/build_site.py --all`; C251 builds need that repo checked out next to this one (`publicDir`). Before reporting done, grep all three for the changed element. Jason should never have to ask for the other sites.
 
 ---
 
@@ -95,6 +95,9 @@ Cadence header (recurring meeting, day, time, platform, date range), then meetin
 
 ### 1.10 Photos tab
 Empty state until site photos exist ("Photos will appear here"); can hold renderings and site-visit pictures.
+
+### 1.12 Paths to service (extra tab type `paths`)
+A project or sub-site can show one row per service (or any path to a goal): numbered stage columns left to right, a short card per tracker item (status icon, date when Done, owner's firm, doc count), and a goal tile on the right (red dashed until every step is Done, then green). Config `paths: [{t, wr, goal, gs, icon, stages:[{n, cards:[[ref, short label, [sheet ids]]]}]}]` in project.json; status, date and owner always come from the tracker, so the cards never go stale. Clicking a card opens its item; clicking the doc count opens the documents. Built for C251 Utilities (Jason, 11/10: the old stage cards were easier to read than one long row of wide cards). `defaultTab` opens a site on that tab; `wideTabs` hides the side bars on it.
 
 ### 1.11 Consistency map (one fact, every place it appears)
 | Fact | Appears in |
@@ -325,6 +328,8 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+
+- 2026-11-10: C251 moved onto the template build (projects/c251, projects/c251-utilities, publicDir into the C251 repo). Utilities became their own sub-site at /utilities/ (ns util_, refs U-01..U-21, was C-01..C-21), like the Nitto Watermain beside L152. New extra tab type `paths` (section 1.12) brings back the stage-card layout. The old standalone utility pages redirect to /utilities/.
 
 - 2026-11-09: In progress merged into Open (Jason). Statuses are Open, Pending, Done; the chip cycles Open -> Done -> Open; resolving a not-done check no longer moves an item to In progress; legacy In progress rows display as Open and were migrated in D1 (Nitto, L152, C251).
 

@@ -1,0 +1,445 @@
+{
+ "name": "C251",
+ "title": "C251 · Zilber Industrial 4",
+ "description": "ZPG project site for C251, Zilber Industrial 4, Caledonia Corporate Park, Caledonia: building, site, approvals and permanent utilities.",
+ "path": "/",
+ "ns": "",
+ "refPrefix": "C",
+ "tabs": [
+  "home",
+  "tracker",
+  "documents",
+  "schedule",
+  "team",
+  "meetings",
+  "photos",
+  "utilities"
+ ],
+ "extraTabs": [
+  {
+   "id": "utilities",
+   "label": "Utilities",
+   "type": "link",
+   "eyebrow": "Permanent utilities · its own site",
+   "title": "Permanent utilities (We Energies)",
+   "lede": "Gas, fire pump and building electric each have a path to service, with their own tracker, documents and team.",
+   "href": "/utilities/",
+   "button": "Open the Utilities site →"
+  }
+ ],
+ "siteLinks": [
+  {
+   "label": "Utilities →",
+   "href": "/utilities/"
+  }
+ ],
+ "schedule": {
+  "rows": [
+   {
+    "n": "Building",
+    "lab": 1
+   },
+   {
+    "n": "For-construction set released (ZA Studios)",
+    "s": "2026-06-09",
+    "m": 1
+   },
+   {
+    "n": "Building address issued, CSM 3679",
+    "s": "2026-06-25",
+    "m": 1
+   },
+   {
+    "n": "Occupancy target Feb ’27 (old portal schedule, not re-sequenced)",
+    "s": "2027-02-01",
+    "m": 1,
+    "k": 1,
+    "pend": 1
+   },
+   {
+    "n": "Permanent utilities",
+    "lab": 1
+   },
+   {
+    "n": "Service applications to We Energies",
+    "s": "2026-07-06",
+    "m": 1
+   },
+   {
+    "n": "WE design, gas and fire pump",
+    "s": "2026-09-29",
+    "e": "2026-10-23"
+   },
+   {
+    "n": "WE design, building electric",
+    "s": "2026-09-29",
+    "e": "2026-11-04"
+   },
+   {
+    "n": "Gas contingencies met; ready to schedule",
+    "s": "2026-11-03",
+    "m": 1
+   },
+   {
+    "n": "Building electric invoice paid (check mailed)",
+    "s": "2026-11-06",
+    "m": 1
+   },
+   {
+    "n": "WE installation window (target)",
+    "s": "2026-12-14",
+    "e": "2026-12-31"
+   },
+   {
+    "n": "Quotes expire (gas, fire pump)",
+    "s": "2027-01-20",
+    "m": 1
+   },
+   {
+    "n": "Quote expires (building electric)",
+    "s": "2027-02-02",
+    "m": 1
+   }
+  ],
+  "start": "2026-06-01",
+  "end": "2027-03-31",
+  "title": "Master schedule",
+  "lede": "Permanent-utility dates are from the We Energies emails; the installation window is WE's mid to late December target, not a scheduled date. Building dates come from the old portal (July) and have not been re-sequenced."
+ },
+ "documents": [
+  {
+   "t": "Drawings",
+   "img": "img/docs/drawings.jpg",
+   "d": "Key sheets and the cover sheets of the for-construction architectural/structural set (6/9/26) and civil set.",
+   "it": [
+    [
+     "Key sheets: C-4, A2.1, A4.0, C-10",
+     "Z4-C251-C-4-Site-Plan.pdf",
+     "For-construction set",
+     [
+      "PL-1",
+      "PL-2",
+      "PL-3",
+      "PL-4"
+     ]
+    ],
+    [
+     "Architectural / structural set",
+     "Z4-C251-For-Construction-Arch.pdf",
+     "Rev 6/9/26 · 26 sheets · cover in the viewer",
+     [
+      "ARC-1"
+     ],
+     [
+      "Full set: Open full PDF"
+     ]
+    ],
+    [
+     "Civil plans C-1 to C-14",
+     "Z4-C251-Civil-Plans.pdf",
+     "14 sheets · cover in the viewer",
+     [
+      "CIV-1"
+     ],
+     [
+      "Full set: Open full PDF"
+     ]
+    ]
+   ]
+  },
+  {
+   "t": "Site, CSM & easements",
+   "img": "img/docs/site.jpg",
+   "d": "CSM 3679 (Lot 6), the address alert, and the storm, stormwater and sanitary easements.",
+   "it": [
+    [
+     "CSM 3679 (final)",
+     "Z4-C251-CSM-3679-final.pdf",
+     "Recorded",
+     [
+      "CSM-1",
+      "CSM-2",
+      "CSM-3",
+      "CSM-4",
+      "CSM-5"
+     ]
+    ],
+    [
+     "Village address alert, 4324 Carol Rd",
+     "Z4-C251-Address-Alert-4324-Carol-Rd.pdf",
+     "Village of Caledonia, 6/25/26",
+     [
+      "AA-1"
+     ]
+    ],
+    [
+     "Storm easement (TRI signed)",
+     "Z4-C251-Storm-Easement-TRI-signed.pdf",
+     "11 pages · first 2 in the viewer",
+     [
+      "SE1-1",
+      "SE1-2"
+     ],
+     [
+      "Needs Utility District approval, then recording"
+     ]
+    ],
+    [
+     "Sanitary easement (TRI signed)",
+     "Z4-C251-Sanitary-Easement-TRI-signed.pdf",
+     "8 pages · first 2 in the viewer",
+     [
+      "SA1-1",
+      "SA1-2"
+     ],
+     [
+      "Needs Utility District approval, then recording"
+     ]
+    ],
+    [
+     "Storm sewer easement, Baxter Ct (draft exhibit)",
+     "Z4-C251-Easement-StormSewer-BaxterCt-draft.pdf",
+     "Draft",
+     [
+      "EBC-1"
+     ]
+    ],
+    [
+     "Stormwater easement, North (draft exhibit)",
+     "Z4-C251-Easement-StormWater-North-draft.pdf",
+     "Draft",
+     [
+      "ENS-1"
+     ]
+    ]
+   ]
+  },
+  {
+   "t": "Schedule",
+   "img": "img/docs/schedule.jpg",
+   "d": "The Scherrer construction schedule and 6-week look-ahead from the old portal (July).",
+   "it": [
+    [
+     "Construction schedule",
+     "Z4-C251-Construction-Schedule.pdf",
+     "Scherrer, July 2026",
+     [
+      "CS-1",
+      "CS-2",
+      "CS-3"
+     ]
+    ],
+    [
+     "6-week look-ahead",
+     "Z4-C251-6Week-LookAhead.pdf",
+     "July 2026",
+     [
+      "LA-1"
+     ]
+    ]
+   ]
+  }
+ ],
+ "team": {
+  "firms": {
+   "zpg": {
+    "n": "Zilber Property Group",
+    "g": "Developer",
+    "web": "https://www.zilberpropertygroup.com",
+    "ph": "800-945-4450",
+    "addr": "710 N. Plankinton Ave., Suite 1100, Milwaukee, WI 53203"
+   },
+   "sch": {
+    "n": "Scherrer Construction",
+    "g": "General contractor (design-build)",
+    "web": "https://www.scherrerconstruction.com",
+    "ph": "262-539-3100",
+    "addr": "601 Black Hawk Dr., Burlington, WI 53105"
+   },
+   "next": {
+    "n": "NEXT Electric",
+    "g": "Electrical contractor",
+    "web": "https://www.nextelectricllc.com",
+    "ph": "262-506-3200",
+    "addr": ""
+   },
+   "sp": {
+    "n": "Southport",
+    "g": "HVAC contractor",
+    "web": "",
+    "ph": "",
+    "addr": ""
+   }
+  },
+  "people": [
+   {
+    "id": "lueders",
+    "f": "zpg",
+    "fn": "Jason",
+    "ln": "Lueders",
+    "t": "Director of Construction",
+    "r": "Building owner's lead",
+    "em": "jason.lueders@zilber.com",
+    "cell": "630-344-3718"
+   },
+   {
+    "id": "kleinke",
+    "f": "zpg",
+    "fn": "Lisa",
+    "ln": "Kleinke",
+    "t": "Project Coordinator",
+    "r": "Remits WE payments",
+    "em": "lisa.kleinke@zilber.com",
+    "ph": "414-274-2838",
+    "cell": "414-801-8534"
+   },
+   {
+    "id": "mcilwee",
+    "f": "zpg",
+    "fn": "Ryan",
+    "ln": "McIlwee",
+    "t": "",
+    "r": "On WE distribution (WE has the address as @zibler.com)",
+    "em": ""
+   },
+   {
+    "id": "bourassa",
+    "f": "sch",
+    "fn": "Lucas",
+    "ln": "Bourassa",
+    "t": "Project Manager",
+    "r": "Service applicant; signs WE sketches and cards",
+    "em": "LBourassa@scherrerconstruction.com",
+    "ph": "262-539-3100 x1217",
+    "cell": "262-212-3232"
+   },
+   {
+    "id": "hegemann",
+    "f": "sch",
+    "fn": "Skip (Roger)",
+    "ln": "Hegemann",
+    "t": "",
+    "r": "Copied on utility coordination",
+    "em": "RogerHegemann@scherrerconstruction.com"
+   },
+   {
+    "id": "kuzniewski",
+    "f": "sch",
+    "fn": "Mark",
+    "ln": "Kuzniewski",
+    "t": "",
+    "r": "Copied on utility coordination",
+    "em": "mkuzniewski@scherrerconstruction.com"
+   },
+   {
+    "id": "wehrman",
+    "f": "next",
+    "fn": "Eddie",
+    "ln": "Wehrman",
+    "t": "Senior Project Manager",
+    "r": "Electrical service info, inspection, affidavit",
+    "em": "eddie.wehrman@nextelectricllc.com",
+    "cell": "262-370-8624"
+   },
+   {
+    "id": "leicht",
+    "f": "sp",
+    "fn": "Dave",
+    "ln": "Leicht",
+    "t": "",
+    "r": "HVAC; gas contact on the WE gas sketch",
+    "em": "dleicht@southportwi.com",
+    "cell": "847-452-1092"
+   }
+  ],
+  "order": [
+   "zpg",
+   "sch",
+   "next",
+   "sp"
+  ]
+ },
+ "disciplines": [
+  [
+   "Design",
+   "Drawings and Design"
+  ],
+  [
+   "Approvals",
+   "Village & agencies"
+  ],
+  [
+   "General Contractor",
+   "General Contractor"
+  ],
+  [
+   "ZPG",
+   "Developer (ZPG)"
+  ]
+ ],
+ "areasText": "Design (Drawings and Design: ZA Studios, RA Smith, Pinnacle), Approvals (only what the Village of Caledonia or the Utility District itself decides), General Contractor (Scherrer and trades: buyout, submittals, construction), ZPG (what ZPG itself must do)",
+ "cover": {
+  "image": "img/rendering.jpg",
+  "eyebrow": "Caledonia Corporate Park · Lot 6 · 4324 Carol Road, Franksville, WI 53126",
+  "big": "251,872",
+  "line1": "SF speculative industrial",
+  "line2": "Zilber Industrial 4 · C251",
+  "sentence": "ZPG develops; Scherrer Construction is the design-build general contractor; NEXT Electric is the electrical contractor; We Energies brings permanent gas and electric service.",
+  "chips": [
+   "All 3 WE invoices paid 11/6",
+   "Permanent power and gas: target mid to late December"
+  ],
+  "button": {
+   "label": "View site plan ⤢",
+   "image": "img/site-plan.jpg",
+   "caption": "Site plan · Caledonia Corporate Park Lot 6"
+  }
+ },
+ "rail": [
+  {
+   "kind": "now",
+   "when": "Now",
+   "title": "Building electric field items to WE",
+   "note": "Signed revised sketch and cost letter, inspection, affidavit"
+  },
+  {
+   "kind": "step",
+   "when": "Next · date not set",
+   "title": "WE schedules gas installation",
+   "note": "All gas contingencies met 11/3"
+  },
+  {
+   "kind": "step",
+   "when": "Gate · target mid to late Dec",
+   "title": "Permanent power and gas on",
+   "note": "After ready-for-service cards and inspections"
+  },
+  {
+   "kind": "key",
+   "when": "Target · Feb ’27",
+   "title": "Occupancy",
+   "note": "Old portal schedule (July); not re-sequenced"
+  }
+ ],
+ "approval": {
+  "eyebrow": "",
+  "title": "",
+  "lede": "",
+  "steps": []
+ },
+ "subtitle": "Zilber Industrial 4 · Caledonia Corporate Park · Caledonia",
+ "vcardNote": "C251 - Zilber Industrial 4 (Caledonia Corporate Park)",
+ "directoryEyebrow": "C251 · Zilber Industrial 4 · Caledonia Corporate Park",
+ "trackerFor": "project C251 (Zilber Industrial 4, Caledonia Corporate Park, Caledonia: building, site and permanent utilities)",
+ "drawings": {
+  "prefix": "PL",
+  "label": "For-construction key sheets · ZA Studios and Pinnacle, set dated 6/9/26",
+  "pdf": "Z4-C251-For-Construction-Arch.pdf"
+ },
+ "meetingsLede": "No recurring meeting is set on this site yet. Notes from each meeting appear below, newest first, once Jason has reviewed them.",
+ "sheets": "all",
+ "footer": "Built from the We Energies, Scherrer, NEXT Electric and Zilber correspondence and the old c251 portal. Open the Documents tab for the source files.",
+ "ownerLine": "Jason Lueders, ZPG",
+ "filePrefix": "Z4-C251",
+ "publicDir": "../../c251-caledonia-portal/public"
+}

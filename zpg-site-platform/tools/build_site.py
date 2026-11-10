@@ -34,13 +34,20 @@ def build(name):
     labels = dict(TAB_LABELS); labels.update({t['id']: t['label'] for t in c.get('extraTabs', [])})
     missing = [t for t in c['tabs'] if t not in labels]
     assert not missing, 'tabs without a label: %s' % missing
-    sheets = json.load(open(os.path.join(PUB, 'sheets', 'manifest.json')))
-    spec = {s['id']: s for s in json.load(open(os.path.join(ROOT, 'tools', 'build', 'src', 'spec.json')))}
-    for m in sheets:
-        if m['id'] in spec: m['pdf'], m['pg'] = 'docs/' + spec[m['id']]['pdf'].split('/')[-1], spec[m['id']]['page']
+    # A project in another repo (C251) sets publicDir, relative to this folder: its own public/ and sheets manifest.
+    pub = os.path.normpath(os.path.join(ROOT, c['publicDir'])) if c.get('publicDir') else PUB
+    if not os.path.isdir(pub):
+        print(name, 'SKIPPED: %s not checked out next to this repo' % c['publicDir']); return True
+    sheets = json.load(open(os.path.join(pub, 'sheets', 'manifest.json')))
+    if pub == PUB:
+        spec = {s['id']: s for s in json.load(open(os.path.join(ROOT, 'tools', 'build', 'src', 'spec.json')))}
+        for m in sheets:
+            if m['id'] in spec: m['pdf'], m['pg'] = 'docs/' + spec[m['id']]['pdf'].split('/')[-1], spec[m['id']]['page']
     # what the page script reads
     cfg = {k: c[k] for k in ('name', 'ns', 'refPrefix', 'filePrefix', 'vcardNote', 'trackerFor', 'areasText', 'disciplines', 'schedule', 'documents', 'team', 'drawings')}
     cfg['tabLabels'] = {t: labels[t] for t in c['tabs']}; cfg['sheets'] = sheets
+    for k in ('paths', 'defaultTab', 'wideTabs'):
+        if k in c: cfg[k] = c[k]
     cover = c['cover']; btn = cover['button']
     cover_btn = ('<button type="button" class="cover-zoom" data-sheets="%s">%s</button>' % (','.join(btn['sheets']), E(btn['label'])) if 'sheets' in btn
                  else '<button type="button" class="vimg cover-zoom" data-full="%s" data-cap="%s">%s</button>' % (E(btn['image']), E(btn['caption']), E(btn['label'])))
@@ -64,19 +71,19 @@ def build(name):
         'directoryEyebrow': E(c['directoryEyebrow']), 'meetingsLede': E(c['meetingsLede']),
         'extraPanels': '\n'.join(panels), 'footer': E(c['footer']), 'ownerLine': E(c['ownerLine']), 'build': build_id,
         'areaOptions': ''.join('<option value="%s">%s</option>' % (E(k), E(n)) for k, n in c['disciplines']),
-        'nsJson': json.dumps(c['ns']), 'css': read('site.css'),
+        'nsJson': json.dumps(c['ns']), 'refPrefix': E(c['refPrefix']), 'css': read('site.css'),
         'configJson': json.dumps(cfg, separators=(',', ':'), ensure_ascii=False).replace('</', '<\\/'), 'js': js,
     }
     page = fill(read('page.html').replace('{{css}}', '\x00CSS').replace('{{js}}', '\x00JS'), {k: v for k, v in values.items() if k not in ('css', 'js')})
     page = page.replace('\x00CSS', values['css']).replace('\x00JS', js)
-    out = os.path.join(PUB, c['path'].strip('/'), 'index.html'); os.makedirs(os.path.dirname(out), exist_ok=True)
+    out = os.path.join(pub, c['path'].strip('/'), 'index.html'); os.makedirs(os.path.dirname(out), exist_ok=True)
     if CHECK:   # has someone edited a built page (or the template) without rebuilding every site?
         strip = lambda t: re.sub(r'· build [0-9a-f]* [0-9-]+', '', t)
         same = os.path.exists(out) and strip(open(out, encoding='utf-8').read()) == strip(page)
         print(name, 'OK' if same else 'OUT OF DATE: %s differs from template + config. Move the change into template/ or project.json, then --all.' % os.path.relpath(out, ROOT))
         return same
     open(out, 'w', encoding='utf-8').write(page)
-    print(name, '->', os.path.relpath(out, ROOT), len(page) // 1024, 'KB')
+    print(name, '->', out if pub != PUB else os.path.relpath(out, ROOT), len(page) // 1024, 'KB')
     return True
 
 CHECK = False

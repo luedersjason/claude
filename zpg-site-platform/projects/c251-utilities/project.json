@@ -1,0 +1,794 @@
+{
+ "name": "C251 Utilities",
+ "title": "C251 · Permanent utilities",
+ "description": "Service applications, cost letters, construction sketches, ready-for-service cards and payment copies for gas WR 5243966, fire pump WR 5256942 and building electric WR 5243977.",
+ "path": "/utilities/",
+ "ns": "util_",
+ "refPrefix": "U",
+ "tabs": [
+  "home",
+  "paths",
+  "tracker",
+  "documents",
+  "schedule",
+  "team"
+ ],
+ "extraTabs": [
+  {
+   "id": "paths",
+   "label": "Paths to service",
+   "type": "paths",
+   "eyebrow": "We Energies · gas WR 5243966 · fire pump WR 5256942 · building electric WR 5243977",
+   "title": "Path to permanent service",
+   "lede": "Each service runs left to right through its stages to the service going live. Cards are tracker items, so they update with the tracker. Click a card for its item page; click the doc count to open the documents."
+  }
+ ],
+ "siteLinks": [
+  {
+   "label": "← C251 project",
+   "href": "/"
+  }
+ ],
+ "defaultTab": "paths",
+ "schedule": {
+  "rows": [
+   {
+    "n": "Permanent utilities",
+    "lab": 1
+   },
+   {
+    "n": "Service applications to We Energies",
+    "s": "2026-07-06",
+    "m": 1
+   },
+   {
+    "n": "WE design, gas and fire pump",
+    "s": "2026-09-29",
+    "e": "2026-10-23"
+   },
+   {
+    "n": "WE design, building electric",
+    "s": "2026-09-29",
+    "e": "2026-11-04"
+   },
+   {
+    "n": "Gas contingencies met; ready to schedule",
+    "s": "2026-11-03",
+    "m": 1
+   },
+   {
+    "n": "Building electric invoice paid (check mailed)",
+    "s": "2026-11-06",
+    "m": 1
+   },
+   {
+    "n": "WE installation window (target)",
+    "s": "2026-12-14",
+    "e": "2026-12-31"
+   },
+   {
+    "n": "Quotes expire (gas, fire pump)",
+    "s": "2027-01-20",
+    "m": 1
+   },
+   {
+    "n": "Quote expires (building electric)",
+    "s": "2027-02-02",
+    "m": 1
+   }
+  ],
+  "start": "2026-06-01",
+  "end": "2027-03-31",
+  "title": "Master schedule",
+  "lede": "Permanent-utility dates are from the We Energies emails; the installation window is WE's mid to late December target, not a scheduled date."
+ },
+ "documents": [
+  {
+   "t": "Permanent utilities · We Energies",
+   "img": "img/docs/utilities.jpg",
+   "d": "Service applications, cost letters, construction sketches, ready-for-service cards and payment copies for gas WR 5243966, fire pump WR 5256942 and building electric WR 5243977.",
+   "it": [
+    [
+     "Building electric sketch WR 5243977 (revised 11/6)",
+     "Z4-C251-WE-Building-WR5243977-Sketch-REVISED-11.6.26.pdf",
+     "Shawn Niles, rev. 11/6/26",
+     [
+      "MS-1",
+      "MS-2",
+      "MS-3"
+     ],
+     [
+      "Needs customer signature",
+      "Sewer-crossing clearance: email says 8 ft; sheet 2 reads 10 ft"
+     ]
+    ],
+    [
+     "Building electric cost letter WR 5243977 (revised)",
+     "Z4-C251-WE-Building-WR5243977-CostLetter-REVISED-11.4.26.pdf",
+     "Tiara Joyner, 11/4/26 (underground)",
+     [
+      "MC-1",
+      "MC-2"
+     ],
+     [
+      "Sign and return this one, not the first 11/4 letter"
+     ]
+    ],
+    [
+     "Building electric ready-for-service card",
+     "Z4-C251-WE-Building-WR5243977-ReadyForService-BLANK.pdf",
+     "Blank",
+     [
+      "MR-1"
+     ]
+    ],
+    [
+     "Building electric payment, check #01137160",
+     "Z4-C251-WE-Building-WR5243977-Payment-Chk01137160-REDACTED.pdf",
+     "Dated 11/5, mailed 11/6 · redacted",
+     [
+      "MK-1"
+     ]
+    ],
+    [
+     "Fire pump sketch WR 5256942 (signed)",
+     "Z4-C251-WE-FirePump-WR5256942-Sketch-SIGNED-10.23.26.pdf",
+     "Signed 10/23/26",
+     [
+      "FS-1",
+      "FS-2"
+     ]
+    ],
+    [
+     "Fire pump cost letter WR 5256942",
+     "Z4-C251-WE-FirePump-WR5256942-CostLetter-10.22.26.pdf",
+     "Tiara Joyner, 10/22/26",
+     [
+      "FC-1",
+      "FC-2"
+     ]
+    ],
+    [
+     "Fire pump ready-for-service card",
+     "Z4-C251-WE-FirePump-WR5256942-ReadyForService-BLANK.pdf",
+     "Blank",
+     [
+      "FR-1"
+     ]
+    ],
+    [
+     "Fire pump payment, check #01136816",
+     "Z4-C251-WE-FirePump-WR5256942-Payment-Chk01136816-REDACTED.pdf",
+     "Mailed 10/26 · redacted",
+     [
+      "FK-1"
+     ]
+    ],
+    [
+     "Gas sketch WR 5243966 (signed)",
+     "Z4-C251-WE-Gas-WR5243966-Sketch-SIGNED-10.23.26.pdf",
+     "Signed 10/23/26",
+     [
+      "GS-1",
+      "GS-2",
+      "GS-3"
+     ]
+    ],
+    [
+     "Gas cost letter WR 5243966 (signed)",
+     "Z4-C251-WE-Gas-WR5243966-CostLetter-SIGNED-11.3.26.pdf",
+     "Signed 11/3/26",
+     [
+      "GC-1",
+      "GC-2"
+     ]
+    ],
+    [
+     "Gas ready-for-service card (signed)",
+     "Z4-C251-WE-Gas-WR5243966-ReadyForService-SIGNED-10.26.26.pdf",
+     "Signed 10/26/26",
+     [
+      "GR-1"
+     ]
+    ],
+    [
+     "Gas payment, check #01136815",
+     "Z4-C251-WE-Gas-WR5243966-Payment-Chk01136815-REDACTED.pdf",
+     "Mailed 10/26 · redacted",
+     [
+      "GK-1"
+     ]
+    ],
+    [
+     "Gas & electric service application",
+     "Z4-C251-WE-ServiceApp-Gas-Electric-SUBMITTED-7.6.26.pdf",
+     "Submitted 7/6/26",
+     [
+      "GA-1",
+      "GA-2",
+      "GA-3",
+      "GA-4",
+      "GA-5",
+      "GA-6"
+     ]
+    ],
+    [
+     "Fire pump service application",
+     "Z4-C251-WE-ServiceApp-FirePump-SUBMITTED-7.6.26.pdf",
+     "Submitted 7/6/26",
+     [
+      "FA-1",
+      "FA-2",
+      "FA-3",
+      "FA-4",
+      "FA-5",
+      "FA-6"
+     ]
+    ],
+    [
+     "WE design exhibits (meter location, load table, motor data, load factor)",
+     "Z4-C251-WE-Gas-Meter-Relocation-Markup-9.30.26.png",
+     "From the WE emails, 9/29 to 10/21",
+     [
+      "EX-1",
+      "EX-2",
+      "EX-3",
+      "EX-4",
+      "EX-5"
+     ]
+    ],
+    [
+     "WE seasonal installation info",
+     "Z4-C251-WE-Seasonal-Installation-Info.pdf",
+     "We Energies",
+     [
+      "SE-1",
+      "SE-2"
+     ]
+    ]
+   ]
+  }
+ ],
+ "team": {
+  "firms": {
+   "zpg": {
+    "n": "Zilber Property Group",
+    "g": "Developer",
+    "web": "https://www.zilberpropertygroup.com",
+    "ph": "800-945-4450",
+    "addr": "710 N. Plankinton Ave., Suite 1100, Milwaukee, WI 53203"
+   },
+   "sch": {
+    "n": "Scherrer Construction",
+    "g": "General contractor (design-build)",
+    "web": "https://www.scherrerconstruction.com",
+    "ph": "262-539-3100",
+    "addr": "601 Black Hawk Dr., Burlington, WI 53105"
+   },
+   "next": {
+    "n": "NEXT Electric",
+    "g": "Electrical contractor",
+    "web": "https://www.nextelectricllc.com",
+    "ph": "262-506-3200",
+    "addr": ""
+   },
+   "sp": {
+    "n": "Southport",
+    "g": "HVAC contractor",
+    "web": "",
+    "ph": "",
+    "addr": ""
+   },
+   "we": {
+    "n": "We Energies",
+    "g": "Utility",
+    "web": "https://www.we-energies.com",
+    "ph": "262-574-6400",
+    "addr": "201 1st Street, Racine, WI 53403"
+   }
+  },
+  "people": [
+   {
+    "id": "lueders",
+    "f": "zpg",
+    "fn": "Jason",
+    "ln": "Lueders",
+    "t": "Director of Construction",
+    "r": "Building owner's lead",
+    "em": "jason.lueders@zilber.com",
+    "cell": "630-344-3718"
+   },
+   {
+    "id": "kleinke",
+    "f": "zpg",
+    "fn": "Lisa",
+    "ln": "Kleinke",
+    "t": "Project Coordinator",
+    "r": "Remits WE payments",
+    "em": "lisa.kleinke@zilber.com",
+    "ph": "414-274-2838",
+    "cell": "414-801-8534"
+   },
+   {
+    "id": "mcilwee",
+    "f": "zpg",
+    "fn": "Ryan",
+    "ln": "McIlwee",
+    "t": "",
+    "r": "On WE distribution (WE has the address as @zibler.com)",
+    "em": ""
+   },
+   {
+    "id": "bourassa",
+    "f": "sch",
+    "fn": "Lucas",
+    "ln": "Bourassa",
+    "t": "Project Manager",
+    "r": "Service applicant; signs WE sketches and cards",
+    "em": "LBourassa@scherrerconstruction.com",
+    "ph": "262-539-3100 x1217",
+    "cell": "262-212-3232"
+   },
+   {
+    "id": "hegemann",
+    "f": "sch",
+    "fn": "Skip (Roger)",
+    "ln": "Hegemann",
+    "t": "",
+    "r": "Copied on utility coordination",
+    "em": "RogerHegemann@scherrerconstruction.com"
+   },
+   {
+    "id": "kuzniewski",
+    "f": "sch",
+    "fn": "Mark",
+    "ln": "Kuzniewski",
+    "t": "",
+    "r": "Copied on utility coordination",
+    "em": "mkuzniewski@scherrerconstruction.com"
+   },
+   {
+    "id": "wehrman",
+    "f": "next",
+    "fn": "Eddie",
+    "ln": "Wehrman",
+    "t": "Senior Project Manager",
+    "r": "Electrical service info, inspection, affidavit",
+    "em": "eddie.wehrman@nextelectricllc.com",
+    "cell": "262-370-8624"
+   },
+   {
+    "id": "leicht",
+    "f": "sp",
+    "fn": "Dave",
+    "ln": "Leicht",
+    "t": "",
+    "r": "HVAC; gas contact on the WE gas sketch",
+    "em": "dleicht@southportwi.com",
+    "cell": "847-452-1092"
+   },
+   {
+    "id": "joyner",
+    "f": "we",
+    "fn": "Tiara",
+    "ln": "Joyner",
+    "t": "Service Manager, CSO Southern Operations",
+    "r": "WE service rep on all three work requests",
+    "em": "Tiara.Joyner@we-energies.com",
+    "ph": "262-574-6242",
+    "cell": "262-622-5129"
+   },
+   {
+    "id": "niles",
+    "f": "we",
+    "fn": "Shawn",
+    "ln": "Niles",
+    "t": "Designer",
+    "r": "Prepared the gas and electric sketches",
+    "em": "Shawn.Niles@we-energies.com",
+    "ph": "262-365-6446",
+    "cell": "262-838-9595"
+   },
+   {
+    "id": "willms",
+    "f": "we",
+    "fn": "Ryan",
+    "ln": "Willms",
+    "t": "Planning",
+    "r": "Building service conductor sizing"
+   },
+   {
+    "id": "fink",
+    "f": "we",
+    "fn": "Danielle",
+    "ln": "Fink",
+    "t": "",
+    "r": "Gas corrosion contact (tracer wire, anode)",
+    "ph": "414-651-3067"
+   }
+  ],
+  "order": [
+   "zpg",
+   "sch",
+   "next",
+   "sp",
+   "we"
+  ]
+ },
+ "disciplines": [
+  [
+   "Utilities",
+   "Permanent utilities (We Energies)"
+  ]
+ ],
+ "areasText": "Utilities (the We Energies gas, fire pump and building electric services and the work Scherrer, NEXT Electric and ZPG owe for them)",
+ "cover": {
+  "image": "img/rendering.jpg",
+  "eyebrow": "We Energies · gas WR 5243966 · fire pump WR 5256942 · building electric WR 5243977",
+  "big": "3",
+  "line1": "We Energies work requests",
+  "line2": "gas · fire pump · building electric",
+  "sentence": "ZPG develops; Scherrer Construction is the design-build general contractor; NEXT Electric is the electrical contractor; We Energies brings permanent gas and electric service.",
+  "chips": [
+   "All 3 WE invoices paid 11/6",
+   "Permanent power and gas: target mid to late December"
+  ],
+  "button": {
+   "label": "View site plan ⤢",
+   "image": "img/site-plan.jpg",
+   "caption": "Site plan · Caledonia Corporate Park Lot 6"
+  }
+ },
+ "rail": [
+  {
+   "kind": "now",
+   "when": "Now",
+   "title": "Building electric field items to WE",
+   "note": "Signed revised sketch and cost letter, inspection, affidavit"
+  },
+  {
+   "kind": "step",
+   "when": "Next · date not set",
+   "title": "WE schedules gas installation",
+   "note": "All gas contingencies met 11/3"
+  },
+  {
+   "kind": "step",
+   "when": "Gate · target mid to late Dec",
+   "title": "Permanent power and gas on",
+   "note": "After ready-for-service cards and inspections"
+  }
+ ],
+ "approval": {
+  "eyebrow": "We Energies contacts",
+  "title": "Where things go",
+  "lede": "",
+  "steps": [
+   {
+    "when": "Signed sketches, cost letters, cards",
+    "title": "Tiara Joyner",
+    "note": "Tiara.Joyner@we-energies.com · fax 262-552-3460 · 201 1st Street, Racine, WI 53403"
+   },
+   {
+    "when": "Payment (reference the WR #)",
+    "title": "We Energies, Essential Services – A299",
+    "note": "PO Box 2046, Milwaukee, WI 53201-9627 · online or 855-570-0998"
+   },
+   {
+    "when": "Electrician affidavit",
+    "title": "WE Central Group",
+    "note": "co-non-design-central@we-energies.com · fax 262-574-6401"
+   },
+   {
+    "when": "New service questions",
+    "title": "262-574-6400",
+    "note": "Toll free 866-423-0364"
+   }
+  ]
+ },
+ "paths": [
+  {
+   "t": "Electric service · building",
+   "wr": "WR 5243977",
+   "goal": "Building electric active",
+   "gs": "3000A main service energized · target mid to late December",
+   "icon": "⚡",
+   "stages": [
+    {
+     "n": "Application",
+     "cards": [
+      [
+       "U-01",
+       "Gas & electric application submitted",
+       [
+        "GA-1"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Design inputs to WE",
+     "cards": [
+      [
+       "U-02",
+       "Switchgear documents accepted",
+       []
+      ],
+      [
+       "U-05",
+       "Load factor · 20%",
+       [
+        "EX-5"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Agreements & payment",
+     "cards": [
+      [
+       "U-10",
+       "Payment sent",
+       [
+        "MK-1",
+        "MC-1"
+       ]
+      ],
+      [
+       "U-13",
+       "Revised sketch & cost letter signed & returned",
+       [
+        "MS-1",
+        "MS-2",
+        "MC-1"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Site & inspections",
+     "cards": [
+      [
+       "U-17",
+       "3000A switchgear & CT metering installed",
+       [
+        "MS-2"
+       ]
+      ],
+      [
+       "U-14",
+       "Municipal electrical inspection",
+       [
+        "MC-1"
+       ]
+      ],
+      [
+       "U-15",
+       "Electrician affidavit to WE",
+       []
+      ],
+      [
+       "U-19",
+       "Ready-for-service card signed & returned",
+       [
+        "MR-1"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "WE installation",
+     "cards": [
+      [
+       "U-21",
+       "Transformer set & service energized",
+       [
+        "MS-1",
+        "MS-2"
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Electric service · fire pump",
+   "wr": "WR 5256942",
+   "goal": "Fire pump service active",
+   "gs": "400A · 480Y/277V energized · target mid to late December",
+   "icon": "⚡",
+   "stages": [
+    {
+     "n": "Application",
+     "cards": [
+      [
+       "U-01",
+       "Fire pump application submitted",
+       [
+        "FA-1"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Design inputs to WE",
+     "cards": [
+      [
+       "U-02",
+       "Fire pump data & switchgear documents",
+       [
+        "EX-4"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Agreements & payment",
+     "cards": [
+      [
+       "U-08",
+       "Sketch signed & returned",
+       [
+        "FS-1"
+       ]
+      ],
+      [
+       "U-09",
+       "Payment sent",
+       [
+        "FK-1",
+        "FC-1"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Site & inspections",
+     "cards": [
+      [
+       "U-16",
+       "400A transocket & CTs installed",
+       [
+        "FS-1"
+       ]
+      ],
+      [
+       "U-14",
+       "Municipal electrical inspection",
+       [
+        "FC-1"
+       ]
+      ],
+      [
+       "U-15",
+       "Electrician affidavit to WE",
+       []
+      ],
+      [
+       "U-18",
+       "Ready-for-service card signed & returned",
+       [
+        "FR-1"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "WE installation",
+     "cards": [
+      [
+       "U-20",
+       "Fire pump service energized",
+       [
+        "FS-1"
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Gas service · building",
+   "wr": "WR 5243966",
+   "goal": "Gas service active",
+   "gs": "4 × 1000TC meters at 2 PSIG · target mid to late December",
+   "icon": "🔥",
+   "stages": [
+    {
+     "n": "Application",
+     "cards": [
+      [
+       "U-01",
+       "Service application submitted",
+       [
+        "GA-1",
+        "EX-3"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Design decisions",
+     "cards": [
+      [
+       "U-03",
+       "Meter location approved",
+       [
+        "EX-1",
+        "EX-2"
+       ]
+      ],
+      [
+       "U-04",
+       "Meter count settled · 4 meters",
+       [
+        "GS-1",
+        "EX-3"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Agreements & payment",
+     "cards": [
+      [
+       "U-06",
+       "Sketch, cost letter & card signed & returned",
+       [
+        "GS-1",
+        "GC-1",
+        "GR-1"
+       ]
+      ],
+      [
+       "U-07",
+       "Payment received",
+       [
+        "GK-1",
+        "GC-1"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "WE installation",
+     "cards": [
+      [
+       "U-11",
+       "Installation scheduled",
+       [
+        "GC-1"
+       ]
+      ],
+      [
+       "U-12",
+       "Service bored & meters set",
+       [
+        "GS-1",
+        "GS-2"
+       ]
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "subtitle": "Zilber Industrial 4 · Caledonia Corporate Park · Caledonia",
+ "vcardNote": "C251 - Zilber Industrial 4 (Caledonia Corporate Park)",
+ "directoryEyebrow": "C251 · Zilber Industrial 4 · Caledonia Corporate Park",
+ "trackerFor": "project C251 (Zilber Industrial 4, Caledonia Corporate Park, Caledonia: building, site and permanent utilities)",
+ "drawings": {
+  "prefix": "PL",
+  "label": "For-construction key sheets · ZA Studios and Pinnacle, set dated 6/9/26",
+  "pdf": "Z4-C251-For-Construction-Arch.pdf"
+ },
+ "meetingsLede": "No recurring meeting is set on this site yet. Notes from each meeting appear below, newest first, once Jason has reviewed them.",
+ "sheets": "all",
+ "footer": "Built from the We Energies, Scherrer, NEXT Electric and Zilber correspondence and the old c251 portal. Open the Documents tab for the source files.",
+ "ownerLine": "Jason Lueders, ZPG",
+ "filePrefix": "Z4-C251",
+ "publicDir": "../../c251-caledonia-portal/public",
+ "wideTabs": [
+  "paths"
+ ]
+}

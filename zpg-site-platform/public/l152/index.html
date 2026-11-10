@@ -476,6 +476,30 @@ body{margin:0}
 .vwork.q{background:#FFF7E6;color:#8A5A00}.vwork.q i{border-color:#F59E0B;border-right-color:transparent;animation:none}
 .vwork.done{background:#00A94F;color:#fff;animation:vflash 5s ease forwards}
 @keyframes vspin{to{transform:rotate(360deg)}}@keyframes vflash{0%,70%{opacity:1}100%{opacity:.25}}
+/* Paths to service (extra tab type "paths"): stage columns left to right, goal tile on the right (playbook 1.12) */
+.pp-legend{display:flex;flex-wrap:wrap;gap:16px;margin:12px 0 4px;font-size:13px;color:var(--muted)}.pp-legend span{display:inline-flex;align-items:center;gap:6px}
+.pp-ic{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-style:normal;font-size:11px;font-weight:700;line-height:1}
+.pp-ic.done{background:var(--accent);color:#fff}.pp-ic.open{border:1.5px solid var(--muted);color:var(--muted);font-size:10px}.pp-ic.pend{background:#F6E7C8;color:#9A5B00;font-size:8px;letter-spacing:-1px}
+.pp{border:1px solid var(--line);border-radius:var(--r);background:var(--sunk);margin-top:18px;overflow-x:auto}
+.pp-h{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;padding:14px 16px 0}.pp-h h3{font-family:var(--display);font-size:18px}
+.pp-badge{font-family:var(--mono);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;background:var(--accent-soft);color:var(--accent-ink)}
+.pp-row{display:flex;align-items:stretch;gap:0;padding:14px 16px 16px;min-width:min-content}
+.pp-st{flex:0 0 190px;display:flex;flex-direction:column}
+.pp-sh{display:flex;align-items:flex-start;gap:7px;min-height:38px;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.pp-sh .n{flex:0 0 20px;height:20px;border-radius:50%;background:var(--steel);color:#fff;display:grid;place-items:center;font-size:10.5px;letter-spacing:0}.pp-sh .c{margin-left:auto;font-weight:400}
+.pp-col{flex:1;display:flex;flex-direction:column;justify-content:center;gap:10px;background:#E8ECF1;border-radius:8px;padding:10px}
+.pp-arrow{flex:0 0 26px;display:grid;place-items:center;color:var(--muted);font-size:18px;padding-top:38px}
+.pp-card{display:block;width:100%;text-align:left;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--line);border-radius:8px;padding:10px 12px;cursor:pointer;box-shadow:0 1px 2px rgba(16,36,64,.06)}
+.pp-card:hover{border-color:var(--accent)}.pp-card.done{border-left-color:var(--accent)}.pp-card.pend{border-left-color:#D6932B}
+.pp-card .s{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.pp-card.done .s{color:var(--accent-ink)}.pp-card.pend .s{color:#9A5B00}
+.pp-card b{display:block;font-size:14px;line-height:1.3;margin:6px 0 4px}
+.pp-card .f{display:flex;justify-content:space-between;gap:8px;font-size:12px;color:var(--muted)}
+.pp-card .d{font-weight:600;color:var(--accent-ink);text-decoration:none;cursor:pointer;background:none;border:0;padding:0;font:inherit;font-size:12px}
+.pp-goal{flex:0 0 210px;margin-left:8px;border:2px dashed #CF4A3C;border-radius:12px;background:#FBE9E7;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:18px;gap:6px;margin-top:38px}
+.pp-goal.ok{border:2px solid var(--accent);background:var(--accent-soft)}
+.pp-goal .i{font-size:34px;line-height:1}.pp-goal b{font-family:var(--display);font-size:20px;line-height:1.2}.pp-goal small{color:var(--muted);font-size:12.5px}
+.pp-bar{width:100%;height:6px;border-radius:3px;background:#fff;overflow:hidden}.pp-bar i{display:block;height:100%;background:#CF4A3C}.pp-goal.ok .pp-bar i{background:var(--accent)}
 
 </style>
 </head>
@@ -632,7 +656,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build cc9f957 2026-11-09</span>
+  <span>Owner: Jason Lueders, ZPG · build ee021ef 2026-11-10</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -1080,21 +1104,44 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 
 })();
 
+// Paths to service (extra tab type "paths", playbook 1.12). CFG.paths: [{t, wr, goal, gs, icon, stages:[{n, cards:[[ref, short, [sheet ids]]]}]}].
+// Cards are tracker items: status, date and owner come from the tracker; only the short label and the documents are config.
+(function paths(){
+  const el=document.getElementById('ppaths');if(!el||!(CFG.paths||[]).length)return;
+  const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const firm=o=>{const m=String(o||'').match(/\(([^)]+)\)\s*$/);return m?m[1]:String(o||'Unassigned');};
+  const IC={Done:['done','✓','Done'],Open:['open','○','Open'],Pending:['pend','❙❙','Waiting']};
+  function draw(){
+    const rows=window.jqIssues||[];if(!rows.length)return;const eff=window.jqEff||(r=>r.status||'Open');
+    el.innerHTML=CFG.paths.map(p=>{
+      const stages=p.stages.map(st=>({n:st.n,cards:st.cards.map(([ref,short,docs])=>({r:rows.find(x=>x.ref===ref),short,docs:docs||[]})).filter(c=>c.r)})).filter(st=>st.cards.length);
+      const all=stages.flatMap(s=>s.cards),done=all.filter(c=>eff(c.r)==='Done').length,ok=all.length&&done===all.length;
+      const cols=stages.map((st,i)=>{const d=st.cards.filter(c=>eff(c.r)==='Done').length;
+        const cards=st.cards.map(({r,short,docs})=>{const e=eff(r),ic=IC[e]||IC.Open;const dt=e==='Done'&&r.confirmed?' · '+esc(r.confirmed):'';
+          return `<button type="button" class="pp-card ${ic[0]}" data-ref="${esc(r.ref)}" title="${esc(r.ref)} · ${esc(r.title)}"><span class="s"><i class="pp-ic ${ic[0]}">${ic[1]}</i>${ic[2]}${dt}</span><b>${esc(short||r.title)}</b><span class="f"><span>${esc(firm(r.owner))}</span>${docs.length?`<span class="d" data-sheets="${esc(docs.join(','))}">${docs.length} doc${docs.length>1?'s':''}</span>`:''}</span></button>`;}).join('');
+        return `${i?'<span class="pp-arrow" aria-hidden="true">→</span>':''}<div class="pp-st"><div class="pp-sh"><span class="n">${i+1}</span><span>${esc(st.n)}</span><span class="c">${d}/${st.cards.length}</span></div><div class="pp-col">${cards}</div></div>`;}).join('');
+      return `<div class="pp"><div class="pp-h"><h3>${esc(p.t)}</h3><span class="pp-badge">${done}/${all.length} done</span><span class="note">${esc(p.wr||'')}</span></div><div class="pp-row">${cols}<span class="pp-arrow" aria-hidden="true">→</span><div class="pp-goal${ok?' ok':''}"><span class="i">${esc(p.icon||'⚡')}</span><b>${esc(p.goal)}</b><small>${esc(p.gs||'')}</small><small><strong>${done} of ${all.length} steps done</strong></small><span class="pp-bar"><i style="width:${all.length?Math.round(100*done/all.length):0}%"></i></span></div></div></div>`;
+    }).join('');
+  }
+  window.addEventListener('jqissues',draw);draw();
+  el.addEventListener('click',e=>{if(e.target.closest('[data-sheets]'))return;const b=e.target.closest('.pp-card');if(b&&window.jqGoRef)window.jqGoRef(b.dataset.ref);});
+})();
+
 (function shell(){
   const tabs=[...document.querySelectorAll('.tab')], panels=[...document.querySelectorAll('.panel')];
   function show(name,scroll){
     if(!panels.some(p=>p.dataset.panel===name)) name='home';
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
-    document.querySelector('.shell').classList.toggle('wide',name==='schedule');
+    document.querySelector('.shell').classList.toggle('wide',name==='schedule'||(CFG.wideTabs||[]).includes(name));
     tabs.forEach(b=>{if(b.dataset.tab===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
-    try{sessionStorage.setItem('jqTab',name)}catch(e){}
+    try{sessionStorage.setItem((CFG.ns||'')+'jqTab',name)}catch(e){}
     if(scroll!==false) window.scrollTo(0,0);
     if(name==='schedule'&&window.jqFit) requestAnimationFrame(window.jqFit);
   }
   window.jqTab=show;
   tabs.forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
-  let first='home'; const h=location.hash.slice(1);
-  if(h&&panels.some(p=>p.dataset.panel===h)) first=h; else { try{first=sessionStorage.getItem('jqTab')||'home'}catch(e){} }
+  let first=CFG.defaultTab||'home'; const h=location.hash.slice(1);
+  if(h&&panels.some(p=>p.dataset.panel===h)) first=h; else { try{first=sessionStorage.getItem((CFG.ns||'')+'jqTab')||first}catch(e){} }
   show(first,false);
   window.jqShow=show;
 

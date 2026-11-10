@@ -365,21 +365,44 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 
 })();
 
+// Paths to service (extra tab type "paths", playbook 1.12). CFG.paths: [{t, wr, goal, gs, icon, stages:[{n, cards:[[ref, short, [sheet ids]]]}]}].
+// Cards are tracker items: status, date and owner come from the tracker; only the short label and the documents are config.
+(function paths(){
+  const el=document.getElementById('ppaths');if(!el||!(CFG.paths||[]).length)return;
+  const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const firm=o=>{const m=String(o||'').match(/\(([^)]+)\)\s*$/);return m?m[1]:String(o||'Unassigned');};
+  const IC={Done:['done','✓','Done'],Open:['open','○','Open'],Pending:['pend','❙❙','Waiting']};
+  function draw(){
+    const rows=window.jqIssues||[];if(!rows.length)return;const eff=window.jqEff||(r=>r.status||'Open');
+    el.innerHTML=CFG.paths.map(p=>{
+      const stages=p.stages.map(st=>({n:st.n,cards:st.cards.map(([ref,short,docs])=>({r:rows.find(x=>x.ref===ref),short,docs:docs||[]})).filter(c=>c.r)})).filter(st=>st.cards.length);
+      const all=stages.flatMap(s=>s.cards),done=all.filter(c=>eff(c.r)==='Done').length,ok=all.length&&done===all.length;
+      const cols=stages.map((st,i)=>{const d=st.cards.filter(c=>eff(c.r)==='Done').length;
+        const cards=st.cards.map(({r,short,docs})=>{const e=eff(r),ic=IC[e]||IC.Open;const dt=e==='Done'&&r.confirmed?' · '+esc(r.confirmed):'';
+          return `<button type="button" class="pp-card ${ic[0]}" data-ref="${esc(r.ref)}" title="${esc(r.ref)} · ${esc(r.title)}"><span class="s"><i class="pp-ic ${ic[0]}">${ic[1]}</i>${ic[2]}${dt}</span><b>${esc(short||r.title)}</b><span class="f"><span>${esc(firm(r.owner))}</span>${docs.length?`<span class="d" data-sheets="${esc(docs.join(','))}">${docs.length} doc${docs.length>1?'s':''}</span>`:''}</span></button>`;}).join('');
+        return `${i?'<span class="pp-arrow" aria-hidden="true">→</span>':''}<div class="pp-st"><div class="pp-sh"><span class="n">${i+1}</span><span>${esc(st.n)}</span><span class="c">${d}/${st.cards.length}</span></div><div class="pp-col">${cards}</div></div>`;}).join('');
+      return `<div class="pp"><div class="pp-h"><h3>${esc(p.t)}</h3><span class="pp-badge">${done}/${all.length} done</span><span class="note">${esc(p.wr||'')}</span></div><div class="pp-row">${cols}<span class="pp-arrow" aria-hidden="true">→</span><div class="pp-goal${ok?' ok':''}"><span class="i">${esc(p.icon||'⚡')}</span><b>${esc(p.goal)}</b><small>${esc(p.gs||'')}</small><small><strong>${done} of ${all.length} steps done</strong></small><span class="pp-bar"><i style="width:${all.length?Math.round(100*done/all.length):0}%"></i></span></div></div></div>`;
+    }).join('');
+  }
+  window.addEventListener('jqissues',draw);draw();
+  el.addEventListener('click',e=>{if(e.target.closest('[data-sheets]'))return;const b=e.target.closest('.pp-card');if(b&&window.jqGoRef)window.jqGoRef(b.dataset.ref);});
+})();
+
 (function shell(){
   const tabs=[...document.querySelectorAll('.tab')], panels=[...document.querySelectorAll('.panel')];
   function show(name,scroll){
     if(!panels.some(p=>p.dataset.panel===name)) name='home';
     panels.forEach(p=>p.hidden=p.dataset.panel!==name);
-    document.querySelector('.shell').classList.toggle('wide',name==='schedule');
+    document.querySelector('.shell').classList.toggle('wide',name==='schedule'||(CFG.wideTabs||[]).includes(name));
     tabs.forEach(b=>{if(b.dataset.tab===name)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});
-    try{sessionStorage.setItem('jqTab',name)}catch(e){}
+    try{sessionStorage.setItem((CFG.ns||'')+'jqTab',name)}catch(e){}
     if(scroll!==false) window.scrollTo(0,0);
     if(name==='schedule'&&window.jqFit) requestAnimationFrame(window.jqFit);
   }
   window.jqTab=show;
   tabs.forEach(b=>b.addEventListener('click',()=>show(b.dataset.tab)));
-  let first='home'; const h=location.hash.slice(1);
-  if(h&&panels.some(p=>p.dataset.panel===h)) first=h; else { try{first=sessionStorage.getItem('jqTab')||'home'}catch(e){} }
+  let first=CFG.defaultTab||'home'; const h=location.hash.slice(1);
+  if(h&&panels.some(p=>p.dataset.panel===h)) first=h; else { try{first=sessionStorage.getItem((CFG.ns||'')+'jqTab')||first}catch(e){} }
   show(first,false);
   window.jqShow=show;
 
