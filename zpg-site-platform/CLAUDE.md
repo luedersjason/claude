@@ -11,4 +11,10 @@ print SKIPPED and pass, which is how the 11/11 Download PDF change shipped witho
 If this session cannot reach luedersjason/c251-caledonia-portal, the change is NOT done: route the
 C251 build to a session that has that repo (or the G14), and say so in the report.
 
+C251 AUTO-SYNC (forever fix, 11/11): luedersjason/c251-caledonia-portal runs
+`.github/workflows/template-sync.yml` (source: `tools/c251-autosync/template-sync.yml`) hourly and on
+demand. It checks out this public branch, builds c251 + c251-utilities, and pushes only if the pages
+changed. So a template change pushed here reaches C251 within the hour with no session needing that
+repo. Do not edit C251's built pages by hand; change template/ or projects/c251*/project.json here.
+
 Read `project-site-playbook.md` before changing anything.
