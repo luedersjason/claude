@@ -17,9 +17,18 @@
   "team",
   "meetings",
   "photos",
+  "tif",
   "watermain"
  ],
  "extraTabs": [
+  {
+   "id": "tif",
+   "label": "DA & TIF",
+   "type": "paths",
+   "eyebrow": "Development Agreement · TID No. 12 · three LakeView sites",
+   "title": "DA & TIF incentive by phase",
+   "lede": "One DA (TI Investors of Pleasant Prairie Holding Company LLC, Village Board approval 8/24/26) covers three sites in TID No. 12 (created 4/22/24, Res. 24-23). Each phase earns its own Municipal Revenue Obligation (MRO) only after Substantial Completion: up to the stated principal at 5%, paid in 12 annual installments each September 15, solely from that phase's tax increment above its base value, less Village administrative costs. Any year the assessed value is below the guarantee, that year's payment is withheld. Village total up to $3,500,000 (about 35% of projected increment). Tax Agreements C1-C3 keep each site taxable until 20 years after TID 12 closes. Closing and recording sit on the Nitto Watermain site (N-31, N-32). Source: DA 08/2026 draft Art. IV and the 8/25/26 approval letter."
+  },
   {
    "id": "watermain",
    "label": "Nitto Watermain",
@@ -85,6 +94,12 @@
    {
     "n": "S&O approval lapses unless the building permit is issued (6 months from 8/17/26)",
     "s": "2027-02-17",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "Tell the Village which phase (B or C) is second (DA s.4.5)",
+    "s": "2028-01-01",
     "m": 1,
     "k": 1
    },
@@ -684,5 +699,168 @@
  "meetingsLede": "No recurring meeting is set for L152 yet. Notes from each meeting appear below, newest first, once Jason has reviewed them.",
  "sheets": "all",
  "footer": "Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.",
- "ownerLine": "Jason Lueders, ZPG"
+ "ownerLine": "Jason Lueders, ZPG",
+ "paths": [
+  {
+   "t": "Phase A · L152 · Parcel 9 CSM 2273 (Nitto site)",
+   "wr": "TPN 92-4-122-272-0502 · base value $1,057,800",
+   "goal": "Phase A MRO up to $654,462",
+   "gs": "12 × $76,325 each Sept 15 · assessed value ≥ $11,297,400",
+   "icon": "$",
+   "stages": [
+    {
+     "n": "Build",
+     "cards": [
+      [
+       "N-42",
+       "Building permit before 2/17/27",
+       []
+      ],
+      [
+       "N-54",
+       "Substantial Completion by 1/1/2028",
+       [
+        "DA-9"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Request MRO",
+     "cards": [
+      [
+       "N-55",
+       "Written request · Village issues within 45 days",
+       [
+        "DA-5"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Hold value",
+     "cards": [
+      [
+       "N-56",
+       "Assessed ≥ $11,297,400 yearly",
+       [
+        "DA-6"
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Phase B · Lot 83-103",
+   "wr": "TPN 92-4-122-321-0165 · base value $72,300",
+   "goal": "Phase B MRO up to $1,682,899",
+   "gs": "12 × $196,265 each Sept 15 · assessed value ≥ $22,838,000",
+   "icon": "$",
+   "stages": [
+    {
+     "n": "Pick second phase",
+     "cards": [
+      [
+       "N-57",
+       "Notify Village by 1/1/2028 (default: B)",
+       [
+        "DA-9"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Build & request MRO",
+     "cards": [
+      [
+       "N-58",
+       "Up to 2 buildings · SC by 1/1/2030 or 1/1/2032",
+       [
+        "DA-6",
+        "DA-7"
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Phase C · Lot 60",
+   "wr": "TPN 92-4-122-281-0230 + -0260 · base value $2,264,400",
+   "goal": "Phase C MRO up to $1,162,639",
+   "gs": "12 × $135,591 each Sept 15 · assessed value ≥ $17,480,000",
+   "icon": "$",
+   "stages": [
+    {
+     "n": "Pick second phase",
+     "cards": [
+      [
+       "N-57",
+       "Notify Village by 1/1/2028 (default: B)",
+       [
+        "DA-9"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Combine parcels",
+     "cards": [
+      [
+       "N-59",
+       "Two parcels into one before construction",
+       [
+        "DA-10"
+       ]
+      ]
+     ]
+    },
+    {
+     "n": "Build & request MRO",
+     "cards": [
+      [
+       "N-60",
+       "1 building · SC by 1/1/2030 or 1/1/2032",
+       [
+        "DA-7",
+        "DA-8"
+       ]
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "t": "Before closing",
+   "wr": "DA 08/2026 draft",
+   "goal": "DA ready to sign",
+   "gs": "Closing itself: Nitto Watermain N-31",
+   "icon": "✎",
+   "stages": [
+    {
+     "n": "Fix the draft",
+     "cards": [
+      [
+       "N-61",
+       "Exhibit A legal descriptions · Developer name",
+       [
+        "DA-1"
+       ]
+      ],
+      [
+       "N-62",
+       "Confirm MRO installment basis",
+       [
+        "DA-5"
+       ]
+      ]
+     ]
+    }
+   ]
+  }
+ ],
+ "wideTabs": [
+  "tif"
+ ]
 }
