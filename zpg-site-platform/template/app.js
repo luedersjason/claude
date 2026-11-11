@@ -143,6 +143,55 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   $('rList').addEventListener('focusout',e=>{const ta=e.target.closest('.dnote');if(ta)saveNote(ta);});
   $('rOpen').addEventListener('click',()=>document.querySelectorAll('#rList .ri').forEach(x=>x.open=true));
   $('rClose').addEventListener('click',()=>document.querySelectorAll('#rList .ri').forEach(x=>x.open=false));
+  // Download PDF: the review list as shown now (expanded items in full, collapsed items as one line). Text PDF via pdf-lib.
+  $('rPdf').addEventListener('click',async()=>{
+    if(!window.PDFLib){say('The PDF tool did not load. Check your connection and try again.');return;}
+    const els=[...document.querySelectorAll('#rList .ri')];if(!els.length){say('No review items to download.');return;}
+    let dl=null;try{dl=window.claude?await window.claude.use('downloads'):null;}catch(e){}
+    if(!dl){say('Downloads are not available in this view.');return;}
+    const btn=$('rPdf');btn.disabled=true;const was=btn.textContent;btn.textContent='Building PDF…';
+    try{
+      const {PDFDocument,rgb,StandardFonts}=window.PDFLib;const doc=await PDFDocument.create();
+      const F=await doc.embedFont(StandardFonts.Helvetica),FB=await doc.embedFont(StandardFonts.HelveticaBold);
+      const clean=t=>{t=String(t??'').replace(/[→]/g,'->').replace(/[←]/g,'<-').replace(/[≤]/g,'<=').replace(/[≥]/g,'>=').replace(/[   ]/g,' ').replace(/\r/g,'');
+        return [...t].map(c=>{try{F.encodeText(c);return c;}catch(e){return '?';}}).join('');};
+      const PW=612,PH=792,M=48,W=PW-2*M;let pg,y;
+      const ink=rgb(.1,.13,.17),mut=rgb(.38,.45,.52),line=rgb(.84,.87,.9);
+      const page=()=>{pg=doc.addPage([PW,PH]);y=PH-M;};
+      const need=h=>{if(y-h<M+14)page();};
+      const wrap=(t,f,sz,w)=>{const out=[];String(t).split('\n').forEach(par=>{let cur='';par.split(/\s+/).forEach(wd=>{if(!wd)return;const tr=cur?cur+' '+wd:wd;if(f.widthOfTextAtSize(tr,sz)<=w)cur=tr;else{if(cur)out.push(cur);while(f.widthOfTextAtSize(wd,sz)>w){let i=wd.length;while(i>1&&f.widthOfTextAtSize(wd.slice(0,i),sz)>w)i--;out.push(wd.slice(0,i));wd=wd.slice(i);}cur=wd;}});out.push(cur);});return out;};
+      const text=(t,o={})=>{const f=o.b?FB:F,sz=o.sz||10,x=M+(o.x||0),w=W-(o.x||0),lh=sz*1.32;wrap(clean(t),f,sz,w).forEach(l=>{need(lh);y-=lh;if(l)pg.drawText(l,{x,y:y+sz*.28,size:sz,font:f,color:o.c||ink});});};
+      const gap=h=>{y-=h;};
+      page();
+      text(CFG.name+' - Review comments',{b:1,sz:16});
+      const now=new Date();const nOpen=els.filter(e=>e.open).length;
+      text('Downloaded '+(now.getMonth()+1)+'/'+now.getDate()+'/'+now.getFullYear()+' '+now.toLocaleTimeString([], {hour:'numeric',minute:'2-digit'})+' · '+($('rcount').textContent||'')+' · '+nOpen+' of '+els.length+' expanded as shown on screen',{sz:9,c:mut});
+      gap(6);
+      const node=document.getElementById('rList');
+      for(const el of node.children){
+        if(el.matches('h3.rg')){need(30);gap(10);text(el.textContent.replace(/\s+(\d+)$/,'  ($1)').toUpperCase(),{b:1,sz:10,c:mut});gap(2);continue;}
+        if(!el.matches('.ri'))continue;
+        const q=s=>el.querySelector(s),k=q('.rk').textContent,t=q('.rt').textContent,st=q('.rs').textContent,by=q('.rby').textContent;
+        need(el.open?60:18);gap(4);pg.drawLine({start:{x:M,y},end:{x:PW-M,y},thickness:.6,color:line});gap(2);
+        text(k+'   '+t,{b:1,sz:10.5});
+        text(st+(by?'  ·  '+by:''),{sz:8.5,c:st==='Open'?rgb(.6,.4,0):mut,x:0});
+        if(!el.open)continue;
+        gap(3);
+        const lab=l=>{gap(3);text(l.toUpperCase(),{b:1,sz:7.5,c:mut,x:10});};
+        const where=[...el.querySelectorAll('.wl li')].map(li=>'- '+li.textContent);
+        if(where.length){lab('Where');where.forEach(w=>text(w,{sz:9.5,x:10}));}
+        el.querySelectorAll('.rd > .rrow, .rd > .rbox').forEach(r=>{const l=r.querySelector('.rlab');if(!l||l.textContent==='Where')return;lab(l.textContent);
+          const ps=r.querySelectorAll('p');if(ps.length)ps.forEach(p=>text(p.textContent,{sz:9.5,x:10}));else{const d=r.querySelector('div');text(d?d.textContent:'',{sz:9.5,x:10});}});
+        const ta=q('.dnote');if(ta&&ta.value.trim()){lab('Review notes');text(ta.value,{sz:9.5,x:10});}
+        gap(4);
+      }
+      const ps=doc.getPages();ps.forEach((p,i)=>p.drawText(clean(CFG.name+' review comments  ·  page '+(i+1)+' of '+ps.length),{x:M,y:28,size:8,font:F,color:mut}));
+      const bytes=await doc.save();const fn=`${CFG.filePrefix}_review_comments_${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}.pdf`;
+      try{await dl.save({filename:fn,data:new Blob([bytes],{type:'application/pdf'})});}catch(e){await dl.save({filename:fn,data:bytes});}
+      say('PDF ready: '+els.length+' items, '+nOpen+' expanded.');
+    }catch(err){say('The PDF could not be built: '+(err&&err.message?err.message:'unknown error'));}
+    finally{btn.disabled=false;btn.textContent=was;}
+  });
   const norm=s=>Array.from((s&&(s.docs||s))||[]).map(d=>{const v=typeof d.data==='function'?d.data():(d.data||d);return {...v,_id:d.id};});
   (async()=>{
     try{db=window.claude?await window.claude.use('db'):null;user=window.claude?await window.claude.use('user'):null;}catch(e){}
