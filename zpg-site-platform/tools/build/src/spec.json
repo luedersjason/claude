@@ -656,5 +656,19 @@
 "pdf": "/home/user/claude/zpg-site-platform/public/docs/NW-WDNR-Form-3300-066-Water-Main-Checklist.pdf",
 "page": 4,
 "label": "p.4"
+},
+{
+"id": "EO-1",
+"title": "PEG EOPC 10/17/25, TID summary, all site costs",
+"pdf": "docs/NZ-PEG-EOPC-TID-Overall-10.17.25.pdf",
+"page": 1,
+"label": "EOPC all costs"
+},
+{
+"id": "EO-2",
+"title": "PEG EOPC 10/17/25, TID-eligible extraordinary costs",
+"pdf": "docs/NZ-PEG-EOPC-TID-Eligible-10.17.25.pdf",
+"page": 1,
+"label": "EOPC TID-eligible"
 }
 ]

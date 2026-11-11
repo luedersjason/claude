@@ -27,7 +27,7 @@
    "type": "paths",
    "eyebrow": "Development Agreement · TID No. 12 · three LakeView sites",
    "title": "DA & TIF incentive by phase",
-   "lede": "One DA (TI Investors of Pleasant Prairie Holding Company LLC, Village Board approval 8/24/26) covers three sites in TID No. 12 (created 4/22/24, Res. 24-23). Each phase earns its own Municipal Revenue Obligation (MRO) only after Substantial Completion: up to the stated principal at 5%, paid in 12 annual installments each September 15, solely from that phase's tax increment above its base value, less Village administrative costs. Any year the assessed value is below the guarantee, that year's payment is withheld. Village total up to $3,500,000 (about 35% of projected increment). Tax Agreements C1-C3 keep each site taxable until 20 years after TID 12 closes. Closing and recording sit on the Nitto Watermain site (N-31, N-32). Source: DA 08/2026 draft Art. IV and the 8/25/26 approval letter."
+   "lede": "One DA (TI Investors of Pleasant Prairie Holding Company LLC, Village Board approval 8/24/26) covers three sites in TID No. 12 (created 4/22/24, Res. 24-23). Each phase earns its own Municipal Revenue Obligation (MRO) only after Substantial Completion: up to the stated principal at 5%, paid in 12 annual installments each September 15, solely from that phase's tax increment above its base value, less Village administrative costs. Any year the assessed value is below the guarantee, that year's payment is withheld. Village total up to $3,500,000 (about 35% of projected increment). Tax Agreements C1-C3 keep each site taxable until 20 years after TID 12 closes. Closing and recording sit on the Nitto Watermain site (N-31, N-32). Basis: Pinnacle's 10/17/25 cost opinion of extraordinary (TID-eligible) site costs, $3,781,897 with 15% contingency; Ehlers and Hilltop found the request reasonable. Rob Hanson (9/14/26): the DA is signed once its exhibits are final, at the same time as CSM recording, fees and financial security, shortly before the preconstruction meeting. Sources: DA 08/2026 draft Art. IV, the 8/25/26 approval letter, Todd Battle emails 9/14-9/15/26."
   },
   {
    "id": "watermain",
@@ -156,7 +156,7 @@
   {
    "t": "Village / DA",
    "img": "img/docs/village-da.jpg",
-   "d": "Village approval letter, Development Agreement draft, CSM language, stormwater agreement draft and the Village Engineer comments.",
+   "d": "Village approval letter, Development Agreement draft, CSM language, stormwater agreement draft and the Village Engineer comments, and Pinnacle's 10/17/25 cost opinions behind the TIF request.",
    "it": [
     [
      "DA conditional approval letter",
@@ -245,6 +245,29 @@
       "EC-3",
       "EC-4",
       "EC-5"
+     ]
+    ],
+    [
+     "PEG opinion of probable cost: TID-eligible costs",
+     "docs/NZ-PEG-EOPC-TID-Eligible-10.17.25.pdf",
+     "Pinnacle, 10/17/25 · sent to the Village with the TIF request",
+     [
+      "EO-2"
+     ],
+     [
+      "$3,781,897 with 15% contingency: Parcel 9 $1,198,033, Lots 83/103 $1,954,905, Lot 60 $135,667 before contingency",
+      "Water main 1,200 LF $216,000 base"
+     ]
+    ],
+    [
+     "PEG opinion of probable cost: all site costs",
+     "docs/NZ-PEG-EOPC-TID-Overall-10.17.25.pdf",
+     "Pinnacle, 10/17/25",
+     [
+      "EO-1"
+     ],
+     [
+      "$5,494,799 with 15% contingency, all three sites"
      ]
     ]
    ]
@@ -703,7 +726,7 @@
  "paths": [
   {
    "t": "Phase A · L152 · Parcel 9 CSM 2273 (Nitto site)",
-   "wr": "TPN 92-4-122-272-0502 · base value $1,057,800",
+   "wr": "TPN 92-4-122-272-0502 · base value $1,057,800 · PEG TID-eligible cost $1,377,738 w/ contingency",
    "goal": "Phase A MRO up to $654,462",
    "gs": "12 × $76,325 each Sept 15 · assessed value ≥ $11,297,400",
    "icon": "$",
@@ -732,7 +755,8 @@
        "N-55",
        "Written request · Village issues within 45 days",
        [
-        "DA-5"
+        "DA-5",
+        "EO-2"
        ]
       ]
      ]
@@ -753,7 +777,7 @@
   },
   {
    "t": "Phase B · Lot 83-103",
-   "wr": "TPN 92-4-122-321-0165 · base value $72,300",
+   "wr": "TPN 92-4-122-321-0165 · base value $72,300 · PEG TID-eligible cost $2,248,141 w/ contingency (Lots 83 + 103)",
    "goal": "Phase B MRO up to $1,682,899",
    "gs": "12 × $196,265 each Sept 15 · assessed value ≥ $22,838,000",
    "icon": "$",
@@ -787,7 +811,7 @@
   },
   {
    "t": "Phase C · Lot 60",
-   "wr": "TPN 92-4-122-281-0230 + -0260 · base value $2,264,400",
+   "wr": "TPN 92-4-122-281-0230 + -0260 · base value $2,264,400 · PEG TID-eligible cost $156,017 w/ contingency",
    "goal": "Phase C MRO up to $1,162,639",
    "gs": "12 × $135,591 each Sept 15 · assessed value ≥ $17,480,000",
    "icon": "$",
