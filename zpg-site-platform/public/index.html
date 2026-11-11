@@ -663,7 +663,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 32d2a79 2026-11-11</span>
+  <span>Owner: Jason Lueders, ZPG · build 97e53a1 2026-11-11</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -906,7 +906,11 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
       const list=$('rList').cloneNode(true);list.removeAttribute('id');list.className='rlist-pdf';
       // notes: show what is typed as text; keep the page's look otherwise
       const src=[...$('rList').querySelectorAll('.dnote')];list.querySelectorAll('.dnote').forEach((ta,i)=>{const v=(src[i]&&src[i].value||'').trim();if(!v){ta.remove();return;}const d=document.createElement('div');d.className='dnote';d.style.cssText='white-space:pre-wrap;min-height:0';d.textContent=v;ta.replaceWith(d);});
-      list.querySelectorAll('details').forEach((d,i)=>{d.open=els[i].open;});
+      // the PDF renderer ignores <details>, so rebuild each item as plain blocks: open items in full, collapsed items as the one-line header
+      [...list.querySelectorAll('details.ri')].forEach((d,i)=>{const open=els[i].open,div=document.createElement('div');div.className='ri'+(open?' pdf-open':'');
+        const sm=d.querySelector(':scope>summary'),hd=document.createElement('div');hd.className='rsum';hd.append(...sm.childNodes);div.appendChild(hd);
+        if(open){const rd=d.querySelector(':scope>.rd');if(rd)div.appendChild(rd);}d.replaceWith(div);});
+      const st=document.createElement('style');st.textContent='.rlist-pdf{display:block}.rlist-pdf .rsum{display:flex;gap:10px;align-items:baseline;padding:10px 12px;flex-wrap:wrap}.rlist-pdf .ri.pdf-open{border-color:#C5CFD9}.rlist-pdf .ri.pdf-open>.rsum{border-bottom:1px solid var(--line)}';box.appendChild(st);
       sec.append(head,list);box.appendChild(sec);document.body.appendChild(box);
       const fn=`${CFG.filePrefix}_review_comments_${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}.pdf`;
       const blob=await window.html2pdf().set({margin:[0.45,0.45,0.5,0.45],filename:fn,image:{type:'jpeg',quality:0.95},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'in',format:'letter',orientation:'portrait'},pagebreak:{mode:['css','avoid-all'],avoid:['.ri','.rg','.rbox','.rrow']}}).from(sec).outputPdf('blob');
