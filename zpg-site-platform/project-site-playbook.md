@@ -40,6 +40,7 @@ This file is the single source of truth. If anything else (a skill, a handoff no
 10. The desktop chat reads `repoqueue` and `asks` at the start of every session and does what is waiting.
 11. Keep dollar values out of tracker notes; they stay in the cost control log and the emails, because the owner may see the site.
 12. **One platform, every site.** A change to how a site looks or works goes into the template (`zpg-site-platform/template/`, `public/claude-shim.js`) AND every connected site in the same session: Nitto Watermain + L152 (`luedersjason/claude` branch `claude/gallant-allen-1vreeq`, `zpg-site-platform/public/`) and C251 + C251 Utilities (`luedersjason/c251-caledonia-portal` main, `public/` and `public/utilities/`). All four are built from `projects/<name>/project.json` with `python3 tools/build_site.py --all`; C251 builds need that repo checked out next to this one (`publicDir`). Before reporting done, grep all three for the changed element. Jason should never have to ask for the other sites.
+13. **Simple beats clever (Jason, 11/11).** Simple methods are more reliable, so more consistent and efficient. Prefer the design with the fewest moving parts: one repo, one template, one build, one deploy, one copy of each document. Before adding a sync job, relay, second copy or cross-repo step, first ask whether the thing can just live in one place. Target: every site in this repo and this branch, so one push updates all of them.
 
 ---
 
@@ -328,6 +329,8 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+
+- 2026-11-11: Rule 13 (simple beats clever). `build_site.py --check` now fails when C251 is not checked out (it passed silently, so the review-list Download PDF never reached C251).
 
 - 2026-11-10: C251 moved onto the template build (projects/c251, projects/c251-utilities, publicDir into the C251 repo). Utilities became their own sub-site at /utilities/ (ns util_, refs U-01..U-21, was C-01..C-21), like the Nitto Watermain beside L152. New extra tab type `paths` (section 1.12) brings back the stage-card layout. The old standalone utility pages redirect to /utilities/.
 
