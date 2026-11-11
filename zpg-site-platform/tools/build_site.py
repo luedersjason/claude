@@ -37,7 +37,11 @@ def build(name):
     # A project in another repo (C251) sets publicDir, relative to this folder: its own public/ and sheets manifest.
     pub = os.path.normpath(os.path.join(ROOT, c['publicDir'])) if c.get('publicDir') else PUB
     if not os.path.isdir(pub):
-        print(name, 'SKIPPED: %s not checked out next to this repo' % c['publicDir']); return True
+        # Rule 12: a platform change is not done until every connected site is built. Missing checkout = FAIL, never a silent pass.
+        print(name, 'FAILED: %s is not checked out next to this repo, so this site was NOT built. '
+              'Clone luedersjason/c251-caledonia-portal beside this repo (or run where it is), then --all. '
+              'Pass --allow-missing only for a build you will finish elsewhere, and say so in the report.' % c['publicDir'])
+        return ALLOW_MISSING
     sheets = json.load(open(os.path.join(pub, 'sheets', 'manifest.json')))
     if pub == PUB:
         spec = {s['id']: s for s in json.load(open(os.path.join(ROOT, 'tools', 'build', 'src', 'spec.json')))}
@@ -87,8 +91,10 @@ def build(name):
     return True
 
 CHECK = False
+ALLOW_MISSING = False
 if __name__ == '__main__':
     args = sys.argv[1:]
+    if '--allow-missing' in args: ALLOW_MISSING = True; args = [a for a in args if a != '--allow-missing']
     if '--check' in args: CHECK = True; args = [a for a in args if a != '--check'] or ['--all']
     names = sorted(os.listdir(os.path.join(ROOT, 'projects'))) if args == ['--all'] else args
     assert names, __doc__
