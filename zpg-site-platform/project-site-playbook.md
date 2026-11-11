@@ -330,7 +330,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 
 ### Changelog
 
-- 2026-11-11: Rule 13 (simple beats clever). `build_site.py --check` now fails when C251 is not checked out (it passed silently, so the review-list Download PDF never reached C251).
+- 2026-11-11: Rule 13 (simple beats clever). `build_site.py --check` now fails when C251 is not checked out (it used to pass silently).
 
 - 2026-11-10: C251 moved onto the template build (projects/c251, projects/c251-utilities, publicDir into the C251 repo). Utilities became their own sub-site at /utilities/ (ns util_, refs U-01..U-21, was C-01..C-21), like the Nitto Watermain beside L152. New extra tab type `paths` (section 1.12) brings back the stage-card layout. The old standalone utility pages redirect to /utilities/.
 
