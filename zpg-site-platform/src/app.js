@@ -161,11 +161,11 @@ async function join(req, env, url) {
 async function notifyClaude(env, col, id) {
   if (!env.RELAY_URL || !env.RELAY_SECRET) return null;
   try {
-    const r = await fetch(env.RELAY_URL + "/event", { method: "POST", headers: { "content-type": "application/json", "x-relay-secret": env.RELAY_SECRET }, body: JSON.stringify({ site: col.startsWith("l152_") ? "l152" : "watermain", col, id }) });
+    const r = await fetch(env.RELAY_URL + "/event", { method: "POST", headers: { "content-type": "application/json", "x-relay-secret": env.RELAY_SECRET }, body: JSON.stringify({ site: (col.match(/^([a-z0-9]+)_/) || [, "watermain"])[1], col, id }) });
     return r.ok ? (await r.json()).claude : null;
   } catch (e) { return null; }
 }
-const wantsClaude = (col, body) => (/^(l152_)?validations$/.test(col) && body.commentPending === true) || (/^(l152_)?asks$/.test(col) && body.state === "new");
+const wantsClaude = (col, body) => (/^([a-z0-9]+_)?validations$/.test(col) && body.commentPending === true) || (/^([a-z0-9]+_)?asks$/.test(col) && body.state === "new");
 
 async function collection(req, env, person, col, id) {
   if (!/^[a-z][a-z0-9_-]{0,40}$/i.test(col)) return json({ error: "bad collection" }, 400);
@@ -179,7 +179,7 @@ async function collection(req, env, person, col, id) {
   if (!id || id.length > 120) return json({ error: "bad id" }, 400);
   // Viewers can add new forum posts (their own, new ids only). Everything else needs editor or admin.
   if (!canWrite(person)) {
-    const forum = col === "posts" || col === "l152_posts";
+    const forum = /^([a-z0-9]+_)?posts$/.test(col);   // every site's forum (posts, l152_posts, da_posts)
     if (!forum || req.method !== "PUT") return json({ error: "not_writer" }, 403);
     if (await env.DB.prepare("SELECT 1 FROM docs WHERE col = ? AND id = ?").bind(col, id).first()) return json({ error: "not_writer" }, 403);
     const b = await req.json().catch(() => null);
@@ -294,7 +294,7 @@ async function route(req, env) {
       return fetch(new Request(env.RELAY_URL + p.slice("/api/relay".length), req));
     }
     if (p === "/api/pending") {  // count only, no content: lets Claude's seat notice a sent comment within seconds
-      const r = await env.DB.prepare("SELECT COUNT(*) n, COALESCE(MAX(updated_at),0) m FROM docs WHERE (col IN ('validations','l152_validations') AND json_extract(data,'$.commentPending')=1) OR (col IN ('asks','l152_asks') AND json_extract(data,'$.state')='new')").first();
+      const r = await env.DB.prepare("SELECT COUNT(*) n, COALESCE(MAX(updated_at),0) m FROM docs WHERE (col LIKE '%validations' AND json_extract(data,'$.commentPending')=1) OR (col LIKE '%asks' AND json_extract(data,'$.state')='new')").first();
       return json({ n: r.n, m: r.m }, 200, { "cache-control": "no-store" });
     }
     const person = await currentPerson(req, env);

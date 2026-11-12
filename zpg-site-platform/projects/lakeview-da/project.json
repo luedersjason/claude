@@ -1,0 +1,573 @@
+{
+ "name": "LakeView DA",
+ "title": "LakeView DA · TID #12 Development Agreement",
+ "subtitle": "Village of Pleasant Prairie · TID #12 · Phases A, B and C",
+ "description": "ZPG site for the LakeView Corporate Park Development Agreement (TID #12): CSM and stormwater agreement, financial security, closing and recording, and the Phase A, B and C MRO deadlines.",
+ "path": "/da/",
+ "ns": "da_",
+ "filePrefix": "LVDA",
+ "vcardNote": "LakeView DA - TID #12 Development Agreement",
+ "directoryEyebrow": "LakeView DA · TID #12 · Pleasant Prairie",
+ "trackerFor": "the LakeView Corporate Park Development Agreement (TID #12, Village of Pleasant Prairie): CSM and stormwater agreement, financial security, closing and recording, and the Phase A, B and C MRO obligations",
+ "tabs": [
+  "home",
+  "tracker",
+  "documents",
+  "schedule",
+  "team",
+  "l152",
+  "watermain"
+ ],
+ "extraTabs": [
+  {
+   "id": "l152",
+   "label": "L152",
+   "type": "link",
+   "eyebrow": "The building · its own site",
+   "title": "L152 · Zilber Industrial 3",
+   "lede": "The building project has its own site: site & operational plan conditions, permits, the precon and construction.",
+   "href": "/l152/",
+   "button": "Open the L152 site →"
+  },
+  {
+   "id": "watermain",
+   "label": "Nitto Watermain",
+   "type": "link",
+   "eyebrow": "Public water main · its own site",
+   "title": "Nitto Watermain",
+   "lede": "The public 16-inch water main has its own site: bid package review, tracker, documents and schedule. Its contract sets the DA security.",
+   "href": "/",
+   "button": "Open the Nitto Watermain site →"
+  }
+ ],
+ "siteLinks": [
+  {
+   "label": "L152 project →",
+   "href": "/l152/"
+  },
+  {
+   "label": "Nitto Watermain →",
+   "href": "/"
+  }
+ ],
+ "schedule": {
+  "title": "Master schedule",
+  "eyebrow": "LakeView DA · Solid = dates from documents. Hatched = ZPG planning targets for a spring 2027 start, sequenced from the approval letters; confirm and adjust.",
+  "lede": "Closing and recording, then the MRO deadlines for each phase (DA s.4.5). Missing a January 1 deadline costs one of the 12 annual MRO payments; the incentive ends entirely after the cutoff year.",
+  "start": "2026-08-01",
+  "end": "2037-06-30",
+  "rows": [
+   {
+    "n": "Approvals",
+    "lab": 1
+   },
+   {
+    "n": "Village Board approves the DA, CSM and plans",
+    "s": "2026-08-24",
+    "m": 1
+   },
+   {
+    "n": "Village approves the revised CSM",
+    "s": "2026-11-05",
+    "m": 1
+   },
+   {
+    "n": "Closing and recording",
+    "lab": 1,
+    "s": "2027-02-01"
+   },
+   {
+    "n": "Closing package: entity names, SWMA, Memorandum, exhibits",
+    "s": "2026-11-12",
+    "e": "2027-01-27",
+    "pend": 1
+   },
+   {
+    "n": "Village sets the security (Exhibit D1)",
+    "s": "2027-01-28",
+    "m": 1,
+    "pend": 1
+   },
+   {
+    "n": "Closing and recording",
+    "s": "2027-02-01",
+    "m": 1,
+    "pend": 1
+   },
+   {
+    "n": "Phase A (L152)",
+    "lab": 1
+   },
+   {
+    "n": "Water main accepted (DA s.6.1)",
+    "s": "2027-11-15",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "Phase A substantially complete; phase-order notice due",
+    "s": "2028-01-01",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "Phase A MRO lost entirely after",
+    "s": "2033-01-01",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "Second and third phases",
+    "lab": 1
+   },
+   {
+    "n": "Second phase substantially complete",
+    "s": "2030-01-01",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "Third phase substantially complete",
+    "s": "2032-01-01",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "Second-phase MRO lost entirely after",
+    "s": "2035-01-01",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "Third-phase MRO lost entirely after",
+    "s": "2037-01-01",
+    "m": 1,
+    "k": 1
+   }
+  ]
+ },
+ "documents": [
+  {
+   "t": "Development Agreement",
+   "img": "img/docs/village-da.jpg",
+   "d": "Village approval letter (conditions 1-12) and the DA draft with its exhibits. No newer DA than the 8/25/26 packet.",
+   "it": [
+    [
+     "DA conditional approval letter",
+     "docs/NW-Village-DA-Approval-Letter-8.25.26.pdf",
+     "Rob Hanson, 8/25/26",
+     [
+      "AL-1",
+      "AL-2",
+      "AL-3",
+      "AL-4",
+      "AL-5"
+     ]
+    ],
+    [
+     "Development Agreement (draft) with exhibits",
+     "docs/NW-Development-Agreement-DRAFT.pdf",
+     "08/2026 draft · pp.1-18 and Exhibits D, D1, D2",
+     [
+      "DA-1",
+      "DA-2",
+      "DA-3",
+      "DA-4",
+      "DA-5",
+      "DA-6",
+      "DA-7",
+      "DA-8",
+      "DA-9",
+      "DA-10",
+      "DA-11",
+      "DA-12",
+      "DA-13",
+      "DA-14",
+      "DA-15",
+      "DA-16",
+      "DA-17",
+      "DA-18",
+      "DA-D",
+      "DA-D1",
+      "DA-D2"
+     ],
+     [
+      "Exhibits A, D1 and D2 blank; Exhibit D is the 8/11 plan set",
+      "Full 57-page DA draft: Open full PDF"
+     ]
+    ]
+   ]
+  },
+  {
+   "t": "CSM and stormwater agreement",
+   "img": "img/docs/site-plan.jpg",
+   "d": "The Village-approved CSM (to be recorded at closing) and the Stormwater Maintenance Agreement with its location exhibit.",
+   "it": [
+    [
+     "Certified Survey Map, approved by the Village",
+     "docs/DA-CSM-Approved-9.22.26.pdf",
+     "Pinnacle, dated 9/22/26 · approved 11/5/26",
+     [
+      "CSMA-1",
+      "CSMA-2",
+      "CSMA-3",
+      "CSMA-4",
+      "CSMA-5",
+      "CSMA-6",
+      "CSMA-7",
+      "CSMA-8",
+      "CSMA-9",
+      "CSMA-10",
+      "CSMA-11",
+      "CSMA-12",
+      "CSMA-13",
+      "CSMA-14",
+      "CSMA-15",
+      "CSMA-16",
+      "CSMA-17"
+     ],
+     [
+      "Sheet 17 spells the owner \"Lakeveiw\"; fix before recording"
+     ]
+    ],
+    [
+     "Stormwater Maintenance Agreement (draft)",
+     "docs/NW-Stormwater-Maintenance-Agreement-DRAFT.pdf",
+     "With the 8/25 packet",
+     [
+      "SW-1",
+      "SW-2",
+      "SW-3",
+      "SW-4",
+      "SW-5",
+      "SW-6",
+      "SW-7",
+      "SW-8",
+      "SW-9",
+      "SW-10",
+      "SW-11"
+     ],
+     [
+      "Revised SWMA with Exhibit B not yet received"
+     ]
+    ],
+    [
+     "SWMA Exhibit B: storm easement location exhibit",
+     "docs/DA-SWMA-ExhibitB-Storm-Easement-10.7.26.pdf",
+     "Pinnacle, 10/7/26",
+     [
+      "SWB-1",
+      "SWB-2"
+     ]
+    ]
+   ]
+  }
+ ],
+ "team": {
+  "firms": {
+   "zpg": {
+    "n": "Zilber Property Group",
+    "g": "Developer",
+    "web": "https://www.zilberpropertygroup.com",
+    "ph": "",
+    "addr": "710 N. Plankinton Ave., Suite 1100, Milwaukee, WI"
+   },
+   "pin": {
+    "n": "Pinnacle Engineering Group",
+    "g": "Civil engineer",
+    "web": "https://pinnacle-engr.com",
+    "ph": "262-754-8888",
+    "addr": "Brookfield, WI"
+   },
+   "vpp": {
+    "n": "Village of Pleasant Prairie",
+    "g": "Municipality",
+    "web": "",
+    "ph": "",
+    "addr": "Pleasant Prairie, WI"
+   },
+   "kwu": {
+    "n": "Kenosha Water Utility",
+    "g": "Water utility",
+    "web": "",
+    "ph": "",
+    "addr": "Kenosha, WI"
+   },
+   "wdnr": {
+    "n": "Wisconsin DNR",
+    "g": "Permitting agency",
+    "web": "",
+    "ph": "",
+    "addr": ""
+   },
+   "usace": {
+    "n": "US Army Corps of Engineers, St. Paul District",
+    "g": "Permitting agency",
+    "web": "",
+    "ph": "",
+    "addr": ""
+   }
+  },
+  "people": [
+   {
+    "id": "lueders",
+    "f": "zpg",
+    "fn": "Jason",
+    "ln": "Lueders",
+    "t": "Director of Construction",
+    "r": "Contract signatory",
+    "em": "jason.lueders@zilber.com",
+    "ph": "630-344-3718"
+   },
+   {
+    "id": "kleinke",
+    "f": "zpg",
+    "fn": "Lisa",
+    "ln": "Kleinke",
+    "t": "",
+    "r": "Standard contract forms",
+    "em": "lisa.kleinke@zilber.com"
+   },
+   {
+    "id": "navis",
+    "f": "zpg",
+    "fn": "Chad",
+    "ln": "Navis",
+    "t": "",
+    "r": "cc on the bid thread",
+    "em": "chad.navis@zilber.com"
+   },
+   {
+    "id": "shoaf",
+    "f": "pin",
+    "fn": "Andy",
+    "ln": "Shoaf",
+    "t": "Associate Project Manager, PE",
+    "r": "Plans, project manual, DNR submittal",
+    "em": "Andrew.Shoaf@pinnacle-engr.com"
+   },
+   {
+    "id": "johnson",
+    "f": "pin",
+    "fn": "Justin",
+    "ln": "Johnson",
+    "t": "",
+    "r": "",
+    "em": "jjohnson@pinnacle-engr.com"
+   },
+   {
+    "id": "artz",
+    "f": "pin",
+    "fn": "Adam",
+    "ln": "Artz",
+    "t": "",
+    "r": "",
+    "em": "Adam.Artz@pinnacle-engr.com"
+   },
+   {
+    "id": "zanon",
+    "f": "pin",
+    "fn": "Anthony",
+    "ln": "Zanon",
+    "t": "",
+    "r": "Named on the proposal form"
+   },
+   {
+    "id": "davidsen",
+    "f": "vpp",
+    "fn": "Kurt",
+    "ln": "Davidsen",
+    "t": "Village Engineer, PE",
+    "r": "",
+    "em": "kdavidsen@pleasantprairiewi.gov",
+    "ph": "262-925-6728"
+   },
+   {
+    "id": "herrick",
+    "f": "vpp",
+    "fn": "Peggy",
+    "ln": "Herrick",
+    "t": "Assistant Community Development Director",
+    "r": "Approval letter contact",
+    "em": "pherrick@pleasantprairiewi.gov",
+    "ph": "262-925-6716"
+   },
+   {
+    "id": "hanson",
+    "f": "vpp",
+    "fn": "Rob",
+    "ln": "Hanson",
+    "t": "Community Development Director",
+    "r": "Signed the approval letter",
+    "ph": "262-925-6717"
+   },
+   {
+    "id": "tomczyk",
+    "f": "vpp",
+    "fn": "Sarah",
+    "ln": "Tomczyk",
+    "t": "Assistant Village Engineer",
+    "r": "",
+    "em": "stomczyk@pleasantprairiewi.gov"
+   },
+   {
+    "id": "bagley",
+    "f": "kwu",
+    "fn": "Ian",
+    "ln": "Bagley",
+    "t": "Director of Engineering, PE",
+    "r": "Signed the KWU approval",
+    "em": "ibagley@kenosha.org",
+    "ph": "262-653-4349"
+   },
+   {
+    "id": "czarnecki",
+    "f": "kwu",
+    "fn": "Curt",
+    "ln": "Czarnecki",
+    "t": "General Manager, PE",
+    "r": "",
+    "em": "cczarnecki@kenosha.org",
+    "ph": "262-653-4306"
+   },
+   {
+    "id": "ponzi",
+    "f": "wdnr",
+    "fn": "Sonya",
+    "ln": "Ponzi",
+    "t": "",
+    "r": "Wetland and pond permits",
+    "em": "sonya.ponzi@wisconsin.gov",
+    "ph": "608-598-0346"
+   },
+   {
+    "id": "kinney",
+    "f": "usace",
+    "fn": "Lorin",
+    "ln": "Kinney",
+    "t": "",
+    "r": "Section 404 permit MVP-2017-01912-LRK",
+    "em": "Lorin.R.Kinney@usace.army.mil",
+    "ph": "651-383-5914"
+   }
+  ],
+  "order": [
+   "zpg",
+   "pin",
+   "vpp",
+   "kwu",
+   "wdnr",
+   "usace"
+  ]
+ },
+ "disciplines": [
+  [
+   "Design",
+   "Drawings and Design"
+  ],
+  [
+   "Approvals",
+   "Village, WDNR, Corps & KWU"
+  ],
+  [
+   "General Contractor",
+   "General Contractor"
+  ],
+  [
+   "ZPG",
+   "Developer (ZPG)"
+  ]
+ ],
+ "areasText": "Design (Drawings and Design, Pinnacle), Approvals (only what the Village, WDNR, Army Corps or KWU itself decides), General Contractor (bidding, cost, construction), ZPG (what ZPG itself must do)",
+ "refPrefix": "D",
+ "cover": {
+  "image": "img/docs/village-da.jpg",
+  "eyebrow": "LakeView Corporate Park · TID #12 · Village of Pleasant Prairie",
+  "big": "$3.5M",
+  "line1": "maximum Village incentive (MRO)",
+  "line2": "Phases A, B and C · about 685,000 SF",
+  "sentence": "The DA, Memorandum of DA, CSM and Stormwater Maintenance Agreement are signed at a Village-scheduled closing and recorded before any permit for the water main or the L152 building. Each phase earns its MRO only after substantial completion.",
+  "chips": [
+   "Village Board approved 8/24/26",
+   "Phase A complete by 1/1/2028"
+  ],
+  "button": {
+   "label": "View the CSM ⤢",
+   "image": "sheets/CSMA-2.jpg",
+   "caption": "Certified Survey Map, Lot 1 · approved by the Village 11/5/26"
+  }
+ },
+ "drawings": {
+  "prefix": "CSMA",
+  "label": "Certified Survey Map approved by the Village · dated 9/22/26 · records at closing",
+  "pdf": "docs/DA-CSM-Approved-9.22.26.pdf"
+ },
+ "rail": [
+  {
+   "kind": "now",
+   "when": "Now",
+   "title": "Prepare the closing package",
+   "note": "CSM typo, entity names, SWMA Exhibit B, Memorandum of DA"
+  },
+  {
+   "kind": "step",
+   "when": "Gate · water main contract",
+   "title": "Village sets the security (D1)",
+   "note": "From the approved contract (Nitto Watermain)"
+  },
+  {
+   "kind": "step",
+   "when": "Target · Feb 2027",
+   "title": "Closing and recording",
+   "note": "Recorded copies to the Village within 72 hours"
+  },
+  {
+   "kind": "key",
+   "when": "Deadline · 1/1/28",
+   "title": "Phase A substantially complete",
+   "note": "Each later Jan 1 costs one of 12 MRO payments"
+  }
+ ],
+ "approval": {
+  "eyebrow": "From the DA approval letter (8/25/26) and the draft DA",
+  "title": "Approval path, from approved CSM to recorded documents",
+  "lede": "The Village schedules the closing once the revised CSM, public improvement plans and contracts/COI are approved (cond 8). At closing the DA with Tax Agreements C1-C3, the Memorandum of DA and the SWMA are signed and the financial security and cash payments delivered. The Village then releases the documents for recording in this order: Memorandum, Tax Agreements, CSM, SWMA; recorded copies within 72 hours (cond 9). No permits issue for the water main or the site before that.",
+  "steps": [
+   {
+    "when": "Done 11/5/26",
+    "title": "CSM approved",
+    "note": "Fix the Lakeveiw typo before signing"
+   },
+   {
+    "when": "Now",
+    "title": "Closing package",
+    "note": "Entity names, SWMA + Exhibit B, Memorandum of DA, taxes",
+    "next": true
+   },
+   {
+    "when": "Gate · Nitto Watermain",
+    "title": "Contract approved; Village sets D1",
+    "note": "120% security (cash per DA s.6.1)"
+   },
+   {
+    "when": "Target Feb 2027",
+    "title": "Closing",
+    "note": "Signed by Developer, Village President and Clerk; security and cash payments delivered"
+   },
+   {
+    "when": "Right after closing",
+    "title": "Record and report",
+    "note": "Memorandum, Tax Agreements, CSM, SWMA; copies within 72 h"
+   },
+   {
+    "when": "By Jan 1, 2028",
+    "title": "Phase A complete; MRO request",
+    "note": "Village issues the MRO within 45 days of the request"
+   }
+  ]
+ },
+ "meetingsLede": "No recurring meeting for the DA. Notes appear here once Jason has reviewed them.",
+ "sheets": "all",
+ "footer": "Built from the DA approval letter (8/25/26), the draft Development Agreement and its exhibits, and the Village-approved CSM. Open the Documents tab for the source PDFs.",
+ "ownerLine": "Jason Lueders, ZPG"
+}

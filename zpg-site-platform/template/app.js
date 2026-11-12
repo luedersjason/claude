@@ -6,7 +6,11 @@ const TODAY=new Date();
 // Confirmed dates only. lab = group label row, m = milestone, k = key milestone.
 // Bid, contract, closing and construction have no dates yet; they are approval-path cards marked "date not set".
 const MASTER=CFG.schedule.rows;
-const VIEWS={master:{t:MASTER,s:CFG.schedule.start,e:CFG.schedule.end,title:CFG.schedule.title,lede:CFG.schedule.lede}};
+const VIEWS={master:{t:MASTER,s:CFG.schedule.start,e:CFG.schedule.end,title:CFG.schedule.title,lede:CFG.schedule.lede,label:'Master'}};
+// Optional extra views (playbook 1.7): CFG.schedule.views = {precon:{label,rows,start,end,title,lede}, constr:{...}}; optional CFG.schedule.eyebrow.
+Object.entries(CFG.schedule.views||{}).forEach(([k,v])=>{VIEWS[k]={t:v.rows,s:v.start,e:v.end,title:v.title,lede:v.lede,label:v.label||k};});
+(function gviews(){const box=document.querySelector('.gviews');if(box&&Object.keys(VIEWS).length>1){box.innerHTML=Object.entries(VIEWS).map(([k,v],i)=>`<button class="gview" data-v="${k}" type="button" aria-pressed="${i?'false':'true'}">${v.label}</button>`).join('');}
+  const eb=document.querySelector('#schedule .g-hdr .eyebrow');if(eb&&CFG.schedule.eyebrow)eb.textContent=CFG.schedule.eyebrow;})();
 
 let CUR='master';
 (function gantt(){
@@ -57,6 +61,7 @@ let CUR='master';
     if(sp.scrollWidth>b.clientWidth-6){b.style.fontSize='10.5px';}
     if(sp.scrollWidth>b.clientWidth-6){sp.hidden=true;if(f)f.insertAdjacentHTML('beforeend',`<span class="nm" style="margin-left:6px">${sp.textContent}</span>`);}});}
   window.jqFit=render;
+  const gv=document.querySelector('.gviews');if(gv)gv.addEventListener('click',e=>{const b=e.target.closest('.gview');if(!b||!VIEWS[b.dataset.v])return;CUR=b.dataset.v;gv.querySelectorAll('.gview').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));render();});
   render(); if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(g.offsetWidth)fit();});
   addEventListener('resize',()=>{if(g.offsetWidth)fit();});
 })();
@@ -436,6 +441,39 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   }
   window.addEventListener('jqissues',draw);draw();
   el.addEventListener('click',e=>{if(e.target.closest('[data-sheets]'))return;const b=e.target.closest('.pp-card');if(b&&window.jqGoRef)window.jqGoRef(b.dataset.ref);});
+})();
+
+// Critical path on Home (playbook 1.13). CFG.critical: {t, lede, deadline:{date, label}, goal, gs,
+//   lanes:[{n, steps:[[ref, short]]}], merge:[[ref, short]]}. ref = "REF" (this site) or "col:REF" (a sister site's
+//   tracker, e.g. "issues:N-24", "da_issues:D-05"). Bubbles take status from the tracker; nothing here is typed by hand.
+(function critical(){
+  const C=CFG.critical, el=document.getElementById('cpath'); if(!C||!el) return; el.hidden=false;
+  const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const SITE={issues:['/', 'Nitto Watermain'], l152_issues:['/l152/', 'L152'], da_issues:['/da/', 'LakeView DA']};
+  const other={}; const own=()=>window.jqIssues||[]; const eff=r=>(window.jqEff&&own().includes(r))?window.jqEff(r):(r.status||'Open');
+  async function load(){
+    const cols=[...new Set([...C.lanes.flatMap(l=>l.steps),...C.merge].map(([ref])=>ref.includes(':')?ref.split(':')[0]:null).filter(Boolean))];
+    await Promise.all(cols.map(async col=>{try{const r=await fetch('/api/c/'+encodeURIComponent(col),{credentials:'same-origin',cache:'no-store'});if(r.ok){other[col]=(await r.json()).docs.map(d=>d.data);}}catch(e){}}));
+    draw();
+  }
+  function find(ref){if(ref.includes(':')){const [col,id]=ref.split(':');return {r:(other[col]||[]).find(x=>x.ref===id),col,id};}return {r:own().find(x=>x.ref===ref),col:null,id:ref};}
+  function bubble([ref,short]){const {r,col,id}=find(ref);const st=r?eff(r):'Open';const k=st==='Done'?'done':st==='Pending'?'pend':'open';
+    const site=col&&SITE[col]?SITE[col][1]+' · ':'';const tip=r?`${site}${id} · ${r.title}${r.ball&&st!=='Done'?' · ball: '+r.ball:''}`:`${site}${id}`;
+    const when=st==='Done'&&r&&r.confirmed?r.confirmed:(r&&r.due&&st!=='Done'?'due '+r.due.slice(5).replace('-','/'):'');
+    return `<button type="button" class="cp-b ${k}" data-ref="${esc(ref)}" title="${esc(tip)}"><i>${k==='done'?'✓':k==='pend'?'❙❙':'○'}</i><span>${esc(short)}</span>${when?`<em>${esc(when)}</em>`:''}${col?`<small>${esc(SITE[col]?SITE[col][1]:col)}</small>`:''}</button>`;}
+  function draw(){
+    const all=[...C.lanes.flatMap(l=>l.steps),...C.merge].map(s=>find(s[0]).r).filter(Boolean),done=all.filter(r=>eff(r)==='Done').length;
+    let dl='';if(C.deadline){const d=Math.ceil((new Date(C.deadline.date+'T12:00:00')-new Date())/864e5);dl=`<span class="cp-dl${d<60?' hot':''}"><b>${d>0?d:0}</b> days to ${esc(C.deadline.label)}</span>`;}
+    el.innerHTML=`<header class="cp-h"><div><span class="eyebrow">Critical path</span><h2>${esc(C.t)}</h2><p class="lede">${esc(C.lede||'')}</p></div>${dl}</header>
+<div class="cp-grid"><div class="cp-lanes">${C.lanes.map(l=>`<div class="cp-lane"><span class="cp-ln">${esc(l.n)}</span><div class="cp-chain">${l.steps.map(bubble).join('<span class="cp-ar">→</span>')}</div></div>`).join('')}</div>
+<div class="cp-join" aria-hidden="true"><span>All lanes finish</span></div>
+<div class="cp-merge">${C.merge.map(bubble).join('<span class="cp-ar">→</span>')}<span class="cp-ar">→</span><div class="cp-goal${all.length&&done===all.length?' ok':''}"><b>${esc(C.goal)}</b><small>${esc(C.gs||'')}</small><small><strong>${done} of ${all.length} steps done</strong></small><span class="cp-bar"><i style="width:${all.length?Math.round(100*done/all.length):0}%"></i></span></div></div></div>
+<div class="cp-leg"><span><i class="cp-i done">✓</i>Done</span><span><i class="cp-i open">○</i>Open</span><span><i class="cp-i pend">❙❙</i>Waiting on another step</span><span>Bubbles tagged with another site's name live on that site's tracker. Click any bubble to open it.</span></div>`;
+  }
+  el.addEventListener('click',e=>{const b=e.target.closest('.cp-b');if(!b)return;const ref=b.dataset.ref;
+    if(ref.includes(':')){const [col,id]=ref.split(':');if(SITE[col])location.href=SITE[col][0]+'#tracker';return;}
+    if(window.jqGoRef)window.jqGoRef(ref);});
+  window.addEventListener('jqissues',draw); load();
 })();
 
 (function shell(){

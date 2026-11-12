@@ -17,7 +17,8 @@
   "team",
   "meetings",
   "photos",
-  "watermain"
+  "watermain",
+  "da"
  ],
  "extraTabs": [
   {
@@ -26,91 +27,439 @@
    "type": "link",
    "eyebrow": "Public water main · its own site",
    "title": "Nitto Watermain",
-   "lede": "The public water main has its own project site with the bid package review, tracker, documents and schedule.",
+   "lede": "The public 16-inch water main has its own site: bid package review, tracker, documents and schedule. Its contract sets the DA security.",
    "href": "/",
    "button": "Open the Nitto Watermain site →"
+  },
+  {
+   "id": "da",
+   "label": "LakeView DA",
+   "type": "link",
+   "eyebrow": "Development Agreement · its own site",
+   "title": "LakeView DA",
+   "lede": "The TID #12 Development Agreement has its own site: CSM and stormwater agreement, security, closing and recording, and the Phase A, B and C MRO deadlines. Recording gates every permit.",
+   "href": "/da/",
+   "button": "Open the LakeView DA site →"
   }
  ],
  "siteLinks": [
   {
    "label": "Nitto Watermain →",
    "href": "/"
+  },
+  {
+   "label": "LakeView DA →",
+   "href": "/da/"
   }
  ],
  "schedule": {
+  "title": "Master schedule",
+  "eyebrow": "L152 · Solid = dates from documents. Hatched = ZPG planning targets for a spring 2027 start, sequenced from the approval letters; confirm and adjust.",
+  "lede": "Approvals to permits by 2/17/27, construction from spring 2027, Phase A substantial completion by 1/1/2028. Dates on the DA closing come from the LakeView DA site.",
+  "start": "2026-08-01",
+  "end": "2028-06-30",
   "rows": [
    {
     "n": "Approvals",
     "lab": 1
    },
    {
-    "n": "WDNR construction stormwater permit coverage starts (FIN 103538)",
-    "s": "2026-02-25",
-    "m": 1
-   },
-   {
-    "n": "Plan Commission approves the site & operational plans",
+    "n": "Plan Commission approves the S&O plans",
     "s": "2026-08-17",
     "m": 1
    },
    {
-    "n": "Village Board approves the DA, CSM and public improvement plans",
-    "s": "2026-08-24",
-    "m": 1
-   },
-   {
-    "n": "Village approval letters: DA (conditions 1-12) and site & operational plans (conditions 1-21)",
+    "n": "Village approval letters (DA and S&O)",
     "s": "2026-08-25",
     "m": 1
    },
    {
-    "n": "WDNR wetland and pond individual permits",
-    "s": "2026-10-15",
+    "n": "DSPS conditional approval, shell",
+    "s": "2026-05-29",
     "m": 1
    },
    {
-    "n": "WDNR Section 401 water quality certification",
-    "s": "2026-10-16",
+    "n": "LakeView Owners Association approval",
+    "s": "2026-09-22",
     "m": 1
    },
    {
-    "n": "Village + KWU approve the watermain plans",
-    "s": "2026-11-04",
+    "n": "Village approves the S&O plans (signed set)",
+    "s": "2026-10-26",
     "m": 1
+   },
+   {
+    "n": "Deadline: building permit issued",
+    "s": "2027-02-17",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "Construction (targets)",
+    "lab": 1
+   },
+   {
+    "n": "Construction starts",
+    "s": "2027-04-01",
+    "m": 1,
+    "k": 1,
+    "pend": 1
+   },
+   {
+    "n": "Site work, floodplain grading, utilities",
+    "s": "2027-04-01",
+    "e": "2027-06-30",
+    "pend": 1
+   },
+   {
+    "n": "Foundations and slab",
+    "s": "2027-05-15",
+    "e": "2027-07-31",
+    "pend": 1
+   },
+   {
+    "n": "Precast walls, steel, roof",
+    "s": "2027-07-01",
+    "e": "2027-09-30",
+    "pend": 1
+   },
+   {
+    "n": "Building enclosed; MEP and fire protection",
+    "s": "2027-09-01",
+    "e": "2027-11-30",
+    "pend": 1
+   },
+   {
+    "n": "Paving, landscaping, closeout items (S&O 13)",
+    "s": "2027-09-15",
+    "e": "2027-12-15",
+    "pend": 1
    },
    {
     "n": "Deadlines",
     "lab": 1
    },
    {
-    "n": "S&O approval lapses unless the building permit is issued (6 months from 8/17/26)",
-    "s": "2027-02-17",
-    "m": 1,
-    "k": 1
-   },
-   {
-    "n": "Watermain installed, inspected and accepted by the Village (DA s.6.1)",
+    "n": "Water main accepted by the Village (Nitto Watermain)",
     "s": "2027-11-15",
     "m": 1,
     "k": 1
    },
    {
-    "n": "Phase A substantial completion (approval letter p.1)",
+    "n": "Phase A substantially complete for full MRO (DA s.4.5)",
     "s": "2028-01-01",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "DSPS: shell closed in; approval expires",
+    "s": "2028-05-29",
+    "m": 1,
+    "k": 1
+   },
+   {
+    "n": "WDNR stormwater coverage ends",
+    "s": "2029-02-25",
     "m": 1,
     "k": 1
    }
   ],
-  "start": "2026-02-01",
-  "end": "2028-02-29",
-  "title": "Master schedule",
-  "lede": "Confirmed dates only. The 2/17/27 date is 6 months after the 8/17/26 approval, counted from the letter, not a date the Village wrote. Bid, contract, closing and construction dates are not set yet; the water main tab has its approval path. WDNR stormwater permit coverage ends 2/25/2029."
+  "views": {
+   "precon": {
+    "label": "Preconstruction",
+    "title": "Preconstruction: approvals to building permit",
+    "lede": "Every gate between today and the 2/17/27 building-permit deadline. Hatched = targets.",
+    "start": "2026-10-01",
+    "end": "2027-03-15",
+    "rows": [
+     {
+      "n": "Wetlands and Corps",
+      "lab": 1
+     },
+     {
+      "n": "WDNR wetland and pond permits (L-01, L-02)",
+      "s": "2026-10-15",
+      "m": 1
+     },
+     {
+      "n": "Corps proffered 404 permit received",
+      "s": "2026-11-09",
+      "m": 1
+     },
+     {
+      "n": "Fix 404 dates, permittee, credits; sign and return (L-04 to L-07)",
+      "s": "2026-11-12",
+      "e": "2026-12-11",
+      "pend": 1
+     },
+     {
+      "n": "Corps countersigns; permits to the Village (L-08, L-09)",
+      "s": "2026-12-14",
+      "e": "2027-01-08",
+      "pend": 1
+     },
+     {
+      "n": "Precon package",
+      "lab": 1
+     },
+     {
+      "n": "Village approves the S&O plans (signed set)",
+      "s": "2026-10-26",
+      "m": 1
+     },
+     {
+      "n": "Correct the precon agenda, logistics plan, schedule (L-17)",
+      "s": "2026-11-16",
+      "e": "2026-12-11",
+      "pend": 1
+     },
+     {
+      "n": "Village staff review of the precon documents (L-18)",
+      "s": "2026-12-14",
+      "e": "2027-01-08",
+      "pend": 1
+     },
+     {
+      "n": "Submittals and state",
+      "lab": 1
+     },
+     {
+      "n": "S&O 5e-5j applications (L-20, L-22 to L-26)",
+      "s": "2027-01-11",
+      "e": "2027-01-22",
+      "pend": 1
+     },
+     {
+      "n": "DSPS site plumbing review (L-27, L-28)",
+      "s": "2026-11-16",
+      "e": "2027-01-15",
+      "pend": 1
+     },
+     {
+      "n": "Gate: DA closing and recording (LakeView DA)",
+      "lab": 1
+     },
+     {
+      "n": "DA closing: documents signed, security posted",
+      "s": "2027-02-01",
+      "m": 1,
+      "pend": 1
+     },
+     {
+      "n": "Record; copies to the Village within 72 h",
+      "s": "2027-02-02",
+      "e": "2027-02-04",
+      "pend": 1
+     },
+     {
+      "n": "Precon and permits",
+      "lab": 1
+     },
+     {
+      "n": "Village schedules the precon (L-36)",
+      "s": "2027-02-05",
+      "m": 1,
+      "pend": 1
+     },
+     {
+      "n": "Precon meeting (L-37)",
+      "s": "2027-02-10",
+      "m": 1,
+      "pend": 1
+     },
+     {
+      "n": "Fees paid, permits picked up (L-38, L-39)",
+      "s": "2027-02-11",
+      "e": "2027-02-16",
+      "pend": 1
+     },
+     {
+      "n": "Deadline: building permit issued (S&O cond 2)",
+      "s": "2027-02-17",
+      "m": 1,
+      "k": 1
+     }
+    ]
+   },
+   "constr": {
+    "label": "Construction",
+    "title": "Construction: spring 2027 to occupancy",
+    "lede": "Planning targets for a spring 2027 start; replace with the GC schedule when one is selected.",
+    "start": "2027-03-01",
+    "end": "2028-06-30",
+    "rows": [
+     {
+      "n": "Construction (targets)",
+      "lab": 1
+     },
+     {
+      "n": "Construction starts",
+      "s": "2027-04-01",
+      "m": 1,
+      "k": 1,
+      "pend": 1
+     },
+     {
+      "n": "Site work, floodplain grading, utilities",
+      "s": "2027-04-01",
+      "e": "2027-06-30",
+      "pend": 1
+     },
+     {
+      "n": "Foundations and slab",
+      "s": "2027-05-15",
+      "e": "2027-07-31",
+      "pend": 1
+     },
+     {
+      "n": "Precast walls, steel, roof",
+      "s": "2027-07-01",
+      "e": "2027-09-30",
+      "pend": 1
+     },
+     {
+      "n": "Building enclosed; MEP and fire protection",
+      "s": "2027-09-01",
+      "e": "2027-11-30",
+      "pend": 1
+     },
+     {
+      "n": "Paving, landscaping, closeout items (S&O 13)",
+      "s": "2027-09-15",
+      "e": "2027-12-15",
+      "pend": 1
+     },
+     {
+      "n": "Deadlines",
+      "lab": 1
+     },
+     {
+      "n": "Water main accepted by the Village (Nitto Watermain)",
+      "s": "2027-11-15",
+      "m": 1,
+      "k": 1
+     },
+     {
+      "n": "Phase A substantially complete for full MRO (DA s.4.5)",
+      "s": "2028-01-01",
+      "m": 1,
+      "k": 1
+     },
+     {
+      "n": "DSPS: shell closed in; approval expires",
+      "s": "2028-05-29",
+      "m": 1,
+      "k": 1
+     },
+     {
+      "n": "WDNR stormwater coverage ends",
+      "s": "2029-02-25",
+      "m": 1,
+      "k": 1
+     }
+    ]
+   }
+  }
  },
  "documents": [
   {
-   "t": "Building & site",
+   "t": "Approved drawings (Village, signed 10/26/26)",
    "img": "img/docs/site-plan.jpg",
-   "d": "Site & operational plan approval (Plan Commission 8/17/26, 21 conditions) and the site lighting layout.",
+   "d": "The Village-approved site & operational plan set: civil, landscape, site lighting, architectural (with Fire Department sheets F01-F04) and structural. This is the current set.",
+   "it": [
+    [
+     "Civil (C-1 to C-23) with the approved title sheet",
+     "docs/LZ-Approved-SO-Civil-10.26.26.pdf",
+     "Pinnacle · signed 10/26/26",
+     [
+      "SOP-1",
+      "SOP-2",
+      "SOP-3",
+      "SOP-4",
+      "SOP-5",
+      "SOP-6",
+      "SOP-7",
+      "SOP-8",
+      "SOP-9",
+      "SOP-10",
+      "SOP-11",
+      "SOP-12",
+      "SOP-13",
+      "SOP-14",
+      "SOP-15",
+      "SOP-16",
+      "SOP-17",
+      "SOP-18",
+      "SOP-19",
+      "SOP-20",
+      "SOP-21",
+      "SOP-22",
+      "SOP-23",
+      "SOP-24"
+     ]
+    ],
+    [
+     "Landscape (L-1 to L-5) and site lighting",
+     "docs/LZ-Approved-SO-Landscape-Lighting-10.26.26.pdf",
+     "Pinnacle / lighting · signed 10/26/26",
+     [
+      "SOL-1",
+      "SOL-2",
+      "SOL-3",
+      "SOL-4",
+      "SOL-5",
+      "SOL-6"
+     ]
+    ],
+    [
+     "Architectural, incl. Fire Department F01-F04",
+     "docs/LZ-Approved-SO-Architectural-10.26.26.pdf",
+     "Partners in Design · signed 10/26/26",
+     [
+      "SOA-1",
+      "SOA-2",
+      "SOA-3",
+      "SOA-4",
+      "SOA-5",
+      "SOA-6",
+      "SOA-7",
+      "SOA-8",
+      "SOA-9",
+      "SOA-10",
+      "SOA-11",
+      "SOA-12",
+      "SOA-13",
+      "SOA-14",
+      "SOA-15",
+      "SOA-16",
+      "SOA-17",
+      "SOA-18",
+      "SOA-19"
+     ]
+    ],
+    [
+     "Structural (S0.1 to S8.6)",
+     "docs/LZ-Approved-SO-Structural-10.26.26.pdf",
+     "raSmith · signed 10/26/26",
+     [
+      "SOS-1",
+      "SOS-2",
+      "SOS-3",
+      "SOS-4",
+      "SOS-5",
+      "SOS-6",
+      "SOS-7",
+      "SOS-8",
+      "SOS-9",
+      "SOS-10"
+     ]
+    ]
+   ]
+  },
+  {
+   "t": "Village approvals",
+   "img": "img/docs/village-da.jpg",
+   "d": "Site & operational plan approval (Plan Commission 8/17/26, 21 conditions), LakeView Owners Association approval, and the precon agenda draft.",
    "it": [
     [
      "Site & operational plan approval letter",
@@ -129,164 +478,93 @@
      ]
     ],
     [
-     "Site lighting layout and photometrics",
-     "docs/NZ-Site-Lighting-Calcs-10.2.26.pdf",
-     "Sheet dated 3/18/26 · file 10/2/26",
+     "LakeView Corporate Park Owners Association approval",
+     "docs/LZ-LakeView-OA-Approval-9.22.26.pdf",
+     "Beth Murphy (Newmark), 9/22/26",
      [
-      "LT-1"
+      "OA-1"
+     ]
+    ],
+    [
+     "Draft preconstruction agenda",
+     "docs/LZ-Draft-Precon-Agenda-Pinnacle-10.2.26.pdf",
+     "Pinnacle draft, 10/2/26",
+     [
+      "PCA-1",
+      "PCA-2",
+      "PCA-3",
+      "PCA-4",
+      "PCA-5",
+      "PCA-6",
+      "PCA-7"
+     ],
+     [
+      "Corrections open (see tracker); goes to Miranda Steinmetz and Kurt Davidsen for approval"
      ]
     ]
    ]
   },
   {
-   "t": "Village / DA",
-   "img": "img/docs/village-da.jpg",
-   "d": "Village approval letter, Development Agreement draft, CSM language, stormwater agreement draft and the Village Engineer comments.",
-   "it": [
-    [
-     "DA conditional approval letter",
-     "docs/NW-Village-DA-Approval-Letter-8.25.26.pdf",
-     "Rob Hanson, 8/25/26",
-     [
-      "AL-1",
-      "AL-2",
-      "AL-3",
-      "AL-4",
-      "AL-5"
-     ]
-    ],
-    [
-     "Development Agreement (draft) with exhibits",
-     "docs/NW-Development-Agreement-DRAFT.pdf",
-     "08/2026 draft · pp.1-18 and Exhibits D, D1, D2",
-     [
-      "DA-1",
-      "DA-2",
-      "DA-3",
-      "DA-4",
-      "DA-5",
-      "DA-6",
-      "DA-7",
-      "DA-8",
-      "DA-9",
-      "DA-10",
-      "DA-11",
-      "DA-12",
-      "DA-13",
-      "DA-14",
-      "DA-15",
-      "DA-16",
-      "DA-17",
-      "DA-18",
-      "DA-D",
-      "DA-D1",
-      "DA-D2"
-     ],
-     [
-      "Exhibits D1 (cost breakdown) and D2 (security) are blank",
-      "Full 57-page PDF: Open full PDF"
-     ]
-    ],
-    [
-     "CSM dedication and covenant language (draft)",
-     "docs/NW-CSM-Dedication-Covenant-Language-DRAFT.pdf",
-     "8/13/26 draft",
-     [
-      "CSM-1",
-      "CSM-2"
-     ],
-     [
-      "Owner spelled \"Lakeveiw\" on line 1"
-     ]
-    ],
-    [
-     "Stormwater Maintenance Agreement (draft)",
-     "docs/NW-Stormwater-Maintenance-Agreement-DRAFT.pdf",
-     "Draft, with the 8/25 packet",
-     [
-      "SW-1",
-      "SW-2",
-      "SW-3",
-      "SW-4",
-      "SW-5",
-      "SW-6",
-      "SW-7",
-      "SW-8",
-      "SW-9",
-      "SW-10",
-      "SW-11"
-     ],
-     [
-      "Exhibit B still needed"
-     ]
-    ],
-    [
-     "Village Engineer comments (marked plans)",
-     "docs/NW-Village-Engineer-Comments-8.11.26.pdf",
-     "8/11/26",
-     [
-      "EC-1",
-      "EC-2",
-      "EC-3",
-      "EC-4",
-      "EC-5"
-     ]
-    ]
-   ]
-  },
-  {
-   "t": "Approvals & permits",
+   "t": "State building approval (DSPS)",
    "img": "img/docs/approvals.jpg",
-   "d": "KWU approval and the WDNR permits and water quality certification.",
+   "d": "Conditional approval of the building shell and the state-stamped plans that must be kept on site.",
    "it": [
     [
-     "WDNR construction stormwater permit coverage, FIN 103538",
-     "docs/NZ-WDNR-NOI-Coverage-103538-2.25.26.pdf",
-     "WDNR, 2/25/26 · general permit WI-S067831-06",
+     "DSPS conditional approval, building shell",
+     "docs/LZ-DSPS-Conditional-Approval-Shell-5.29.26.pdf",
+     "CB-052600583-PRB · 5/29/26",
      [
-      "NOI-1",
-      "NOI-2",
-      "NOI-3"
+      "DSL-1",
+      "DSL-2",
+      "DSL-3"
      ],
      [
-      "Coverage ends 2/25/2029"
+      "Expires 5/29/2028; shell closed within 2 years",
+      "HVAC, precast, steel, sprinkler and plumbing submittals due before installation"
      ]
     ],
     [
-     "KWU approval letter",
-     "docs/NW-KWU-Approval-11.4.26.pdf",
-     "Ian Bagley, 11/4/26",
+     "DSPS-stamped shell plans (architectural and structural)",
+     "docs/LZ-DSPS-Approved-Shell-Plans-5.29.26.pdf",
+     "Partners in Design · stamped 5/29/26",
      [
-      "KWU-1"
+      "DSP-1"
+     ],
+     [
+      "Bound copy with the approval letter must be on site"
      ]
-    ],
+    ]
+   ]
+  },
+  {
+   "t": "Wetlands, Corps and stormwater",
+   "img": "img/docs/approvals.jpg",
+   "d": "Wetland fill permits for the building site, the Corps 404 permit, the wetland delineation and credits, and WDNR stormwater coverage.",
+   "it": [
     [
      "WDNR wetland individual permit IP-SE-2026-30-01917",
-     "docs/NW-WDNR-Wetland-IP-01917-10.15.26.pdf",
-     "Sonya Ponzi, 10/15/26",
+     "docs/LZ-WDNR-Wetland-IP-01917-rev10.23.26.pdf",
+     "Revised 10/23/26 · expires 10/15/2029",
      [
-      "WP-1",
-      "WP-2",
-      "WP-3",
-      "WP-4",
-      "WP-5",
-      "WP-6",
-      "WP-7"
-     ],
-     [
-      "Completion date and permit number need correcting"
+      "WPR-1",
+      "WPR-2",
+      "WPR-3",
+      "WPR-4",
+      "WPR-5",
+      "WPR-6",
+      "WPR-7"
      ]
     ],
     [
      "WDNR pond individual permit IP-SE-2026-30-02789",
-     "docs/NW-WDNR-Pond-IP-02789-10.15.26.pdf",
-     "Sonya Ponzi, 10/15/26",
+     "docs/LZ-WDNR-Pond-IP-02789-rev10.23.26.pdf",
+     "Revised 10/23/26 · expires 10/15/2029",
      [
-      "PP-1",
-      "PP-2",
-      "PP-3",
-      "PP-4",
-      "PP-5"
+      "PPR-1",
+      "PPR-2",
+      "PPR-3",
+      "PPR-4",
+      "PPR-5"
      ]
     ],
     [
@@ -300,69 +578,104 @@
      ]
     ],
     [
-     "WDNR water system approval request (Form 3300-260)",
-     "docs/NW-WDNR-Form-3300-260-Water-System-Approval-Request.pdf",
-     "Pinnacle submittal · 1,088 LF of 16-inch PVC",
+     "Army Corps initial proffered 404 permit (for signature)",
+     "docs/LZ-Corps-404-Proffered-Permit-11.9.26.pdf",
+     "Lorin Kinney, 11/9/26",
      [
-      "WSA-1"
+      "C404-1",
+      "C404-2",
+      "C404-3",
+      "C404-4",
+      "C404-5",
+      "C404-6",
+      "C404-7",
+      "C404-8",
+      "C404-9",
+      "C404-10",
+      "C404-11"
      ],
      [
-      "WDNR approval not on file here"
+      "Effective only when Jason signs and the Corps countersigns"
      ]
     ],
     [
-     "WDNR water main submittal checklist (Form 3300-066)",
-     "docs/NW-WDNR-Form-3300-066-Water-Main-Checklist.pdf",
-     "Pinnacle submittal",
+     "Army Corps approved jurisdictional determination",
+     "docs/LZ-Corps-AJD-4.17.26.pdf",
+     "4/17/26 · Wetland B not federal · good to 4/17/2031",
      [
-      "WMC-1",
-      "WMC-2",
-      "WMC-3",
-      "WMC-4"
+      "AJD-1",
+      "AJD-2",
+      "AJD-3",
+      "AJD-4",
+      "AJD-5",
+      "AJD-6",
+      "AJD-7",
+      "AJD-8",
+      "AJD-9",
+      "AJD-10",
+      "AJD-11",
+      "AJD-12"
+     ]
+    ],
+    [
+     "WWCT wetland credit affidavit (2.12 credits)",
+     "docs/LZ-WWCT-Credit-Affidavit-9.21.22.pdf",
+     "Final, countersigned 9/21/22",
+     [
+      "AFF-1"
+     ]
+    ],
+    [
+     "Wetland delineation report",
+     "docs/LZ-LANDCO2-Wetland-Delineation-4.16.26.pdf",
+     "LANDCO2, 4/16/26 · 82 pp (first 11 in viewer)",
+     [
+      "LDR-1",
+      "LDR-2",
+      "LDR-3",
+      "LDR-4",
+      "LDR-5",
+      "LDR-6",
+      "LDR-7",
+      "LDR-8",
+      "LDR-9",
+      "LDR-10",
+      "LDR-11"
+     ]
+    ],
+    [
+     "WDNR construction stormwater permit coverage, FIN 103538",
+     "docs/NZ-WDNR-NOI-Coverage-103538-2.25.26.pdf",
+     "WDNR, 2/25/26 · general permit WI-S067831-06",
+     [
+      "NOI-1",
+      "NOI-2",
+      "NOI-3"
+     ],
+     [
+      "Coverage ends 2/25/2029"
      ]
     ]
    ]
   },
   {
-   "t": "Water main bid package",
-   "img": "img/docs/bid-package.jpg",
-   "d": "What goes out to water main bidders: the Pinnacle project manual and the watermain plans bid set.",
+   "t": "Reports",
+   "img": "img/docs/cover-plan.jpg",
+   "d": "Geotechnical report for the site.",
    "it": [
     [
-     "Project manual (contract, terms, proposal form)",
-     "docs/NW-Project-Manual-Pinnacle-11.3.26.pdf",
-     "Pinnacle, 11/3/26",
+     "Geotechnical report (subsurface exploration)",
+     "docs/LZ-Geotech-ECS-8.25.16.pdf",
+     "ECS 42:1291, 8/25/16 · written for the earlier 2-building layout",
      [
-      "PM-1",
-      "PM-2",
-      "PM-3",
-      "PM-4",
-      "PM-5",
-      "PM-6",
-      "PM-7",
-      "PM-8",
-      "PM-9",
-      "PM-10",
-      "PM-11",
-      "PM-12"
-     ],
-     [
-      "Completion date still 7/31/2026; 8 items sent to Pinnacle 11/4"
-     ]
-    ],
-    [
-     "Public watermain plans, bid set (rev. 4)",
-     "docs/NW-Public-Watermain-Plans-BidSet-11.3.26.pdf",
-     "Pinnacle 644.00, 11/3/26",
-     [
-      "PL-1",
-      "PL-2",
-      "PL-3",
-      "PL-4",
-      "PL-5",
-      "PL-6",
-      "PL-7",
-      "PL-8"
+      "GEO-1",
+      "GEO-2",
+      "GEO-3",
+      "GEO-4",
+      "GEO-5",
+      "GEO-6",
+      "GEO-7",
+      "GEO-8"
      ]
     ]
    ]
@@ -584,105 +897,256 @@
   ]
  ],
  "areasText": "Design (Drawings and Design, Pinnacle), Approvals (only what the Village, WDNR, Army Corps or KWU itself decides), General Contractor (bidding, cost, construction), ZPG (what ZPG itself must do)",
- "refPrefix": "N",
+ "refPrefix": "L",
  "cover": {
   "image": "img/docs/site-plan.jpg",
   "eyebrow": "LakeView Corporate Park · STH 31 and 108th Street · Pleasant Prairie, WI",
   "big": "152,334",
   "line1": "SF speculative industrial",
   "line2": "Zilber Industrial 3 · Nitto parcel",
-  "sentence": "ZPG develops for TI Investors of Lakeview Nitto Parcel LLC; Pinnacle is civil engineer. The Nitto Watermain must be bid and secured before the Village issues any permits.",
+  "sentence": "ZPG develops for TI Investors of Lakeview Nitto Parcel LLC; Pinnacle is civil engineer, Partners in Design the architect. Permits need the DA closed and recorded and the precon held; the building permit must issue by 2/17/27 for a spring 2027 start.",
   "chips": [
-   "Site & Ops approved 8/17/26",
+   "S&O plans signed 10/26/26",
+   "DSPS shell approved 5/29/26",
    "Building permit by 2/17/27"
   ],
   "button": {
    "label": "View site plan ⤢",
-   "image": "sheets/LT-1.jpg",
-   "caption": "Site lighting layout · Zilber Lakeview 3 · sheet dated 3/18/26"
+   "image": "sheets/SOP-7.jpg",
+   "caption": "C-6 Layout plan · Village-approved set signed 10/26/26"
   }
  },
  "drawings": {
-  "prefix": "PL",
-  "label": "Nitto Watermain bid set · Pinnacle 11/3/26 · building plan set not on file here",
-  "pdf": "docs/NW-Public-Watermain-Plans-BidSet-11.3.26.pdf"
+  "prefix": "SOP",
+  "label": "Village-approved S&O set · civil · signed 10/26/26 (architectural, structural and landscape on the Documents tab)",
+  "pdf": "docs/LZ-Approved-SO-Civil-10.26.26.pdf"
  },
  "rail": [
   {
    "kind": "now",
    "when": "Now",
-   "title": "Bid the Nitto Watermain",
-   "note": "Project manual items with Pinnacle, sent 11/4"
+   "title": "Precon package and 404 permit",
+   "note": "Correct the precon documents (L-17); sign the 404 after fixes (L-04 to L-07)"
   },
   {
    "kind": "step",
-   "when": "Next · date not set",
-   "title": "Close and record",
-   "note": "DA executed, security posted, CSM and SWMA recorded; required before any permits"
+   "when": "Target · Jan",
+   "title": "S&O 5a-5j submittals",
+   "note": "Erosion control, floodplain, ROW, driveway, building permit applications"
   },
   {
    "kind": "step",
-   "when": "Gate · by 2/17/27",
-   "title": "Building permit issued",
-   "note": "The site & ops approval lapses 6 months after 8/17/26"
+   "when": "Gate · DA recording",
+   "title": "Close and record (LakeView DA)",
+   "note": "No permits before the DA, CSM and SWMA are recorded"
   },
   {
    "kind": "key",
-   "when": "Target · 1/1/28",
-   "title": "Phase A substantial completion",
-   "note": "DA approval letter, p.1"
+   "when": "Deadline · 2/17/27",
+   "title": "Building permit issued",
+   "note": "S&O approval lapses 6 months after 8/17/26"
   }
  ],
  "approval": {
-  "eyebrow": "From the DA and site & operational plan approval letters (8/25/26)",
-  "title": "Approval path, from water main bid to permits",
+  "eyebrow": "From the site & operational plan and DA approval letters (8/25/26)",
+  "title": "Approval path, from today to the building permit",
   "lede": "The DA must be executed and the water main financial security provided, and the CSM and Stormwater Maintenance Agreement recorded, before the Village issues any permits for the project (S&O condition 1). The Village sizes the security at 120% of the public improvements, inspections and construction-related services, from the signed contract (DA conditions 6 and 7). The Village schedules the preconstruction meeting once all S&O condition 5 submittals are in. The building permit must be issued within 6 months of the 8/17/26 approval. Bid, contract, closing and construction dates are not set.",
   "steps": [
    {
-    "when": "In progress · List sent to Pinnacle 11/4",
-    "title": "Fix project manual",
-    "note": "Eight items sent to Pinnacle 11/4; answers awaited.",
+    "when": "Now · target Dec",
+    "title": "Precon documents to the Village",
+    "note": "Corrected agenda, logistics plan, schedule (S&O cond 4)",
     "next": true
    },
    {
-    "when": "Date not set",
-    "title": "Bid to Village-prequalified contractors",
-    "note": "Village-prequalified contractors only (Ch. 405). Bid date not set.",
-    "noDate": true
+    "when": "Target Dec-Jan",
+    "title": "Village approves them (cond 5)",
+    "note": "Then the 5b-5j submittals go in"
    },
    {
-    "when": "Date not set",
-    "title": "Sign contract; Village approves it",
-    "note": "Village checks the itemized contract, owner name and COI (condition 6c).",
-    "noDate": true
+    "when": "Target Jan",
+    "title": "Submittals 5b-5i",
+    "note": "Wetland permits, erosion control + NOI, floodplain, ROW, driveway, building permit"
    },
    {
-    "when": "Date not set",
-    "title": "Village sets security (120%)",
-    "note": "120% of public improvements, inspections and construction services (condition 7).",
-    "noDate": true
+    "when": "Gate · LakeView DA",
+    "title": "Close and record",
+    "note": "DA, Memorandum, CSM, SWMA recorded; security posted"
    },
    {
-    "when": "Date not set",
-    "title": "Closing: security, DA, SWMA signed",
-    "note": "DA, Memorandum of DA and SWMA executed; security delivered (condition 8).",
-    "noDate": true
+    "when": "Target Feb 5-16",
+    "title": "Precon, fees, permits (cond 6-7)",
+    "note": "Village schedules the precon once everything is in"
    },
    {
-    "when": "Date not set",
-    "title": "Record documents; get permits",
-    "note": "Recorded copies to the Village within 72 hours; then permits (conditions 9-12).",
-    "noDate": true
-   },
-   {
-    "when": "Village acceptance by Mon Nov 15, 2027",
-    "title": "Build; Village accepts by 11/15/27",
-    "note": "Installed, inspected and accepted by the Village (DA s.6.1, condition 4). Construction dates not set."
+    "when": "Deadline Wed Feb 17, 2027",
+    "title": "Building permit issued",
+    "note": "S&O approval lapses after 6 months (cond 2)"
    }
   ]
  },
  "meetingsLede": "No recurring meeting is set for L152 yet. Notes from each meeting appear below, newest first, once Jason has reviewed them.",
  "sheets": "all",
  "footer": "Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.",
- "ownerLine": "Jason Lueders, ZPG"
+ "ownerLine": "Jason Lueders, ZPG",
+ "critical": {
+  "t": "What has to happen before construction can start",
+  "lede": "From Jason's flow chart, corrected against the two approval letters: every lane must finish before the Village schedules the precon, and the building permit must issue by 2/17/27 for a spring start. Bubbles turn green as the tracker items close.",
+  "deadline": {
+   "date": "2027-02-17",
+   "label": "the building-permit deadline (S&O approval lapses)"
+  },
+  "goal": "Construction starts",
+  "gs": "Spring 2027 target",
+  "lanes": [
+   {
+    "n": "Water main approvals",
+    "steps": [
+     [
+      "issues:N-10",
+      "Village approves plans"
+     ],
+     [
+      "issues:N-11",
+      "KWU approval"
+     ],
+     [
+      "issues:N-14",
+      "WDNR extension approval"
+     ]
+    ]
+   },
+   {
+    "n": "Water main contract & security",
+    "steps": [
+     [
+      "issues:N-16",
+      "Manual finished"
+     ],
+     [
+      "issues:N-19",
+      "Bid"
+     ],
+     [
+      "issues:N-21",
+      "Contractor selected"
+     ],
+     [
+      "issues:N-24",
+      "Village approves contract"
+     ],
+     [
+      "da_issues:D-08",
+      "Village cost breakdown (120%)"
+     ]
+    ]
+   },
+   {
+    "n": "CSM, SWMA & DA closing",
+    "steps": [
+     [
+      "da_issues:D-01",
+      "CSM approved"
+     ],
+     [
+      "da_issues:D-06",
+      "SWMA + Exhibit B"
+     ],
+     [
+      "da_issues:D-17",
+      "Security posted at closing"
+     ],
+     [
+      "da_issues:D-15",
+      "DA, Memorandum, SWMA signed"
+     ],
+     [
+      "da_issues:D-20",
+      "Recorded copies to Village (5c)"
+     ]
+    ]
+   },
+   {
+    "n": "Wetlands (DNR / Corps)",
+    "steps": [
+     [
+      "L-01",
+      "DNR wetland permit"
+     ],
+     [
+      "L-08",
+      "Corps 404 countersigned"
+     ],
+     [
+      "L-09",
+      "Permits to Village (5b)"
+     ]
+    ]
+   },
+   {
+    "n": "Precon package",
+    "steps": [
+     [
+      "L-13",
+      "S&O plans approved"
+     ],
+     [
+      "L-17",
+      "Agenda, logistics, schedule"
+     ],
+     [
+      "L-18",
+      "Village approves (cond 5)"
+     ]
+    ]
+   },
+   {
+    "n": "Submittals (S&O 5a-5i)",
+    "steps": [
+     [
+      "L-12",
+      "Owners Assoc. (5a)"
+     ],
+     [
+      "L-20",
+      "Erosion control + NOI (5e)"
+     ],
+     [
+      "L-22",
+      "Floodplain permit (5f)"
+     ],
+     [
+      "L-23",
+      "ROW permit (5g)"
+     ],
+     [
+      "L-24",
+      "Driveway permit (5h)"
+     ],
+     [
+      "L-25",
+      "Building permit app (5i)"
+     ]
+    ]
+   }
+  ],
+  "merge": [
+   [
+    "L-36",
+    "Village schedules precon"
+   ],
+   [
+    "L-37",
+    "Precon meeting"
+   ],
+   [
+    "L-38",
+    "Fees paid, permits picked up"
+   ],
+   [
+    "L-40",
+    "Building permit by 2/17/27"
+   ]
+  ]
+ }
 }
