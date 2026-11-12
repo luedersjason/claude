@@ -3305,6 +3305,41 @@
      "N-31",
      "N-32"
     ]
+   },
+   "move": {
+    "doclog": {
+     "d07": "da_doclog",
+     "d08": "da_doclog",
+     "d09": "da_doclog",
+     "d10": "da_doclog",
+     "d16": "da_doclog",
+     "d-da-0825": "da_doclog",
+     "d-eopc-1017": "da_doclog",
+     "d-rh-0914": "da_doclog",
+     "d04": "l152_doclog",
+     "d05": "l152_doclog",
+     "d06": "l152_doclog",
+     "d-404-1109": "l152_doclog"
+    },
+    "validations": {
+     "v-n-404-fix": "l152_validations",
+     "v-n-404-credits": "l152_validations"
+    }
+   }
+  },
+  {
+   "v": 9,
+   "merge": {
+    "l152_validations": {
+     "v-n-404-fix": {
+      "ref": "L-04",
+      "state": "resolved"
+     },
+     "v-n-404-credits": {
+      "ref": "L-06",
+      "state": "resolved"
+     }
+    }
    }
   }
  ],

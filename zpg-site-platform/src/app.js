@@ -58,7 +58,7 @@ function ensureReady(env) {
   return ready;
 }
 
-// Applies public/migrate.json once per version to a live database: "delete" removes docs, "put" writes docs whole,
+// Applies public/migrate.json once per version to a live database: "move" relocates docs, "delete" removes docs, "put" writes docs whole,
 // "insert" adds docs that are not there yet, "merge" patches fields on existing docs. Touches only the docs it names.
 async function migrate(env) {
   const r = await env.ASSETS.fetch(new Request("https://assets.local/migrate.json"));
@@ -69,6 +69,12 @@ async function migrate(env) {
   // Each step runs once, in order. Later steps must not re-put docs the team may have changed since.
   for (const s of (m.steps || []).filter((x) => x.v > done).sort((x, y) => x.v - y.v)) {
     const now = Date.now(), stmts = [];
+    // "move": {fromCol: {id: toCol}} copies the doc as it is now into toCol and removes it from fromCol.
+    for (const [from, ids] of Object.entries(s.move || {}))
+      for (const [id, to] of Object.entries(ids)) {
+        stmts.push(env.DB.prepare("INSERT OR REPLACE INTO docs (col, id, data, ver, updated_at, updated_by) SELECT ?, id, data, ver + 1, ?, 'migrate' FROM docs WHERE col = ? AND id = ?").bind(to, now, from, id));
+        stmts.push(env.DB.prepare("DELETE FROM docs WHERE col = ? AND id = ?").bind(from, id));
+      }
     for (const [col, ids] of Object.entries(s.delete || {}))
       for (const id of ids) stmts.push(env.DB.prepare("DELETE FROM docs WHERE col = ? AND id = ?").bind(col, id));
     for (const [col, docs] of Object.entries(s.put || {}))
