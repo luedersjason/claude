@@ -692,7 +692,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 1e64002 2026-11-12</span>
+  <span>Owner: Jason Lueders, ZPG · build accd193 2026-11-12</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -1718,7 +1718,7 @@ OPEN ITEMS: ${JSON.stringify(slim)}`;}
   async function revise(v,card){const ci=card.querySelector('[data-f=c]'),c=ci?ci.value.trim():'';
     if(!c){$('vNote').textContent='Type a comment first, then press Enter.';return;}
     let sample=null;try{sample=window.claude?await window.claude.use('sample'):null;}catch(e){}
-    if(!sample){try{const res=await upd(v._id,{lastComment:c,commentPending:true,commentAt:Date.now()});ci.value='';ci.blur();const k=res&&res.claude;if(k==null){$('vNote').textContent='Sent to Claude. The revised request shows here when a Claude session picks it up.';return;}VW[v._id]={s:k>0?'sent':'queued',at:Date.now()};if(k>0)vSock();$('vNote').textContent=k>0?'Sent to Claude. You can go to the next request.':'Saved. No Claude session is open; it will be revised when one is.';paint();}catch(err){$('vNote').textContent='That comment did not save. You may have view-only access.';}return;}
+    if(!sample){try{const res=await upd(v._id,{lastComment:c,commentPending:true,commentAt:Date.now()});v.commentPending=true;v.lastComment=c;ci.value='';ci.blur();const k=res&&res.claude;if(k==null){$('vNote').textContent='Sent to Claude. The revised request shows here when a Claude session picks it up.';return;}VW[v._id]={s:k>0?'sent':'queued',at:Date.now()};if(k>0)vSock();$('vNote').textContent=k>0?'Sent to Claude. You can go to the next request.':'Saved. No Claude session is open; it will be revised when one is.';paint();}catch(err){$('vNote').textContent='That comment did not save. You may have view-only access.';}return;}
     const sb=card.querySelector('.vsend');sb.disabled=true;ci.disabled=true;$('vNote').textContent='Revising…';
     try{const r=await sample.json(buildPrompt(v,c),{modelTier:'default',cache:false});
       const clean=x=>String(x??'').slice(0,300);
