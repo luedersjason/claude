@@ -71,11 +71,29 @@ const dcards=CFG.documents;
   g('dcards').innerHTML=dcards.map((c,i)=>`<button type="button" class="dc" data-i="${i}"><div class="dc-img" style="background-image:url('${c.img}')"></div><div class="dc-b"><span class="dc-n">${c.it.length} file${c.it.length===1?'':'s'}</span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div></button>`).join('');
   const m=g('dcModal');
   function openItem(i,ids){if(!ids||!ids.length||!window.jqOpenSheets)return;window.jqOpenSheets(ids,ids[0],()=>list(i));}
-  function list(i){const c=dcards[i];g('dcH').textContent=c.t;g('dcSub').textContent=c.d+' Click a file to open it in the viewer.';
+  function list(i){const c=dcards[i];g('dcH').textContent=c.t;g('dcSub').textContent=c.d+' Click a file to open it in the viewer. Check files, then Download checked for one combined PDF.';
     g('dcList').innerHTML=c.it.map((x,k)=>{const v=x[3];
       const img=`<div class="dfc-i" style="background-image:url('sheets/${esc(v[0])}.jpg')"></div>`;
-      return `<div class="dfw"><button type="button" class="dfc" data-k="${k}">${img}<div class="dfc-b"><b>${esc(x[0])}</b><span>${esc(x[2]||'')}${v.length>1?' · '+v.length+' sheets':''}</span>${(x[4]||[]).map(t=>`<span class="dfc-t">${esc(t)}</span>`).join('')}</div></button><a class="dfc-pdf" href="${esc(x[1])}" target="_blank" rel="noopener">Open full PDF ↗</a></div>`;}).join('');
-    g('dcList').dataset.i=i;m.hidden=false;}
+      return `<div class="dfw"><label class="dfc-ck"><input type="checkbox" data-ck="${k}" checked> Include in download</label><button type="button" class="dfc" data-k="${k}">${img}<div class="dfc-b"><b>${esc(x[0])}</b><span>${esc(x[2]||'')}${v.length>1?' · '+v.length+' sheets':''}</span>${(x[4]||[]).map(t=>`<span class="dfc-t">${esc(t)}</span>`).join('')}</div></button><a class="dfc-pdf" href="${esc(x[1])}" target="_blank" rel="noopener">Open full PDF ↗</a></div>`;}).join('');
+    g('dcList').dataset.i=i;dcCount();m.hidden=false;}
+  const dcCks=()=>[...g('dcList').querySelectorAll('input[data-ck]')];
+  function dcCount(){const n=dcCks().filter(x=>x.checked).length;g('dcDl').textContent=`Download checked (${n})`;g('dcDl').disabled=!n;}
+  g('dcList').addEventListener('change',e=>{if(e.target.matches('input[data-ck]'))dcCount();});
+  g('dcAll').addEventListener('click',()=>{dcCks().forEach(x=>x.checked=true);dcCount();});
+  g('dcNone').addEventListener('click',()=>{dcCks().forEach(x=>x.checked=false);dcCount();});
+  // Download checked: one combined PDF, files in card order; PNG/JPG files become one page each.
+  g('dcDl').addEventListener('click',async()=>{
+    const i=+g('dcList').dataset.i,c=dcards[i],ks=dcCks().filter(x=>x.checked).map(x=>+x.dataset.ck);if(!ks.length)return;
+    const b=g('dcDl'),lab=b.textContent;b.disabled=true;b.textContent='Building PDF…';
+    try{const L=window.PDFLib;if(!L)throw new Error('PDF library did not load');const out=await L.PDFDocument.create();
+      for(const k of ks){const f=c.it[k][1],r=await fetch(f);if(!r.ok)throw new Error('Could not load '+f);const buf=await r.arrayBuffer();
+        if(/\.pdf$/i.test(f)){const src=await L.PDFDocument.load(buf,{ignoreEncryption:true});(await out.copyPages(src,src.getPageIndices())).forEach(pg=>out.addPage(pg));}
+        else{const im=/\.png$/i.test(f)?await out.embedPng(buf):await out.embedJpg(buf);const pg=out.addPage([im.width,im.height]);pg.drawImage(im,{x:0,y:0,width:im.width,height:im.height});}}
+      const blob=new Blob([await out.save()],{type:'application/pdf'}),a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);a.download=`${CFG.filePrefix}_${c.t.replace(/[^A-Za-z0-9]+/g,'_').replace(/^_|_$/g,'')}.pdf`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+      say(ks.length+' file'+(ks.length===1?'':'s')+' downloaded as one PDF');}
+    catch(err){say('Download failed: '+err.message);}
+    finally{b.textContent=lab;dcCount();}});
   g('dcards').addEventListener('click',e=>{const b=e.target.closest('.dc');if(!b)return;list(+b.dataset.i);});
   g('dcList').addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(!b)return;const i=+g('dcList').dataset.i,it=dcards[i].it[+b.dataset.k];m.hidden=true;openItem(i,it[3]);});
   g('dcX').addEventListener('click',()=>m.hidden=true);

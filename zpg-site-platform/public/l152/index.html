@@ -459,6 +459,8 @@ body{margin:0}
 /* documents */
 .dfw{display:grid;gap:4px;align-content:start}
 .dfc-pdf{font-size:12.5px;font-weight:500;padding:0 2px}
+.dfc-ck{display:flex;align-items:center;gap:6px;font-size:12.5px;padding:0 2px;cursor:pointer}.dfc-ck input{width:16px;height:16px;margin:0}
+.dc-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
 /* schedule */
 .g-lab{position:absolute;left:10px;top:5px;font-family:var(--display);font-weight:700;font-size:12.5px;color:var(--steel);letter-spacing:.02em}
 .step .eyebrow.nd{color:var(--warn)}
@@ -594,7 +596,7 @@ body{margin:0}
   <header><span class="eyebrow">Latest versions only</span><h2>Documents by group</h2></header>
   <div class="dcards" id="dcards"></div>
 </section>
-<div class="prof" id="dcModal" hidden role="dialog" aria-modal="true" aria-labelledby="dcH"><div class="prof-card dcm"><button class="btn prof-x" type="button" id="dcX">Close</button><h2 id="dcH"></h2><p class="note" id="dcSub"></p><div id="dcList" class="dcg"></div></div></div>
+<div class="prof" id="dcModal" hidden role="dialog" aria-modal="true" aria-labelledby="dcH"><div class="prof-card dcm"><button class="btn prof-x" type="button" id="dcX">Close</button><h2 id="dcH"></h2><p class="note" id="dcSub"></p><div class="row dc-tools"><button type="button" class="btn" id="dcAll">Check all</button><button type="button" class="btn" id="dcNone">Check none</button><button type="button" class="btn go" id="dcDl">Download checked</button></div><div id="dcList" class="dcg"></div></div></div>
 <section id="doclog">
   <header><span class="eyebrow">What changed</span><h2>Document log</h2></header>
   <div class="files-scroll"><table><thead><tr><th>Date</th><th>Document</th><th>Change</th><th>From</th></tr></thead><tbody id="doclogbody"></tbody></table></div>
@@ -656,7 +658,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 97e53a1 2026-11-11</span>
+  <span>Owner: Jason Lueders, ZPG · build 6b7a851 2026-11-12</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -810,11 +812,29 @@ const dcards=CFG.documents;
   g('dcards').innerHTML=dcards.map((c,i)=>`<button type="button" class="dc" data-i="${i}"><div class="dc-img" style="background-image:url('${c.img}')"></div><div class="dc-b"><span class="dc-n">${c.it.length} file${c.it.length===1?'':'s'}</span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div></button>`).join('');
   const m=g('dcModal');
   function openItem(i,ids){if(!ids||!ids.length||!window.jqOpenSheets)return;window.jqOpenSheets(ids,ids[0],()=>list(i));}
-  function list(i){const c=dcards[i];g('dcH').textContent=c.t;g('dcSub').textContent=c.d+' Click a file to open it in the viewer.';
+  function list(i){const c=dcards[i];g('dcH').textContent=c.t;g('dcSub').textContent=c.d+' Click a file to open it in the viewer. Check files, then Download checked for one combined PDF.';
     g('dcList').innerHTML=c.it.map((x,k)=>{const v=x[3];
       const img=`<div class="dfc-i" style="background-image:url('sheets/${esc(v[0])}.jpg')"></div>`;
-      return `<div class="dfw"><button type="button" class="dfc" data-k="${k}">${img}<div class="dfc-b"><b>${esc(x[0])}</b><span>${esc(x[2]||'')}${v.length>1?' · '+v.length+' sheets':''}</span>${(x[4]||[]).map(t=>`<span class="dfc-t">${esc(t)}</span>`).join('')}</div></button><a class="dfc-pdf" href="${esc(x[1])}" target="_blank" rel="noopener">Open full PDF ↗</a></div>`;}).join('');
-    g('dcList').dataset.i=i;m.hidden=false;}
+      return `<div class="dfw"><label class="dfc-ck"><input type="checkbox" data-ck="${k}" checked> Include in download</label><button type="button" class="dfc" data-k="${k}">${img}<div class="dfc-b"><b>${esc(x[0])}</b><span>${esc(x[2]||'')}${v.length>1?' · '+v.length+' sheets':''}</span>${(x[4]||[]).map(t=>`<span class="dfc-t">${esc(t)}</span>`).join('')}</div></button><a class="dfc-pdf" href="${esc(x[1])}" target="_blank" rel="noopener">Open full PDF ↗</a></div>`;}).join('');
+    g('dcList').dataset.i=i;dcCount();m.hidden=false;}
+  const dcCks=()=>[...g('dcList').querySelectorAll('input[data-ck]')];
+  function dcCount(){const n=dcCks().filter(x=>x.checked).length;g('dcDl').textContent=`Download checked (${n})`;g('dcDl').disabled=!n;}
+  g('dcList').addEventListener('change',e=>{if(e.target.matches('input[data-ck]'))dcCount();});
+  g('dcAll').addEventListener('click',()=>{dcCks().forEach(x=>x.checked=true);dcCount();});
+  g('dcNone').addEventListener('click',()=>{dcCks().forEach(x=>x.checked=false);dcCount();});
+  // Download checked: one combined PDF, files in card order; PNG/JPG files become one page each.
+  g('dcDl').addEventListener('click',async()=>{
+    const i=+g('dcList').dataset.i,c=dcards[i],ks=dcCks().filter(x=>x.checked).map(x=>+x.dataset.ck);if(!ks.length)return;
+    const b=g('dcDl'),lab=b.textContent;b.disabled=true;b.textContent='Building PDF…';
+    try{const L=window.PDFLib;if(!L)throw new Error('PDF library did not load');const out=await L.PDFDocument.create();
+      for(const k of ks){const f=c.it[k][1],r=await fetch(f);if(!r.ok)throw new Error('Could not load '+f);const buf=await r.arrayBuffer();
+        if(/\.pdf$/i.test(f)){const src=await L.PDFDocument.load(buf,{ignoreEncryption:true});(await out.copyPages(src,src.getPageIndices())).forEach(pg=>out.addPage(pg));}
+        else{const im=/\.png$/i.test(f)?await out.embedPng(buf):await out.embedJpg(buf);const pg=out.addPage([im.width,im.height]);pg.drawImage(im,{x:0,y:0,width:im.width,height:im.height});}}
+      const blob=new Blob([await out.save()],{type:'application/pdf'}),a=document.createElement('a');
+      a.href=URL.createObjectURL(blob);a.download=`${CFG.filePrefix}_${c.t.replace(/[^A-Za-z0-9]+/g,'_').replace(/^_|_$/g,'')}.pdf`;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+      say(ks.length+' file'+(ks.length===1?'':'s')+' downloaded as one PDF');}
+    catch(err){say('Download failed: '+err.message);}
+    finally{b.textContent=lab;dcCount();}});
   g('dcards').addEventListener('click',e=>{const b=e.target.closest('.dc');if(!b)return;list(+b.dataset.i);});
   g('dcList').addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(!b)return;const i=+g('dcList').dataset.i,it=dcards[i].it[+b.dataset.k];m.hidden=true;openItem(i,it[3]);});
   g('dcX').addEventListener('click',()=>m.hidden=true);
