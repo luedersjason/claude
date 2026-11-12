@@ -84,34 +84,40 @@
  },
  "documents": [
   {
-   "t": "Permanent utilities · We Energies",
-   "img": "img/docs/utilities.jpg",
-   "d": "Service applications, cost letters, construction sketches, ready-for-service cards and payment copies for gas WR 5243966, fire pump WR 5256942 and building electric WR 5243977.",
+   "t": "Building electric · WR 5243977",
+   "img": "sheets/MSS-1.jpg",
+   "d": "Main 3000A service: signed sketch, current revised sketch, cost letter, ready-for-service card and payment.",
    "it": [
     [
-     "Building electric sketch WR 5243977 (revised 11/6)",
+     "Building electric sketch WR 5243977 (signed)",
+     "Z4-C251-WE-Building-WR5243977-Sketch-SIGNED-11.4.26.pdf",
+     "Signed by Lucas Bourassa 11/4/26, returned to WE 11/4",
+     [
+      "MSS-1",
+      "MSS-2",
+      "MSS-3"
+     ]
+    ],
+    [
+     "Building electric sketch WR 5243977 (revised 11/6, current)",
      "Z4-C251-WE-Building-WR5243977-Sketch-REVISED-11.6.26.pdf",
-     "Shawn Niles, rev. 11/6/26",
+     "Shawn Niles, rev. 11/6/26 · sent for records, no re-sign requested",
      [
       "MS-1",
       "MS-2",
       "MS-3"
      ],
      [
-      "Needs customer signature",
       "Sewer-crossing clearance: email says 8 ft; sheet 2 reads 10 ft"
      ]
     ],
     [
      "Building electric cost letter WR 5243977 (revised)",
      "Z4-C251-WE-Building-WR5243977-CostLetter-REVISED-11.4.26.pdf",
-     "Tiara Joyner, 11/4/26 (underground)",
+     "Tiara Joyner, 11/4/26 (underground) · no signature needed",
      [
       "MC-1",
       "MC-2"
-     ],
-     [
-      "Sign and return this one, not the first 11/4 letter"
      ]
     ],
     [
@@ -130,6 +136,26 @@
       "MK-1"
      ]
     ],
+    [
+     "Gas & electric service application",
+     "Z4-C251-WE-ServiceApp-Gas-Electric-SUBMITTED-7.6.26.pdf",
+     "Submitted 7/6/26",
+     [
+      "GA-1",
+      "GA-2",
+      "GA-3",
+      "GA-4",
+      "GA-5",
+      "GA-6"
+     ]
+    ]
+   ]
+  },
+  {
+   "t": "Fire pump electric · WR 5256942",
+   "img": "sheets/FS-1.jpg",
+   "d": "Fire pump service: signed sketch, cost letter, ready-for-service card, payment and application.",
+   "it": [
     [
      "Fire pump sketch WR 5256942 (signed)",
      "Z4-C251-WE-FirePump-WR5256942-Sketch-SIGNED-10.23.26.pdf",
@@ -164,6 +190,26 @@
       "FK-1"
      ]
     ],
+    [
+     "Fire pump service application",
+     "Z4-C251-WE-ServiceApp-FirePump-SUBMITTED-7.6.26.pdf",
+     "Submitted 7/6/26",
+     [
+      "FA-1",
+      "FA-2",
+      "FA-3",
+      "FA-4",
+      "FA-5",
+      "FA-6"
+     ]
+    ]
+   ]
+  },
+  {
+   "t": "Gas · WR 5243966",
+   "img": "sheets/GS-1.jpg",
+   "d": "Gas service: signed sketch, signed cost letter, signed ready-for-service card, payment and application.",
+   "it": [
     [
      "Gas sketch WR 5243966 (signed)",
      "Z4-C251-WE-Gas-WR5243966-Sketch-SIGNED-10.23.26.pdf",
@@ -211,20 +257,14 @@
       "GA-5",
       "GA-6"
      ]
-    ],
-    [
-     "Fire pump service application",
-     "Z4-C251-WE-ServiceApp-FirePump-SUBMITTED-7.6.26.pdf",
-     "Submitted 7/6/26",
-     [
-      "FA-1",
-      "FA-2",
-      "FA-3",
-      "FA-4",
-      "FA-5",
-      "FA-6"
-     ]
-    ],
+    ]
+   ]
+  },
+  {
+   "t": "We Energies reference",
+   "img": "img/docs/utilities.jpg",
+   "d": "Design exhibits and seasonal installation info shared across the three services.",
+   "it": [
     [
      "WE design exhibits (meter location, load table, motor data, load factor)",
      "Z4-C251-WE-Gas-Meter-Relocation-Markup-9.30.26.png",
