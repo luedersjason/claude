@@ -690,7 +690,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the DA approval letter (8/25/26), the draft Development Agreement and its exhibits, and the Village-approved CSM. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build accd193 2026-11-12</span>
+  <span>Owner: Jason Lueders, ZPG · build 5185b63 2026-11-12</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -1674,7 +1674,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     if(r.kind==='item'){const is=(window.jqIssues||[]).find(x=>x.ref===v.ref);if(!is)return;title=is.ref+' '+is.title;body='Owner: '+(is.owner||'Unassigned')+'\nArea: '+(is.area||'')+'\nStatus: '+is.status+((is.blockedBy||[]).length?'\nWaits on: '+is.blockedBy.join(', '):'')+'\n\n'+(is.next||'No note yet.');}
     $('vRefT').textContent=title;if(r.kind==='text'){$('vRefB').innerHTML='<div class="vq-doc"><div class="vq-dh">'+esc(r.src||r.label)+'</div><mark>'+esc(body)+'</mark></div>';}else $('vRefB').textContent=body;$('vModal').hidden=true;$('vRef').hidden=false;
     $('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};}
-  function paint(){const n=list.length;$('vCount').textContent=n;$('vBtn').closest('.vbox').classList.toggle('has',n>0);$('vNote').textContent=n?(n+' item'+(n===1?'':'s')+' to confirm from new documents.'):'Nothing waiting.';{const fi=document.activeElement;if(fi&&fi.matches&&fi.matches('#vList [data-f=c]')){vPend=true;return;}}  // never redraw under the cursor; catch up when the box loses focus
+  function paint(){const n=list.length;$('vCount').textContent=n;$('vBtn').closest('.vbox').classList.toggle('has',n>0);$('vNote').textContent=n?(n+' item'+(n===1?'':'s')+' to confirm from new documents.'):'Nothing waiting.';{const fi=document.activeElement;if(fi&&fi.matches&&fi.matches('#vList [data-f=c]')){vPend=true;const fc=fi.closest('.vq'),fv=fc&&list.find(x=>x._id===fc.dataset.id),lv=fc&&fc.querySelector('.vlive');if(fv&&lv)lv.innerHTML=vWorkHtml(fv)+proposalHtml(fv);return;}}  // never redraw under the cursor; catch up when the box loses focus
     if(cur>=n)cur=Math.max(0,n-1);
     const old=document.querySelector('#vList .vq [data-f=c]'),oid=old&&old.closest('.vq').dataset.id,oval=old?old.value:'',hadFocus=!!old&&document.activeElement===old,ss=old?old.selectionStart:0,se=old?old.selectionEnd:0;
     if(!n){$('vList').innerHTML='<p class="note">Nothing waiting.</p>';return;}
@@ -1686,7 +1686,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
       <div class="vcol">${hdr}
       <div class="vwh"><span class="eyebrow">What happened · ${esc(v.doc)}</span><p>${esc(v.detail||v.evidence)}</p></div>
       ${thumbs(v)}</div>
-      <div class="vcol">${vWorkHtml(v)}${proposalHtml(v)}
+      <div class="vcol"><div class="vlive">${vWorkHtml(v)}${proposalHtml(v)}</div>
       <div class="vcomposer"><input data-f="c" value="${esc(oid===v._id?oval:'')}" placeholder="Correct me or add a step, then press Enter to send it to Claude" maxlength="400"><button type="button" class="vsend" data-a="revise" title="Send to Claude" aria-label="Send to Claude">&#10148;</button></div></div>
       <div class="vfoot"><div class="vfr">${foot}</div></div></div>`;
     const ci=document.querySelector('#vList [data-f=c]');if(ci&&oid===v._id&&hadFocus){ci.focus();try{ci.setSelectionRange(ss,se);}catch(e){}}}
