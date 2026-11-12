@@ -238,11 +238,14 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const body=document.getElementById('tkBody'), msg=document.getElementById('tkMsg');
   const ownerSel=document.getElementById('tkOwner'), showSel=document.getElementById('tkShow');
   const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-  const NEXT={Open:'Pending',Pending:'Done',Done:'Open'};   // Prereq is never stored: it shows while a prerequisite is unfinished (playbook 5)
+  const NEXT={Open:'Done',Pending:'Done',Done:'Open'};   // Prereq is never stored: it shows while a prerequisite is unfinished (playbook 5)
   let rows=[], canWrite=true, tkGrp='area', tkOnly=null, detailId=null; const tkOpen=new Set(), doneOpen=new Set();
   const DNAME=Object.fromEntries(CFG.disciplines);
   const syncSw=()=>document.querySelectorAll('#tkGrpSw button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.tg===tkGrp)));
   window.jqOpenItem=id=>{detailId=id;render();if(window.jqTab)window.jqTab('tracker',true);};
+  // Arriving from another site with #ref=X: open that item once the tracker has loaded.
+  let refHash=(location.hash.match(/^#ref=([^&]+)/)||[])[1];refHash=refHash&&decodeURIComponent(refHash);
+  window.addEventListener('jqissues',()=>{if(!refHash)return;const r=rows.find(x=>x.ref===refHash);refHash=null;if(r){history.replaceState(null,'',location.pathname);window.jqOpenItem(r._id);}});
   window.jqOpenGroup=(kind,key,withDone)=>{detailId=null;tkGrp=kind;tkOnly=key;syncSw();tkOpen.add(kind+':'+key);if(withDone)doneOpen.add(kind+':'+key);showSel.value=showSel.value==='Done'?'active':showSel.value;render();if(window.jqTab)window.jqTab('tracker',true);};
   document.getElementById('tkGrpSw').addEventListener('click',e=>{const b=e.target.closest('[data-tg]');if(!b)return;tkGrp=b.dataset.tg;tkOnly=null;document.querySelectorAll('#tkGrpSw button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));render();});
   try{ if(localStorage.getItem('tkShow')) showSel.value=localStorage.getItem('tkShow'); }catch(e){}
@@ -260,8 +263,11 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   window.jqX=window.jqX||[];
   const findRef=ref=>rows.find(x=>x.ref===ref)||window.jqX.find(x=>x.ref===ref);window.jqFind=findRef;
   window.jqWait=r=>(r.blockedBy||[]).map(findRef).filter(x=>x&&x.status!=='Done');
+  // The step right before: one unfinished direct prereq (the one closest to Open first). Clicking it walks the chain one step at a time.
+  window.jqNext=r=>{const w=window.jqWait(r);if(!w.length)return null;const ready=w.find(x=>!(x.blockedBy||[]).some(b=>{const y=findRef(b);return y&&y.status!=='Done';}));return {x:ready||w[0],more:w.length-1};};
+  window.jqPreTag=(r,tag)=>{const n=window.jqNext(r);if(!n)return '';const x=n.x;return `<${tag||'span'} class="wait">Prereq: <a href="${x._x?esc(x._x.path)+'#ref='+esc(x.ref):'#'}" class="pre" data-pre="${esc(x.ref)}" title="${esc(x.title)}${x._x?' · '+esc(x._x.name):''}">${esc(x.ref)}</a>${n.more?` <span class="mono" style="font-weight:400">+${n.more} more</span>`:''}</${tag||'span'}> `;};
   (function linked(){const L=CFG.linked||{};const load=()=>Promise.all(Object.entries(L).map(([pfx,o])=>fetch('/api/c/'+encodeURIComponent(o.ns+'issues'),{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():{docs:[]}).then(j=>(j.docs||[]).map(d=>Object.assign({},d.data,{_x:o}))).catch(()=>[]))).then(a=>{window.jqX=a.flat();window.dispatchEvent(new Event('jqlinked'));});if(Object.keys(L).length){load();document.addEventListener('visibilitychange',()=>{if(!document.hidden)load();});}})();
-  const eff=r=>{const s=r.status==='In progress'?'Open':(r.status||'Open');return (s!=='Done'&&window.jqWait(r).length)?'Prereq':s;};window.jqEff=eff;
+  const eff=r=>{const s=(r.status==='Done')?'Done':'Open';return (s!=='Done'&&window.jqWait(r).length)?'Prereq':s;};window.jqEff=eff;
   const stc=s=>s==='In progress'?'Progress':s;
   const pd=t=>{const m=String(t||'').match(/^(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/);if(!m)return null;const now=new Date();let y=m[3]?+m[3]:now.getFullYear();if(y<100)y+=2000;let d=new Date(y,+m[1]-1,+m[2]);if(!m[3]&&d-now>60*864e5)d=new Date(y-1,+m[1]-1,+m[2]);return d;};
   const age=t=>{const d=pd(t);return d?Math.floor((new Date()-d)/864e5):null;};
@@ -276,7 +282,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const sec=(h,a)=>a.length?`<h3>${h}</h3><ul>${a.map(link).join('')}</ul>`:'';
     return `<button type="button" class="btn" data-back>← Back to ${esc(tkOnly?(tkGrp==='area'?(DNAME[tkOnly]||tkOnly):tkOnly):'the tracker')}</button>
     <div class="eyebrow" style="margin-top:12px">${esc(r.ref||'')} · ${esc(lab)}</div><h2 style="margin:4px 0 10px">${esc(r.title)}</h2>
-    <div class="tk-facts"><div><span>Status</span><button class="st ${esc(stc(eff(r)))}" data-id="${esc(r._id)}"${canWrite?'':' disabled'}>${esc(eff(r))}</button></div>
+    ${r.status!=='Done'&&window.jqNext(r)?`<p style="margin:0 0 10px">${window.jqPreTag(r)}</p>`:''}<div class="tk-facts"><div><span>Status</span><button class="st ${esc(stc(eff(r)))}" data-id="${esc(r._id)}"${canWrite?'':' disabled'}>${esc(eff(r))}</button></div>
     <div><span>Owner</span>${esc(r.owner||'Unassigned')}</div>${r.ball?`<div><span>Ball is with</span>${esc(r.ball)}</div>`:''}${r.due?`<div><span>Due</span>${esc(r.due)}</div>`:''}${r.confirmed?`<div><span>Last confirmed</span>${esc(r.confirmed)}${r.source?' · '+esc(r.source):''}</div>`:''}
     <div><span>Priority</span><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" aria-pressed="${!!r.pri}">★ ${r.pri?'Priority':'Mark priority'}</button></div>
     <div><span>Updated</span>${esc(r.updated||'')}</div></div>
@@ -294,8 +300,8 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     const owners=[...new Set(rows.flatMap(r=>String(r.owner||'Unassigned').split(/\s*[·,]\s*/)))].sort();
     const cur=ownerSel.value;
     ownerSel.innerHTML='<option value="">Everyone</option>'+owners.map(o=>`<option${o===cur?' selected':''}>${esc(o)}</option>`).join('');
-    const c={Open:0,Prereq:0,Pending:0,Done:0}; rows.forEach(r=>{const e=eff(r);c[e]=(c[e]||0)+1;});
-    document.getElementById('tkCounts').innerHTML=`<span>${c.Open} open</span><span>${c.Prereq} prereq</span><span>${c.Pending} pending</span><span>${c.Done} done</span>`+(()=>{const n=rows.filter(r=>gaps(r).length).length;return n?`<span class="flag" style="border-radius:999px">${n} incomplete</span>`:'';})();
+    const c={Open:0,Prereq:0,Done:0}; rows.forEach(r=>{const e=eff(r);c[e]=(c[e]||0)+1;});
+    document.getElementById('tkCounts').innerHTML=`<span>${c.Open} open</span><span>${c.Prereq} prereq</span><span>${c.Done} done</span>`+(()=>{const n=rows.filter(r=>gaps(r).length).length;return n?`<span class="flag" style="border-radius:999px">${n} incomplete</span>`:'';})();
     const show=showSel.value;
     const vis=rows.filter(r=>(!cur||String(r.owner||'Unassigned').includes(cur))&&(tkGrp!=='none'||show==='all'||(show==='Done'?r.status==='Done':r.status!=='Done')))
       .sort(window.jqCmp);
@@ -304,7 +310,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
       <td class="t"><a href="#" class="itm" data-open="${esc(r._id)}">${esc(r.title)}</a><span class="area">${esc(r.area||'')}</span></td>
       <td class="who">${esc(r.owner||'Unassigned')}</td>
       <td><button class="st ${esc(stc(eff(r)))}" data-id="${esc(r._id)}"${canWrite?'':' disabled'} title="${canWrite?'Click to change status':'View only'}">${esc(eff(r))}</button></td>
-      <td class="nx">${(r.ve&&r.ve.length)?`<span class="wait" style="background:#E8F5EE;border-color:#BFE3CF;color:#1B6B3F">VE ideas: ${r.ve.map(x=>`<a href="#" class="pre" data-pre="${esc(x)}">${esc(x)}</a>`).join(', ')}</span> `:''}${r.status!=='Done'&&window.jqWait(r).length?`<span class="wait">Prereq: ${window.jqWait(r).map(x=>`<a href="${x._x?esc(x._x.path):'#'}" class="pre" data-pre="${esc(x.ref)}" title="${esc(x.title)}${x._x?' · '+esc(x._x.name):''}">${esc(x.ref)}</a>`).join(', ')}</span> `:''}${flags(r)}${r.now?`<span class="nowl">${esc(r.now)}</span>`:esc(r.next||'')}${r.updated?` <span class="mono" style="font-size:11px">· ${esc(r.updated)}</span>`:''}</td></tr>`;
+      <td class="nx">${(r.ve&&r.ve.length)?`<span class="wait" style="background:#E8F5EE;border-color:#BFE3CF;color:#1B6B3F">VE ideas: ${r.ve.map(x=>`<a href="#" class="pre" data-pre="${esc(x)}">${esc(x)}</a>`).join(', ')}</span> `:''}${r.status!=='Done'?window.jqPreTag(r):''}${flags(r)}${r.now?`<span class="nowl">${esc(r.now)}</span>`:esc(r.next||'')}${r.updated?` <span class="mono" style="font-size:11px">· ${esc(r.updated)}</span>`:''}</td></tr>`;
     const DN=DNAME;
     if(!vis.length){body.innerHTML='<tr><td colspan="5" class="note">Nothing matches this filter.</td></tr>';return;}
     if(tkGrp==='none'){body.innerHTML=vis.map(rowHtml).join('');return;}
@@ -431,7 +437,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const el=document.getElementById('ppaths');if(!el||!(CFG.paths||[]).length)return;
   const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const firm=o=>{const m=String(o||'').match(/\(([^)]+)\)\s*$/);return m?m[1]:String(o||'Unassigned');};
-  const IC={Done:['done','✓','Done'],Open:['open','○','Open'],Prereq:['pre','⧗','Prereq'],Pending:['pend','❙❙','Pending']};
+  const IC={Done:['done','✓','Done'],Open:['open','○','Open'],Prereq:['pre','⧗','Prereq']};
   function draw(){
     const rows=window.jqIssues||[];if(!rows.length)return;const eff=window.jqEff||(r=>r.status||'Open');
     el.innerHTML=CFG.paths.map(p=>{
@@ -473,7 +479,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 <div class="cp-grid"><div class="cp-lanes">${C.lanes.map(l=>`<div class="cp-lane"><span class="cp-ln">${esc(l.n)}</span><div class="cp-chain">${l.steps.map(bubble).join('<span class="cp-ar">→</span>')}</div></div>`).join('')}</div>
 <div class="cp-join" aria-hidden="true"><span>All lanes finish</span></div>
 <div class="cp-merge">${C.merge.map(bubble).join('<span class="cp-ar">→</span>')}<span class="cp-ar">→</span><div class="cp-goal${all.length&&done===all.length?' ok':''}"><b>${esc(C.goal)}</b><small>${esc(C.gs||'')}</small><small><strong>${done} of ${all.length} steps done</strong></small><span class="cp-bar"><i style="width:${all.length?Math.round(100*done/all.length):0}%"></i></span></div></div></div>
-<div class="cp-leg"><span><i class="cp-i done">✓</i>Done</span><span><i class="cp-i open">○</i>Open</span><span><i class="cp-i pre">⧗</i>Prereq: waits on another step</span><span><i class="cp-i pend">❙❙</i>Pending: outside party has it</span><span>Bubbles tagged with another site's name live on that site's tracker. Click any bubble to open it.</span></div>`;
+<div class="cp-leg"><span><i class="cp-i done">✓</i>Done</span><span><i class="cp-i open">○</i>Open</span><span><i class="cp-i pre">⧗</i>Prereq: waits on another step</span><span>Bubbles tagged with another site's name live on that site's tracker. Click any bubble to open it.</span></div>`;
   }
   el.addEventListener('click',e=>{const b=e.target.closest('.cp-b');if(!b)return;const ref=b.dataset.ref;
     if(ref.includes(':')){const [col,id]=ref.split(':');if(SITE[col])location.href=SITE[col][0]+'#tracker';return;}
@@ -520,19 +526,19 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     names.sort((a,b)=>a==='Unassigned'?1:b==='Unassigned'?-1:a==='Jason'?-1:b==='Jason'?1:a.localeCompare(b));
     discEl.innerHTML=names.map(n=>{const items=rows.filter(r=>own(r).includes(n)).sort(window.jqCmp);
       const open=items.filter(r=>r.status!=='Done').length;if(!open&&!items.length)return '';
-      return `<details data-k="o:${esc(n)}"${(openSet.has('o:'+n)||(n==='Jason'&&!openSet.has('_x')))?' open':''}><summary>${esc(n)}<span><b>${open}</b> open / ${items.length}</span></summary><ul>${items.filter(r=>r.status!=='Done').map(r=>`<li class="${r.status==='Done'?'done':''}${r.pri?' pri':''}"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button><button type="button" data-ref="${esc(r._id)}"><i>${esc(r.ref||'')}</i><span>${esc(r.title)}${r.status!=='Done'&&window.jqWait&&window.jqWait(r).length?` <em class="pre" role="link" tabindex="0" data-pre="${window.jqWait(r)[0].ref}">Prereq: ${window.jqWait(r).map(x=>esc(x.ref)).join(', ')}</em>`:''}</span></button></li>`).join('')}</ul>${items.filter(r=>r.status==='Done').length?`<button type="button" class="donelink" data-dl="owner:${esc(n)}">${items.filter(r=>r.status==='Done').length} completed →</button>`:''}</details>`;}).join('')||'<p class="note">No issues yet.</p>';}
+      return `<details data-k="o:${esc(n)}"${(openSet.has('o:'+n)||(n==='Jason'&&!openSet.has('_x')))?' open':''}><summary>${esc(n)}<span><b>${open}</b> open / ${items.length}</span></summary><ul>${items.filter(r=>r.status!=='Done').map(r=>`<li class="${r.status==='Done'?'done':''}${r.pri?' pri':''}"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button><button type="button" data-ref="${esc(r._id)}"><i>${esc(r.ref||'')}</i><span>${esc(r.title)}${r.status!=='Done'&&window.jqWait&&window.jqWait(r).length?` <em class="pre" role="link" tabindex="0" data-pre="${window.jqNext(r).x.ref}">Prereq: ${esc(window.jqNext(r).x.ref)}${window.jqNext(r).more?' +'+window.jqNext(r).more:''}</em>`:''}</span></button></li>`).join('')}</ul>${items.filter(r=>r.status==='Done').length?`<button type="button" class="donelink" data-dl="owner:${esc(n)}">${items.filter(r=>r.status==='Done').length} completed →</button>`:''}</details>`;}).join('')||'<p class="note">No issues yet.</p>';}
   document.querySelector('.grpsw').addEventListener('click',e=>{const b=e.target.closest('[data-g]');if(!b)return;grp=b.dataset.g;document.querySelectorAll('.grpsw button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));renderDisc();});
   function renderDisc(){
     const rows=window.jqIssues||[];if(grp==='owner'){renderOwner(rows);return;} const known=DISC.map(d=>d[0]);
     const groups=DISC.concat(rows.some(r=>!known.includes(r.area))?[['__other','Other']]:[]);
     discEl.innerHTML=groups.map(([k,n])=>{const items=rows.filter(r=>k==='__other'?!known.includes(r.area):r.area===k).sort(window.jqCmp);
       if(!items.length)return '';const open=items.filter(r=>r.status!=='Done').length;
-      return `<details data-k="${k}"${openSet.has(k)?' open':''}><summary>${n}<span><b>${open}</b> open / ${items.length}</span></summary><ul>${items.filter(r=>r.status!=='Done').map(r=>`<li class="${r.status==='Done'?'done':''}${r.pri?' pri':''}"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button><button type="button" data-ref="${esc(r._id)}"><i>${esc(r.ref||'')}</i><span>${esc(r.title)}${r.status!=='Done'&&window.jqWait&&window.jqWait(r).length?` <em class="pre" role="link" tabindex="0" data-pre="${window.jqWait(r)[0].ref}">Prereq: ${window.jqWait(r).map(x=>esc(x.ref)).join(', ')}</em>`:''}</span></button></li>`).join('')}</ul>${items.filter(r=>r.status==='Done').length?`<button type="button" class="donelink" data-dl="area:${esc(k)}">${items.filter(r=>r.status==='Done').length} completed →</button>`:''}</details>`;}).join('')||'<p class="note">No issues yet.</p>';
+      return `<details data-k="${k}"${openSet.has(k)?' open':''}><summary>${n}<span><b>${open}</b> open / ${items.length}</span></summary><ul>${items.filter(r=>r.status!=='Done').map(r=>`<li class="${r.status==='Done'?'done':''}${r.pri?' pri':''}"><button type="button" class="pri-b${r.pri?' on':''}" data-pid="${esc(r._id)}" title="Priority: move to top" aria-pressed="${!!r.pri}">★</button><button type="button" data-ref="${esc(r._id)}"><i>${esc(r.ref||'')}</i><span>${esc(r.title)}${r.status!=='Done'&&window.jqWait&&window.jqWait(r).length?` <em class="pre" role="link" tabindex="0" data-pre="${window.jqNext(r).x.ref}">Prereq: ${esc(window.jqNext(r).x.ref)}${window.jqNext(r).more?' +'+window.jqNext(r).more:''}</em>`:''}</span></button></li>`).join('')}</ul>${items.filter(r=>r.status==='Done').length?`<button type="button" class="donelink" data-dl="area:${esc(k)}">${items.filter(r=>r.status==='Done').length} completed →</button>`:''}</details>`;}).join('')||'<p class="note">No issues yet.</p>';
   }
   window.addEventListener('jqissues',renderDisc);
   discEl.addEventListener('toggle',e=>{const d=e.target;if(d.tagName==='DETAILS'){openSet.add('_x');d.open?openSet.add(d.dataset.k):openSet.delete(d.dataset.k);}},true);
   function goTo(id){if(window.jqOpenItem)window.jqOpenItem(id);}
-  window.jqGoRef=ref=>{const r=(window.jqIssues||[]).find(x=>x.ref===ref);if(r){goTo(r._id);return;}const x=(window.jqX||[]).find(y=>y.ref===ref);if(x)location.href=x._x.path+'#tracker';};
+  window.jqGoRef=ref=>{const r=(window.jqIssues||[]).find(x=>x.ref===ref);if(r){goTo(r._id);return;}const x=(window.jqX||[]).find(y=>y.ref===ref);if(x)location.href=x._x.path+'#ref='+encodeURIComponent(ref);};
   discEl.addEventListener('click',e=>{
     const dl=e.target.closest('.donelink');if(dl){const [kd,...kk]=dl.dataset.dl.split(':');window.jqOpenGroup(kd,kk.join(':'),true);return;}
     const sm=e.target.closest('summary');if(sm){e.preventDefault();const d=sm.parentElement,dk=d.dataset.k||'';openSet.add('_x');if(d.open){openSet.delete(dk);d.open=false;return;}openSet.add(dk);d.open=true;if(dk.startsWith('o:'))window.jqOpenGroup('owner',dk.slice(2));else if(dk)window.jqOpenGroup('area',dk);return;}const pb=e.target.closest('.pri-b');if(pb){window.jqPri&&window.jqPri(pb.dataset.pid);return;}
@@ -920,11 +926,11 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     return VF[v._id]?'<div class="vwork done"><span>Revised</span></div>':'';}
   async function applyProposal(v){const p=v.proposal;if(!p)return [];const rows=window.jqIssues||[];let n=rows.reduce((m,r)=>Math.max(m,parseInt(String(r.ref||'').replace(/\D/g,''))||0),0);const made=[];
     for(const it of (p.items||[])){if(!it.title)continue;n++;const ref=CFG.refPrefix+'-'+String(n).padStart(2,'0');await db.collection('issues').doc(ref).set({ref,title:it.title,owner:it.owner||'Unassigned',area:it.area||CFG.disciplines[0][0],status:'Open',next:it.next||'',order:n,updated:today(),blockedBy:it.blockedBy||[]});made.push(ref);}
-    for(const u of (p.itemUpdates||[])){if(!u.ref)continue;const P={};['next','title','owner','status','now','ball','due'].forEach(k=>{if(u[k]!=null&&u[k]!=='')P[k]=String(u[k]);});if(Array.isArray(u.blockedBy))P.blockedBy=u.blockedBy;if(P.status&&!['Open','Pending','Done'].includes(P.status))delete P.status;if(Object.keys(P).length){P.updated=today();await db.collection('issues').doc(u.ref).update(P);}}
+    for(const u of (p.itemUpdates||[])){if(!u.ref)continue;const P={};['next','title','owner','status','now','ball','due'].forEach(k=>{if(u[k]!=null&&u[k]!=='')P[k]=String(u[k]);});if(Array.isArray(u.blockedBy))P.blockedBy=u.blockedBy;if(P.status==='Pending'||P.status==='Prereq')P.status='Open';if(P.status&&!['Open','Done'].includes(P.status))delete P.status;if(Object.keys(P).length){P.updated=today();await db.collection('issues').doc(u.ref).update(P);}}
     return made;}
   function buildPrompt(v,c){const rows=(window.jqIssues||[]),is=rows.find(r=>r.ref===v.ref)||{};
     const slim=rows.filter(r=>r.status!=='Done').map(r=>({ref:r.ref,title:cut(r.title,100),owner:r.owner,area:r.area,blockedBy:r.blockedBy||[]}));
-    return `You help Jason Lueders (Director of Construction, Zilber Property Group) keep the tracker for ${CFG.trackerFor} correct. A validation card shows something that happened, what the tracker will do next, and Jason's comment. Revise the proposed outcome so it follows Jason's comment exactly. Return JSON only, no other text: {"invalid":false,"summary":"1 to 3 plain sentences: what happens to the item and what happens next","items":[{"title":"","owner":"","area":"","blockedBy":["${CFG.refPrefix}-00"]}],"itemUpdates":[{"ref":"${CFG.refPrefix}-00","next":"note text","now":"optional one-sentence current state","status":"optional Open|Pending|Done","ball":"optional who moves next","title":"optional new title","owner":"optional new owner"}]}. Use empty arrays when nothing is added. Omit optional fields you are not changing.
+    return `You help Jason Lueders (Director of Construction, Zilber Property Group) keep the tracker for ${CFG.trackerFor} correct. A validation card shows something that happened, what the tracker will do next, and Jason's comment. Revise the proposed outcome so it follows Jason's comment exactly. Return JSON only, no other text: {"invalid":false,"summary":"1 to 3 plain sentences: what happens to the item and what happens next","items":[{"title":"","owner":"","area":"","blockedBy":["${CFG.refPrefix}-00"]}],"itemUpdates":[{"ref":"${CFG.refPrefix}-00","next":"note text","now":"optional one-sentence current state","status":"optional Open|Done","ball":"optional who moves next","title":"optional new title","owner":"optional new owner"}]}. Use empty arrays when nothing is added. Omit optional fields you are not changing.
 Rules: owner is the person who does the action (never put ZPG's action under another party). Use blockedBy with existing refs when a step cannot start until another finishes, so nobody gets an item they cannot act on yet. One item per hand-off; do not duplicate an existing open item (update it instead). Areas allowed (use the exact key): ${CFG.areasText}. Do not invent steps Jason did not ask for. If his comment adds an interim step or a follow-up (for example an email to send), add it as an item. If Jason says the request itself is wrong, does not apply, or the premise is mistaken, set "invalid":true, make the summary say plainly that nothing changes in the tracker and why in his words, and return empty arrays. Plain wording, short.
 ITEM: ${JSON.stringify({ref:v.ref,title:is.title,owner:is.owner,area:is.area,status:is.status,next:cut(is.next,400),blockedBy:is.blockedBy||[]})}
 WHAT HAPPENED (${v.doc}): ${v.detail||v.evidence}
