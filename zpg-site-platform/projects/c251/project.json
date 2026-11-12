@@ -108,21 +108,10 @@
  },
  "documents": [
   {
-   "t": "Drawings",
-   "img": "img/docs/drawings.jpg",
-   "d": "Key sheets and the cover sheets of the for-construction architectural/structural set (6/9/26) and civil set.",
+   "t": "Building plans & specs",
+   "img": "sheets/ARC-1.jpg",
+   "d": "Architectural and structural for-construction set, key building sheets and the marketing brochure.",
    "it": [
-    [
-     "Key sheets: C-4, A2.1, A4.0, C-10",
-     "Z4-C251-C-4-Site-Plan.pdf",
-     "For-construction set",
-     [
-      "PL-1",
-      "PL-2",
-      "PL-3",
-      "PL-4"
-     ]
-    ],
     [
      "Architectural / structural set",
      "Z4-C251-For-Construction-Arch.pdf",
@@ -135,6 +124,53 @@
      ]
     ],
     [
+     "A2.1 First floor plan",
+     "Z4-C251-A2.1-First-Floor-Plan.pdf",
+     "Key sheet, for-construction set",
+     [
+      "PL-2"
+     ]
+    ],
+    [
+     "A4.0 Exterior elevations",
+     "Z4-C251-A4.0-Exterior-Elevations.pdf",
+     "Key sheet, for-construction set",
+     [
+      "PL-3"
+     ]
+    ],
+    [
+     "Marketing brochure",
+     "Z4-C251-Marketing-Brochure.pdf",
+     "2 pages",
+     [
+      "MKT-1"
+     ]
+    ]
+   ]
+  },
+  {
+   "t": "Site & survey",
+   "img": "sheets/PL-1.jpg",
+   "d": "Civil plans, surveys, geotechnical and environmental reports, site-protection exhibits and the Caledonia Corporate Park plans and as-builts.",
+   "it": [
+    [
+     "C-4 Site plan",
+     "Z4-C251-C-4-Site-Plan.pdf",
+     "Key sheet, for-construction set",
+     [
+      "PL-1"
+     ]
+    ],
+    [
+     "C-10 Site utilities",
+     "Z4-C251-C-10-Utility-Plan.pdf",
+     "Key sheet, for-construction set",
+     [
+      "PL-4"
+     ]
+    ],
+    [
      "Civil plans C-1 to C-14",
      "Z4-C251-Civil-Plans.pdf",
      "14 sheets · cover in the viewer",
@@ -144,13 +180,149 @@
      [
       "Full set: Open full PDF"
      ]
+    ],
+    [
+     "Civil details",
+     "Z4-C251-Civil-Details.pdf",
+     "3 sheets · cover in the viewer",
+     [
+      "CVD-1"
+     ]
+    ],
+    [
+     "Civil landscape plans",
+     "Z4-C251-Civil-Landscape.pdf",
+     "4 sheets · cover in the viewer",
+     [
+      "CVL-1"
+     ]
+    ],
+    [
+     "ALTA survey",
+     "Z4-C251-ALTA-Survey.pdf",
+     "",
+     [
+      "ALT-1"
+     ]
+    ],
+    [
+     "ALTA survey, post-construction",
+     "Z4-C251-ALTA-PostConstruction-2024.pdf",
+     "2024",
+     [
+      "ALP-1"
+     ]
+    ],
+    [
+     "Geotechnical report (due diligence)",
+     "Z4-C251-Geotech-Report-DueDiligence.pdf",
+     "65 pages · first in the viewer",
+     [
+      "GEO-1"
+     ]
+    ],
+    [
+     "Phase I ESA, executive summary",
+     "Z4-C251-Phase1-ESA-ExecSummary.pdf",
+     "14 pages · first in the viewer",
+     [
+      "ESA-1"
+     ]
+    ],
+    [
+     "Site protection: curb tile",
+     "Z4-C251-SiteProtection-Curb-Tile.pdf",
+     "Reesman exhibit, 6/26/26",
+     [
+      "SPC-1"
+     ]
+    ],
+    [
+     "Site protection: building-pad tile, 10 leads",
+     "Z4-C251-SiteProtection-Pad-Tile-10.pdf",
+     "Reesman exhibit, 6/26/26 · accepted",
+     [
+      "SPT-1"
+     ]
+    ],
+    [
+     "Site protection: building-pad tile, 8 leads",
+     "Z4-C251-SiteProtection-Pad-Tile-8.pdf",
+     "Reesman exhibit, 6/26/26 · declined option",
+     [
+      "SP8-1"
+     ]
+    ],
+    [
+     "Site protection: extra stone areas",
+     "Z4-C251-SiteProtection-Extra-Stone-Areas.pdf",
+     "Reesman exhibit, 6/26/26",
+     [
+      "SPS-1"
+     ]
+    ],
+    [
+     "Caledonia Corporate Park concept",
+     "Z4-CCP-Concept-v48-Overall-Park.pdf",
+     "v48",
+     [
+      "PK48-1"
+     ]
+    ],
+    [
+     "Park infrastructure REV7, pt 1 roadway",
+     "Z4-CCP-Infra-REV7-Pt1-Roadway-Plans.pdf",
+     "21 sheets",
+     [
+      "IN1-1"
+     ]
+    ],
+    [
+     "Park infrastructure REV7, pt 2 grading & profiles",
+     "Z4-CCP-Infra-REV7-Pt2-Grading-Profiles.pdf",
+     "29 sheets",
+     [
+      "IN2-1"
+     ]
+    ],
+    [
+     "Park infrastructure REV7, pt 3 details & traffic",
+     "Z4-CCP-Infra-REV7-Pt3-Details-Traffic.pdf",
+     "38 sheets",
+     [
+      "IN3-1"
+     ]
+    ],
+    [
+     "Park infrastructure REV7, pt 4 landscape",
+     "Z4-CCP-Infra-REV7-Pt4-Landscape.pdf",
+     "16 sheets",
+     [
+      "IN4-1"
+     ]
+    ],
+    [
+     "Park public infrastructure as-builts",
+     "Z4-CCP-PublicInfra-AsBuilts-2024.pdf",
+     "2024",
+     [
+      "ABP-1"
+     ]
+    ],
+    [
+     "Park as-built, gas & electric",
+     "Z4-CCP-PostConstruction-AsBuilt-Gas-Electric-Utilities.pdf",
+     "Post-construction",
+     [
+      "ABG-1"
+     ]
     ]
    ]
   },
   {
-   "t": "Site, CSM & easements",
-   "img": "img/docs/site.jpg",
-   "d": "CSM 3679 (Lot 6), the address alert, and the storm, stormwater and sanitary easements.",
+   "t": "Village documents & approvals",
+   "img": "sheets/CSM-1.jpg",
+   "d": "Recorded CSMs, the address alert, easements (signed, recorded and draft) and the DNR wetland exemption.",
    "it": [
     [
      "CSM 3679 (final)",
@@ -210,6 +382,125 @@
      "Draft",
      [
       "ENS-1"
+     ]
+    ],
+    [
+     "DNR wetland exemption",
+     "Z4-C251-DNR-Wetland-Exemption-2022.pdf",
+     "2022",
+     [
+      "DNR-1"
+     ]
+    ],
+    [
+     "CSM 3552 (recorded)",
+     "Z4-CCP-CSM-3552-Recorded.pdf",
+     "Park",
+     [
+      "C35-1"
+     ]
+    ],
+    [
+     "CSM 3601 (recorded)",
+     "Z4-CCP-CSM-3601-Recorded.pdf",
+     "Park",
+     [
+      "C36-1"
+     ]
+    ],
+    [
+     "Access & cross-access easement (recorded)",
+     "Z4-CCP-Access-CrossAccess-RECORDED-Doc2659644.pdf",
+     "Doc 2659644",
+     [
+      "XAC-1"
+     ]
+    ],
+    [
+     "C1-C2 access easement, Exhibit C",
+     "Z4-CCP-C1-C2-Access-Easement-Exhibit-C.pdf",
+     "",
+     [
+      "C12-1"
+     ]
+    ],
+    [
+     "Pond easement (recorded)",
+     "Z4-CCP-Pond-Easement-RECORDED-Doc2671168.pdf",
+     "Doc 2671168",
+     [
+      "PER-1"
+     ]
+    ],
+    [
+     "Pond easement exhibits A-D",
+     "Z4-CCP-Pond-Easement-Exhibits-ABCD.pdf",
+     "",
+     [
+      "PEX-1"
+     ]
+    ],
+    [
+     "Southern sanitary easement (recorded)",
+     "Z4-CCP-Southern-Sanitary-RECORDED-Doc2694005.pdf",
+     "Doc 2694005",
+     [
+      "SSR-1"
+     ]
+    ],
+    [
+     "Southern sanitary easement exhibit",
+     "Z4-CCP-Southern-Sanitary-Easement-Exhibit-2024.pdf",
+     "2024",
+     [
+      "SSX-1"
+     ]
+    ]
+   ]
+  },
+  {
+   "t": "Contracts",
+   "img": "sheets/RC1-1.jpg",
+   "d": "Executed site contracts and change orders.",
+   "it": [
+    [
+     "Reesman contract (executed), part 1",
+     "Z4-C251-Reesman-Contract-EXECUTED-Part1.pdf",
+     "33 pages",
+     [
+      "RC1-1"
+     ]
+    ],
+    [
+     "Reesman contract (executed), part 2",
+     "Z4-C251-Reesman-Contract-EXECUTED-Part2.pdf",
+     "17 pages",
+     [
+      "RC2-1"
+     ]
+    ],
+    [
+     "Reesman contract (executed), part 3",
+     "Z4-C251-Reesman-Contract-EXECUTED-Part3.pdf",
+     "17 pages",
+     [
+      "RC3-1"
+     ]
+    ],
+    [
+     "Reesman CO1, stone deduct (executed)",
+     "Z4-C251-Reesman-StoneDeduct-CO1-EXECUTED.pdf",
+     "",
+     [
+      "RCO-1"
+     ]
+    ],
+    [
+     "Trinity contract (curb & gutter)",
+     "Z4-C251-Trinity-Contract-6.30.26.pdf",
+     "Dated 6/30/26 · not marked executed",
+     [
+      "TRC-1"
      ]
     ]
    ]
