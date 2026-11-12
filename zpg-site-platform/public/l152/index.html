@@ -354,7 +354,9 @@ table.tk tr.done td.t{text-decoration:line-through}
 .vwh{margin:6px 0 14px}.vwh p{margin:4px 0 0;font-size:14.5px;line-height:1.55;color:#2B3A48;white-space:pre-wrap}
 .vsrc{margin:6px 0 14px}.vthumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;margin-top:6px}
 .vt{border:1px solid #D5DDE5;border-radius:8px;overflow:hidden;background:#fff;cursor:pointer;text-align:left;padding:0;font:inherit;color:inherit}.vt:hover{border-color:var(--accent);box-shadow:0 2px 8px rgba(0,0,0,.12)}
-.vt-i{aspect-ratio:4/3;background:#F4F6F8 center/contain no-repeat;border-bottom:1px solid #D5DDE5;display:grid;place-items:center;color:#8A9AAA}.vt-b{padding:7px 9px;font-size:12.5px;font-weight:600;line-height:1.3}
+.vt-i{aspect-ratio:4/3;background:#F4F6F8 center/contain no-repeat;border-bottom:1px solid #D5DDE5;display:grid;place-items:center;color:#8A9AAA}.vt-doc{display:block;place-items:initial;background:#fff;padding:8px 9px;overflow:hidden;text-align:left;color:#1F2A37;position:relative}.vt-doc:after{content:"";position:absolute;left:0;right:0;bottom:0;height:28px;background:linear-gradient(transparent,#fff)}.vt-dh{display:flex;align-items:center;gap:5px;font-size:10px;font-weight:600;color:#5B6B7B;border-bottom:1px solid #E3E8EE;padding-bottom:4px;margin-bottom:5px}.vt-dh svg{width:12px;height:12px;flex:none}.vt-dh span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vt-dq{font-size:9.5px;line-height:1.45}.vt-dq mark,.vq-doc mark{background:#FFE14D;box-shadow:0 0 0 1px #E67800;border-radius:2px;color:inherit;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.vq-doc{background:#fff;border:1px solid #D5DDE5;border-radius:6px;padding:16px 18px;line-height:1.7;white-space:pre-wrap}.vq-doc .vq-dh{font-size:12px;color:#5B6B7B;border-bottom:1px solid #E3E8EE;padding-bottom:6px;margin-bottom:10px;white-space:normal}
+.vt-b{padding:7px 9px;font-size:12.5px;font-weight:600;line-height:1.3}
 .vcard .vnext{font-size:14.5px;line-height:1.5;padding:8px 14px;margin:4px 0 14px;color:#2B3A48}.vcard .vnext>b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent-ink);margin-bottom:2px}.vlc{font-size:13px;color:var(--muted)}
 .vcomposer{display:flex;align-items:center;gap:8px;border:1px solid #C5CFD9;border-radius:26px;padding:6px 6px 6px 16px;background:#fff}.vcomposer:focus-within{border-color:var(--accent);box-shadow:0 0 0 2px var(--accent-soft)}
 .vq .vcomposer input{border:0;outline:0;flex:1;min-width:0;font-size:14.5px;padding:6px 0;background:transparent}
@@ -658,7 +660,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 7ad584f 2026-11-12</span>
+  <span>Owner: Jason Lueders, ZPG · build 35f9bdc 2026-11-12</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -1580,7 +1582,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const refsOf=v=>{const a=(v.refs||[]).slice();if(v.ref)a.push({label:'Tracker item '+v.ref,kind:'item'});return a;};
   function thumbs(v){const r=refsOf(v);if(!r.length)return '';
     return `<div class="vsrc"><span class="eyebrow">Where this came from · click to open</span><div class="vthumbs">${r.map((x,i)=>{
-      const img=x.kind==='img'&&x.img?`<div class="vt-i" style="background-image:url('${esc(x.img)}');background-size:cover;background-position:center top"></div>`:x.kind==='sheet'&&x.ids&&x.ids[0]?`<div class="vt-i" style="background-image:url('${'sheets/'+esc(x.ids[0])}.jpg')"></div>`:`<div class="vt-i">${x.kind==='item'?CLIP:MAIL}</div>`;
+      const img=x.kind==='img'&&x.img?`<div class="vt-i" style="background-image:url('${esc(x.img)}');background-size:cover;background-position:left top"></div>`:x.kind==='sheet'&&x.ids&&x.ids[0]?`<div class="vt-i" style="background-image:url('${'sheets/'+esc(x.ids[0])}.jpg')"></div>`:x.kind==='text'&&x.body?`<div class="vt-i vt-doc"><div class="vt-dh">${MAIL}<span>${esc(x.title||x.label)}</span></div><div class="vt-dq"><mark>${esc(String(x.body).slice(0,260))}</mark></div></div>`:`<div class="vt-i">${x.kind==='item'?CLIP:MAIL}</div>`;
       return `<button type="button" class="vt" data-a="show" data-r="${i}">${img}<div class="vt-b">${esc(x.label)}</div></button>`;}).join('')}</div></div>`;}
   function showRef(v,r){
     const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};const card=$('vRef').querySelector('.prof-card');card.style.maxWidth='720px';
@@ -1588,7 +1590,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     if(r.kind==='sheet'&&window.jqOpenSheets){$('vModal').hidden=true;window.jqOpenSheets(r.ids,r.ids[0],()=>{$('vModal').hidden=false;});return;}
     let title=r.title||r.label,body=r.body||'';
     if(r.kind==='item'){const is=(window.jqIssues||[]).find(x=>x.ref===v.ref);if(!is)return;title=is.ref+' '+is.title;body='Owner: '+(is.owner||'Unassigned')+'\nArea: '+(is.area||'')+'\nStatus: '+is.status+((is.blockedBy||[]).length?'\nWaits on: '+is.blockedBy.join(', '):'')+'\n\n'+(is.next||'No note yet.');}
-    $('vRefT').textContent=title;$('vRefB').textContent=body;$('vModal').hidden=true;$('vRef').hidden=false;
+    $('vRefT').textContent=title;if(r.kind==='text'){$('vRefB').innerHTML='<div class="vq-doc"><div class="vq-dh">'+esc(r.src||r.label)+'</div><mark>'+esc(body)+'</mark></div>';}else $('vRefB').textContent=body;$('vModal').hidden=true;$('vRef').hidden=false;
     $('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};}
   function paint(){const n=list.length;$('vCount').textContent=n;$('vBtn').closest('.vbox').classList.toggle('has',n>0);$('vNote').textContent=n?(n+' item'+(n===1?'':'s')+' to confirm from new documents.'):'Nothing waiting.';{const fi=document.activeElement;if(fi&&fi.matches&&fi.matches('#vList [data-f=c]')){vPend=true;return;}}  // never redraw under the cursor; catch up when the box loses focus
     if(cur>=n)cur=Math.max(0,n-1);

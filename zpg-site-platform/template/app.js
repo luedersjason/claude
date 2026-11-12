@@ -839,7 +839,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const refsOf=v=>{const a=(v.refs||[]).slice();if(v.ref)a.push({label:'Tracker item '+v.ref,kind:'item'});return a;};
   function thumbs(v){const r=refsOf(v);if(!r.length)return '';
     return `<div class="vsrc"><span class="eyebrow">Where this came from · click to open</span><div class="vthumbs">${r.map((x,i)=>{
-      const img=x.kind==='img'&&x.img?`<div class="vt-i" style="background-image:url('${esc(x.img)}');background-size:cover;background-position:center top"></div>`:x.kind==='sheet'&&x.ids&&x.ids[0]?`<div class="vt-i" style="background-image:url('${'sheets/'+esc(x.ids[0])}.jpg')"></div>`:`<div class="vt-i">${x.kind==='item'?CLIP:MAIL}</div>`;
+      const img=x.kind==='img'&&x.img?`<div class="vt-i" style="background-image:url('${esc(x.img)}');background-size:cover;background-position:left top"></div>`:x.kind==='sheet'&&x.ids&&x.ids[0]?`<div class="vt-i" style="background-image:url('${'sheets/'+esc(x.ids[0])}.jpg')"></div>`:x.kind==='text'&&x.body?`<div class="vt-i vt-doc"><div class="vt-dh">${MAIL}<span>${esc(x.title||x.label)}</span></div><div class="vt-dq"><mark>${esc(String(x.body).slice(0,260))}</mark></div></div>`:`<div class="vt-i">${x.kind==='item'?CLIP:MAIL}</div>`;
       return `<button type="button" class="vt" data-a="show" data-r="${i}">${img}<div class="vt-b">${esc(x.label)}</div></button>`;}).join('')}</div></div>`;}
   function showRef(v,r){
     const back=()=>{$('vRef').hidden=true;$('vModal').hidden=false;};const card=$('vRef').querySelector('.prof-card');card.style.maxWidth='720px';
@@ -847,7 +847,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     if(r.kind==='sheet'&&window.jqOpenSheets){$('vModal').hidden=true;window.jqOpenSheets(r.ids,r.ids[0],()=>{$('vModal').hidden=false;});return;}
     let title=r.title||r.label,body=r.body||'';
     if(r.kind==='item'){const is=(window.jqIssues||[]).find(x=>x.ref===v.ref);if(!is)return;title=is.ref+' '+is.title;body='Owner: '+(is.owner||'Unassigned')+'\nArea: '+(is.area||'')+'\nStatus: '+is.status+((is.blockedBy||[]).length?'\nWaits on: '+is.blockedBy.join(', '):'')+'\n\n'+(is.next||'No note yet.');}
-    $('vRefT').textContent=title;$('vRefB').textContent=body;$('vModal').hidden=true;$('vRef').hidden=false;
+    $('vRefT').textContent=title;if(r.kind==='text'){$('vRefB').innerHTML='<div class="vq-doc"><div class="vq-dh">'+esc(r.src||r.label)+'</div><mark>'+esc(body)+'</mark></div>';}else $('vRefB').textContent=body;$('vModal').hidden=true;$('vRef').hidden=false;
     $('vRefX').onclick=back;$('vRef').onclick=e=>{if(e.target===$('vRef'))back();};}
   function paint(){const n=list.length;$('vCount').textContent=n;$('vBtn').closest('.vbox').classList.toggle('has',n>0);$('vNote').textContent=n?(n+' item'+(n===1?'':'s')+' to confirm from new documents.'):'Nothing waiting.';{const fi=document.activeElement;if(fi&&fi.matches&&fi.matches('#vList [data-f=c]')){vPend=true;return;}}  // never redraw under the cursor; catch up when the box loses focus
     if(cur>=n)cur=Math.max(0,n-1);
