@@ -461,7 +461,9 @@ body{margin:0}
 .ws-card b{display:block;margin-bottom:4px}.ws-card span{font-size:13px;opacity:.8}.ws-card em{display:block;margin-top:6px;font-style:normal;font-size:12px;opacity:.7}
 
 /* Claude relay: working state on a validation request */
-.vwork{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-bottom:10px;border-radius:8px;background:#EEF7F1;color:#0B6B33;font-weight:600;font-size:14px}
+.vwork{display:flex;align-items:center;gap:10px;box-sizing:border-box;height:40px;padding:0 12px;margin-bottom:10px;border-radius:8px;background:#EEF7F1;color:#0B6B33;font-weight:600;font-size:14px;white-space:nowrap;overflow:hidden}
+.vwork span{overflow:hidden;text-overflow:ellipsis}
+.vwork.idle{background:transparent;color:#8A8F98;font-weight:400;border:1px dashed #D5D9DE}
 .vwork i{flex:none;width:16px;height:16px;border:2px solid #00A94F;border-right-color:transparent;border-radius:50%;animation:vspin .8s linear infinite}
 .vwork.q{background:#FFF7E6;color:#8A5A00}.vwork.q i{border-color:#F59E0B;border-right-color:transparent;animation:none}
 .vwork.done{background:#00A94F;color:#fff;animation:vflash 5s ease forwards}
