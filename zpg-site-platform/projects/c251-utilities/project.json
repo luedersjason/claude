@@ -865,5 +865,12 @@
  "publicDir": "../../c251-caledonia-portal/public",
  "wideTabs": [
   "paths"
- ]
+ ],
+ "linked": {
+  "C": {
+   "ns": "",
+   "path": "/",
+   "name": "C251"
+  }
+ }
 }

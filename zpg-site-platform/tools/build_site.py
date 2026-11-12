@@ -50,7 +50,7 @@ def build(name):
     # what the page script reads
     cfg = {k: c[k] for k in ('name', 'ns', 'refPrefix', 'filePrefix', 'vcardNote', 'trackerFor', 'areasText', 'disciplines', 'schedule', 'documents', 'team', 'drawings')}
     cfg['tabLabels'] = {t: labels[t] for t in c['tabs']}; cfg['sheets'] = sheets
-    for k in ('paths', 'defaultTab', 'wideTabs', 'critical'):
+    for k in ('paths', 'defaultTab', 'wideTabs', 'critical', 'linked'):
         if k in c: cfg[k] = c[k]
     cover = c['cover']; btn = cover['button']
     cover_btn = ('<button type="button" class="cover-zoom" data-sheets="%s">%s</button>' % (','.join(btn['sheets']), E(btn['label'])) if 'sheets' in btn

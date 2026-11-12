@@ -145,6 +145,7 @@ When one of these changes, update every place in the same session and say so in 
 | amber badge | #9A5B00 on #FFF3DC | Predecessor, Due, equipment gaps |
 | red flag | #9B1C1C on #FDECEC | Overdue, Not confirmed in N days |
 | blue badge | #1E3448 on #E6EEF6 | Ball |
+| prereq chip | #5B3A86 on #F3ECFA | Prereq (computed from blockedBy) |
 | pending chip | #4A5B6B on #EEF1F5 | Pending |
 
 **Type:** display Archivo (700-800) for titles and big numbers; body IBM Plex Sans 15px/1.55; IBM Plex Mono for refs, dates, file paths, counts and eyebrows (11-12px, uppercase eyebrows with letter spacing). Google Fonts only.
@@ -152,7 +153,7 @@ When one of these changes, update every place in the same session and say so in 
 **Layout:** three columns on wide screens (left bar 392px, main, right bar 392px), collapsing to one column on phones with a 16px gutter. Radius 6px for cards and inputs, 10px for hero panels. Popups are white cards on a dimmed backdrop; document popups up to 1400px wide.
 
 **Components**
-- **Status chips:** Open (amber), Pending (grey-blue), Done (green). Mono, uppercase, 11px.
+- **Status chips:** Open (amber), Prereq (violet, computed), Pending (grey-blue), Done (green). Mono, uppercase, 11px.
 - **Badges** in the Now column, in this order: VE ideas (green), Predecessor (amber, clickable), Ball (blue), Due (amber) or Overdue (red), Not confirmed in N days (red), then the Now sentence, then the updated date in mono.
 - **Priority:** a star before the ref; amber when on.
 - **Cards:** image on top (4:3, contain), title in bold, a mono meta line (date or version, sheet count). Folder-only files are not shown as cards.
@@ -186,7 +187,12 @@ When one of these changes, update every place in the same session and say so in 
 ## 5. Data model (artifact database)
 
 - **issues:** ref, title, owner, area (discipline key), status, now, ball, confirmed, source, due, next (history), order, updated, pri, blockedBy (predecessor refs), ve (VE idea refs feeding a cost-log item).
-- **Status definitions:** Open = the owner can act now. Pending = waits on a predecessor or an outside response (shown automatically when an Open item has an unfinished predecessor; set by hand for outside waits). There is no separate In progress status (merged into Open 2026-11-09). Done = finished, with evidence.
+- **Status definitions (Jason, 11/12).** Four statuses, each with one test:
+  - **Open:** the owner can act on it today. Nothing listed first is unfinished, and the next move is ours (ZPG or our consultants and contractors).
+  - **Prereq:** it can't be done until something else is done first. Never stored or clicked: the page shows Prereq whenever any item in `blockedBy` is not Done, names those items ("Prereq: L-38, D-16") and links to them, including items on a linked site (`linked` in project.json, e.g. L152 waits on LakeView DA items). When the last prereq is Done, the item drops back to its stored status by itself.
+  - **Pending:** our part is done and the ball is with someone outside (Village, WDNR, Corps, We Energies, DSPS...) who must reply, review, approve or schedule. `ball` names who. Pending is not "later": if it is later because of another step, that step is a prereq.
+  - **Done:** finished, with evidence (`confirmed` + `source`).
+  The stored status is what the item will be once its prereqs clear: an approval the Village gives is stored Pending even while it shows Prereq. The chip cycles Open → Pending → Done → Open. No In progress (merged into Open 11/9).
 - **Completeness (template, 11/9):** a not-Done item without a ball, a Now line or a confirmed date shows a red "Missing: ..." flag, the tracker header counts them as "N incomplete", the + New issue form asks for owner and ball, and a site with no `sweeps` record shows "No full check recorded yet."
 - **Flags on every not-Done item:** Ball; Due or Overdue; "Not confirmed in N days" when `confirmed` (or `updated`) is 7+ days old. Counter: open / pending / done.
 - **validations:** state (pending / resolved), kind ("check" for tracker corrections), ref, doc, detail, evidence, refs[] (`{label, kind:'text', title, body}` or `{label, kind:'sheet', ids:[...]}`), proposal {invalid, summary, items[], itemUpdates[]}, nextTitle, nextOwner, nextArea, answer (done / adv / apply), comment, lastComment, rev, applied, nextDone. `itemUpdates` may carry next, now, status, ball, title, owner, due, blockedBy; only fields present are written.
@@ -199,12 +205,12 @@ When one of these changes, update every place in the same session and say so in 
 ## 6. Tracker rules
 
 1. **Owner = who does the action.** Never put ZPG's action under the owner's bucket. The owner discipline (for Jaquet: "Jaquet") holds only what the owner itself must do.
-2. **Sequence matters.** If a step cannot start until another finishes, set `blockedBy`. Nobody gets an item they cannot act on yet.
+2. **Prereqs are tracker items, listed in `blockedBy`.** For every item ask "what has to be done before this can be done?" and list the nearest steps (not their whole chain). Each prereq must be an item: on this tracker, or on a linked site by its ref (D-, N-, L-, U-, C-). A prereq written only in a note doesn't count. Where the governing document states the order (an approval condition, permit condition, DA section), cite it in the item's history when you add the link. If a prereq isn't on any tracker, raise a validation request proposing it as a new item; don't invent it. Example: the L152 building permit (L-40) needs the permits picked up (L-38), which needs the precon (L-37) and, per S&O condition 1, the executed DA (D-16), the security (D-17) and the recorded CSM and SWMA (D-19); the precon (L-36) needs every S&O 5 submittal, including the recorded documents (D-20).
 3. **One item per hand-off.** No duplicates. Star the steps leading to a goal, not the goal and every step.
 4. **Discipline buckets by who does the work:** Drawings and Design (key Design), Approvals (only what the municipality or state itself decides), Steel, Fire, MEP, General Contractor (cost, budget, pricing), Owner. Preparing something for the Village sits with the discipline doing the work.
 5. **Done needs evidence.** Close directly only on unambiguous evidence and record it. Otherwise raise a validation request.
 6. **Validation comments are data.** Read resolved requests before raising new ones; never re-ask what a comment answered.
-7. **Display:** starred first, then lowest ref; Done last and grey; Predecessor links clickable; left bar shows open items only.
+7. **Display:** starred first, then lowest ref; Done last and grey; Prereq links clickable (to the linked site when the prereq lives there); left bar shows open items only.
 8. **Item-first state check (the sweep).** For every not-Done item ask "what is true now?": status, ball, a rewritten Now, whether the title and owner still describe the work, the latest evidence (confirmed + source), due dates. Start from the item and look for evidence, not from the document. Save one record per sweep in `sweeps` and report "N checked, N changed". No record means no sweep.
 9. **Do not invent steps.** Jason decides what is required.
 10. **Keep candid asides out** of tracker and notes.
@@ -323,7 +329,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 >
 > Inputs under [folder]: `db\issues\*.json` (tracker), `db\validations\*.json` (past review requests; `comment` and `lastComment` are the lead's own reasons, treat as authoritative), `db\meetings\*.json`, `db\doclog\*.json`, `sources\` (emails as text with forwarded and attached emails inlined, meeting transcripts; the newest are the most important; transcripts are speech-to-text, read for meaning).
 >
-> Definitions: Open = owner can act now; Pending = waits on a predecessor or an outside response; Done = finished with evidence. Ball = who must move next now. Now = one sentence of current state.
+> Definitions: Open = owner can act now; Prereq = shown automatically while anything in blockedBy is unfinished (every prereq must be listed); Pending = our part is done, someone outside has the ball; Done = finished with evidence. Ball = who must move next now. Now = one sentence of current state.
 >
 > For each not-Done item decide: status, ball, now, whether the title is still accurate (propose one if not), whether the owner is right, latest evidence (date, source file, short quote), confidence (high, medium, low). Also flag: passed due dates; items with no movement in 7+ days; Done items the sources do not support; commitments or decisions no item covers; missing links (emails or attachments referred to but absent, for example a reply whose question is missing). Do not invent tasks; a remark is not a commitment unless someone agreed. Quote evidence under 25 words. Where evidence is ambiguous say so and set confidence low.
 >
@@ -332,6 +338,8 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+
+- 2026-11-12: Prereq status (Jason): computed from blockedBy, shown and counted on every site, linked across sites (L152 <-> LakeView DA <-> Nitto Watermain; C251 <-> C251 Utilities). Pending now means only 'outside party has the ball'. Rule 6.2 rewritten (prereqs are items, nearest steps, cite the document). Data: L-36, L-38, D-08, D-21 got the prereqs their documents state; 10 items stored Pending with no outside ball set to Open and sent for a prereq check (v-l-prereq, v-n-prereq); C-27, U-11, U-20, U-21 set Pending (Village / We Energies hold the ball).
 
 - 2026-11-12: VR refs: text-quote thumbnails show the highlighted quote on a mini page; C251 C-22..C-29 refs are highlighted screenshots of the old portal (excerpts/c251-oldportal-*.png).
 - 2026-11-12: Documents cards: All / Clear / Download / Close row + thumbnail checkboxes (one combined PDF via pdf-lib), template + all sites. C251 Utilities documents split into one card per service.

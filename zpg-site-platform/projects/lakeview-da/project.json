@@ -569,5 +569,17 @@
  "meetingsLede": "No recurring meeting for the DA. Notes appear here once Jason has reviewed them.",
  "sheets": "all",
  "footer": "Built from the DA approval letter (8/25/26), the draft Development Agreement and its exhibits, and the Village-approved CSM. Open the Documents tab for the source PDFs.",
- "ownerLine": "Jason Lueders, ZPG"
+ "ownerLine": "Jason Lueders, ZPG",
+ "linked": {
+  "N": {
+   "ns": "",
+   "path": "/",
+   "name": "Nitto Watermain"
+  },
+  "L": {
+   "ns": "l152_",
+   "path": "/l152/",
+   "name": "L152"
+  }
+ }
 }

@@ -711,5 +711,12 @@
  "footer": "Built from the We Energies, Scherrer, NEXT Electric and Zilber correspondence and the old c251 portal. Open the Documents tab for the source files.",
  "ownerLine": "Jason Lueders, ZPG",
  "filePrefix": "Z4-C251",
- "publicDir": "../../c251-caledonia-portal/public"
+ "publicDir": "../../c251-caledonia-portal/public",
+ "linked": {
+  "U": {
+   "ns": "util_",
+   "path": "/utilities/",
+   "name": "C251 Utilities"
+  }
+ }
 }
