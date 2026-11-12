@@ -148,6 +148,27 @@
       "GA-5",
       "GA-6"
      ]
+    ],
+    [
+     "WE design exhibits (meter location, load table, motor data, load factor)",
+     "Z4-C251-WE-Gas-Meter-Relocation-Markup-9.30.26.png",
+     "From the WE emails, 9/29 to 10/21",
+     [
+      "EX-1",
+      "EX-2",
+      "EX-3",
+      "EX-4",
+      "EX-5"
+     ]
+    ],
+    [
+     "WE seasonal installation info",
+     "Z4-C251-WE-Seasonal-Installation-Info.pdf",
+     "We Energies",
+     [
+      "SE-1",
+      "SE-2"
+     ]
     ]
    ]
   },
@@ -201,6 +222,27 @@
       "FA-4",
       "FA-5",
       "FA-6"
+     ]
+    ],
+    [
+     "WE design exhibits (meter location, load table, motor data, load factor)",
+     "Z4-C251-WE-Gas-Meter-Relocation-Markup-9.30.26.png",
+     "From the WE emails, 9/29 to 10/21",
+     [
+      "EX-1",
+      "EX-2",
+      "EX-3",
+      "EX-4",
+      "EX-5"
+     ]
+    ],
+    [
+     "WE seasonal installation info",
+     "Z4-C251-WE-Seasonal-Installation-Info.pdf",
+     "We Energies",
+     [
+      "SE-1",
+      "SE-2"
      ]
     ]
    ]
@@ -257,14 +299,7 @@
       "GA-5",
       "GA-6"
      ]
-    ]
-   ]
-  },
-  {
-   "t": "We Energies reference",
-   "img": "img/docs/utilities.jpg",
-   "d": "Design exhibits and seasonal installation info shared across the three services.",
-   "it": [
+    ],
     [
      "WE design exhibits (meter location, load table, motor data, load factor)",
      "Z4-C251-WE-Gas-Meter-Relocation-Markup-9.30.26.png",
