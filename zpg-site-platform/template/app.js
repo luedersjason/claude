@@ -71,13 +71,13 @@ const dcards=CFG.documents;
   g('dcards').innerHTML=dcards.map((c,i)=>`<button type="button" class="dc" data-i="${i}"><div class="dc-img" style="background-image:url('${c.img}')"></div><div class="dc-b"><span class="dc-n">${c.it.length} file${c.it.length===1?'':'s'}</span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div></button>`).join('');
   const m=g('dcModal');
   function openItem(i,ids){if(!ids||!ids.length||!window.jqOpenSheets)return;window.jqOpenSheets(ids,ids[0],()=>list(i));}
-  function list(i){const c=dcards[i];g('dcH').textContent=c.t;g('dcSub').textContent=c.d+' Click a file to open it in the viewer. Check files, then Download checked for one combined PDF.';
+  function list(i){const c=dcards[i];g('dcH').textContent=c.t;g('dcSub').textContent=c.d+' Click a file to open it. Tick files, then Download for one combined PDF.';
     g('dcList').innerHTML=c.it.map((x,k)=>{const v=x[3];
       const img=`<div class="dfc-i" style="background-image:url('sheets/${esc(v[0])}.jpg')"></div>`;
-      return `<div class="dfw"><label class="dfc-ck"><input type="checkbox" data-ck="${k}" checked> Include in download</label><button type="button" class="dfc" data-k="${k}">${img}<div class="dfc-b"><b>${esc(x[0])}</b><span>${esc(x[2]||'')}${v.length>1?' · '+v.length+' sheets':''}</span>${(x[4]||[]).map(t=>`<span class="dfc-t">${esc(t)}</span>`).join('')}</div></button><a class="dfc-pdf" href="${esc(x[1])}" target="_blank" rel="noopener">Open full PDF ↗</a></div>`;}).join('');
+      return `<div class="dfw"><label class="dfc-ck" title="Select for download"><input type="checkbox" data-ck="${k}" aria-label="Select ${esc(x[0])} for download"></label><button type="button" class="dfc" data-k="${k}">${img}<div class="dfc-b"><b>${esc(x[0])}</b><span>${esc(x[2]||'')}${v.length>1?' · '+v.length+' sheets':''}</span>${(x[4]||[]).map(t=>`<span class="dfc-t">${esc(t)}</span>`).join('')}</div></button><a class="dfc-pdf" href="${esc(x[1])}" target="_blank" rel="noopener">Open full PDF ↗</a></div>`;}).join('');
     g('dcList').dataset.i=i;dcCount();m.hidden=false;}
   const dcCks=()=>[...g('dcList').querySelectorAll('input[data-ck]')];
-  function dcCount(){const n=dcCks().filter(x=>x.checked).length;g('dcDl').textContent=`Download checked (${n})`;g('dcDl').disabled=!n;}
+  function dcCount(){const n=dcCks().filter(x=>x.checked).length;g('dcDl').textContent=n?`Download (${n})`:'Download';g('dcDl').disabled=!n;}
   g('dcList').addEventListener('change',e=>{if(e.target.matches('input[data-ck]'))dcCount();});
   g('dcAll').addEventListener('click',()=>{dcCks().forEach(x=>x.checked=true);dcCount();});
   g('dcNone').addEventListener('click',()=>{dcCks().forEach(x=>x.checked=false);dcCount();});

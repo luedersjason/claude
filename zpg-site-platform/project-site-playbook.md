@@ -75,7 +75,7 @@ A published Claude Artifact (one HTML page plus supporting files) shared with a 
 See sections 5 and 6. Header with counts (open / pending / done) and "Last full check"; grouping switch (By discipline, By owner, Flat list); Owner and Show filters; table columns #, Item, Owner, Status, Now / next step; item detail page with status, owner, ball, due, last confirmed, predecessors, what it unblocks, VE links, Now and History.
 
 ### 1.6 Documents tab
-See section 9. One card per group (for utilities: one card per service, each holding its own application, cost letter, sketch, ready-for-service card and payment). Inside a card: every file has an "Include in download" checkbox (checked by default), plus Check all, Check none and Download checked, which merges the checked files into one PDF in card order (images become one page each) named `<filePrefix>_<card title>.pdf`.
+See section 9. One card per group (for utilities: one card per service, each holding its own application, cost letter, sketch, ready-for-service card and payment). Inside a card: header row right side reads All · Clear · Download · Close; each file has a checkbox on its thumbnail (unchecked to start); Download (shows the count, disabled at 0) merges the checked files into one PDF in card order (images become one page each) named `<filePrefix>_<card title>.pdf`.
 
 ### 1.7 Schedule tab (Gantt, approval path, week-by-week)
 - **Gantt data:** three row lists (master, preconstruction, construction). Each row is `{n: name, s: start (YYYY-MM-DD), e: end, p:1 phase heading, m:1 milestone, k:1 key milestone, pend:1 carried from an older schedule and not yet re-sequenced}`. Views: `{master, precon, constr}` each with its row list, date range, title and one-line lede.
@@ -330,7 +330,7 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 
 ### Changelog
 
-- 2026-11-12: Documents cards: Check all / Check none / Download checked (one combined PDF via pdf-lib), template + all sites. C251 Utilities documents split into one card per service.
+- 2026-11-12: Documents cards: All / Clear / Download / Close row + thumbnail checkboxes (one combined PDF via pdf-lib), template + all sites. C251 Utilities documents split into one card per service.
 - 2026-11-11: Rule 13 (simple beats clever). `build_site.py --check` now fails when C251 is not checked out (it used to pass silently).
 
 - 2026-11-10: C251 moved onto the template build (projects/c251, projects/c251-utilities, publicDir into the C251 repo). Utilities became their own sub-site at /utilities/ (ns util_, refs U-01..U-21, was C-01..C-21), like the Nitto Watermain beside L152. New extra tab type `paths` (section 1.12) brings back the stage-card layout. The old standalone utility pages redirect to /utilities/.

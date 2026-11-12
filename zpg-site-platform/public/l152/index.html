@@ -459,8 +459,8 @@ body{margin:0}
 /* documents */
 .dfw{display:grid;gap:4px;align-content:start}
 .dfc-pdf{font-size:12.5px;font-weight:500;padding:0 2px}
-.dfc-ck{display:flex;align-items:center;gap:6px;font-size:12.5px;padding:0 2px;cursor:pointer}.dfc-ck input{width:16px;height:16px;margin:0}
-.dc-tools{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.dfw{position:relative}.dfc-ck{position:absolute;top:10px;left:10px;z-index:2;width:30px;height:30px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);border-radius:6px;box-shadow:0 1px 3px rgba(0,0,0,.15);cursor:pointer}.dfc-ck input{width:18px;height:18px;margin:0;cursor:pointer;accent-color:var(--green,#00A94F)}
+.dc-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}.dc-head h2{margin:0}.dc-tools{display:flex;flex-wrap:wrap;gap:8px}.dc-tools .btn:disabled{opacity:.5;cursor:default}
 /* schedule */
 .g-lab{position:absolute;left:10px;top:5px;font-family:var(--display);font-weight:700;font-size:12.5px;color:var(--steel);letter-spacing:.02em}
 .step .eyebrow.nd{color:var(--warn)}
@@ -596,7 +596,7 @@ body{margin:0}
   <header><span class="eyebrow">Latest versions only</span><h2>Documents by group</h2></header>
   <div class="dcards" id="dcards"></div>
 </section>
-<div class="prof" id="dcModal" hidden role="dialog" aria-modal="true" aria-labelledby="dcH"><div class="prof-card dcm"><button class="btn prof-x" type="button" id="dcX">Close</button><h2 id="dcH"></h2><p class="note" id="dcSub"></p><div class="row dc-tools"><button type="button" class="btn" id="dcAll">Check all</button><button type="button" class="btn" id="dcNone">Check none</button><button type="button" class="btn go" id="dcDl">Download checked</button></div><div id="dcList" class="dcg"></div></div></div>
+<div class="prof" id="dcModal" hidden role="dialog" aria-modal="true" aria-labelledby="dcH"><div class="prof-card dcm"><div class="dc-head"><h2 id="dcH"></h2><div class="dc-tools"><button type="button" class="btn" id="dcAll">All</button><button type="button" class="btn" id="dcNone">Clear</button><button type="button" class="btn go" id="dcDl" disabled>Download</button><button type="button" class="btn" id="dcX">Close</button></div></div><p class="note" id="dcSub"></p><div id="dcList" class="dcg"></div></div></div>
 <section id="doclog">
   <header><span class="eyebrow">What changed</span><h2>Document log</h2></header>
   <div class="files-scroll"><table><thead><tr><th>Date</th><th>Document</th><th>Change</th><th>From</th></tr></thead><tbody id="doclogbody"></tbody></table></div>
@@ -658,7 +658,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the Village approval letters (8/25/26), the DA draft, agency permits and the 11/3 water main bid set. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 48d327e 2026-11-12</span>
+  <span>Owner: Jason Lueders, ZPG · build c71a93f 2026-11-12</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -812,13 +812,13 @@ const dcards=CFG.documents;
   g('dcards').innerHTML=dcards.map((c,i)=>`<button type="button" class="dc" data-i="${i}"><div class="dc-img" style="background-image:url('${c.img}')"></div><div class="dc-b"><span class="dc-n">${c.it.length} file${c.it.length===1?'':'s'}</span><h3>${esc(c.t)}</h3><p>${esc(c.d)}</p></div></button>`).join('');
   const m=g('dcModal');
   function openItem(i,ids){if(!ids||!ids.length||!window.jqOpenSheets)return;window.jqOpenSheets(ids,ids[0],()=>list(i));}
-  function list(i){const c=dcards[i];g('dcH').textContent=c.t;g('dcSub').textContent=c.d+' Click a file to open it in the viewer. Check files, then Download checked for one combined PDF.';
+  function list(i){const c=dcards[i];g('dcH').textContent=c.t;g('dcSub').textContent=c.d+' Click a file to open it. Tick files, then Download for one combined PDF.';
     g('dcList').innerHTML=c.it.map((x,k)=>{const v=x[3];
       const img=`<div class="dfc-i" style="background-image:url('sheets/${esc(v[0])}.jpg')"></div>`;
-      return `<div class="dfw"><label class="dfc-ck"><input type="checkbox" data-ck="${k}" checked> Include in download</label><button type="button" class="dfc" data-k="${k}">${img}<div class="dfc-b"><b>${esc(x[0])}</b><span>${esc(x[2]||'')}${v.length>1?' · '+v.length+' sheets':''}</span>${(x[4]||[]).map(t=>`<span class="dfc-t">${esc(t)}</span>`).join('')}</div></button><a class="dfc-pdf" href="${esc(x[1])}" target="_blank" rel="noopener">Open full PDF ↗</a></div>`;}).join('');
+      return `<div class="dfw"><label class="dfc-ck" title="Select for download"><input type="checkbox" data-ck="${k}" aria-label="Select ${esc(x[0])} for download"></label><button type="button" class="dfc" data-k="${k}">${img}<div class="dfc-b"><b>${esc(x[0])}</b><span>${esc(x[2]||'')}${v.length>1?' · '+v.length+' sheets':''}</span>${(x[4]||[]).map(t=>`<span class="dfc-t">${esc(t)}</span>`).join('')}</div></button><a class="dfc-pdf" href="${esc(x[1])}" target="_blank" rel="noopener">Open full PDF ↗</a></div>`;}).join('');
     g('dcList').dataset.i=i;dcCount();m.hidden=false;}
   const dcCks=()=>[...g('dcList').querySelectorAll('input[data-ck]')];
-  function dcCount(){const n=dcCks().filter(x=>x.checked).length;g('dcDl').textContent=`Download checked (${n})`;g('dcDl').disabled=!n;}
+  function dcCount(){const n=dcCks().filter(x=>x.checked).length;g('dcDl').textContent=n?`Download (${n})`:'Download';g('dcDl').disabled=!n;}
   g('dcList').addEventListener('change',e=>{if(e.target.matches('input[data-ck]'))dcCount();});
   g('dcAll').addEventListener('click',()=>{dcCks().forEach(x=>x.checked=true);dcCount();});
   g('dcNone').addEventListener('click',()=>{dcCks().forEach(x=>x.checked=false);dcCount();});
