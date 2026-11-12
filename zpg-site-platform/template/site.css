@@ -515,3 +515,4 @@ body{margin:0}
 @media print{.cp{break-inside:avoid}}
 .pp-ic.pre{background:#F3ECFA;color:#5B3A86;font-size:10px}.pp-card.pre{border-left-color:#8E6CC0}.pp-card.pre .s{color:#5B3A86}
 .cp-b.pre{border-color:#8E6CC0;border-style:dashed}.cp-b.pre i{color:#5B3A86}.cp-i.pre{border-style:dashed;border-color:#8E6CC0;color:#5B3A86}
+.wait.fin{color:#1E5A8A;background:#E8F1FA;border-color:#BFD6EC}
