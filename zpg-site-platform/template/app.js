@@ -490,6 +490,29 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   window.addEventListener('jqissues',draw); load();
 })();
 
+// Side bars slide (playbook 3). Docked, or hidden to a slim tab; the tab slides the bar over the page (Pin docks it).
+// Starts hidden on narrow screens; each person's choice is remembered on their browser.
+(function sidebars(){
+  const sh=document.querySelector('.shell');if(!sh)return;
+  const K='zpgBars',def=w=>({l:w>=1500,r:w>=1180});
+  let st;try{st=JSON.parse(localStorage.getItem(K)||'null');}catch(e){}st=st||def(window.innerWidth);
+  const save=()=>{try{localStorage.setItem(K,JSON.stringify(st));}catch(e){}};
+  const bars={l:document.querySelector('.lbar'),r:document.querySelector('.rbar')},label={l:'Tracker & search',r:'Checks · forum · feed'};
+  Object.entries(bars).forEach(([k,b])=>{if(!b)return;
+    const tab=document.createElement('button');tab.type='button';tab.className='sb-tab';tab.textContent=(k==='l'?'› ':'‹ ')+label[k];tab.title='Show this panel';
+    const bar=document.createElement('div');bar.className='sb-bar';bar.innerHTML='<button type="button" class="btn sb-pin">Pin open</button><button type="button" class="btn sb-hide">Hide '+(k==='l'?'‹':'›')+'</button>';
+    b.prepend(bar);b.prepend(tab);
+    tab.addEventListener('click',e=>{e.stopPropagation();Object.values(bars).forEach(x=>x&&x!==b&&x.classList.remove('fly'));b.classList.add('fly');});
+    bar.querySelector('.sb-hide').addEventListener('click',()=>{if(b.classList.contains('fly')){b.classList.remove('fly');return;}st[k]=false;save();apply();});
+    bar.querySelector('.sb-pin').addEventListener('click',()=>{st[k]=true;save();b.classList.remove('fly');apply();});
+  });
+  function apply(){sh.classList.toggle('lc',!st.l);sh.classList.toggle('rc',!st.r);
+    Object.entries(bars).forEach(([k,b])=>{if(!b)return;b.classList.toggle('col',!st[k]);b.querySelector('.sb-pin').hidden=!!st[k];});}
+  document.addEventListener('click',e=>{Object.values(bars).forEach(b=>{if(b&&b.classList.contains('fly')&&!b.contains(e.target)&&!e.target.closest('.prof'))b.classList.remove('fly');});});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')Object.values(bars).forEach(b=>b&&b.classList.remove('fly'));});
+  apply();
+})();
+
 (function shell(){
   const tabs=[...document.querySelectorAll('.tab')], panels=[...document.querySelectorAll('.panel')];
   function show(name,scroll){

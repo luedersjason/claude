@@ -54,6 +54,9 @@ A published Claude Artifact (one HTML page plus supporting files) shared with a 
 - **Three columns:** left bar, main panel, right bar (sticky, scroll on their own); one column on phones.
 - **Toast:** short black message at the bottom for confirmations and errors ("That change did not save. You may have view-only access.").
 
+### 1.1a Side bars slide (Jason, 11/13)
+The left bar (search, new issue, tracker) and right bar (checks, change box, forum, feed) can each be docked or hidden to a slim tab on the screen edge. Clicking the tab slides the bar over the page; "Pin open" docks it, "Hide" tucks it away, Esc or a click outside closes it. Screens under 1500 px wide start with the left bar hidden, under 1180 px with both hidden; each person's choice is then remembered in their browser. Reason: the fixed three-column layout squeezed the middle on smaller screens.
+
 ### 1.2 Left bar
 - **Search:** searches tracker rows, list items, people cards, schedule rows, week items, approval steps and section headings across all tabs; results show the tab name; clicking jumps there and highlights the hit for about 2 seconds.
 - **+ New issue:** green full-width button opening a form (title, owner, discipline, next step); creates the next ref (J-nn) with status Open.
@@ -337,6 +340,8 @@ The web chat leaves repo jobs in `repoqueue`. If a Microsoft 365 / SharePoint co
 ---
 
 ### Changelog
+
+- 2026-11-13: Side bars slide out (section 1.1a) on every site; replaces the stacked layout below 1180 px.
 
 - 2026-11-12 (3): finishAfter added (can start, can't finish: stays Open with a Finish-after tag); rule 6.2 requires every item and every VR recommendation to judge both can-start and needed-before-completion. VR proposals show 'can start now' / 'can't start until' / 'finish after'.
 
