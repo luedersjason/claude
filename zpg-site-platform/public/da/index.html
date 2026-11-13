@@ -540,9 +540,23 @@ body{margin:0}
 .cp-i{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;font-style:normal;font-size:10px;font-weight:700;border:1.5px solid var(--muted)}.cp-i.done{background:var(--accent);border-color:var(--accent);color:#fff}.cp-i.pend{border-style:dashed;border-color:#D6932B;color:#9A5B00}
 @media (max-width:900px){.cp-ln{flex-basis:100%}.cp-lane{flex-wrap:wrap}}
 @media print{.cp{break-inside:avoid}}
-.pp-ic.pre{background:#F3ECFA;color:#5B3A86;font-size:10px}.pp-card.pre{border-left-color:#8E6CC0}.pp-card.pre .s{color:#5B3A86}
-.cp-b.pre{border-color:#8E6CC0;border-style:dashed}.cp-b.pre i{color:#5B3A86}.cp-i.pre{border-style:dashed;border-color:#8E6CC0;color:#5B3A86}
+.pp-ic.prq{background:#F3ECFA;color:#5B3A86;font-size:10px}.pp-card.prq{border-left-color:#8E6CC0}.pp-card.prq .s{color:#5B3A86}
+.cp-b.prq{border-color:#8E6CC0;border-style:dashed}.cp-b.prq i{color:#5B3A86}.cp-i.prq{border-style:dashed;border-color:#8E6CC0;color:#5B3A86}
 .wait.fin{color:#1E5A8A;background:#E8F1FA;border-color:#BFD6EC}
+/* Side bar width: drag the inner edge (220-480 px), double-click to reset (playbook 1.1a) */
+.lbar,.rbar{position:sticky}.sb-grip{position:absolute;top:0;bottom:0;width:10px;cursor:col-resize;z-index:5;touch-action:none}
+.lbar>.sb-grip{right:0}.rbar>.sb-grip{left:0}.sb-grip:hover,.sb-grip.on{background:linear-gradient(90deg,transparent 4px,var(--accent) 4px,var(--accent) 6px,transparent 6px)}
+.col>.sb-grip,.fly>.sb-grip,.shell.wide .sb-grip{display:none}.shell.drag{transition:none;user-select:none}
+/* Tracker rows stack when the middle column is narrow: the Now / next step text gets the full width */
+#main{container-type:inline-size}
+@container (max-width:760px){
+ table.tk thead{display:none}
+ table.tk tr:not(.grp):not(.donetoggle){display:grid;grid-template-columns:auto minmax(0,1fr) auto;column-gap:10px;padding:8px 0;border-top:1px solid var(--line)}
+ table.tk tr:not(.grp):not(.donetoggle) td{border:0;padding:2px 0}
+ table.tk td.id{grid-column:1;grid-row:1}table.tk td.t{grid-column:2;grid-row:1}table.tk tr:not(.grp):not(.donetoggle) td:nth-child(4){grid-column:3;grid-row:1}
+ table.tk td.who{grid-column:2/-1;grid-row:2;white-space:normal;font-size:12.5px;color:var(--muted)}
+ table.tk td.nx{grid-column:1/-1;grid-row:3;min-width:0}
+}
 
 </style>
 </head>
@@ -703,7 +717,7 @@ body{margin:0}
 
 <footer><div class="wrap">
   <span>Built from the DA approval letter (8/25/26), the draft Development Agreement and its exhibits, and the Village-approved CSM. Open the Documents tab for the source PDFs.</span>
-  <span>Owner: Jason Lueders, ZPG · build 1c2d2bd 2026-11-13</span>
+  <span>Owner: Jason Lueders, ZPG · build da324e1 2026-11-13</span>
 </div></footer>
 <div class="toast" id="toast" role="status"></div>
 
@@ -1226,7 +1240,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
   const el=document.getElementById('ppaths');if(!el||!(CFG.paths||[]).length)return;
   const esc=x=>String(x??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
   const firm=o=>{const m=String(o||'').match(/\(([^)]+)\)\s*$/);return m?m[1]:String(o||'Unassigned');};
-  const IC={Done:['done','✓','Done'],Open:['open','○','Open'],Prereq:['pre','⧗','Prereq']};
+  const IC={Done:['done','✓','Done'],Open:['open','○','Open'],Prereq:['prq','⧗','Prereq']};
   function draw(){
     const rows=window.jqIssues||[];if(!rows.length)return;const eff=window.jqEff||(r=>r.status||'Open');
     el.innerHTML=CFG.paths.map(p=>{
@@ -1257,10 +1271,10 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     draw();
   }
   function find(ref){if(ref.includes(':')){const [col,id]=ref.split(':');return {r:(other[col]||[]).find(x=>x.ref===id),col,id};}return {r:own().find(x=>x.ref===ref),col:null,id:ref};}
-  function bubble([ref,short]){const {r,col,id}=find(ref);const st=r?eff(r):'Open';const k=st==='Done'?'done':st==='Pending'?'pend':st==='Prereq'?'pre':'open';
+  function bubble([ref,short]){const {r,col,id}=find(ref);const st=r?eff(r):'Open';const k=st==='Done'?'done':st==='Pending'?'pend':st==='Prereq'?'prq':'open';
     const site=col&&SITE[col]?SITE[col][1]+' · ':'';const tip=r?`${site}${id} · ${r.title}${r.ball&&st!=='Done'?' · ball: '+r.ball:''}`:`${site}${id}`;
     const when=st==='Done'&&r&&r.confirmed?r.confirmed:(r&&r.due&&st!=='Done'?'due '+r.due.slice(5).replace('-','/'):'');
-    return `<button type="button" class="cp-b ${k}" data-ref="${esc(ref)}" title="${esc(tip)}"><i>${k==='done'?'✓':k==='pend'?'❙❙':k==='pre'?'⧗':'○'}</i><span>${esc(short)}</span>${when?`<em>${esc(when)}</em>`:''}${col?`<small>${esc(SITE[col]?SITE[col][1]:col)}</small>`:''}</button>`;}
+    return `<button type="button" class="cp-b ${k}" data-ref="${esc(ref)}" title="${esc(tip)}"><i>${k==='done'?'✓':k==='pend'?'❙❙':k==='prq'?'⧗':'○'}</i><span>${esc(short)}</span>${when?`<em>${esc(when)}</em>`:''}${col?`<small>${esc(SITE[col]?SITE[col][1]:col)}</small>`:''}</button>`;}
   function draw(){
     const all=[...C.lanes.flatMap(l=>l.steps),...C.merge].map(s=>find(s[0]).r).filter(Boolean),done=all.filter(r=>eff(r)==='Done').length;
     let dl='';if(C.deadline){const d=Math.ceil((new Date(C.deadline.date+'T12:00:00')-new Date())/864e5);dl=`<span class="cp-dl${d<60?' hot':''}"><b>${d>0?d:0}</b> days to ${esc(C.deadline.label)}</span>`;}
@@ -1268,7 +1282,7 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
 <div class="cp-grid"><div class="cp-lanes">${C.lanes.map(l=>`<div class="cp-lane"><span class="cp-ln">${esc(l.n)}</span><div class="cp-chain">${l.steps.map(bubble).join('<span class="cp-ar">→</span>')}</div></div>`).join('')}</div>
 <div class="cp-join" aria-hidden="true"><span>All lanes finish</span></div>
 <div class="cp-merge">${C.merge.map(bubble).join('<span class="cp-ar">→</span>')}<span class="cp-ar">→</span><div class="cp-goal${all.length&&done===all.length?' ok':''}"><b>${esc(C.goal)}</b><small>${esc(C.gs||'')}</small><small><strong>${done} of ${all.length} steps done</strong></small><span class="cp-bar"><i style="width:${all.length?Math.round(100*done/all.length):0}%"></i></span></div></div></div>
-<div class="cp-leg"><span><i class="cp-i done">✓</i>Done</span><span><i class="cp-i open">○</i>Open</span><span><i class="cp-i pre">⧗</i>Prereq: waits on another step</span><span>Bubbles tagged with another site's name live on that site's tracker. Click any bubble to open it.</span></div>`;
+<div class="cp-leg"><span><i class="cp-i done">✓</i>Done</span><span><i class="cp-i open">○</i>Open</span><span><i class="cp-i prq">⧗</i>Prereq: waits on another step</span><span>Bubbles tagged with another site's name live on that site's tracker. Click any bubble to open it.</span></div>`;
   }
   el.addEventListener('click',e=>{const b=e.target.closest('.cp-b');if(!b)return;const ref=b.dataset.ref;
     if(ref.includes(':')){const [col,id]=ref.split(':');if(SITE[col])location.href=SITE[col][0]+'#tracker';return;}
@@ -1296,6 +1310,16 @@ function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say
     Object.entries(bars).forEach(([k,b])=>{if(!b)return;b.classList.toggle('col',!st[k]);b.querySelector('.sb-pin').hidden=!!st[k];});}
   document.addEventListener('click',e=>{Object.values(bars).forEach(b=>{if(b&&b.classList.contains('fly')&&!b.contains(e.target)&&!e.target.closest('.prof'))b.classList.remove('fly');});});
   document.addEventListener('keydown',e=>{if(e.key==='Escape')Object.values(bars).forEach(b=>b&&b.classList.remove('fly'));});
+  // Drag the inner edge of a docked bar to make it narrower or wider; double-click resets. Saved per browser.
+  const W='zpgBarW';let wd;try{wd=JSON.parse(localStorage.getItem(W)||'{}')||{};}catch(e){wd={};}
+  const setW=()=>{sh.style.setProperty('--lw',st.l?(wd.l||392)+'px':'30px');sh.style.setProperty('--rw',st.r?(wd.r||392)+'px':'30px');};
+  Object.entries(bars).forEach(([k,b])=>{if(!b)return;const g=document.createElement('div');g.className='sb-grip';g.title='Drag to resize · double-click to reset';b.appendChild(g);
+    g.addEventListener('pointerdown',e=>{e.preventDefault();g.setPointerCapture(e.pointerId);g.classList.add('on');sh.classList.add('drag');const x0=e.clientX,w0=b.getBoundingClientRect().width;
+      const mv=ev=>{const d=k==='l'?ev.clientX-x0:x0-ev.clientX;wd[k]=Math.round(Math.max(220,Math.min(480,w0+d)));setW();};
+      const up=()=>{g.classList.remove('on');sh.classList.remove('drag');g.removeEventListener('pointermove',mv);g.removeEventListener('pointerup',up);try{localStorage.setItem(W,JSON.stringify(wd));}catch(e){}};
+      g.addEventListener('pointermove',mv);g.addEventListener('pointerup',up);});
+    g.addEventListener('dblclick',()=>{delete wd[k];setW();try{localStorage.setItem(W,JSON.stringify(wd));}catch(e){}});});
+  const apply0=apply;apply=function(){apply0();setW();};
   apply();
 })();
 
